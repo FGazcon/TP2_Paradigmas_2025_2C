@@ -28,13 +28,6 @@ public abstract class Terreno {
         }
         terrenos[18] = new Desierto();
 
-        Random rnd = new Random();
-        for (int i = terrenos.length - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1);
-            Terreno temp = terrenos[i];
-            terrenos[i] = terrenos[j];
-            terrenos[j] = temp;
-        }
 
         for (int i = 0; i < terrenos.length; i++) {
             System.out.println(terrenos[i] + " " + i);
