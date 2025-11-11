@@ -1,0 +1,26 @@
+@startuml Diagrama De CLASES
+
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+
+' ======================
+' CLASES DEL MODELO
+' ======================
+
+class Terreno
+class Bosque
+class Pastizal
+class Campo
+class Montaña
+class Colina
+class Desierto
+
+Terreno <|-- Bosque
+Terreno <|-- Pastizal
+Terreno <|-- Montaña
+Terreno <|-- Campo
+Terreno <|-- Colina
+Terreno <|-- Desierto
+
+
+@enduml

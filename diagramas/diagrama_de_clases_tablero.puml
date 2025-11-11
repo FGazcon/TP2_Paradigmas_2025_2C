@@ -1,0 +1,25 @@
+@startuml Diagrama De CLASES
+
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+
+' ======================
+' CLASES DEL MODELO
+' ======================
+
+class Tablero
+class Hexagono
+class Arista
+class Vertice
+class Terreno
+
+Tablero --> Hexagono
+Tablero --> Arista
+Tablero --> Vertice
+
+Hexagono --> Vertice
+Hexagono --> Terreno
+
+Arista --> Vertice
+
+@enduml

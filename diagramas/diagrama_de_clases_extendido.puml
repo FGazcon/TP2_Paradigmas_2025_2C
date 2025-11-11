@@ -89,8 +89,4 @@ Productor <|.. Lana
 Productor <|.. Grano
 Productor <|.. Mineral
 
-
-
-
-
 @enduml
