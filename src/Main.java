@@ -1,3 +1,4 @@
+import Dados.Dados;
 import Tablero.Tablero;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -13,5 +14,11 @@ void main() {
         IO.println("i = " + i);
     }
 
-    Tablero tablero = new Tablero();
+    Dados dados = new Dados();
+
+    dados.tirarDados();
+    dados.tirarDados();
+    dados.tirarDados();
+
+    //Tablero tablero = new Tablero();
 }
