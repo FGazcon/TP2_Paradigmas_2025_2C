@@ -34,10 +34,4 @@ public class Tablero {
 
     }
 
-
-
-    public void moverLadron(Hexagono destino, Hexagono origen) {
-
-    }
-
 }

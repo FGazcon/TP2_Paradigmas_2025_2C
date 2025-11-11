@@ -57,7 +57,7 @@ public class Hexagono {
         }
 
         for (int i = 0; i < hexagonos.length; i++) {
-            System.out.println(hexagonos[i] + " " + i + " " + hexagonos[i].terreno);
+            System.out.println(hexagonos[i] + " " + i + " " + hexagonos[i].terreno + " " + hexagonos[i].numero);
         }
 
         return hexagonos;

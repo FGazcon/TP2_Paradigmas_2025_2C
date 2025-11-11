@@ -1,0 +1,48 @@
+@startuml Diagrama De CLASES
+
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+
+' ======================
+' CLASES DEL MODELO
+' ======================
+
+class Tablero
+class Hexagono{
+    -numero: int
+    -tieneLadron: boolean
+}
+class Dados{
+    -random: Random
+}
+class Vertice
+class Arista
+class Terreno
+class Ladron
+
+Tablero --> Hexagono
+Tablero --> Vertice
+
+Hexagono --> Vertice
+Hexagono --> Terreno
+
+Ladron --> Hexagono
+
+Vertice <--> Arista
+
+Terreno <|-- Desierto
+Terreno <|-- Colina
+Terreno <|-- Montaña
+Terreno <|-- Pastizal
+Terreno <|-- Campo
+Terreno <|-- Bosque
+
+Vertice --> Estructura
+Arista --> Camino
+
+Construible <|-- Estructura
+Construible <|-- Camino
+
+Estructura <|-- Poblado
+Estructura <|-- Ciudad
+@enduml
