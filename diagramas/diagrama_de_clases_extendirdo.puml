@@ -1,0 +1,96 @@
+@startuml Diagrama De CLASES
+
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+
+' ======================
+' CLASES DEL MODELO
+' ======================
+
+class Ladron
+class Catan
+class Tablero
+class Jugador
+class Banco
+class Dado
+class Hexagono
+class Terreno
+class Desierto
+interface Productor
+class Numero
+class Vertice
+class Camino
+interface Produccion
+class Carretera
+class Poblado
+interface Bonificacion
+class Ciudad
+interface Construccion
+class Recurso
+interface Desarrollo
+class Caballero
+class PuntoDeVictoria
+interface Progreso
+class Monopolio
+class ConstruccionDeCarreteras
+class Descubrimiento
+
+
+Catan --> Ladron
+Catan --> Tablero
+Catan --> "3..4" Jugador
+Catan --> Dado
+Catan --> Banco
+
+Tablero *-- "19" Hexagono
+
+Hexagono --> Terreno
+Hexagono --> Numero
+
+Terreno <|-- Productor
+Terreno <|-- Desierto
+
+Ladron --> Hexagono
+
+Construccion <|.. Produccion
+Construccion <|.. Carretera
+
+Produccion <|.. Poblado
+Produccion <|.. Ciudad
+
+Hexagono <--> Vertice
+
+Jugador --> Recurso
+Jugador --> Desarrollo
+Jugador --> Construccion
+Jugador --> Bonificacion
+
+Bonificacion <|-- Ejercito
+Bonificacion <|-- Ruta
+
+Desarrollo <|-- Caballero
+Desarrollo <|-- PuntoDeVictoria
+Desarrollo <|-- Progreso
+Progreso <|-- Monopolio
+Progreso <|-- ConstruccionDeCarreteras
+Progreso <|-- Descubrimiento
+
+Vertice --> Produccion
+Vertice <--> Camino
+
+Camino --> Carretera
+
+Banco --> Desarrollo
+Banco --> Recurso
+
+Productor <|.. Madera
+Productor <|.. Ladrillo
+Productor <|.. Lana
+Productor <|.. Grano
+Productor <|.. Mineral
+
+
+
+
+
+@enduml
