@@ -20,5 +20,5 @@ void main() {
     dados.tirarDados();
     dados.tirarDados();
 
-    //Tablero tablero = new Tablero();
+    Tablero tablero = new Tablero();
 }
