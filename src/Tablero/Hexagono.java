@@ -1,63 +1,29 @@
 package Tablero;
 
-import Terreno.Terreno;
-
-import java.util.Random;
-
 public class Hexagono {
 
-    private Terreno terreno;
     private Vertice[] vertices;
-    private boolean tieneLadron;
-    private int numero;
+    private FichaNumero fichaNumero;
 
-    public Hexagono(Terreno terreno, Vertice[] vertices) {
-        this.terreno = terreno;
+    public Hexagono(FichaNumero fichaNumero, Vertice[] vertices) {
         this.vertices = vertices;
-        this.tieneLadron = false;
-        this.numero = 0;
+        this.fichaNumero = fichaNumero;
     }
 
     public static Hexagono[] generar19Hexagonos(Vertice[] vertices){
 
         Hexagono[] hexagonos = new Hexagono[19];
 
-        Terreno[] terrenos = Terreno.generar19Terrenos();
+        FichaNumero[] fichaNumeros = FichaNumero.generar19FichasNumero();
 
         Vertice[][] vertices_por_hexagono = vertices_por_hexagono(vertices);
 
-        for (int i = 0; i < 19; i++) {
-            hexagonos[i] = new Hexagono(terrenos[i], vertices_por_hexagono[i]);
-        }
-
-        Random rnd = new Random();
-
-        int[] arrayNumero = {2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12};
-        for (int i = arrayNumero.length - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1);
-            int temp = arrayNumero[i];
-            arrayNumero[i] = arrayNumero[j];
-            arrayNumero[j] = temp;
-        }
-
-        for (int i = 0; i < 18; i++) {
-            hexagonos[i].numero = arrayNumero[i];
-        }
-        hexagonos[18].numero = 7;
-
-        for (int i = hexagonos.length - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1);
-            Terreno temp = hexagonos[i].terreno;
-            hexagonos[i].terreno = hexagonos[j].terreno;
-            hexagonos[j].terreno = temp;
-
-            int tempInt = hexagonos[i].numero;
-            hexagonos[i].numero = hexagonos[j].numero;
-            hexagonos[j].numero = tempInt;
+        for(int i = 0; i < 19; i++){
+            hexagonos[i] = new Hexagono(fichaNumeros[i], vertices_por_hexagono[i]);
         }
 
         for (int i = 0; i < hexagonos.length; i++) {
-            System.out.println(hexagonos[i] + " " + i + " " + hexagonos[i].terreno + " " + hexagonos[i].numero);
+            System.out.println(hexagonos[i] + " " + i + " " + hexagonos[i].fichaNumero);
         }
 
         return hexagonos;
@@ -65,19 +31,7 @@ public class Hexagono {
     }
 
     public boolean esDesierto() {
-        return this.numero == 7;
-    }
-
-    private void setLadron(boolean tieneLadron) {
-        this.tieneLadron = tieneLadron;
-    }
-
-    public void quitarLadron(){
-        setLadron(false);
-    }
-
-    public void ponerLadron(){
-        setLadron(true);
+        return this.fichaNumero.esDesierto();
     }
 
     private static Vertice[][] vertices_por_hexagono(Vertice[] vertices) {

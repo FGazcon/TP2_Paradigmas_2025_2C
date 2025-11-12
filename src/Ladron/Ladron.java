@@ -11,9 +11,7 @@ public class Ladron {
     }
 
     public void moverLadron(Hexagono destino){
-        this.hexagono.quitarLadron();
         this.hexagono = destino;
-        this.hexagono.ponerLadron();
     }
 
 }
