@@ -1,4 +1,7 @@
-package Tablero;
+package Tablero.Vertice;
+
+import Tablero.Arista;
+import Tablero.Estructura.Estructura;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +10,36 @@ public class Vertice {
 
     private Estructura estructura;
     private List<Arista> aristas;
+    private int numeroDeVertice;
+    private Estado estado;
 
-    public Vertice() {
+
+    public Vertice(int numeroDeVertice) {
         this.estructura = null;
         this.aristas = new ArrayList<Arista>();
+        this.numeroDeVertice = numeroDeVertice;
+        this.estado = Estado.VACIO;
     }
+
+    /*
+    Tengo un problema: Estoy generando un juego Catan en Java en POO. PAra modelar el tablero, cree la clase Tablero, la cual tiene 19 Hexagonos, los cuales tienen 1 FichaTerreno (la cual tiene 1 Terreno y un Numero), y 6 Vertices. Los Vertices conocen 2-3 Aristas, las cuales conocen al Vertice destino. Los Hexagonos pueden tener Vertices en comun, puesto que dos Hexagonos pueden tener efecto sobre un Vertice. Hay tres tipos de Vertice: Ocupados (tienen una Estructura), Bloqueados (un Vertice adyacente es Ocupado) y Vacio. Como harias para que cuando un Vertice Vacio recibe la orden de construir casa, se transforme en uno Ocupado y que los adyacentes se transformen en Bloqueados? te parece buena idea esto? dame sugerencias sobre todo lo que dije.
+     */
+    //Posible polimorfismo haciendo VerticeOcupado y VerticeVacio, VerticeBloqueado
+    /*
+    public void colocarPoblado(Jugador jugador){
+
+        if(this.estructura != null){
+
+            //Excepcion vertice ocupado
+
+        }
+
+        revisarDistancias();
+
+        this.estructura = new Poblado(jugador);
+
+    }
+    */
 
     private static void agregarArista(Vertice vertice1, Vertice vertice2){
 
@@ -23,12 +51,11 @@ public class Vertice {
 
     }
 
-
     public static Vertice[] generarVertices() {
 
         Vertice[] vertices = new Vertice[54];
         for (int i = 0; i < 54; i++) {
-            vertices[i] = new Vertice();
+            vertices[i] = new Vertice(i);
         }
 
         agregarArista(vertices[0], vertices[1]);

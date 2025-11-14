@@ -2,6 +2,8 @@ package Tablero;
 
 import Terreno.Terreno;
 
+import java.util.Random;
+
 public class FichaNumero {
 
     private Terreno terreno;
@@ -18,15 +20,16 @@ public class FichaNumero {
 
         Terreno[] terrenos = Terreno.generar19Terrenos();
 
-        int[] arrayNumero = RandomizadorNumeros.generarNumeros();
+        RandomizadorFichaNumero randomizador = new RandomizadorFichaNumero(new Random());
+        int[] arrayNumero = randomizador.generarNumeros();
 
         for (int i = 0; i < fichas.length - 1; i++){
             fichas[i] = new FichaNumero(terrenos[i], arrayNumero[i]);
         }
         fichas[18] = new FichaNumero(terrenos[18], 7);
-        
 
-        return RandomizadorNumeros.mezclarFichas(fichas);
+
+        return randomizador.mezclarFichas(fichas);
 
         //Quiza en lugar de llamar dos veces al randomizador, hacer que se llame solo una vez. Consultar con Maia.
 

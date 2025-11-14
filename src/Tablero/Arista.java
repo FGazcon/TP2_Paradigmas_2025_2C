@@ -1,5 +1,7 @@
 package Tablero;
 
+import Tablero.Vertice.Vertice;
+
 public class Arista {
 
     private Vertice destino;

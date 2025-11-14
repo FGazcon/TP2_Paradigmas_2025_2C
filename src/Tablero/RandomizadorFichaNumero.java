@@ -2,15 +2,19 @@ package Tablero;
 
 import java.util.Random;
 
-public class RandomizadorNumeros {
+public class RandomizadorFichaNumero {
 
-    public static int[] generarNumeros() {
+    private Random random;
 
-        Random rnd = new Random();
+    public RandomizadorFichaNumero(Random random) {
+        this.random = random;
+    }
+
+    public int[] generarNumeros() {
 
         int[] arrayNumero = {2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12};
         for (int i = arrayNumero.length - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1);
+            int j = this.random.nextInt(i + 1);
             int temp = arrayNumero[i];
             arrayNumero[i] = arrayNumero[j];
             arrayNumero[j] = temp;
@@ -20,11 +24,10 @@ public class RandomizadorNumeros {
 
     }
 
-    public static FichaNumero[] mezclarFichas(FichaNumero[] fichas) {
-        Random rnd = new Random();
+    public FichaNumero[] mezclarFichas(FichaNumero[] fichas) {
 
         for (int i = fichas.length - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1);
+            int j = this.random.nextInt(i + 1);
             FichaNumero temp = fichas[i];
             fichas[i] = fichas[j];
             fichas[j] = temp;

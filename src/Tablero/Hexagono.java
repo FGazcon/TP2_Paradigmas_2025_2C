@@ -1,5 +1,7 @@
 package Tablero;
 
+import Tablero.Vertice.Vertice;
+
 public class Hexagono {
 
     private Vertice[] vertices;
@@ -10,13 +12,13 @@ public class Hexagono {
         this.fichaNumero = fichaNumero;
     }
 
-    public static Hexagono[] generar19Hexagonos(Vertice[] vertices){
+    public static Hexagono[] generar19Hexagonos(){
 
         Hexagono[] hexagonos = new Hexagono[19];
 
         FichaNumero[] fichaNumeros = FichaNumero.generar19FichasNumero();
 
-        Vertice[][] vertices_por_hexagono = vertices_por_hexagono(vertices);
+        Vertice[][] vertices_por_hexagono = vertices_por_hexagono(Vertice.generarVertices());
 
         for(int i = 0; i < 19; i++){
             hexagonos[i] = new Hexagono(fichaNumeros[i], vertices_por_hexagono[i]);
@@ -24,6 +26,9 @@ public class Hexagono {
 
         for (int i = 0; i < hexagonos.length; i++) {
             System.out.println(hexagonos[i] + " " + i + " " + hexagonos[i].fichaNumero);
+            for (Vertice vertice : hexagonos[i].vertices) {
+                System.out.println(vertice);
+            }
         }
 
         return hexagonos;

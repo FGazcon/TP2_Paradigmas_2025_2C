@@ -1,20 +1,15 @@
 package Tablero;
 
-import Terreno.Desierto;
-
-import java.util.HashMap;
+import Tablero.Vertice.Vertice;
 
 public class Tablero {
 
     private Hexagono[] hexagonos;
-    private Vertice[] vertices;
 
 
     public Tablero() {
 
-        this.vertices = Vertice.generarVertices();
-
-        this.hexagonos = Hexagono.generar19Hexagonos(this.vertices);
+        this.hexagonos = Hexagono.generar19Hexagonos();
 
     }
 
