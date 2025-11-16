@@ -1,0 +1,47 @@
+@startuml
+title Secuencia de un Turno - Catan Mejorado
+
+actor Jugador
+participant "Catan" as C
+participant "Dados" as D
+participant "Tablero" as T
+participant "Banco" as B
+participant "ServicioConstruccion" as SC
+participant "ServicioComercio" as SCom
+participant "ServicioCartas" as SCar
+
+== Inicio del Turno ==
+Jugador -> C : iniciarTurno()
+C -> D : lanzar()
+D --> C : valorDado
+
+alt valorDado != 7
+    C -> T : obtenerHexagonosConNumero(valorDado)
+    T --> C : listaHex
+    C -> B : entregarRecursos(listaHex)
+else valorDado == 7
+    C -> T : moverLadron()
+    T --> C : ladronMovido
+    C -> Jugador : descartarRecursos()
+end
+
+== Fase de Comercio ==
+Jugador -> SCom : comerciar(con, ofrecer, pedir)
+SCom --> Jugador : resultado
+
+== Fase de Construcción ==
+Jugador -> SC : construirPoblado(vertice)
+SC --> Jugador : éxito/fallo
+Jugador -> SC : construirCiudad(vertice)
+SC --> Jugador : éxito/fallo
+Jugador -> SC : construirCamino(arista)
+SC --> Jugador : éxito/fallo
+
+== Fase de Cartas de Desarrollo ==
+Jugador -> SCar : jugarCarta(carta)
+SCar --> Jugador : efecto
+
+== Fin del Turno ==
+Jugador -> C : terminarTurno()
+C -> C : pasarAlSiguienteJugador()
+@enduml

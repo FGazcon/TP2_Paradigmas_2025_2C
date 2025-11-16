@@ -1,7 +1,10 @@
 package Tablero.Vertice;
 
+import Errores.VerticeNoVacio;
+import Jugador.Jugador;
 import Tablero.Arista;
-import Tablero.Estructura.Estructura;
+import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Vertice.Estructura.Poblado;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,37 @@ public class Vertice {
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = numeroDeVertice;
         this.estado = Estado.VACIO;
+    }
+
+    public Vertice() {
+        this.estructura = null;
+        this.aristas = new ArrayList<Arista>();
+        this.numeroDeVertice = 0;
+        this.estado = Estado.VACIO;
+    }
+
+    public void bloquearse(){
+        if(estado == Estado.VACIO){
+            estado = Estado.BLOQUEADO;
+        }
+    }
+
+    public void ubicarPoblado(Jugador jugador){
+
+        if(estado == Estado.VACIO){
+            this.estado = Estado.OCUPADO;
+            //this.estructura = Estructura.nuevoPoblado(jugador);
+            bloquearAdyacentes();
+        } else {
+            throw new VerticeNoVacio();
+        }
+
+    }
+
+    private void bloquearAdyacentes(){
+        for(Arista arista : aristas){
+            arista.bloquearDestino();
+        }
     }
 
     /*
@@ -193,5 +227,17 @@ public class Vertice {
 
         return vertices;
 
+    }
+
+    public boolean numeroDeVerticeEs(int numeroDeVertice) {
+        return (this.numeroDeVertice == numeroDeVertice);
+    }
+
+    public boolean construirPoblado() {
+        if (estructura == null){
+            this.estructura = new Poblado();
+            return true;
+        }
+        return false;
     }
 }

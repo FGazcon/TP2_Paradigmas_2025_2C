@@ -14,4 +14,14 @@ public class Catan {
     private Dados dados;
     private Ladron ladron;
 
+    public Catan() {
+
+        this.banco = new Banco();
+        this.jugadores = new Jugador[4];
+        this.tablero = new Tablero();
+        this.dados = new Dados();
+        this.ladron = new Ladron(null);
+
+    }
+
 }

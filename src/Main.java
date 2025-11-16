@@ -1,3 +1,4 @@
+import Catan.Catan;
 import Dados.Dados;
 import Tablero.Tablero;
 
@@ -20,5 +21,5 @@ void main() {
     dados.tirarDados();
     dados.tirarDados();
 
-    Tablero tablero = new Tablero();
+    Catan catan = new Catan();
 }

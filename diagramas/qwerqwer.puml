@@ -1,0 +1,178 @@
+@startuml
+title Catan - Diagrama de Clases Mejorado (Sintaxis Correcta)
+
+' ===== ENUMS =====
+enum TerrenoTipo {
+    BOSQUE
+    PRADERA
+    CAMPO
+    MONTAÑA
+    COLINA
+    DESIERTO
+}
+enum Recurso {
+    MADERA
+    LANA
+    TRIGO
+    MINERAL
+    BARRO
+}
+
+enum CartaDesarrolloTipo {
+    CABALLERO
+    PROGRESO
+    PUNTOS_VICTORIA
+}
+
+' ===== INTERFACES =====
+interface Construible {
+    +esConstruible(): bool
+}
+
+interface Jugable {
+    +jugar(jugador: Jugador)
+}
+
+' ===== CLASES PRINCIPALES =====
+class Catan {
+    -tablero: Tablero
+    -jugadores: List<Jugador>
+    -banco: Banco
+    -dados: Dados
+    -jugadorActual: int
+    +ejecutarTurno()
+    +pasarAlSiguienteJugador()
+}
+
+class Tablero {
+    -hexagonos: List<Hexagono>
+    -vertices: List<Vertice>
+    -aristas: List<Arista>
+    -ladron: Hexagono
+    +inicializar()
+    +obtenerHexagonosConNumero(numero: int): List<Hexagono>
+    +moverLadron(hex: Hexagono)
+}
+
+class Dados {
+    +lanzar(): int
+}
+
+class Banco {
+    -recursos: Map<Recurso,Integer>
+    -cartasDesarrollo: List<CartaDesarrollo>
+    +entregarRecurso(j: Jugador, r: Recurso, c: int)
+    +entregarCartaDesarrollo(): CartaDesarrollo
+}
+
+class Jugador {
+    -nombre: String
+    -puntos: int
+    -servicioConstruccion: ServicioConstruccion
+    -servicioComercio: ServicioComercio
+    -servicioCartas: ServicioCartas
+}
+
+class ServicioConstruccion {
+    +construirPoblado(j: Jugador, v: Vertice)
+    +construirCiudad(j: Jugador, v: Vertice)
+    +construirCamino(j: Jugador, a: Arista)
+}
+
+class ServicioComercio {
+    +comerciar(j1: Jugador, j2: Jugador/Banco, ofrecer: Map<Recurso,Integer>, pedir: Map<Recurso,Integer>)
+}
+
+class ServicioCartas {
+    +comprarCarta(j: Jugador)
+    +jugarCarta(c: CartaDesarrollo, j: Jugador)
+}
+
+' ===== TABLERO =====
+class Hexagono {
+    -terreno: Terreno
+    -fichaNumero: FichaNumero
+    -vertices: Vertice[6]
+    -aristas: Arista[6]
+    +getVertices(): List<Vertice>
+}
+
+class Terreno {
+    -tipo: TerrenoTipo
+    +getRecurso(): Recurso
+}
+
+class FichaNumero {
+    -valor: int
+}
+
+class Vertice implements Construible {
+    -estructura: Estructura
+    -coordenada: int
+    -aristas: List<Arista>
+    +esConstruible(): bool
+}
+
+class Arista {
+    -camino: Camino
+    -v1: Vertice
+    -v2: Vertice
+}
+
+' ===== ESTRUCTURAS Y CAMINOS =====
+abstract class Estructura {
+    -jugador: Jugador
+    +getJugador(): Jugador
+}
+
+class Poblado extends Estructura
+class Ciudad extends Estructura
+
+class Camino {
+    -jugador: Jugador
+}
+
+' ===== CARTAS =====
+abstract class CartaDesarrollo implements Jugable {
+    -jugador: Jugador
+}
+
+class Caballero extends CartaDesarrollo
+class Progreso extends CartaDesarrollo
+class PuntosVictoria extends CartaDesarrollo
+
+' ===== ASOCIACIONES =====
+Catan --> Tablero
+Catan --> Banco
+Catan --> Dados
+Catan --> Jugador : 1..4
+
+Tablero --> Hexagono : 19
+Tablero --> Hexagono : ladron
+
+Hexagono --> FichaNumero
+Hexagono --> Vertice : 6
+
+FichaNumero --> Terreno
+
+Vertice --> Estructura : 0..1
+Vertice --> Arista : 2..3
+
+Arista --> Camino : 0..1
+Arista --> Vertice : 2
+
+Estructura --> Jugador
+Camino --> Jugador
+CartaDesarrollo --> Jugador
+
+' ===== DEPENDENCIAS =====
+Jugador ..> Tablero : usa
+Jugador ..> Banco : recibe recursos
+Jugador ..> Dados : lanza
+Hexagono ..> Terreno : consulta recurso
+Vertice ..> Estructura : consulta
+Arista ..> Camino : consulta
+Banco ..> Recurso : entrega
+Banco ..> CartaDesarrollo : entrega
+
+@enduml

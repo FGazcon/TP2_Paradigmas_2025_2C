@@ -1,11 +1,28 @@
 package Jugador;
 
-import Carta.Desarrollo.Desarrollo;
-import Carta.Recurso.Recurso;
+import Banco.Banco;
+import Desarrollo.MazoDesarrolloGeneral;
+import Errores.BancoNoTieneRecurso;
+import Negociantes.Negociantes;
+import Produccion.MazoProduccion;
+import Produccion.Recurso;
 
-public class Jugador {
+public class Jugador extends Negociantes{
 
-    private String nombre;
-    private Desarrollo[] desarrollo;
-    private Recurso[] recursos;
+    private Banco banco;
+    private MazoProduccion mazoProduccion;
+    private MazoDesarrolloGeneral mazoDesarrolloGeneral;
+
+    public Jugador(Banco banco) {
+        this.banco = banco;
+    }
+
+    public void pedirAlBanco(Recurso recurso){
+        if (this.banco.darRecurso(recurso)){
+            this.mazoProduccion.recibirRecurso(recurso);
+        } else {
+            throw new BancoNoTieneRecurso();
+        }
+    }
+
 }

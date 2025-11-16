@@ -1,42 +1,37 @@
 package Tablero;
 
+import Jugador.Jugador;
 import Tablero.Vertice.Vertice;
+import Terreno.Terreno;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hexagono {
 
     private Vertice[] vertices;
-    private FichaNumero fichaNumero;
+    private Terreno terreno;
+    private int numero;
 
-    public Hexagono(FichaNumero fichaNumero, Vertice[] vertices) {
-        this.vertices = vertices;
-        this.fichaNumero = fichaNumero;
+    public Hexagono(Terreno terreno, int numero) {
+        this.vertices = null;
+        this.terreno = terreno;
+        this.numero = numero;
     }
 
-    public static Hexagono[] generar19Hexagonos(){
+    //Consultar si esto esta bien.
+    public void setVertices(Vertice[] vertices) {
+        this.vertices = vertices;
+    }
 
-        Hexagono[] hexagonos = new Hexagono[19];
+    public static List<Hexagono> generar19Hexagonos() {
 
-        FichaNumero[] fichaNumeros = FichaNumero.generar19FichasNumero();
+        List<Terreno> terrenos = Terreno.generar19Terrenos();
 
-        Vertice[][] vertices_por_hexagono = vertices_por_hexagono(Vertice.generarVertices());
-
-        for(int i = 0; i < 19; i++){
-            hexagonos[i] = new Hexagono(fichaNumeros[i], vertices_por_hexagono[i]);
-        }
-
-        for (int i = 0; i < hexagonos.length; i++) {
-            System.out.println(hexagonos[i] + " " + i + " " + hexagonos[i].fichaNumero);
-            for (Vertice vertice : hexagonos[i].vertices) {
-                System.out.println(vertice);
-            }
-        }
+        List<Hexagono> hexagonos = MezcladorGeneracionTablero.mezclarNumerosYHexagonos(vertices_por_hexagono(Vertice.generarVertices()), terrenos);
 
         return hexagonos;
 
-    }
-
-    public boolean esDesierto() {
-        return this.fichaNumero.esDesierto();
     }
 
     private static Vertice[][] vertices_por_hexagono(Vertice[] vertices) {
@@ -75,4 +70,27 @@ public class Hexagono {
         return vertices_por_hexagono;
     }
 
+    public boolean construyePoblado(int numeroDeVertice) {
+        if (!poseeVerticeNumero(numeroDeVertice)){
+
+            Vertice verticeBuscado;
+
+            for (int i = 0; i < vertices.length; i++) {
+                if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
+                    verticeBuscado = vertices[i];
+                    return verticeBuscado.construirPoblado();
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean poseeVerticeNumero(int numeroDeVertice) {
+        for (int i = 0; i < vertices.length; i++) {
+            if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
