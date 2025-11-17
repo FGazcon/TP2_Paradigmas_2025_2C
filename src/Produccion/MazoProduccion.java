@@ -11,7 +11,7 @@ public class MazoProduccion {
         recursos = new ArrayList<MazoRecurso>();
     }
 
-    public MazoProduccion crearMazoParaBanco(){
+    public static MazoProduccion crearMazoParaBanco(){
         //Revisar si es responsabilidad del MazoProduccion o de la clase MazoRecurso
         MazoProduccion mazo = new MazoProduccion();
 

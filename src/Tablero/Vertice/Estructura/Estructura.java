@@ -9,4 +9,8 @@ public abstract class Estructura {
 
     public abstract void entregarRecursos(Recurso recurso);
 
+    public static Poblado nuevoPoblado(Jugador jugador){
+        return new Poblado(jugador);
+    }
+
 }

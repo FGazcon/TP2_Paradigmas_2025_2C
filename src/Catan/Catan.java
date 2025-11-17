@@ -6,10 +6,14 @@ import Jugador.Jugador;
 import Ladron.Ladron;
 import Tablero.Tablero;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Catan {
 
     private Banco banco;
-    private Jugador[] jugadores;
+    private List<Jugador> jugadores;
     private Tablero tablero;
     private Dados dados;
     private Ladron ladron;
@@ -17,10 +21,16 @@ public class Catan {
     public Catan() {
 
         this.banco = new Banco();
-        this.jugadores = new Jugador[4];
+        this.jugadores = new ArrayList<Jugador>();
         this.tablero = new Tablero();
         this.dados = new Dados();
         this.ladron = new Ladron(null);
+
+    }
+
+    public void armadoJugadores(){
+
+        this.jugadores.add(new Jugador(this.banco));
 
     }
 

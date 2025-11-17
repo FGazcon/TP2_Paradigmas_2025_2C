@@ -11,8 +11,8 @@ public class Banco extends Negociantes {
     private MazoDesarrolloGeneral mazoDesarrollo;
 
     public Banco(){
-        this.mazoDesarrollo = new MazoDesarrolloGeneral();
-        this.mazoDeProduccion = new MazoProduccion();
+        this.mazoDesarrollo = MazoDesarrolloGeneral.generarMazoDesarrolloBanco();
+        this.mazoDeProduccion = MazoProduccion.crearMazoParaBanco();
     }
 
     public boolean darRecurso(Recurso recurso){

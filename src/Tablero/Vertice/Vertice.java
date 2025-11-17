@@ -31,28 +31,33 @@ public class Vertice {
         this.estado = Estado.VACIO;
     }
 
-    public void bloquearse(){
-        if(estado == Estado.VACIO){
+    public void bloquearse() {
+        if (estado == Estado.VACIO) {
             estado = Estado.BLOQUEADO;
         }
     }
 
-    public void ubicarPoblado(Jugador jugador){
+    public boolean ubicarPoblado(Jugador jugador) {
 
-        if(estado == Estado.VACIO){
+        if (estado == Estado.VACIO) {
             this.estado = Estado.OCUPADO;
-            //this.estructura = Estructura.nuevoPoblado(jugador);
+            this.estructura = Estructura.nuevoPoblado(jugador);
             bloquearAdyacentes();
+            return true;
         } else {
             throw new VerticeNoVacio();
         }
-
     }
 
-    private void bloquearAdyacentes(){
-        for(Arista arista : aristas){
+
+    private void bloquearAdyacentes() {
+        for (Arista arista : aristas) {
             arista.bloquearDestino();
         }
+    }
+
+    public boolean numeroDeVerticeEs(int numeroDeVertice) {
+        return (this.numeroDeVertice == numeroDeVertice);
     }
 
     /*
@@ -75,7 +80,7 @@ public class Vertice {
     }
     */
 
-    private static void agregarArista(Vertice vertice1, Vertice vertice2){
+    private static void agregarArista(Vertice vertice1, Vertice vertice2) {
 
         Arista arista1 = new Arista(vertice2);
         Arista arista2 = new Arista(vertice1);
@@ -227,17 +232,5 @@ public class Vertice {
 
         return vertices;
 
-    }
-
-    public boolean numeroDeVerticeEs(int numeroDeVertice) {
-        return (this.numeroDeVertice == numeroDeVertice);
-    }
-
-    public boolean construirPoblado() {
-        if (estructura == null){
-            this.estructura = new Poblado();
-            return true;
-        }
-        return false;
     }
 }

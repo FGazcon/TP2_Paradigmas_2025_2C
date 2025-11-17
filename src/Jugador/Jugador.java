@@ -15,6 +15,8 @@ public class Jugador extends Negociantes{
 
     public Jugador(Banco banco) {
         this.banco = banco;
+        this.mazoProduccion = new MazoProduccion();
+        this.mazoDesarrolloGeneral = new MazoDesarrolloGeneral();
     }
 
     public void pedirAlBanco(Recurso recurso){

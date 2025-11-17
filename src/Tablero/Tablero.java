@@ -1,8 +1,10 @@
 package Tablero;
 
 import Jugador.Jugador;
+import Tablero.Vertice.Estructura.Poblado;
 import Tablero.Vertice.Vertice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tablero {
@@ -15,15 +17,16 @@ public class Tablero {
 
     }
 
-    public void ubicarPoblado(int numeroDeVertice){
+    public void ubicarPoblado(int numeroDeVertice, Jugador jugador) {
         int encontrado = 0;
         while(encontrado >= 0){
-            if(hexagonos.get(encontrado).construyePoblado(numeroDeVertice)){
+            if(hexagonos.get(encontrado).construyePoblado(numeroDeVertice, jugador)){
                 return;
             }
             encontrado++;
         }
     }
+
 
     /*
     public Hexagono buscarDesierto() {

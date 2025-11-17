@@ -70,7 +70,7 @@ public class Hexagono {
         return vertices_por_hexagono;
     }
 
-    public boolean construyePoblado(int numeroDeVertice) {
+    public boolean construyePoblado(int numeroDeVertice, Jugador jugador) {
         if (!poseeVerticeNumero(numeroDeVertice)){
 
             Vertice verticeBuscado;
@@ -78,7 +78,7 @@ public class Hexagono {
             for (int i = 0; i < vertices.length; i++) {
                 if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
                     verticeBuscado = vertices[i];
-                    return verticeBuscado.construirPoblado();
+                    return verticeBuscado.ubicarPoblado(jugador);
                 }
             }
         }
