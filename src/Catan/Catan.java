@@ -28,9 +28,25 @@ public class Catan {
 
     }
 
-    public void armadoJugadores(){
+    public void prepararJugadores(){
+        this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
+    }
 
-        this.jugadores.add(new Jugador(this.banco));
+    public void primeraEtapa(){
+
+        for(Jugador jugador: this.jugadores){
+            jugador.ubicarPoblado(this.tablero);
+        }
+
+        int[] vertices_segundo_poblado = new int[this.jugadores.size()];
+
+        int contador = 0;
+        for(Jugador jugador: this.jugadores){
+            vertices_segundo_poblado[contador] = jugador.ubicarPoblado(this.tablero);
+            contador++;
+        }
+
+        this.tablero.activarParaSegundoPoblado(vertices_segundo_poblado);
 
     }
 

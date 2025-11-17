@@ -1,10 +1,9 @@
 package Tablero;
 
-import Jugador.Jugador;
+import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Hexagono {
@@ -14,9 +13,36 @@ public class Hexagono {
     private int numero;
 
     public Hexagono(Terreno terreno, int numero) {
-        this.vertices = null;
+        this.vertices = new Vertice[6];
         this.terreno = terreno;
         this.numero = numero;
+    }
+
+    public boolean contieneVertice(int numeroDeVertice){
+        for(int i = 0; i < vertices.length; i++){
+            if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void ubicarEstructura(Estructura estructura, int numeroDeVertice){
+        for(int i = 0; i < vertices.length; i++){
+            if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
+                vertices[i].ubicarEstructura(estructura);
+            }
+        }
+    }
+
+    public void activarseParaVerticeEspecifico(int[] vertices_segundo_poblado) {
+        for (int i = 0; i < vertices.length; i++){
+            for (int j = 0; j < vertices_segundo_poblado.length; j++){
+                if (vertices[i].numeroDeVerticeEs(vertices_segundo_poblado[j])){
+                    this.terreno.darRecurso(vertices[i]);
+                }
+            }
+        }
     }
 
     //Consultar si esto esta bien.
@@ -28,8 +54,15 @@ public class Hexagono {
 
         List<Terreno> terrenos = Terreno.generar19Terrenos();
 
-        List<Hexagono> hexagonos = MezcladorGeneracionTablero.mezclarNumerosYHexagonos(vertices_por_hexagono(Vertice.generarVertices()), terrenos);
 
+        List<Hexagono> hexagonos = MezcladorTablero.mezclarNumerosYHexagonos(vertices_por_hexagono(Vertice.generarVertices()), terrenos);
+
+        for (int i = 0; i < hexagonos.size(); i++) {
+            System.out.println(hexagonos.get(i) + " " + i + " " + hexagonos.get(i).numero);
+            for (Vertice vertice : hexagonos.get(i).vertices) {
+                System.out.println(vertice);
+            }
+        }
         return hexagonos;
 
     }
@@ -70,27 +103,5 @@ public class Hexagono {
         return vertices_por_hexagono;
     }
 
-    public boolean construyePoblado(int numeroDeVertice, Jugador jugador) {
-        if (!poseeVerticeNumero(numeroDeVertice)){
 
-            Vertice verticeBuscado;
-
-            for (int i = 0; i < vertices.length; i++) {
-                if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
-                    verticeBuscado = vertices[i];
-                    return verticeBuscado.ubicarPoblado(jugador);
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean poseeVerticeNumero(int numeroDeVertice) {
-        for (int i = 0; i < vertices.length; i++) {
-            if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
-                return true;
-            }
-        }
-        return false;
-    }
 }

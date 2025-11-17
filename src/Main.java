@@ -22,4 +22,6 @@ void main() {
     dados.tirarDados();
 
     Catan catan = new Catan();
+    catan.prepararJugadores();
+    catan.primeraEtapa();
 }

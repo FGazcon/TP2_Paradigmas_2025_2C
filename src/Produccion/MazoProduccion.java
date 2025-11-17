@@ -39,7 +39,7 @@ public class MazoProduccion {
     public void recibirRecurso(Recurso recurso){
         MazoRecurso mazo;
         int encontrado = 0;
-        while(encontrado >= 0){
+        while(encontrado < recursos.size() && encontrado >= -1){
             if (this.recursos.get(encontrado).esDeTipo(recurso)){
                 mazo = this.recursos.get(encontrado);
                 mazo.recibirRecurso();
@@ -48,6 +48,10 @@ public class MazoProduccion {
             encontrado++;
         }
         this.recursos.add(new MazoRecurso(recurso, 1));
+
+        for (int i = 0; i < recursos.size(); i++) {
+            System.out.println(i + " " + recursos.get(i));
+        }
 
     }
 

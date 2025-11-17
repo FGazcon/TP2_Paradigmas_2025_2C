@@ -3,20 +3,27 @@ package Jugador;
 import Banco.Banco;
 import Desarrollo.MazoDesarrolloGeneral;
 import Errores.BancoNoTieneRecurso;
+import Errores.VerticeNoVacio;
 import Negociantes.Negociantes;
 import Produccion.MazoProduccion;
 import Produccion.Recurso;
+import Tablero.Tablero;
+import Tablero.Vertice.Estructura.Poblado;
+
+import java.util.Scanner;
 
 public class Jugador extends Negociantes{
 
     private Banco banco;
     private MazoProduccion mazoProduccion;
     private MazoDesarrolloGeneral mazoDesarrolloGeneral;
+    private String nombre;
 
-    public Jugador(Banco banco) {
+    public Jugador(String nombre, Banco banco) {
         this.banco = banco;
         this.mazoProduccion = new MazoProduccion();
         this.mazoDesarrolloGeneral = new MazoDesarrolloGeneral();
+        this.nombre = nombre;
     }
 
     public void pedirAlBanco(Recurso recurso){
@@ -25,6 +32,25 @@ public class Jugador extends Negociantes{
         } else {
             throw new BancoNoTieneRecurso();
         }
+    }
+
+    public int ubicarPoblado(Tablero tablero){
+
+        Poblado poblado = new Poblado(this);
+
+        Scanner sc = new Scanner(System.in);  // Crear Scanner para leer desde la terminal
+
+        System.out.print("Ingresa un vertice: ");
+        int numeroDeVerice = sc.nextInt();
+
+        try{
+            tablero.ubicarEstructura(poblado, numeroDeVerice);
+        } catch (VerticeNoVacio e) {
+            System.out.println("No se puede ubicar un vertice");
+            return this.ubicarPoblado(tablero);
+        }
+        return numeroDeVerice;
+
     }
 
 }

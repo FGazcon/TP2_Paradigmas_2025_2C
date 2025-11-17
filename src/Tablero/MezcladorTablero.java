@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MezcladorGeneracionTablero {
+public class MezcladorTablero {
 
     public static List<Hexagono> mezclarNumerosYHexagonos(Vertice[][] vertices, List<Terreno> terrenos) {
 
@@ -29,8 +29,10 @@ public class MezcladorGeneracionTablero {
 
         List<Hexagono> hexagonos = new ArrayList<Hexagono>();
 
-        for (int i = 0; i < numerosMezclados.size(); i++) {
+        int size = numerosMezclados.size();
+        for (int i = 0; i < size; i++) {
             hexagonos.add(new Hexagono(terrenos.removeFirst(), numerosMezclados.removeFirst()));
+            System.out.println(i);
         }
         hexagonos.add(new Hexagono(terrenos.removeFirst(), 7));
 
@@ -46,6 +48,10 @@ public class MezcladorGeneracionTablero {
         for(int i = 0; i < arrayNumero.length; i++){
             numerosMezclados.add(arrayNumero[i]);
         }
+
+        Collections.shuffle(numerosMezclados);
+
+        System.out.println("Mezclados " + numerosMezclados.size());
 
         return numerosMezclados;
 
