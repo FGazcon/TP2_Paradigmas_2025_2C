@@ -69,7 +69,12 @@ public class Hexagono {
 
     public void ubicarPoblado(Jugador jugador, int numeroDeVertice){
         Vertice verticeDestino = buscarVerticeNumero(numeroDeVertice);
-        verticeDestino.ubicarEstructura(jugador);
+        verticeDestino.ubicarPoblado(jugador);
+    }
+
+    public void ubicarCiudad(Jugador jugador, int numeroDeVertice){
+        Vertice verticeDestino = buscarVerticeNumero(numeroDeVertice);
+        verticeDestino.ubicarCiudad(jugador);
     }
 
     //Consultar si esto esta bien.

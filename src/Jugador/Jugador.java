@@ -34,4 +34,8 @@ public class Jugador extends Negociantes{
         }
     }
 
+    public boolean equals(Jugador jugador){
+        return this.nombre.equals(jugador.nombre);
+    }
+
 }

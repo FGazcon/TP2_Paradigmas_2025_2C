@@ -13,4 +13,8 @@ public abstract class Estructura {
         return new Poblado(jugador);
     }
 
+    public boolean esDe(Jugador jugador){
+        return this.jugador.equals(jugador);
+    }
+
 }

@@ -19,7 +19,7 @@ public class VerticeTest {
 
         vertice.bloquearse();
 
-        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(jugador);});
+        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarPoblado(jugador);});
 
     }
 
@@ -28,9 +28,9 @@ public class VerticeTest {
         Vertice vertice = new Vertice();
         Jugador jugador = mock(Jugador.class);
 
-        vertice.ubicarEstructura(jugador);
+        vertice.ubicarPoblado(jugador);
 
-        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(jugador);});
+        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarPoblado(jugador);});
 
     }
 

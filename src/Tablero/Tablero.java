@@ -48,6 +48,14 @@ public class Tablero {
 
     }
 
+    public void ubicarCiudad(Jugador jugador, int numeroDeVerice) {
+
+        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVerice);
+
+        hexagonoConVertice.ubicarCiudad(jugador, numeroDeVerice);
+
+    }
+
     public int buscarDesierto() {
         for (int i = 0; i < hexagonos.size(); i++) {
             if (hexagonos.get(i).esDesierto()){

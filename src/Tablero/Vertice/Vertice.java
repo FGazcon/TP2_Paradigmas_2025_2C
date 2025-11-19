@@ -31,10 +31,18 @@ public class Vertice {
         this.estado = new Vacio();
     }
 
-    public void ubicarEstructura(Jugador jugador) {
+    public void ubicarPoblado(Jugador jugador) {
 
-        this.estado.intentarUbicarEstructura(jugador, this);
+        this.estado.intentarUbicarPoblado(jugador, this);
 
+    }
+
+    public void ubicarCiudad(Jugador jugador) {
+        this.estado.intentarUbicarCiudad(jugador, this);
+    }
+
+    public boolean estructuraEsDe(Jugador jugador) {
+        return this.estructura.esDe(jugador);
     }
 
 
