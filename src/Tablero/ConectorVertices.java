@@ -2,7 +2,7 @@ package Tablero;
 
 import Tablero.Vertice.Vertice;
 
-public class GeneradorGrafo {
+public class ConectorVertices {
 
     public static void generarGrafo(Vertice[] vertices) {
 

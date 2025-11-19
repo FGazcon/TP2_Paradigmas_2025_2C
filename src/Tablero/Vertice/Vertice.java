@@ -1,9 +1,8 @@
 package Tablero.Vertice;
 
-import Errores.VerticeNoVacio;
 import Produccion.Recurso;
 import Tablero.Arista;
-import Tablero.GeneradorGrafo;
+import Tablero.ConectorVertices;
 import Tablero.Vertice.Estructura.Estructura;
 
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ public class Vertice {
             vertices[i] = new Vertice(i);
         }
 
-        GeneradorGrafo.generarGrafo(vertices);
+        ConectorVertices.generarGrafo(vertices);
 
         for (int i = 0; i < vertices.length; i++) {
             System.out.println(vertices[i].numeroDeVertice + " " +  vertices[i]);

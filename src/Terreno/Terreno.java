@@ -10,7 +10,17 @@ public abstract class Terreno {
 
     public static List<Terreno> generar19Terrenos(){
 
-        List<Terreno> terrenos = Productor.generar18TerrenosProductores();
+        List<Terreno> terrenos = new ArrayList<Terreno>();
+
+        for(int i = 0; i < 4; i++){
+            terrenos.add(new Bosque());
+            terrenos.add(new Campo());
+            terrenos.add(new Pastizal());
+        }
+        for(int i = 0; i < 3; i++){
+            terrenos.add(new Montaña());
+            terrenos.add(new Colina());
+        }
 
         terrenos.add(new Desierto());
 
