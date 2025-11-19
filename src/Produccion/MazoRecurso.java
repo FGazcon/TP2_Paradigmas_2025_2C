@@ -26,6 +26,10 @@ public class MazoRecurso {
         return false;
     }
 
+    public int getCantidad(){
+        return cantidadRecurso;
+    }
+
     public void recibirRecurso(){
         this.cantidadRecurso++;
     }

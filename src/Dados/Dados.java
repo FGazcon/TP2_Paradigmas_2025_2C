@@ -5,9 +5,14 @@ import java.util.Random;
 public class Dados {
 
     private Random random;
+    private static Dados dados = new Dados();
 
     public Dados(){
         random = new Random();
+    }
+
+    public static Dados getDados(){
+        return dados;
     }
 
     public int tirarDados(){

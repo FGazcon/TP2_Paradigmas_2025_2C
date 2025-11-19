@@ -4,11 +4,9 @@ import Banco.Banco;
 import Dados.Dados;
 import Errores.VerticeNoVacio;
 import Jugador.Jugador;
-import Ladron.Ladron;
 import Tablero.Tablero;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Catan {
@@ -16,14 +14,12 @@ public class Catan {
     private Banco banco;
     private List<Jugador> jugadores;
     private Tablero tablero;
-    private Dados dados;
 
     public Catan() {
 
         this.banco = new Banco();
         this.jugadores = new ArrayList<Jugador>();
         this.tablero = new Tablero();
-        this.dados = new Dados();
 
     }
 
@@ -53,10 +49,14 @@ public class Catan {
         }
 
         for(Jugador jugador: this.jugadores){
-            int verticeSegundoPoblado = intentarUbicarPoblado(jugador, numeroDeVertice);
-            this.tablero.activarParaSegundoPoblado(verticeSegundoPoblado);
+            int verticeSegundoPoblado = intentarUbicarPoblado(jugador, 45);
+            this.tablero.activarHexagonoParaSegundoPoblado(45);
             numeroDeVertice+=4;
         }
+
+    }
+
+    public void turnoDeJugador(Jugador jugador){
 
     }
 

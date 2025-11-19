@@ -1,5 +1,7 @@
 package Tablero;
 
+import Errores.DesiertoNoProduceNada;
+import Errores.VerticeNoVacio;
 import Jugador.Jugador;
 import Produccion.Recurso;
 import Tablero.Vertice.Estructura.Estructura;
@@ -33,8 +35,14 @@ public class Hexagono {
 
         for (Vertice vertice : vertices) {
             if (vertice.numeroDeVerticeEs(vertices_segundo_poblado)) {
-                Recurso recurso = this.terreno.darRecurso();
-                vertice.darRecurso(recurso);
+
+                try{
+                    Recurso recurso = this.terreno.darRecurso();
+                    vertice.darRecurso(recurso);
+                } catch (DesiertoNoProduceNada e) {
+                    System.out.println("Se intento generar recursos del Desierto");
+                }
+
             }
         }
     }

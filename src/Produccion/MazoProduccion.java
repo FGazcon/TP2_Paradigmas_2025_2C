@@ -50,7 +50,7 @@ public class MazoProduccion {
         this.recursos.add(new MazoRecurso(recurso, 1));
 
         for (int i = 0; i < recursos.size(); i++) {
-            System.out.println(i + " " + recursos.get(i));
+            System.out.println(i + " " + recursos.get(i) + " " + recursos.get(i).getCantidad());
         }
 
     }

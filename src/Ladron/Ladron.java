@@ -12,4 +12,8 @@ public class Ladron {
         this.numeroHexagono = destino;
     }
 
+    public void activarLadron(){
+        //Activar Robo general a mas de 7 cartas
+    }
+
 }
