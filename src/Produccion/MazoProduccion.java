@@ -15,11 +15,11 @@ public class MazoProduccion {
         //Revisar si es responsabilidad del MazoProduccion o de la clase MazoRecurso
         MazoProduccion mazo = new MazoProduccion();
 
-        mazo.recursos.add(new MazoRecurso(Recurso.MADERA, 19));
-        mazo.recursos.add(new MazoRecurso(Recurso.TRIGO, 19));
-        mazo.recursos.add(new MazoRecurso(Recurso.PIEDRA, 19));
-        mazo.recursos.add(new MazoRecurso(Recurso.LADRILLO, 19));
-        mazo.recursos.add(new MazoRecurso(Recurso.OVEJA, 19));
+        mazo.recursos.add(new MazoRecurso(new Madera(), 19));
+        mazo.recursos.add(new MazoRecurso(new Trigo(), 19));
+        mazo.recursos.add(new MazoRecurso(new Ladrillo(), 19));
+        mazo.recursos.add(new MazoRecurso(new Piedra(), 19));
+        mazo.recursos.add(new MazoRecurso(new Oveja(), 19));
 
         return mazo;
 

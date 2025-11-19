@@ -34,23 +34,4 @@ public class Jugador extends Negociantes{
         }
     }
 
-    public int ubicarPoblado(Tablero tablero){
-
-        Poblado poblado = new Poblado(this);
-
-        Scanner sc = new Scanner(System.in);  // Crear Scanner para leer desde la terminal
-
-        System.out.print("Ingresa un vertice: ");
-        int numeroDeVerice = sc.nextInt();
-
-        try{
-            tablero.ubicarEstructura(poblado, numeroDeVerice);
-        } catch (VerticeNoVacio e) {
-            System.out.println("No se puede ubicar un vertice");
-            return this.ubicarPoblado(tablero);
-        }
-        return numeroDeVerice;
-
-    }
-
 }

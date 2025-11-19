@@ -1,5 +1,6 @@
 package Tablero.Vertice;
 
+import Jugador.Jugador;
 import Produccion.Recurso;
 import Tablero.Arista;
 import Tablero.ConectorVertices;
@@ -30,9 +31,9 @@ public class Vertice {
         this.estado = new Vacio();
     }
 
-    public void ubicarEstructura(Estructura estructura) {
+    public void ubicarEstructura(Jugador jugador) {
 
-        this.estado.intentarUbicarEstructura(estructura, this);
+        this.estado.intentarUbicarEstructura(jugador, this);
 
     }
 

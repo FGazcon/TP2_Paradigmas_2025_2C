@@ -1,5 +1,6 @@
 package Tablero;
 
+import Jugador.Jugador;
 import Produccion.Recurso;
 import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Vertice;
@@ -28,39 +29,39 @@ public class Hexagono {
         return false;
     }
 
-    public void ubicarEstructura(Estructura estructura, int numeroDeVertice){
-        for(int i = 0; i < vertices.length; i++){
-            if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
-                vertices[i].ubicarEstructura(estructura);
+    public void activarHexagonoParaVerticeEspecifico(int vertices_segundo_poblado) {
+
+        for (Vertice vertice : vertices) {
+            if (vertice.numeroDeVerticeEs(vertices_segundo_poblado)) {
+                Recurso recurso = this.terreno.darRecurso();
+                vertice.darRecurso(recurso);
             }
         }
     }
 
-    public void activarHexagono(int numero){
-        if(this.numero == numero){
-            for(int i = 0; i < vertices.length; i++){
-                this.terreno.darRecurso(vertices[i]);
+    public void activarHexagonoNumero(int numero){
+        if (this.numero == numero){
+            for(Vertice vertice: vertices){
+                Recurso recurso = this.terreno.darRecurso();
+                vertice.darRecurso(recurso);
             }
         }
     }
 
-    public void activarseParaVerticeEspecifico(int[] vertices_segundo_poblado) {
-        for (int i = 0; i < vertices.length; i++){
-            for (int j = 0; j < vertices_segundo_poblado.length; j++){
-                if (vertices[i].numeroDeVerticeEs(vertices_segundo_poblado[j])){
-                    this.terreno.darRecurso(vertices[i]);
-                }
-            }
-        }
-    }
-
-    public void entregarRecursoAVertices(Recurso recurso){
-
-        Recurso recurso = this.terreno.darRecurso();
-
+    private Vertice buscarVerticeNumero(int numeroDeVertice){
         for(Vertice vertice: vertices){
-            vertice.darRecurso(recurso);
+            if (vertice.numeroDeVerticeEs(numeroDeVertice)){
+                return vertice;
+            }
         }
+        return null;
+    }
+
+
+
+    public void ubicarPoblado(Jugador jugador, int numeroDeVertice){
+        Vertice verticeDestino = buscarVerticeNumero(numeroDeVertice);
+        verticeDestino.ubicarEstructura(jugador);
     }
 
     //Consultar si esto esta bien.

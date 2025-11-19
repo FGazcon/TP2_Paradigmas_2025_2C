@@ -1,9 +1,13 @@
 package Tablero;
 
+import Errores.VerticeNoVacio;
+import Jugador.Jugador;
 import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Vertice.Estructura.Poblado;
 import Tablero.Vertice.Vertice;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Tablero {
 
@@ -15,17 +19,9 @@ public class Tablero {
 
     }
 
-    public void ubicarEstructura(Estructura estructura, int numeroDeVerice) {
-
-        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVerice);
-
-        hexagonoConVertice.ubicarEstructura(estructura, numeroDeVerice);
-
-    }
-
     public void activarHexagono(int numero){
         for (int i = 0; i < hexagonos.size(); i++) {
-            hexagonos.get(i).activarHexagono(numero);
+            hexagonos.get(i).activarHexagonoNumero(numero);
         }
     }
 
@@ -39,10 +35,20 @@ public class Tablero {
         return null;
     }
 
-    public void activarParaSegundoPoblado(int[] vertices_segundo_poblado) {
+    public void activarParaSegundoPoblado(int vertice_segundo_poblado) {
         for (Hexagono hexagono : hexagonos) {
-            hexagono.activarseParaVerticeEspecifico(vertices_segundo_poblado);
+            hexagono.activarHexagonoParaVerticeEspecifico(vertice_segundo_poblado);
         }
+    }
+
+    public int ubicarPoblado(Jugador jugador, int numeroDeVerice) {
+
+        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVerice);
+
+        hexagonoConVertice.ubicarPoblado(jugador, numeroDeVerice);
+
+        return numeroDeVerice;
+
     }
 
 }

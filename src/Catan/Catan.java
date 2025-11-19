@@ -2,6 +2,7 @@ package Catan;
 
 import Banco.Banco;
 import Dados.Dados;
+import Errores.VerticeNoVacio;
 import Jugador.Jugador;
 import Ladron.Ladron;
 import Tablero.Tablero;
@@ -32,21 +33,32 @@ public class Catan {
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
     }
 
+    public int intentarUbicarPoblado(Jugador jugador, int numeroDeVerice){
+
+        //Para que tenga sentido, la eleccion del numero de vertice tiene que estar aca.
+
+        try{
+            this.tablero.ubicarPoblado(jugador, numeroDeVerice);
+        } catch (VerticeNoVacio e) {
+            System.out.println("No se puede ubicar un vertice");
+            return this.intentarUbicarPoblado(jugador, numeroDeVerice);
+        }
+        return numeroDeVerice;
+    }
+
     public void primeraEtapa(){
 
+        int numeroDeVertice = 4;
         for(Jugador jugador: this.jugadores){
-            jugador.ubicarPoblado(this.tablero);
+            intentarUbicarPoblado(jugador, numeroDeVertice);
+            numeroDeVertice+=4;
         }
 
-        int[] vertices_segundo_poblado = new int[this.jugadores.size()];
-
-        int contador = 0;
         for(Jugador jugador: this.jugadores){
-            vertices_segundo_poblado[contador] = jugador.ubicarPoblado(this.tablero);
-            contador++;
+            int verticeSegundoPoblado = intentarUbicarPoblado(jugador, numeroDeVertice);
+            this.tablero.activarParaSegundoPoblado(verticeSegundoPoblado);
+            numeroDeVertice+=4;
         }
-
-        this.tablero.activarParaSegundoPoblado(vertices_segundo_poblado);
 
     }
 
