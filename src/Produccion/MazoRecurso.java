@@ -15,7 +15,7 @@ public class MazoRecurso {
     }
 
     public boolean esDeTipo(Recurso tipo){
-        return this.tipo.getClass() == tipo.getClass();
+        return this.tipo.nombre() == tipo.nombre();
     }
 
     public boolean darRecurso(){

@@ -10,13 +10,16 @@ enum TerrenoTipo {
     COLINA
     DESIERTO
 }
-enum Recurso {
-    MADERA
-    LANA
-    TRIGO
-    MINERAL
-    BARRO
+
+abstract class Recurso {
+    +nombre(): String
 }
+
+class Trigo;
+class Ladrillo;
+class Madera;
+class Oveja;
+class Piedra;
 
 enum CartaDesarrolloTipo {
     CABALLERO
@@ -166,12 +169,23 @@ Camino --> Jugador
 CartaDesarrollo --> Jugador
 
 ' ===== DEPENDENCIAS =====
+
+Recurso <|-- Madera
+Recurso <|-- Trigo
+Recurso <|-- Oveja
+Recurso <|-- Ladrillo
+Recurso <|-- Piedra
+
 Jugador ..> Tablero : usa
 Jugador ..> Banco : recibe recursos
 Jugador ..> Dados : lanza
+
 Hexagono ..> Terreno : consulta recurso
+
 Vertice ..> Estructura : consulta
+
 Arista ..> Camino : consulta
+
 Banco ..> Recurso : entrega
 Banco ..> CartaDesarrollo : entrega
 

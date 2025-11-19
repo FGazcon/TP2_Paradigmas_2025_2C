@@ -51,7 +51,7 @@ public class Catan {
         int numeroDeVertice = 4;
         for(Jugador jugador: this.jugadores){
             intentarUbicarPoblado(jugador, numeroDeVertice);
-            numeroDeVertice+=4;
+            numeroDeVertice+=30;
         }
 
         for(Jugador jugador: this.jugadores){
