@@ -1,5 +1,6 @@
 package Terreno;
 
+import Produccion.Recurso;
 import Tablero.Vertice.Vertice;
 import Terreno.Productor.*;
 
@@ -28,6 +29,6 @@ public abstract class Terreno {
     }
 
     //Urgente consultar si no rompe con DIP.
-    public abstract void darRecurso(Vertice vertice);
+    public abstract Recurso darRecurso();
 
 }

@@ -1,13 +1,14 @@
 package Terreno.Productor;
 
+import Produccion.Madera;
 import Produccion.Recurso;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
 
 public class Bosque extends Productor {
 
-    public void darRecurso(Vertice vertice){
-        vertice.darRecurso(Recurso.MADERA);
+    public Recurso darRecurso() {
+        return new Madera();
     }
 
 }

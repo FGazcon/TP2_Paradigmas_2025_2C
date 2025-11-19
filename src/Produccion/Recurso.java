@@ -1,9 +1,6 @@
 package Produccion;
 
-public enum Recurso {
-    MADERA,
-    TRIGO,
-    OVEJA,
-    LADRILLO,
-    PIEDRA
+public abstract class Recurso {
+    public abstract String nombre();
 }
+

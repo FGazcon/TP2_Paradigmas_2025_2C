@@ -55,6 +55,9 @@ public class Hexagono {
     }
 
     public void entregarRecursoAVertices(Recurso recurso){
+
+        Recurso recurso = this.terreno.darRecurso();
+
         for(Vertice vertice: vertices){
             vertice.darRecurso(recurso);
         }
