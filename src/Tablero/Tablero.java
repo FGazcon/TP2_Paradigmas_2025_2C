@@ -2,6 +2,7 @@ package Tablero;
 
 import Errores.VerticeNoVacio;
 import Jugador.Jugador;
+import Ladron.Ladron;
 import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Estructura.Poblado;
 import Tablero.Vertice.Vertice;
@@ -12,11 +13,15 @@ import java.util.Scanner;
 public class Tablero {
 
     private List<Hexagono> hexagonos;
+    private Ladron ladron;
+
+
+
 
     public Tablero() {
 
         this.hexagonos = Hexagono.generar19Hexagonos();
-
+        this.ladron = new Ladron(buscarDesierto());
     }
 
     public void activarHexagono(int numero){
@@ -49,6 +54,15 @@ public class Tablero {
 
         return numeroDeVerice;
 
+    }
+
+    public int buscarDesierto() {
+        for (int i = 0; i < hexagonos.size(); i++) {
+            if (hexagonos.get(i).esDesierto()){
+                return i;
+            }
+        }
+        return 0;
     }
 
 }

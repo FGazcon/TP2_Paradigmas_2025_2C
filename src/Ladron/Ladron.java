@@ -1,17 +1,15 @@
 package Ladron;
 
-import Tablero.Hexagono;
-
 public class Ladron {
 
-    private Hexagono hexagono;
+    private int numeroHexagono;
 
-    public Ladron(Hexagono hexagonoDesierto) {
-        this.hexagono = hexagonoDesierto;
+    public Ladron(int numeroHexagono) {
+        this.numeroHexagono = numeroHexagono;
     }
 
-    public void moverLadron(Hexagono destino){
-        this.hexagono = destino;
+    public void moverLadron(int destino){
+        this.numeroHexagono = destino;
     }
 
 }

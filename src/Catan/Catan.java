@@ -17,7 +17,6 @@ public class Catan {
     private List<Jugador> jugadores;
     private Tablero tablero;
     private Dados dados;
-    private Ladron ladron;
 
     public Catan() {
 
@@ -25,7 +24,6 @@ public class Catan {
         this.jugadores = new ArrayList<Jugador>();
         this.tablero = new Tablero();
         this.dados = new Dados();
-        this.ladron = new Ladron(null);
 
     }
 
