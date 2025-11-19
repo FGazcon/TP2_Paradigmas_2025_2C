@@ -15,9 +15,9 @@ public class MezcladorHexagonosNumerosYTerrenos {
 
         List<Hexagono> hexagonos = generarHexagonosNoFijos(numerosMezclados, terrenos);
 
-        Vertice[][] verticesAsignados = vertices_por_hexagono(vertices);
-
         Collections.shuffle(hexagonos);
+
+        Vertice[][] verticesAsignados = vertices_por_hexagono(vertices);
 
         for (int i = 0; i < hexagonos.size(); i++) {
             hexagonos.get(i).setVertices(verticesAsignados[i]);
