@@ -1,11 +1,14 @@
 package Produccion;
 
+import Recurso.Recurso;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MazoProduccion {
 
     private List<MazoRecurso> recursos;
+    private List<Carta> cartas = new ArrayList<Carta>();
 
     public MazoProduccion() {
         recursos = new ArrayList<MazoRecurso>();
@@ -55,4 +58,30 @@ public class MazoProduccion {
 
     }
 
+    /////cambios
+
+    public List<Carta> crearMazoParaBanco2(){
+        List<Carta> cartas = new ArrayList<Carta>();
+        cartas.add(new Carta("MADERA"));
+        cartas.add(new Carta("TRIGO"));
+        cartas.add(new Carta("PIEDRA"));
+        cartas.add(new Carta("LADRILLO"));
+        cartas.add(new Carta("OVEJA"));
+        return cartas;
+    }
+
+    public int longitud(){
+        int cantidadDeRecursos = 0;
+        for (MazoRecurso recurso : recursos) {
+           cantidadDeRecursos = recurso.sumarRecursos(cantidadDeRecursos);
+        }
+    return cantidadDeRecursos;
+
+    }
+
+    public void consumirCartas(int cantidadDescarte){
+        for(int i= 0; i< cantidadDescarte;i++){
+            this.recursos.remover(recursos.size());
+        }
+    }
 }

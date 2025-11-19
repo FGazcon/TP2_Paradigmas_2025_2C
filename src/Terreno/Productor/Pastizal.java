@@ -1,8 +1,7 @@
 package Terreno.Productor;
 
-import Produccion.Recurso;
+import Recurso.Recurso;
 import Tablero.Vertice.Vertice;
-import Terreno.Terreno;
 
 public class Pastizal extends Productor {
 

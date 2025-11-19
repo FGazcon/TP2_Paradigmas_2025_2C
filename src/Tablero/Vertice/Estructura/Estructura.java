@@ -1,7 +1,7 @@
 package Tablero.Vertice.Estructura;
 
 import Jugador.Jugador;
-import Produccion.Recurso;
+import Recurso.Recurso;
 
 public abstract class Estructura {
 

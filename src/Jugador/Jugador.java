@@ -3,14 +3,11 @@ package Jugador;
 import Banco.Banco;
 import Desarrollo.MazoDesarrolloGeneral;
 import Errores.BancoNoTieneRecurso;
-import Errores.VerticeNoVacio;
 import Negociantes.Negociantes;
 import Produccion.MazoProduccion;
-import Produccion.Recurso;
+import Recurso.Recurso;
 import Tablero.Tablero;
 import Tablero.Vertice.Estructura.Poblado;
-
-import java.util.Scanner;
 
 public class Jugador extends Negociantes{
 
@@ -33,7 +30,7 @@ public class Jugador extends Negociantes{
             throw new BancoNoTieneRecurso();
         }
     }
-
+/*
     public int ubicarPoblado(Tablero tablero){
 
         Poblado poblado = new Poblado(this);
@@ -51,6 +48,38 @@ public class Jugador extends Negociantes{
         }
         return numeroDeVerice;
 
+    }
+    */
+
+    public int elegirVertice(){
+        return 4;
+    }
+    public int elegirVertice2(){
+        return 10;
+    }
+
+    public int elegirNumero(){
+        return 10;
+    }
+    public int ubicarPoblado(Tablero tablero){
+        int numeroDeVertice = this.elegirVertice();
+        tablero.ubicarEstructura(new Poblado(this),numeroDeVertice);
+        return numeroDeVertice;
+    }
+    public int ubicarPoblado2(Tablero tablero){
+        int numeroDeVertice = this.elegirVertice2();
+        tablero.ubicarEstructura(new Poblado(this),numeroDeVertice);
+        return numeroDeVertice;
+    }
+
+    public void descartarMitad(){
+        if(this.cantidadCartas() > 7){
+            this.mazoProduccion.consumirCartas(mazoProduccion.longitud()/2);
+        }
+    }
+
+    public int cantidadCartas(){
+        return mazoProduccion.longitud();
     }
 
 }

@@ -1,5 +1,7 @@
 package Produccion;
 
+import Recurso.Recurso;
+
 public class MazoRecurso {
 
     private int cantidadRecurso;
@@ -28,5 +30,9 @@ public class MazoRecurso {
 
     public void recibirRecurso(){
         this.cantidadRecurso++;
+    }
+
+    public int sumarRecursos(int recursosASumar){
+        return (recursosASumar + this.cantidadRecurso);
     }
 }

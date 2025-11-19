@@ -103,5 +103,36 @@ public class Hexagono {
         return vertices_por_hexagono;
     }
 
+    private Vertice encontrarVertice(int numeroDeVertice){
+        for(int i = 0; i < vertices.length; i++){
+            if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
+                return vertices[i];
+            }
+        }
+        return null;
+    }
+    ///
+
+
+    public void darRecursoAlVertice(int numeroDeVertice) {
+        Vertice vertice;
+        vertice = this.encontrarVertice(numeroDeVertice);
+        //no se si se peude chequear que vertice sea distinto de null o hay que tirar exception
+        if(vertice != null) {
+            this.terreno.darRecurso(vertice);
+        }
+    }
+
+    public boolean hexagonoCorrecto(int numeroHexagono){
+        return this.numero == numeroHexagono;
+    }
+
+    public void otorgarRecursosVertices(){
+        //por cada vertice buscar una estructura y otorgarle los recursos
+        for (Vertice vertice : this.vertices) {
+            terreno.darRecurso(vertice);
+        }
+
+    }
 
 }

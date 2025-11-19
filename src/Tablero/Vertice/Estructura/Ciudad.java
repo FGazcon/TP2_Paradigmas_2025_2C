@@ -1,6 +1,6 @@
 package Tablero.Vertice.Estructura;
 
-import Produccion.Recurso;
+import Recurso.Recurso;
 
 public class Ciudad extends Estructura {
 

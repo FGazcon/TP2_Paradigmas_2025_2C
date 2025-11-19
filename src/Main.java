@@ -1,7 +1,7 @@
 import Catan.Catan;
 import Dados.Dados;
 import Tablero.Tablero;
-
+/*
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 void main() {
@@ -25,3 +25,4 @@ void main() {
     catan.prepararJugadores();
     catan.primeraEtapa();
 }
+*/

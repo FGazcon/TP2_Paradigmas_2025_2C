@@ -10,6 +10,8 @@ public class Ladron {
         this.hexagono = hexagonoDesierto;
     }
 
+    //public Ladron();
+
     public void moverLadron(Hexagono destino){
         this.hexagono = destino;
     }

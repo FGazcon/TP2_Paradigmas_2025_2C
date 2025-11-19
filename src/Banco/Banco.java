@@ -3,7 +3,7 @@ package Banco;
 import Desarrollo.MazoDesarrolloGeneral;
 import Negociantes.Negociantes;
 import Produccion.MazoProduccion;
-import Produccion.Recurso;
+import Recurso.Recurso;
 
 public class Banco extends Negociantes {
 

@@ -1,7 +1,7 @@
 package Tablero.Vertice;
 
 import Errores.VerticeNoVacio;
-import Produccion.Recurso;
+import Recurso.Recurso;
 import Tablero.Arista;
 import Tablero.GeneradorGrafo;
 import Tablero.Vertice.Estructura.Estructura;
@@ -55,6 +55,7 @@ public class Vertice {
     }
 
     public void darRecurso(Recurso recurso) {
+
         this.estructura.entregarRecursos(recurso);
     }
 
@@ -72,6 +73,7 @@ public class Vertice {
 
     }
 
+
     public static Vertice[] generarVertices() {
 
         Vertice[] vertices = new Vertice[54];
@@ -88,5 +90,18 @@ public class Vertice {
         return vertices;
 
     }
+
+    public void darRecursoHexagonosAdyacentes(){
+
+    }
+
+    public Vertice verticeEncontrado(int numeroVertice){
+        if (numeroVertice == this.numeroDeVertice){
+            return this;
+        }
+        return null;
+    }
+
+
 }
 

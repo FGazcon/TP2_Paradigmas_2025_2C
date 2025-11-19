@@ -27,11 +27,20 @@ public class Catan {
         this.ladron = new Ladron(null);
 
     }
+    public Catan(List<Jugador> listaJugadores,Banco banco) {
 
+        this.banco = banco;
+        this.jugadores = new ArrayList<Jugador>();
+        this.jugadores.addAll(listaJugadores);
+        this.tablero = new Tablero();
+        this.dados = new Dados();
+        this.ladron = new Ladron(null);
+
+    }
     public void prepararJugadores(){
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
     }
-
+/*
     public void primeraEtapa(){
 
         for(Jugador jugador: this.jugadores){
@@ -48,6 +57,42 @@ public class Catan {
 
         this.tablero.activarParaSegundoPoblado(vertices_segundo_poblado);
 
+    }
+*/
+    public void primeraEtapa(){
+
+        int pobladoUbicacion=0;
+        for(Jugador jugador: this.jugadores){
+            jugador.ubicarPoblado(this.tablero);
+        }
+
+        for(Jugador jugador: this.jugadores){
+            pobladoUbicacion = jugador.ubicarPoblado2(this.tablero);
+            tablero.darRecursosHexagonosAdyacentesAlVertice(pobladoUbicacion);
+
+        }
+    }
+    public void lanzamientoDeDados(int numeroTirado){
+        tablero.activarHexagono(numeroTirado);
+    }
+    public void descarte(){
+        for(Jugador jugador : this.jugadores){
+            jugador.descartarMitad();
+        }
+    }
+    public void jugadorMueveLadron(Jugador jugador){
+        //ladron.moverLadron();
+    }
+    public void robo(){
+
+    }
+    public void resultado7(){
+        descarte();
+        //jugadorMueveLadron();
+        robo();
+    }
+    public void activarLadron(Jugador jugador){
+        //ladron.moverLadron();
     }
 
 }
