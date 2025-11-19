@@ -35,6 +35,14 @@ public class Hexagono {
         }
     }
 
+    public void activarHexagono(int numero){
+        if(this.numero == numero){
+            for(int i = 0; i < vertices.length; i++){
+                this.terreno.darRecurso(vertices[i]);
+            }
+        }
+    }
+
     public void activarseParaVerticeEspecifico(int[] vertices_segundo_poblado) {
         for (int i = 0; i < vertices.length; i++){
             for (int j = 0; j < vertices_segundo_poblado.length; j++){

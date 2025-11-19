@@ -23,6 +23,12 @@ public class Tablero {
 
     }
 
+    public void activarHexagono(int numero){
+        for (int i = 0; i < hexagonos.size(); i++) {
+            hexagonos.get(i).activarHexagono(numero);
+        }
+    }
+
     private Hexagono buscarHexagonoConVertice(int numeroDeVerice) {
 
         for (Hexagono hexagono : hexagonos) {
