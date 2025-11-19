@@ -1,9 +1,9 @@
 package Tablero.Vertice;
 
-public enum Estado {
+import Tablero.Vertice.Estructura.Estructura;
 
-    VACIO,
-    OCUPADO,
-    BLOQUEADO
+public abstract class Estado {
+
+    public abstract void intentarUbicarEstructura(Estructura estructura, Vertice vertice);
 
 }

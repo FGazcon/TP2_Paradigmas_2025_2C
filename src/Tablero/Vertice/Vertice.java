@@ -21,34 +21,33 @@ public class Vertice {
         this.estructura = null;
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = numeroDeVertice;
-        this.estado = Estado.VACIO;
+        this.estado = new Vacio();
     }
 
     public Vertice() {
         this.estructura = null;
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = 0;
-        this.estado = Estado.VACIO;
+        this.estado = new Vacio();
     }
 
     public void ubicarEstructura(Estructura estructura) {
-        if(this.estado == Estado.VACIO){
-            this.estado = Estado.OCUPADO;
-            bloquearAdyacentes();
-            this.estructura = estructura;
-        } else {
-            throw new VerticeNoVacio();
-        }
+
+        this.estado.intentarUbicarEstructura(estructura, this);
+
     }
 
 
     public void bloquearse() {
-        if (estado == Estado.VACIO) {
-            estado = Estado.BLOQUEADO;
-        }
+        this.estado = new Bloqueado();
     }
 
-    private void bloquearAdyacentes() {
+    public void ocuparse(Estructura estructura) {
+        this.estado = new Ocupado();
+        this.estructura = estructura;
+    }
+
+    public void bloquearAdyacentes() {
         for (Arista arista : aristas) {
             arista.bloquearDestino();
         }
