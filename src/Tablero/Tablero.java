@@ -64,4 +64,12 @@ public class Tablero {
 
     }
 
+    public void moveLadron(int nuevoHexagono){
+        Ladron ladron = Ladron.getLadron();
+        int viejoHexagono = ladron.moverLadron(nuevoHexagono);
+
+        hexagonos.get(nuevoHexagono).recibirLadron();
+        hexagonos.get(viejoHexagono).liberarse();
+    }
+
 }

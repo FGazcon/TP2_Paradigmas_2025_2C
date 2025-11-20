@@ -14,11 +14,13 @@ public class Hexagono {
     private Vertice[] vertices;
     private Terreno terreno;
     private int numero;
+    private EstadoHexagono estado;
 
     public Hexagono(Terreno terreno, int numero) {
         this.vertices = new Vertice[6];
         this.terreno = terreno;
         this.numero = numero;
+        this.estado = new Libre();
     }
 
     public boolean contieneVertice(int numeroDeVertice){
@@ -47,11 +49,15 @@ public class Hexagono {
     }
 
     public void activarHexagonoNumero(int numero){
-        if (this.numero == numero){
-            for(Vertice vertice: vertices){
-                Recurso recurso = this.terreno.darRecurso();
-                vertice.darRecurso(recurso);
-            }
+        if(this.numero == numero){
+            this.estado.intentarProducir(this);
+        }
+    }
+
+    public void producir(){
+        for(Vertice vertice: vertices){
+            Recurso recurso = this.terreno.darRecurso();
+            vertice.darRecurso(recurso);
         }
     }
 
@@ -63,8 +69,6 @@ public class Hexagono {
         }
         return null;
     }
-
-
 
     public void ubicarPoblado(Jugador jugador, int numeroDeVertice){
         Vertice verticeDestino = buscarVerticeNumero(numeroDeVertice);
@@ -97,6 +101,14 @@ public class Hexagono {
 
     public boolean esDesierto() {
         return this.numero == 7;
+    }
+
+    public void liberarse(){
+        this.estado = new Libre();
+    }
+
+    public void recibirLadron(){
+        this.estado = new BajoAsalto();
     }
 
 }

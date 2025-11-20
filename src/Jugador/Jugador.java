@@ -40,8 +40,14 @@ public class Jugador extends Negociantes{
     }
 
     public void descartarCarta(int cantidadCartasADescartar){
+        Banco banco = Banco.getBanco();
         //descarta la ultima carta
-        this.cartas.removeLast();
+        for (int i = 0; i < cantidadCartasADescartar; i++) {
+
+            //Falta que el banco reciba e alguna manera
+            this.cartas.removeLast();
+
+        }
     }
 
     public int cantidadCartas(){

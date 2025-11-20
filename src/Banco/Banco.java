@@ -27,4 +27,8 @@ public class Banco extends Negociantes {
 
     }
 
+    public void recibirRecurso(Recurso recurso){
+        this.mazoDeProduccion.recibirRecurso(recurso);
+    }
+
 }

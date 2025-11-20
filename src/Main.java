@@ -28,5 +28,5 @@ void main() {
     Jugador jugador2 = new Jugador("Matias2");
     //catan.primeraEtapa();
     catan.segundaEleccion(jugador, 45);
-    catan.segundaEleccion(jugador2, 23);
+    catan.segundaEleccion(jugador2, 47);
 }

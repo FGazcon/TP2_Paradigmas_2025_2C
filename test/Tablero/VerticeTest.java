@@ -34,9 +34,14 @@ public class VerticeTest {
 
     }
 
-    @Test void test03VerticeDaElelementoCorrecto(){
+    @Test void test03ElVertice(){
 
+        Vertice vertice = new Vertice();
+        Jugador jugador = mock(Jugador.class);
 
+        vertice.ubicarPoblado(jugador);
+
+        Assertions.assertEquals(vertice.estructuraEsDe(jugador), true);
 
     }
 

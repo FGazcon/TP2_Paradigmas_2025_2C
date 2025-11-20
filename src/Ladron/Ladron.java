@@ -21,8 +21,10 @@ public class Ladron {
 
     //public Ladron();
 
-    public void moverLadron(int numeroDeHexagono){
+    public int moverLadron(int numeroDeHexagono){
+        int aux = this.numeroDeHexagono;
         this.numeroDeHexagono = numeroDeHexagono;
+        return aux;
     }
 
 }
