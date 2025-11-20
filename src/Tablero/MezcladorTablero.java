@@ -31,7 +31,7 @@ public class MezcladorTablero {
 
         int size = numerosMezclados.size();
         for (int i = 0; i < size; i++) {
-            hexagonos.add(new Hexagono(terrenos.removeFirst(), numerosMezclados.removeFirst()));
+            hexagonos.add(asignarTerrenoYNumeroAHexagono(terrenos.removeFirst(), numerosMezclados.removeFirst()));
             System.out.println(i);
         }
         hexagonos.add(new Hexagono(terrenos.removeFirst(), 7));
@@ -39,7 +39,12 @@ public class MezcladorTablero {
         return  hexagonos;
     }
 
-    private static List<Integer> generarNumerosMezclados(){
+    private static Hexagono asignarTerrenoYNumeroAHexagono(Terreno terreno, int numero){
+         return new Hexagono(terreno, numero);
+
+    }
+
+    public static List<Integer> generarNumerosMezclados(){
 
         List<Integer> numerosMezclados = new ArrayList<>();
 

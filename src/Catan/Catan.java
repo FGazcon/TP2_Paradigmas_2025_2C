@@ -59,19 +59,13 @@ public class Catan {
 
     }
 */
-    public void primeraEtapa(){
+    public void primeraEtapa(int verticeElegido){
 
-        int pobladoUbicacion=0;
-        for(Jugador jugador: this.jugadores){
-            jugador.ubicarPoblado(this.tablero);
-        }
 
-        for(Jugador jugador: this.jugadores){
-            pobladoUbicacion = jugador.ubicarPoblado2(this.tablero);
-            tablero.darRecursosHexagonosAdyacentesAlVertice(pobladoUbicacion);
-
-        }
+     //   tablero.ubicarPoblado(this.tablero);
+        tablero.darRecursosHexagonosAdyacentesAlVertice(verticeElegido);
     }
+
     public void lanzamientoDeDados(int numeroTirado){
         tablero.activarHexagono(numeroTirado);
     }

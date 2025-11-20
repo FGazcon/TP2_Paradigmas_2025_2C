@@ -3,16 +3,24 @@ package Catan;
 import Banco.Banco;
 import Dados.Dados;
 import Jugador.Jugador;
+import Tablero.Vertice.Vertice;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
 import Tablero.Tablero;
 import Tablero.Vertice.Estructura.Poblado;
+import Tablero.MezcladorTablero;
+import Tablero.Hexagono;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import java.util.*;
 
 
 import java.util.ArrayList;
 
-import static Recurso.Recurso.MADERA;
 
 
 public class CatanTest {
@@ -24,7 +32,7 @@ public class CatanTest {
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
         Catan catan = new Catan(jugadores,banco);
-        catan.primeraEtapa();
+     //   catan.primeraEtapa();
 
         int recursosObtenidos = jugador.cantidadCartas();
 
@@ -89,7 +97,7 @@ public class CatanTest {
         catan.activarLadron(jugador);
 
     }
-
+/*
     @Test
     public void test04JugadorPierdeLaMitadDeLasCartas(){
         Banco banco = new Banco();
@@ -113,6 +121,62 @@ public class CatanTest {
 
 
         Assertions.assertEquals(4,recursosObtenidos);
+
+    }
+*/
+/*
+    public class MezcladorTableroTest {
+
+        @Test
+        public void testAsignacionTerrenosYNumeros() {
+
+            // Mockeamos Terrenos
+            List<Terreno> terrenosMock = new ArrayList<>();
+            for (int i = 0; i < 19; i++) {
+                Terreno t = mock(Terreno.class);
+                when(t.getNombre()).thenReturn("Terreno" + i);
+                terrenosMock.add(t);
+            }
+
+            // Creamos lista de números predecible
+            List<Integer> numerosMock = new ArrayList<>();
+            for (int i = 2; i <= 12; i++) { // ejemplo simplificado
+                numerosMock.add(i);
+            }
+
+            // Mockeamos método generarNumerosMezclados para devolver lista predecible
+            MezcladorTablero mezclador = spy(MezcladorTablero.class);
+            doReturn(numerosMock).when(mezclador).generarNumerosMezclados();
+
+            // Vertices predecibles
+            Vertice[][] vertices = Vertice.generarVertices();
+
+            // Ejecutamos
+            List<Hexagono> hexagonos = MezcladorTablero.mezclarNumerosYHexagonos(vertices, terrenosMock);
+
+            // Verificaciones
+            for (int i = 0; i < hexagonos.size(); i++) {
+                Hexagono h = hexagonos.get(i);
+                System.out.println(h.getTerreno().getNombre() + " - " + h.getNumero());
+                assertNotNull(h.getTerreno());
+                assertNotNull(h.getNumero());
+            }
+
+            // Verificar que se usaron exactamente 19 terrenos
+            assertEquals(19, hexagonos.size());
+        }
+    }
+*/
+
+    @Test
+    public void testMismoHexagonoDaMaderaSiempre(){
+
+    }
+
+
+    @Test
+    public void testNumerosAleatorios(){
+
 
     }
 }

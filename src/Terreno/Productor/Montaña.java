@@ -6,7 +6,7 @@ import Tablero.Vertice.Vertice;
 public class Montaña extends Productor {
 
     public void darRecurso(Vertice vertice){
-        vertice.darRecurso(Recurso.PIEDRA);
+        //vertice.darRecurso(Recurso.PIEDRA);
     }
 
 }

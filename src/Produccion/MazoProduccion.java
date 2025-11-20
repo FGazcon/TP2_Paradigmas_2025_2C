@@ -11,21 +11,7 @@ public class MazoProduccion {
     private List<Carta> cartas = new ArrayList<Carta>();
 
     public MazoProduccion() {
-        recursos = new ArrayList<MazoRecurso>();
-    }
-
-    public static MazoProduccion crearMazoParaBanco(){
-        //Revisar si es responsabilidad del MazoProduccion o de la clase MazoRecurso
-        MazoProduccion mazo = new MazoProduccion();
-
-        mazo.recursos.add(new MazoRecurso(Recurso.MADERA, 19));
-        mazo.recursos.add(new MazoRecurso(Recurso.TRIGO, 19));
-        mazo.recursos.add(new MazoRecurso(Recurso.PIEDRA, 19));
-        mazo.recursos.add(new MazoRecurso(Recurso.LADRILLO, 19));
-        mazo.recursos.add(new MazoRecurso(Recurso.OVEJA, 19));
-
-        return mazo;
-
+        cartas = crearMazoParaBanco();
     }
 
     public boolean darRecurso(Recurso recurso){
@@ -60,7 +46,7 @@ public class MazoProduccion {
 
     /////cambios
 
-    public List<Carta> crearMazoParaBanco2(){
+    public List<Carta> crearMazoParaBanco(){
         List<Carta> cartas = new ArrayList<Carta>();
         cartas.add(new Carta("MADERA"));
         cartas.add(new Carta("TRIGO"));
@@ -81,7 +67,7 @@ public class MazoProduccion {
 
     public void consumirCartas(int cantidadDescarte){
         for(int i= 0; i< cantidadDescarte;i++){
-            this.recursos.remover(recursos.size());
+            //this.recursos.remover(recursos.size());
         }
     }
 }
