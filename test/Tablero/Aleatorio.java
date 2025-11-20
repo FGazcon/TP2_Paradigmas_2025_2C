@@ -2,9 +2,11 @@ package Tablero;
 
 import Recurso.Madera;
 import Tablero.Vertice.Vertice;
+import Terreno.Productor.Bosque;
 import Terreno.Productor.Montaña;
 import Terreno.Productor.Productor;
 import org.junit.jupiter.api.Test;
+import Recurso.Recurso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +65,15 @@ public class Aleatorio {
     @Test
     public void testMismoHexagonoDaMaderaSiempre(){
         List <Terreno> terrenosMock = mock(List.class);
-        when(terrenosMock.removeFirst()).thenReturn(new Madera());
-        terrenosMock = Terreno.generar19Terrenos();
-        Terreno terrenoEsperado = new ();
-        assertEquals(terrenoEsperado,terrenosMock.removeFirst());
+        when(terrenosMock.removeFirst()).thenReturn(new Bosque());
+ //       terrenosMock = Terreno.generar19Terrenos();
+        List<Hexagono> hexagonosAColocar = new ArrayList<Hexagono>();
+        hexagonosAColocar = Hexagono.generar19Hexagonos(terrenosMock);
+        Recurso recurso;
+        Tablero tablero = new Tablero(hexagonosAColocar);
+        recurso = tablero.activarHexagono(4);
+        assertInstanceOf(Madera.class, recurso);
+
     }
 
 

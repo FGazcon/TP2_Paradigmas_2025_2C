@@ -1,6 +1,7 @@
 package Tablero;
 
 import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Vertice.Estructura.Poblado;
 import Tablero.Vertice.Vertice;
 import Ladron.Ladron;
 
@@ -13,6 +14,10 @@ public class Tablero {
     public Tablero() {
 
         this.hexagonos = Hexagono.generar19Hexagonos();
+    }
+    public Tablero(List<Hexagono> hexagonosAColocar) {
+
+        this.hexagonos = hexagonosAColocar;
     }
 
     public void ubicarEstructura(Estructura estructura, int numeroDeVerice) {
@@ -42,7 +47,11 @@ public class Tablero {
 
     ///// aca esta lo que cree yo
 
+    public void ubicarPoblado(int posicionPoblado){
+        Hexagono hexagonoConVertice = buscarHexagonoConVertice(posicionPoblado);
 
+       // hexagonoConVertice.ubicarEstructura(new Estructura(),posicionPoblado);
+    }
     public void darRecursosHexagonosAdyacentesAlVertice(int vertice) {
         for (Hexagono hexagono : hexagonos) {
             hexagono.darRecursoAlVertice(vertice);
@@ -60,6 +69,7 @@ public class Tablero {
         Hexagono hexagono;
 
         hexagono = buscarHexagonoPorNumero(numeroHexagono);
+        assert hexagono != null;
         hexagono.otorgarRecursosVertices();
     }
 

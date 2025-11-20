@@ -30,7 +30,7 @@ public class Hexagono {
     public void ubicarEstructura(Estructura estructura, int numeroDeVertice){
         for(int i = 0; i < vertices.length; i++){
             if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
-                vertices[i].ubicarEstructura(estructura);
+                //vertices[i].ubicarEstructura();
             }
         }
     }
@@ -50,9 +50,10 @@ public class Hexagono {
         this.vertices = vertices;
     }
 
-    public static List<Hexagono> generar19Hexagonos() {
+    public static List<Hexagono> generar19Hexagonos(List<Terreno> terrenosEnHexagonos) {
 
-        List<Terreno> terrenos = Terreno.generar19Terrenos();
+       // List<Terreno> terrenos = Terreno.generar19Terrenos();
+        List<Terreno> terrenos = terrenosEnHexagonos;
 
 
         List<Hexagono> hexagonos = MezcladorTablero.mezclarNumerosYHexagonos(vertices_por_hexagono(Vertice.generarVertices()), terrenos);

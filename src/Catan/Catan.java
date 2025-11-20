@@ -59,32 +59,32 @@ public class Catan {
 
     }
 */
-    public void primeraEtapa(int verticeElegido){
+    public void segundaEleccion(Jugador jugador,int verticeElegido){
 
 
-     //   tablero.ubicarPoblado(this.tablero);
+        tablero.ubicarPoblado(verticeElegido);
         tablero.darRecursosHexagonosAdyacentesAlVertice(verticeElegido);
     }
 
     public void lanzamientoDeDados(int numeroTirado){
         tablero.activarHexagono(numeroTirado);
-    }
+    }/*
     public void descarte(){
         for(Jugador jugador : this.jugadores){
             jugador.descartarMitad();
         }
-    }
+    }*/
     public void jugadorMueveLadron(Jugador jugador){
         //ladron.moverLadron();
     }
     public void robo(){
 
-    }
+    }/*
     public void resultado7(){
         descarte();
         //jugadorMueveLadron();
         robo();
-    }
+    }*/
     public void activarLadron(Jugador jugador){
         //ladron.moverLadron();
     }

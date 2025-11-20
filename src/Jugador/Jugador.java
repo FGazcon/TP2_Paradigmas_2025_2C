@@ -4,31 +4,32 @@ import Banco.Banco;
 import Desarrollo.MazoDesarrolloGeneral;
 import Errores.BancoNoTieneRecurso;
 import Negociantes.Negociantes;
+import Produccion.Carta;
 import Produccion.MazoProduccion;
 import Recurso.Recurso;
 import Tablero.Tablero;
 import Tablero.Vertice.Estructura.Poblado;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Jugador extends Negociantes{
 
     private Banco banco;
     private MazoProduccion mazoProduccion;
-    private MazoDesarrolloGeneral mazoDesarrolloGeneral;
+    private List<Carta> cartas;
     private String nombre;
 
     public Jugador(String nombre, Banco banco) {
+        this.cartas = new ArrayList<Carta>();
         this.banco = banco;
-        this.mazoProduccion = new MazoProduccion();
-        this.mazoDesarrolloGeneral = new MazoDesarrolloGeneral();
+       // this.mazoProduccion = new MazoProduccion();
+       // this.mazoDesarrolloGeneral = new MazoDesarrolloGeneral();
         this.nombre = nombre;
     }
 
     public void pedirAlBanco(Recurso recurso){
-        if (this.banco.darRecurso(recurso)){
-            this.mazoProduccion.recibirRecurso(recurso);
-        } else {
-            throw new BancoNoTieneRecurso();
-        }
+        cartas.add(banco.darRecurso(recurso));
     }
 /*
     public int ubicarPoblado(Tablero tablero){
@@ -50,17 +51,6 @@ public class Jugador extends Negociantes{
 
     }
     */
-
-    public int elegirVertice(){
-        return 4;
-    }
-    public int elegirVertice2(){
-        return 10;
-    }
-
-    public int elegirNumero(){
-        return 10;
-    }
     public int ubicarPoblado(Tablero tablero){
         int numeroDeVertice = this.elegirVertice();
         tablero.ubicarEstructura(new Poblado(this),numeroDeVertice);
@@ -71,7 +61,7 @@ public class Jugador extends Negociantes{
         tablero.ubicarEstructura(new Poblado(this),numeroDeVertice);
         return numeroDeVertice;
     }
-
+/*
     public void descartarMitad(){
         if(this.cantidadCartas() > 7){
             this.mazoProduccion.consumirCartas(mazoProduccion.longitud()/2);
@@ -81,5 +71,5 @@ public class Jugador extends Negociantes{
     public int cantidadCartas(){
         return mazoProduccion.longitud();
     }
-
+*/
 }

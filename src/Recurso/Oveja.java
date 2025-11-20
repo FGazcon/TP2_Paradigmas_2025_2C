@@ -1,8 +1,9 @@
 package Recurso;
-/*
+
 public class Oveja extends Recurso {
 
     @Override
-    public usar();
+        public void usar(){
+                //print("hola");
+        }
 }
-*/

@@ -14,7 +14,7 @@ public class MazoProduccion {
     public MazoProduccion() {
         mazosPorTipo = crearMazoParaBanco();
     }
-
+/*
     public void recibirRecurso(Recurso recurso){
 
         //no entiendo que hace esto
@@ -42,7 +42,7 @@ public class MazoProduccion {
         }
 
 
-    }
+    }*/
     public List<Carta> encontrarTipoCarta(Recurso recurso){
         for(List<Carta> mazo : mazosPorTipo) {
            if(mazo.contains(recurso)){
@@ -52,12 +52,29 @@ public class MazoProduccion {
         return null;
     }
 
-    void eliminarCartaRecurso(List<Carta> cartas) {
-        cartas.removeFirst();
+
+    private Carta eliminarCartaRecurso(List<Carta> cartas) {
+        return cartas.removeFirst();
     }
 
 
     /////cambios
+    public boolean darRecurso(Recurso recurso){
+        return encontrarTipoCarta(recurso) != null;
+
+    }
+    private Carta buscarEliminarCartaRecurso(Recurso recurso){
+        List<Carta> mazoRecurso = new ArrayList<>();
+        mazoRecurso = encontrarTipoCarta(recurso);
+        return eliminarCartaRecurso(mazoRecurso);
+    }
+    public Carta recibirRecurso(Recurso recurso){
+        if(darRecurso(recurso)){
+            return buscarEliminarCartaRecurso(recurso);
+
+        }
+        return null;
+    }
 
 
     public List<Carta> mazoDeMadera() {

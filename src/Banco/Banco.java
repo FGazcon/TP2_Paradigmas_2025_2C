@@ -2,6 +2,7 @@ package Banco;
 
 import Desarrollo.MazoDesarrolloGeneral;
 import Negociantes.Negociantes;
+import Produccion.Carta;
 import Produccion.MazoProduccion;
 import Recurso.Recurso;
 
@@ -15,9 +16,9 @@ public class Banco extends Negociantes {
         this.mazoDeProduccion = new MazoProduccion();
     }
 
-    public boolean darRecurso(Recurso recurso){
+    public Carta darRecurso(Recurso recurso){
 
-        return this.mazoDeProduccion.darRecurso(recurso);
+        return this.mazoDeProduccion.recibirRecurso(recurso);
 
     }
 
