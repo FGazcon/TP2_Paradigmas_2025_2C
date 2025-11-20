@@ -19,7 +19,7 @@ public class MazoTest {
         carta = mazoProduccion.recibirRecurso(RecursoFactory.crearRecurso("Madera"));
         Carta cartaEsperada = new Carta("Madera");
 
-        assertInstanceOf(Carta.class,carta);
+        assertInstanceOf(Carta.class, carta);
 
     }
 }

@@ -1,33 +1,32 @@
 package Tablero;
 
+import Jugador.Jugador;
 import Ladron.Ladron;
-import Tablero.Vertice.Estructura.Estructura;
-import Tablero.Vertice.Vertice;
-import Terreno.Terreno;
 
 import java.util.List;
 
 public class Tablero {
-    private Vertice[] vertices;
+
     private List<Hexagono> hexagonos;
+    private Ladron ladron;
 
     public Tablero() {
 
-        this.hexagonos = Hexagono.generar19Hexagonos(Terreno.generar19Terrenos());
-    }
-    public Tablero(List<Hexagono> hexagonosAColocar) {
-
-        this.hexagonos = hexagonosAColocar;
-    }
-
-    public void ubicarEstructura(Estructura estructura, int numeroDeVerice) {
-
-        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVerice);
-
-        hexagonoConVertice.ubicarEstructura(estructura, numeroDeVerice);
+        this.hexagonos = Hexagono.generar19Hexagonos();
 
     }
 
+    public void activarHexagono(int numero){
+        for(Hexagono hexagono: hexagonos){
+            hexagono.activarHexagonoNumero(numero);
+        }
+    }
+
+    public void activarHexagonoParaSegundoPoblado(int vertice_segundo_poblado) {
+        for (Hexagono hexagono : hexagonos) {
+            hexagono.activarHexagonoParaVerticeEspecifico(vertice_segundo_poblado);
+        }
+    }
 
     private Hexagono buscarHexagonoConVertice(int numeroDeVerice) {
 
@@ -39,43 +38,22 @@ public class Tablero {
         return null;
     }
 
-    public void activarParaSegundoPoblado(int[] vertices_segundo_poblado) {
-        for (Hexagono hexagono : hexagonos) {
-            hexagono.activarseParaVerticeEspecifico(vertices_segundo_poblado);
-        }
+    public int ubicarPoblado(Jugador jugador, int numeroDeVerice) {
+
+        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVerice);
+
+        hexagonoConVertice.ubicarPoblado(jugador, numeroDeVerice);
+
+        return numeroDeVerice;
+
     }
 
-    ///// aca esta lo que cree yo
+    public void ubicarCiudad(Jugador jugador, int numeroDeVerice) {
 
-    public void ubicarPoblado(int posicionPoblado){
-        Hexagono hexagonoConVertice = buscarHexagonoConVertice(posicionPoblado);
+        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVerice);
 
-       // hexagonoConVertice.ubicarEstructura(new Estructura(),posicionPoblado);
-    }
-    public void darRecursosHexagonosAdyacentesAlVertice(int vertice) {
-        for (Hexagono hexagono : hexagonos) {
-            hexagono.darRecursoAlVertice(vertice);
-        }
-    }
-    private Hexagono buscarHexagonoPorNumero(int numeroHexagono){
-        for(Hexagono hexagono : this.hexagonos){
-            if(hexagono.hexagonoCorrecto(numeroHexagono)){
-                return hexagono;
-            }
-        }
-        return null;
-    }
-    public void activarHexagono(int numeroHexagono){
-        Hexagono hexagono;
+        hexagonoConVertice.ubicarCiudad(jugador, numeroDeVerice);
 
-        hexagono = buscarHexagonoPorNumero(numeroHexagono);
-        assert hexagono != null;
-        //hexagono.otorgarRecursosVertices();
-    }
-
-    public void moverLadron(Ladron ladron,int numeroHexagono){
-
-       // ladron.moverLadron(hexagono);
     }
 
 }

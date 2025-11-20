@@ -3,18 +3,6 @@ package Catan;
 import Banco.Banco;
 import Dados.Dados;
 import Jugador.Jugador;
-import Tablero.Vertice.Vertice;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-import org.mockito.Mockito;
-import Tablero.Tablero;
-import Tablero.Vertice.Estructura.Poblado;
-import Tablero.MezcladorTablero;
-import Tablero.Hexagono;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
@@ -28,7 +16,7 @@ public class CatanTest {
     @Test
     public void test01LosJugadoresRecibenRecursosIniciales(){
         Banco banco = new Banco();
-        Jugador jugador = new Jugador("Wilmar", banco);
+        Jugador jugador = new Jugador("Wilmar");
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
         Catan catan = new Catan(jugadores,banco);
@@ -37,16 +25,16 @@ public class CatanTest {
         //aca deberia implementar para saber que recursos gano el jugador
 
 
-       // int recursosObtenidos = jugador.cantidadCartas();
+        // int recursosObtenidos = jugador.cantidadCartas();
 
         //en el assertion comparo si los recursos que gano son los que se esperaba que gane. asi parece
-      //  Assertions.assertNotEquals(0,recursosObtenidos);
+        //  Assertions.assertNotEquals(0,recursosObtenidos);
 
     }
     @Test
     public void test02SeRecibenLosRecursosCorrectamenteSegunElNumero(){
         Banco banco = new Banco();
-        Jugador jugador = new Jugador("Wilmar", banco);
+        Jugador jugador = new Jugador("Wilmar");
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
         Catan catan = new Catan(jugadores,banco);
@@ -59,19 +47,19 @@ public class CatanTest {
         //int recursosObtenidos = jugador.cantidadCartas();
 
 
-       // Assertions.assertNotEquals(0,recursosObtenidos);
+        // Assertions.assertNotEquals(0,recursosObtenidos);
 
     }
     //Verificar que el Terreno bajo el Ladrón no produzca recursos.
-      //      ● Verificar que si un jugador tiene más de 7 cartas, descarte correctamente la mitad,
+    //      ● Verificar que si un jugador tiene más de 7 cartas, descarte correctamente la mitad,
     //redondeando hacia abajo, al lanzar un 7.
-      //      ● Verificar que el jugador activo pueda mover el Ladrón y robar una carta aleatoria
+    //      ● Verificar que el jugador activo pueda mover el Ladrón y robar una carta aleatoria
     //de un jugador adyacente a la nueva ubicación.
 
     @Test
     public void test03HayLadronNoSaleRecurso(){
         Banco banco = new Banco();
-        Jugador jugador = new Jugador("Wilmar", banco);
+        Jugador jugador = new Jugador("Wilmar");
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
         Catan catan = new Catan(jugadores,banco);
@@ -162,5 +150,3 @@ public class CatanTest {
 
     }
 }
-
-

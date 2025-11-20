@@ -11,21 +11,27 @@ import java.util.List;
 
 public class Jugador extends Negociantes{
 
-    private Banco banco;
     private MazoProduccion mazoProduccion;
     private List<Carta> cartas;
     private String nombre;
 
-    public Jugador(String nombre, Banco banco) {
+    public Jugador(String nombre) {
         this.cartas = new ArrayList<Carta>();
-        this.banco = banco;
-       // this.mazoProduccion = new MazoProduccion();
-       // this.mazoDesarrolloGeneral = new MazoDesarrolloGeneral();
         this.nombre = nombre;
     }
 
     public void pedirAlBanco(Recurso recurso){
-        cartas.add(banco.darRecurso(recurso));
+
+        Banco banco = Banco.getBanco();
+        Carta cartanueva = banco.darRecurso(recurso);
+        System.out.println(cartanueva);
+        cartas.add(cartanueva);
+    }
+
+    public void imprimirRecursos(){
+        for (Carta carta : cartas){
+            System.out.println(carta);
+        }
     }
 /*
     public int ubicarPoblado(Tablero tablero){

@@ -10,10 +10,15 @@ public class Banco extends Negociantes {
 
     private MazoProduccion mazoDeProduccion;
     private MazoDesarrolloGeneral mazoDesarrollo;
+    private static Banco banco =  new Banco();
 
     public Banco(){
         this.mazoDesarrollo = MazoDesarrolloGeneral.generarMazoDesarrolloBanco();
         this.mazoDeProduccion = new MazoProduccion();
+    }
+
+    public static Banco getBanco() {
+        return banco;
     }
 
     public Carta darRecurso(Recurso recurso){

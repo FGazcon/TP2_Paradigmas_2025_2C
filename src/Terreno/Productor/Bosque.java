@@ -1,13 +1,12 @@
 package Terreno.Productor;
 
 import Recurso.Recurso;
-import Tablero.Vertice.Vertice;
-import Recurso.RecursoFactory;
+import Recurso.Madera;
 
 public class Bosque extends Productor {
 
     public Recurso darRecurso(){
-        return RecursoFactory.crearRecurso("Madera");
+        return new Madera();
     }
 
 }

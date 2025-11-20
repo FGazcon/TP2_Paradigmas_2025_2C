@@ -15,22 +15,22 @@ public class VerticeTest {
     @Test void test01VerticeRespetaReglaDeDistanciasAlUbicarPobladoInicial(){
 
         Vertice vertice = new Vertice();
-        Estructura estructura = mock(Estructura.class);
+        Jugador jugador = mock(Jugador.class);
 
         vertice.bloquearse();
 
-        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(estructura);});
+        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarPoblado(jugador);});
 
     }
 
     @Test void test02VerticeRespetaReglaDeDistanciasAlUbicarPobladoInicial(){
 
         Vertice vertice = new Vertice();
-        Estructura estructura = mock(Estructura.class);
+        Jugador jugador = mock(Jugador.class);
 
-        vertice.ubicarEstructura(estructura);
+        vertice.ubicarPoblado(jugador);
 
-        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(estructura);});
+        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarPoblado(jugador);});
 
     }
 

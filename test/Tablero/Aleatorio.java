@@ -1,6 +1,7 @@
 package Tablero;
 
 import Recurso.Recurso;
+import Tablero.Factory.Factory_MapaBasico;
 import Terreno.Productor.Bosque;
 import Terreno.Terreno;
 import org.junit.jupiter.api.Test;
@@ -58,19 +59,20 @@ public class Aleatorio {
 
 */
 
+    /*
     @Test
     public void testMismoHexagonoDaMaderaSiempre(){
         List <Terreno> terrenosMock = mock(List.class);
         when(terrenosMock.removeFirst()).thenReturn(new Bosque());
- //       terrenosMock = Terreno.generar19Terrenos();
+        //       terrenosMock = Terreno.generar19Terrenos();
         List<Hexagono> hexagonosAColocar = new ArrayList<Hexagono>();
-        hexagonosAColocar = Hexagono.generar19Hexagonos(terrenosMock);
+        hexagonosAColocar = Hexagono.generar19Hexagonos();
         Recurso recurso;
-        Tablero tablero = new Tablero(hexagonosAColocar);
-       // recurso = tablero.activarHexagono(4);
-       // assertInstanceOf(Madera.class, recurso);
+        Tablero tablero = new Tablero();
+        // recurso = tablero.activarHexagono(4);
+        // assertInstanceOf(Madera.class, recurso);
 
-    }
+    }*/
 
 
     @Test
@@ -79,13 +81,13 @@ public class Aleatorio {
         List<Integer> numeros = new ArrayList<Integer>();
         List <Integer> numerosMock = mock(List.class);
         when(numerosMock.removeFirst()).thenReturn(1);
-        numeros = MezcladorTablero.generarNumerosMezclados();
-        numerosMock = MezcladorTablero.generarNumerosMezclados();
-
+        numeros = Factory_MapaBasico.generarNumerosMezclados();
+        numerosMock = Factory_MapaBasico.generarNumerosMezclados();
 
         assertNotEquals(numerosMock.removeFirst(), numeros.removeFirst());
 
     }
+
     @Test
     public void testTerrenosAleatoreos(){
 
@@ -95,10 +97,8 @@ public class Aleatorio {
         terrenos= Terreno.generar19Terrenos();
         terrenosMock = Terreno.generar19Terrenos();
 
-
         assertNotEquals(terrenosMock.removeFirst(), terrenos.removeFirst());
 
     }
-
 
 }

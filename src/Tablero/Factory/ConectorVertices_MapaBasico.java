@@ -1,8 +1,8 @@
-package Tablero;
+package Tablero.Factory;
 
 import Tablero.Vertice.Vertice;
 
-public class GeneradorGrafo {
+public class ConectorVertices_MapaBasico {
 
     public static void generarGrafo(Vertice[] vertices) {
 

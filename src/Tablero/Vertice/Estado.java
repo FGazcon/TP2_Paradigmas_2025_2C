@@ -1,9 +1,10 @@
 package Tablero.Vertice;
 
-public enum Estado {
+import Jugador.Jugador;
 
-    VACIO,
-    OCUPADO,
-    BLOQUEADO
+public abstract class Estado {
 
+    public abstract void intentarUbicarPoblado(Jugador jugador, Vertice vertice);
+
+    public abstract void intentarUbicarCiudad(Jugador jugador, Vertice vertice);
 }

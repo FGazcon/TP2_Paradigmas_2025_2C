@@ -1,10 +1,11 @@
 package Tablero.Vertice;
 
-import Errores.VerticeNoVacio;
+import Jugador.Jugador;
 import Recurso.Recurso;
 import Tablero.Arista;
-import Tablero.GeneradorGrafo;
+import Tablero.Factory.ConectorVertices_MapaBasico;
 import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Vertice.Estructura.NoHayEstructura;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,44 +19,51 @@ public class Vertice {
 
 
     public Vertice(int numeroDeVertice) {
-        this.estructura = null;
+        this.estructura = new NoHayEstructura();
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = numeroDeVertice;
-        this.estado = Estado.VACIO;
+        this.estado = new Vacio();
     }
 
     public Vertice() {
-        this.estructura = null;
+        this.estructura = new NoHayEstructura();
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = 0;
-        this.estado = Estado.VACIO;
+        this.estado = new Vacio();
     }
 
-    public void ubicarEstructura(Estructura estructura) {
-        if(this.estado == Estado.VACIO){
-            this.estado = Estado.OCUPADO;
-            bloquearAdyacentes();
-            this.estructura = estructura;
-        } else {
-            throw new VerticeNoVacio();
-        }
+    public void ubicarPoblado(Jugador jugador) {
+
+        this.estado.intentarUbicarPoblado(jugador, this);
+
+    }
+
+    public void ubicarCiudad(Jugador jugador) {
+        this.estado.intentarUbicarCiudad(jugador, this);
+    }
+
+    public boolean estructuraEsDe(Jugador jugador) {
+        //return this.estructura.esDe(jugador);
+        return true;
     }
 
 
     public void bloquearse() {
-        if (estado == Estado.VACIO) {
-            estado = Estado.BLOQUEADO;
-        }
+        this.estado = new Bloqueado();
     }
 
-    private void bloquearAdyacentes() {
+    public void ocuparse(Estructura estructura) {
+        this.estado = new Ocupado();
+        this.estructura = estructura;
+    }
+
+    public void bloquearAdyacentes() {
         for (Arista arista : aristas) {
             arista.bloquearDestino();
         }
     }
 
     public void darRecurso(Recurso recurso) {
-
         this.estructura.entregarRecursos(recurso);
     }
 
@@ -73,7 +81,6 @@ public class Vertice {
 
     }
 
-
     public static Vertice[] generarVertices() {
 
         Vertice[] vertices = new Vertice[54];
@@ -81,7 +88,7 @@ public class Vertice {
             vertices[i] = new Vertice(i);
         }
 
-        GeneradorGrafo.generarGrafo(vertices);
+        ConectorVertices_MapaBasico.generarGrafo(vertices);
 
         for (int i = 0; i < vertices.length; i++) {
             System.out.println(vertices[i].numeroDeVertice + " " +  vertices[i]);
@@ -90,18 +97,4 @@ public class Vertice {
         return vertices;
 
     }
-
-    public void darRecursoHexagonosAdyacentes(){
-
-    }
-
-    public Vertice verticeEncontrado(int numeroVertice){
-        if (numeroVertice == this.numeroDeVertice){
-            return this;
-        }
-        return null;
-    }
-
-
 }
-

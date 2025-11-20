@@ -1,7 +1,8 @@
 import Catan.Catan;
 import Dados.Dados;
+import Jugador.Jugador;
 import Tablero.Tablero;
-/*
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 void main() {
@@ -22,7 +23,10 @@ void main() {
     dados.tirarDados();
 
     Catan catan = new Catan();
-    catan.prepararJugadores();
-    catan.primeraEtapa();
+    //catan.prepararJugadores();
+    Jugador jugador = new Jugador("Matias");
+    Jugador jugador2 = new Jugador("Matias2");
+    //catan.primeraEtapa();
+    catan.segundaEleccion(jugador, 45);
+    catan.segundaEleccion(jugador2, 23);
 }
-*/
