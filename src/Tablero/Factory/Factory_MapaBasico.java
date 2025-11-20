@@ -1,5 +1,6 @@
-package Tablero;
+package Tablero.Factory;
 
+import Tablero.Hexagono;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
 
@@ -7,36 +8,40 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MezcladorHexagonosNumerosYTerrenos {
+public class Factory_MapaBasico {
 
-    public static List<Hexagono> mezclarNumerosYHexagonos(Vertice[] vertices, List<Terreno> terrenos) {
+    public static List<Hexagono> mezclarNumerosYHexagonos() {
 
         List<Integer> numerosMezclados = generarNumerosMezclados();
 
-        List<Hexagono> hexagonos = generarHexagonosNoFijos(numerosMezclados, terrenos);
+        List<Hexagono> hexagonos = generarHexagonosNoFijos();
 
         Collections.shuffle(hexagonos);
 
-        Vertice[][] verticesAsignados = vertices_por_hexagono(vertices);
+        Vertice[][] verticesAsignados = vertices_por_hexagono();
 
         for (int i = 0; i < hexagonos.size(); i++) {
-            hexagonos.get(i).setVertices(verticesAsignados[i]);
+            hexagonos.get(i).setVertices(verticesAsignados[i]); //Los fija en el mapa via vertices y orden.
         }
 
         return hexagonos;
 
     }
 
-    private static List<Hexagono> generarHexagonosNoFijos(List<Integer> numerosMezclados, List<Terreno> terrenos) {
+    private static List<Hexagono> generarHexagonosNoFijos() {
 
         List<Hexagono> hexagonos = new ArrayList<Hexagono>();
+
+        List<Integer> numerosMezclados = generarNumerosMezclados();
+
+        List<Terreno>  terrenos = pedirTerrenos();
 
         int size = numerosMezclados.size();
         for (int i = 0; i < size; i++) {
             hexagonos.add(new Hexagono(terrenos.removeFirst(), numerosMezclados.removeFirst()));
             System.out.println(i);
         }
-        hexagonos.add(new Hexagono(terrenos.removeFirst(), 7));
+        hexagonos.add(new Hexagono(terrenos.removeFirst(), 7)); //Es el desierto
 
         return  hexagonos;
     }
@@ -59,7 +64,9 @@ public class MezcladorHexagonosNumerosYTerrenos {
 
     }
 
-    private static Vertice[][] vertices_por_hexagono(Vertice[] vertices) {
+    private static Vertice[][] vertices_por_hexagono() {
+
+        Vertice[] vertices = pedirVertices();
 
         Vertice[] vertices0 = {vertices[0], vertices[1],  vertices[2], vertices[31], vertices[30], vertices[29]};
         Vertice[] vertices1 = {vertices[2], vertices[3], vertices[4], vertices[33], vertices[32], vertices[31]};
@@ -67,7 +74,7 @@ public class MezcladorHexagonosNumerosYTerrenos {
         Vertice[] vertices2 = {vertices[4], vertices[5],  vertices[6], vertices[7], vertices[34], vertices[33]};
         Vertice[] vertices3 = {vertices[28], vertices[29], vertices[30], vertices[47], vertices[46], vertices[27]};
 
-        Vertice[] vertices4 = {vertices[30], vertices[31],  vertices[32], vertices[38], vertices[53], vertices[47]};
+        Vertice[] vertices4 = {vertices[30], vertices[31],  vertices[32], vertices[48], vertices[53], vertices[47]};
         Vertice[] vertices5 = {vertices[32], vertices[33], vertices[34], vertices[35], vertices[49], vertices[48]};
 
         Vertice[] vertices6 = {vertices[34], vertices[7],  vertices[8], vertices[9], vertices[36], vertices[35]};
@@ -93,6 +100,14 @@ public class MezcladorHexagonosNumerosYTerrenos {
         Vertice[][] vertices_por_hexagono = {vertices0, vertices1, vertices2, vertices3, vertices4, vertices5, vertices6, vertices7, vertices8, vertices9, vertices10, vertices11, vertices12, vertices13, vertices14, vertices15, vertices16, vertices17, vertices18};
 
         return vertices_por_hexagono;
+    }
+
+    private static List<Terreno> pedirTerrenos() {
+        return Terreno.generar19Terrenos();
+    }
+
+    private static Vertice[] pedirVertices() {
+        return Vertice.generarVertices();
     }
 
 }

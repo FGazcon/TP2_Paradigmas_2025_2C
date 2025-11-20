@@ -24,4 +24,5 @@ void main() {
     Catan catan = new Catan();
     catan.prepararJugadores();
     catan.primeraEtapa();
+    catan.loopTurnos();
 }

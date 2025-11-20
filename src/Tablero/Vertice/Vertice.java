@@ -3,8 +3,9 @@ package Tablero.Vertice;
 import Jugador.Jugador;
 import Produccion.Recurso;
 import Tablero.Arista;
-import Tablero.ConectorVertices;
+import Tablero.Factory.ConectorVertices_MapaBasico;
 import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Vertice.Estructura.NoHayEstructura;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +19,14 @@ public class Vertice {
 
 
     public Vertice(int numeroDeVertice) {
-        this.estructura = null;
+        this.estructura = new NoHayEstructura();
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = numeroDeVertice;
         this.estado = new Vacio();
     }
 
     public Vertice() {
-        this.estructura = null;
+        this.estructura = new NoHayEstructura();
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = 0;
         this.estado = new Vacio();
@@ -86,7 +87,7 @@ public class Vertice {
             vertices[i] = new Vertice(i);
         }
 
-        ConectorVertices.generarGrafo(vertices);
+        ConectorVertices_MapaBasico.generarGrafo(vertices);
 
         for (int i = 0; i < vertices.length; i++) {
             System.out.println(vertices[i].numeroDeVertice + " " +  vertices[i]);

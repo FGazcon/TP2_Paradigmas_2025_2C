@@ -37,21 +37,27 @@ public class MazoProduccion {
     }
 
     public void recibirRecurso(Recurso recurso){
-        MazoRecurso mazo;
-        int encontrado = 0;
-        while(encontrado < recursos.size() && encontrado >= -1){
-            if (this.recursos.get(encontrado).esDeTipo(recurso)){
-                mazo = this.recursos.get(encontrado);
-                mazo.recibirRecurso();
-                return;
-            }
-            encontrado++;
-        }
-        this.recursos.add(new MazoRecurso(recurso, 1));
+        MazoRecurso mazo = null;
 
+        for(MazoRecurso rec : recursos){
+            if (rec.esDeTipo(recurso)) {
+                mazo = rec;
+            }
+        }
+
+        if(mazo == null){
+            this.recursos.add(new MazoRecurso(recurso, 1));
+        } else {
+            mazo.recibirRecurso();
+        }
+
+        int recursosTotales = 0;
         for (int i = 0; i < recursos.size(); i++) {
             System.out.println(i + " " + recursos.get(i) + " " + recursos.get(i).getCantidad());
+            recursosTotales += recursos.get(i).getCantidad();
         }
+
+        System.out.println("Recursos totales: " + recursosTotales);
 
     }
 

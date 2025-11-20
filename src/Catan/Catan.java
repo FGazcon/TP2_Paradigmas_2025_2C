@@ -42,22 +42,29 @@ public class Catan {
 
     public void primeraEtapa(){
 
-        int numeroDeVertice = 4;
+        int numeroDeVertice = 30;
         for(Jugador jugador: this.jugadores){
             intentarUbicarPoblado(jugador, numeroDeVertice);
-            numeroDeVertice+=30;
+            numeroDeVertice+=4;
         }
 
         for(Jugador jugador: this.jugadores){
-            int verticeSegundoPoblado = intentarUbicarPoblado(jugador, 45);
-            this.tablero.activarHexagonoParaSegundoPoblado(45);
+            int verticeSegundoPoblado = intentarUbicarPoblado(jugador, numeroDeVertice);
+            this.tablero.activarHexagonoParaSegundoPoblado(verticeSegundoPoblado);
             numeroDeVertice+=4;
         }
 
     }
 
-    public void turnoDeJugador(Jugador jugador){
+    public void loopTurnos(){
+        for(Jugador jugador: this.jugadores){
+            turnoDeJugador(jugador);
+        }
+    }
 
+    public void turnoDeJugador(Jugador jugador){
+        Turno turno = new Turno(jugador, this.tablero);
+        turno.empezarTurno();
     }
 
 }

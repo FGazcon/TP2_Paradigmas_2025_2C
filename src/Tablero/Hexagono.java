@@ -1,10 +1,9 @@
 package Tablero;
 
 import Errores.DesiertoNoProduceNada;
-import Errores.VerticeNoVacio;
 import Jugador.Jugador;
 import Produccion.Recurso;
-import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Factory.Factory_MapaBasico;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
 
@@ -84,10 +83,7 @@ public class Hexagono {
 
     public static List<Hexagono> generar19Hexagonos() {
 
-        List<Terreno> terrenos = Terreno.generar19Terrenos();
-
-
-        List<Hexagono> hexagonos = MezcladorHexagonosNumerosYTerrenos.mezclarNumerosYHexagonos(Vertice.generarVertices(), terrenos);
+        List<Hexagono> hexagonos = Factory_MapaBasico.mezclarNumerosYHexagonos();
 
         for (int i = 0; i < hexagonos.size(); i++) {
             System.out.println(hexagonos.get(i) + " " + i + " " + hexagonos.get(i).numero);
