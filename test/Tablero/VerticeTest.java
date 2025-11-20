@@ -34,4 +34,10 @@ public class VerticeTest {
 
     }
 
+    @Test void test03VerticeDaElelementoCorrecto(){
+
+
+
+    }
+
 }

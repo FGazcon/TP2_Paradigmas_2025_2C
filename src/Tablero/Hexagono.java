@@ -98,4 +98,5 @@ public class Hexagono {
     public boolean esDesierto() {
         return this.numero == 7;
     }
+
 }

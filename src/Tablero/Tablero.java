@@ -15,6 +15,14 @@ public class Tablero {
         this.hexagonos = Hexagono.generar19Hexagonos();
 
     }
+    public int buscarDesierto() {
+        for (int i = 0; i < this.hexagonos.size(); i++) {
+            if(hexagonos.get(i).esDesierto()){
+                return i;
+            }
+        }
+        return 0;
+    }
 
     public void activarHexagono(int numero){
         for(Hexagono hexagono: hexagonos){

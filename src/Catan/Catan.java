@@ -5,6 +5,7 @@ import Errores.VerticeNoVacio;
 import Errores.VerticeOcupadoPorAlguienMas;
 import Errores.VerticeVacio;
 import Jugador.Jugador;
+import Ladron.Ladron;
 import Recurso.Recurso;
 import Tablero.Tablero;
 
@@ -22,6 +23,9 @@ public class Catan {
         this.banco = new Banco();
         this.jugadores = new ArrayList<Jugador>();
         this.tablero = new Tablero();
+        Ladron.getLadron();
+        Ladron.getLadron().moverLadron(this.tablero.buscarDesierto());
+
     }
     public Catan(List<Jugador> listaJugadores,Banco banco) {
 
@@ -29,6 +33,8 @@ public class Catan {
         this.jugadores = new ArrayList<Jugador>();
         this.jugadores.addAll(listaJugadores);
         this.tablero = new Tablero();
+
+
     }
     public void prepararJugadores(){
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);

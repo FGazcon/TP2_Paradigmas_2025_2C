@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Jugador extends Negociantes{
 
-    private MazoProduccion mazoProduccion;
     private List<Carta> cartas;
     private String nombre;
 
@@ -33,45 +32,20 @@ public class Jugador extends Negociantes{
             System.out.println(carta);
         }
     }
-/*
-    public int ubicarPoblado(Tablero tablero){
 
-        Poblado poblado = new Poblado(this);
-
-        Scanner sc = new Scanner(System.in);  // Crear Scanner para leer desde la terminal
-
-        System.out.print("Ingresa un vertice: ");
-        int numeroDeVerice = sc.nextInt();
-
-        try{
-            tablero.ubicarEstructura(poblado, numeroDeVerice);
-        } catch (VerticeNoVacio e) {
-            System.out.println("No se puede ubicar un vertice");
-            return this.ubicarPoblado(tablero);
-        }
-        return numeroDeVerice;
-
-    }
-    *//*
-    public int ubicarPoblado(Tablero tablero){
-       // int numeroDeVertice = this.elegirVertice();
-        tablero.ubicarEstructura(new Poblado(this),numeroDeVertice);
-        return numeroDeVertice;
-    }
-    public int ubicarPoblado2(Tablero tablero){
-      //  int numeroDeVertice = this.elegirVertice2();
-        tablero.ubicarEstructura(new Poblado(this),numeroDeVertice);
-        return numeroDeVertice;
-    }*/
-/*
     public void descartarMitad(){
-        if(this.cantidadCartas() > 7){
-            this.mazoProduccion.consumirCartas(mazoProduccion.longitud()/2);
+        if(this.cantidadCartas() > 7) {
+            descartarCarta(cantidadCartas() / 2);
         }
+    }
+
+    public void descartarCarta(int cantidadCartasADescartar){
+        //descarta la ultima carta
+        this.cartas.removeLast();
     }
 
     public int cantidadCartas(){
-        return mazoProduccion.longitud();
+        return this.cartas.size();
     }
-*/
+
 }

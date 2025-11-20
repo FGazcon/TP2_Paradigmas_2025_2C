@@ -4,16 +4,25 @@ import Tablero.Hexagono;
 
 public class Ladron {
 
-    private Hexagono hexagono;
+    private int numeroDeHexagono;
+    private static Ladron ladron =  new Ladron();
 
-    public Ladron(Hexagono hexagonoDesierto) {
-        this.hexagono = hexagonoDesierto;
+    private Ladron() {
+        this.numeroDeHexagono = 0;
+    }
+
+    public static Ladron getLadron(){
+        return ladron;
+    }
+
+    public void ubicarseEn(int numeroDeHexagono){
+        this.numeroDeHexagono = numeroDeHexagono;
     }
 
     //public Ladron();
 
-    public void moverLadron(Hexagono destino){
-        this.hexagono = destino;
+    public void moverLadron(int numeroDeHexagono){
+        this.numeroDeHexagono = numeroDeHexagono;
     }
 
 }

@@ -59,7 +59,6 @@ public class Aleatorio {
 
 */
 
-    /*
     @Test
     public void testMismoHexagonoDaMaderaSiempre(){
         List <Terreno> terrenosMock = mock(List.class);
@@ -72,7 +71,7 @@ public class Aleatorio {
         // recurso = tablero.activarHexagono(4);
         // assertInstanceOf(Madera.class, recurso);
 
-    }*/
+    }
 
 
     @Test

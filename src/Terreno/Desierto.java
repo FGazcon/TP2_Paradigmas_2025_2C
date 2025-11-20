@@ -1,11 +1,12 @@
 package Terreno;
 
+import Errores.DesiertoNoProduceNada;
 import Recurso.Recurso;
 
 public class Desierto extends Terreno{
 
     public Recurso darRecurso(){
-        return null;
+        throw new DesiertoNoProduceNada();
     }
 
 }
