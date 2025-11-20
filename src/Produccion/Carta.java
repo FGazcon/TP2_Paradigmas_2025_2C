@@ -8,6 +8,12 @@ public class Carta  {
     public void usar() {
         recurso.usar();
     }
+    public boolean cartaEncontrada(Recurso recursoBuscado){
+        if (recurso.equals(recursoBuscado)){
+            return true;
+        }
+        return false;
+    }
     public Carta(String tipo){
         this.recurso = RecursoFactory.crearRecurso(tipo);
     }
