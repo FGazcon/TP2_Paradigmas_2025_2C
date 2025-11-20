@@ -39,7 +39,7 @@ public class Hexagono {
         for (int i = 0; i < vertices.length; i++){
             for (int j = 0; j < vertices_segundo_poblado.length; j++){
                 if (vertices[i].numeroDeVerticeEs(vertices_segundo_poblado[j])){
-                    this.terreno.darRecurso(vertices[i]);
+                    this.terreno.darRecurso();
                 }
             }
         }
@@ -120,20 +120,20 @@ public class Hexagono {
         vertice = this.encontrarVertice(numeroDeVertice);
         //no se si se peude chequear que vertice sea distinto de null o hay que tirar exception
         if(vertice != null) {
-            this.terreno.darRecurso(vertice);
+            this.terreno.darRecurso();
         }
     }
 
     public boolean hexagonoCorrecto(int numeroHexagono){
         return this.numero == numeroHexagono;
     }
-
-    public void otorgarRecursosVertices(){
+/*
+    public List<Recurso> otorgarRecursosVertices(){
         //por cada vertice buscar una estructura y otorgarle los recursos
         for (Vertice vertice : this.vertices) {
-            terreno.darRecurso(vertice);
+            terreno.darRecurso();
         }
 
-    }
+    }*/
 
 }

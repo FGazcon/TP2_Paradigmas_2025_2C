@@ -1,11 +1,11 @@
 package Terreno;
 
-import Tablero.Vertice.Vertice;
+import Recurso.Recurso;
 
 public class Desierto extends Terreno{
 
-    public void darRecurso(Vertice vertice){
-
+    public Recurso darRecurso(){
+        return null;
     }
 
 }

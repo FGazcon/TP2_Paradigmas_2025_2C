@@ -1,9 +1,9 @@
 package Tablero;
 
-import Tablero.Vertice.Estructura.Estructura;
-import Tablero.Vertice.Estructura.Poblado;
-import Tablero.Vertice.Vertice;
 import Ladron.Ladron;
+import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Vertice.Vertice;
+import Terreno.Terreno;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class Tablero {
 
     public Tablero() {
 
-        this.hexagonos = Hexagono.generar19Hexagonos();
+        this.hexagonos = Hexagono.generar19Hexagonos(Terreno.generar19Terrenos());
     }
     public Tablero(List<Hexagono> hexagonosAColocar) {
 
@@ -70,7 +70,7 @@ public class Tablero {
 
         hexagono = buscarHexagonoPorNumero(numeroHexagono);
         assert hexagono != null;
-        hexagono.otorgarRecursosVertices();
+        //hexagono.otorgarRecursosVertices();
     }
 
     public void moverLadron(Ladron ladron,int numeroHexagono){

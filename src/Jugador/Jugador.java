@@ -1,14 +1,10 @@
 package Jugador;
 
 import Banco.Banco;
-import Desarrollo.MazoDesarrolloGeneral;
-import Errores.BancoNoTieneRecurso;
 import Negociantes.Negociantes;
 import Produccion.Carta;
 import Produccion.MazoProduccion;
 import Recurso.Recurso;
-import Tablero.Tablero;
-import Tablero.Vertice.Estructura.Poblado;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,17 +46,17 @@ public class Jugador extends Negociantes{
         return numeroDeVerice;
 
     }
-    */
+    *//*
     public int ubicarPoblado(Tablero tablero){
-        int numeroDeVertice = this.elegirVertice();
+       // int numeroDeVertice = this.elegirVertice();
         tablero.ubicarEstructura(new Poblado(this),numeroDeVertice);
         return numeroDeVertice;
     }
     public int ubicarPoblado2(Tablero tablero){
-        int numeroDeVertice = this.elegirVertice2();
+      //  int numeroDeVertice = this.elegirVertice2();
         tablero.ubicarEstructura(new Poblado(this),numeroDeVertice);
         return numeroDeVertice;
-    }
+    }*/
 /*
     public void descartarMitad(){
         if(this.cantidadCartas() > 7){

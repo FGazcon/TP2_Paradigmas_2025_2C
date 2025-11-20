@@ -6,13 +6,13 @@ import Recurso.RecursoFactory;
 public class Carta  {
     Recurso recurso;
     public void usar() {
-        recurso.usar();
+        recurso.nombre();
     }
     public boolean cartaEncontrada(Recurso recursoBuscado){
-        if (recurso.equals(recursoBuscado)){
-            return true;
-        }
-        return false;
+        return recurso.nombre().equals(recursoBuscado.nombre());
+    }
+    public Carta(){
+        this.recurso  = null;
     }
     public Carta(String tipo){
         this.recurso = RecursoFactory.crearRecurso(tipo);

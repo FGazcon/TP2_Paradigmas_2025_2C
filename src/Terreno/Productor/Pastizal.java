@@ -1,12 +1,12 @@
 package Terreno.Productor;
 
 import Recurso.Recurso;
-import Tablero.Vertice.Vertice;
 
 public class Pastizal extends Productor {
 
-    public void darRecurso(Vertice vertice){
+    public Recurso darRecurso(){
        // vertice.darRecurso(Recurso.OVEJA);
+        return null;
     }
 
 }

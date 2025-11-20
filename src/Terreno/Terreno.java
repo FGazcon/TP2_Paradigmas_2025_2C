@@ -1,9 +1,8 @@
 package Terreno;
 
-import Tablero.Vertice.Vertice;
-import Terreno.Productor.*;
+import Recurso.Recurso;
+import Terreno.Productor.Productor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Terreno {
@@ -18,6 +17,6 @@ public abstract class Terreno {
     }
 
     //Urgente consultar si no rompe con DIP.
-    public abstract void darRecurso(Vertice vertice);
+    public abstract Recurso darRecurso();
 
 }

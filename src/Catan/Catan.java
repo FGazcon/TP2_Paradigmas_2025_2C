@@ -7,7 +7,6 @@ import Ladron.Ladron;
 import Tablero.Tablero;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Catan {
@@ -61,9 +60,10 @@ public class Catan {
 */
     public void segundaEleccion(Jugador jugador,int verticeElegido){
 
-
+       // List<Recurso> recursos = new ArrayList<Recurso>;
         tablero.ubicarPoblado(verticeElegido);
-        tablero.darRecursosHexagonosAdyacentesAlVertice(verticeElegido);
+       // recursos = tablero.encontrarRecursosHexagonosAdyacentesAlVertice(verticeElegido);
+        //jugador.pedirAlBanco(recursos);
     }
 
     public void lanzamientoDeDados(int numeroTirado){

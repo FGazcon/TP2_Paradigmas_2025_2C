@@ -2,7 +2,7 @@ package Recurso;
 
 public class Ladrillo extends Recurso {
     @Override
-    public void usar() {
-
+    public String nombre(){
+        return "Ladrillo";
     }
 }
