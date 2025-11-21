@@ -64,11 +64,11 @@ public class Tablero {
 
     }
 
-    public void moveLadron(int nuevoHexagono){
+    public void moveLadron(int nuevoHexagono, Jugador jugador){
         Ladron ladron = Ladron.getLadron();
         int viejoHexagono = ladron.moverLadron(nuevoHexagono);
 
-        hexagonos.get(nuevoHexagono).recibirLadron();
+        hexagonos.get(nuevoHexagono).recibirLadron(jugador);
         hexagonos.get(viejoHexagono).liberarse();
     }
 

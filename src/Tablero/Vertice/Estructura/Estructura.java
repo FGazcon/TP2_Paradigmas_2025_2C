@@ -3,14 +3,14 @@ package Tablero.Vertice.Estructura;
 import Jugador.Jugador;
 import Recurso.Recurso;
 
+import java.util.List;
+
 public abstract class Estructura {
 
     protected Jugador jugador;
 
     public abstract void entregarRecursos(Recurso recurso);
 
-    public static Poblado nuevoPoblado(Jugador jugador){
-        return new Poblado(jugador);
-    }
+    public abstract List<Jugador> anotarDueño(List<Jugador> jugadores);
 
 }

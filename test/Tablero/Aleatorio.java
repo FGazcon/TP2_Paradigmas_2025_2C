@@ -87,6 +87,8 @@ public class Aleatorio {
 
     }
 
+
+    //Revisar este test despues de factory.
     @Test
     public void testTerrenosAleatoreos(){
 

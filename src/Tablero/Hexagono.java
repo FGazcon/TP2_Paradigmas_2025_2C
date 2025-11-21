@@ -7,6 +7,7 @@ import Tablero.Factory.Factory_MapaBasico;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hexagono {
@@ -107,8 +108,16 @@ public class Hexagono {
         this.estado = new Libre();
     }
 
-    public void recibirLadron(){
+    public void recibirLadron(Jugador jugador){
         this.estado = new BajoAsalto();
+
+        List<Jugador> jugadores = new ArrayList<Jugador>();
+        for(Vertice vertice: vertices){
+            vertice.tieneDueño(jugadores);
+        }
+        //jugadores.getFirst().descartarCarta(1, jugador);
+
+
     }
 
 }

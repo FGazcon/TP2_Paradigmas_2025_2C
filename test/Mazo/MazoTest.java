@@ -19,6 +19,8 @@ public class MazoTest {
         carta = mazoProduccion.recibirRecurso(RecursoFactory.crearRecurso("Madera"));
         Carta cartaEsperada = new Carta("Madera");
 
+        //Fijarse factory recursos
+
         assertInstanceOf(Carta.class, carta);
 
     }

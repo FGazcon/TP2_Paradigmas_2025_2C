@@ -47,7 +47,6 @@ public class Vertice {
         return true;
     }
 
-
     public void bloquearse() {
         this.estado = new Bloqueado();
     }
@@ -96,5 +95,9 @@ public class Vertice {
 
         return vertices;
 
+    }
+
+    public List<Jugador> tieneDueño(List<Jugador> jugadores) {
+        return this.estructura.anotarDueño(jugadores);
     }
 }

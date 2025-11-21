@@ -7,7 +7,7 @@ public class Ladron {
     private int numeroDeHexagono;
     private static Ladron ladron =  new Ladron();
 
-    private Ladron() {
+    Ladron() {
         this.numeroDeHexagono = 0;
     }
 
