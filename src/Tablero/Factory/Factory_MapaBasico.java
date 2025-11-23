@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Factory_MapaBasico {
 
-    public static List<Hexagono> mezclarNumerosYHexagonos() {
+    public static List<Hexagono> mezclarNumerosYHexagonos(List<Integer> numerosMezclados,List<Terreno>  terrenos) {
 
-        List<Integer> numerosMezclados = generarNumerosMezclados();
+        //List<Integer> numerosMezclados = generarNumerosMezclados();
 
-        List<Hexagono> hexagonos = generarHexagonosNoFijos();
+        List<Hexagono> hexagonos = generarHexagonosNoFijos(numerosMezclados,terrenos);
 
         Collections.shuffle(hexagonos);
 
@@ -28,13 +28,13 @@ public class Factory_MapaBasico {
 
     }
 
-    public static List<Hexagono> generarHexagonosNoFijos() {
+    public static List<Hexagono> generarHexagonosNoFijos(List<Integer> numerosMezclados,List<Terreno>  terrenos) {
 
         List<Hexagono> hexagonos = new ArrayList<Hexagono>();
 
-        List<Integer> numerosMezclados = generarNumerosMezclados();
+        //List<Integer> numerosMezclados = generarNumerosMezclados();
 
-        List<Terreno>  terrenos = pedirTerrenos();
+        //List<Terreno>  terrenos = pedirTerrenos();
 
         int size = numerosMezclados.size();
         for (int i = 0; i < size; i++) {

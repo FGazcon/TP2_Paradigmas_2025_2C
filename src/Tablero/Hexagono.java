@@ -86,9 +86,9 @@ public class Hexagono {
         this.vertices = vertices;
     }
 
-    public static List<Hexagono> generar19Hexagonos() {
+    public static List<Hexagono> generar19Hexagonos(List<Integer>  numerosMezclados,List<Terreno>  terrenos) {
 
-        List<Hexagono> hexagonos = Factory_MapaBasico.mezclarNumerosYHexagonos();
+        List<Hexagono> hexagonos = Factory_MapaBasico.mezclarNumerosYHexagonos(numerosMezclados,terrenos);
 
         for (int i = 0; i < hexagonos.size(); i++) {
             System.out.println(hexagonos.get(i) + " " + i + " " + hexagonos.get(i).numero);

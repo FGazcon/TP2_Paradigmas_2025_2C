@@ -2,6 +2,7 @@ package Tablero;
 
 import Jugador.Jugador;
 import Ladron.Ladron;
+import Terreno.Terreno;
 
 import java.util.List;
 
@@ -9,12 +10,18 @@ public class Tablero {
 
     private List<Hexagono> hexagonos;
     private Ladron ladron;
-
+/*
     public Tablero() {
 
-        this.hexagonos = Hexagono.generar19Hexagonos();
+        //this.hexagonos = Hexagono.generar19Hexagonos();
+
+    }*/
+    public Tablero(List<Terreno>  terrenos,List<Integer> numeros) {
+
+        this.hexagonos = Hexagono.generar19Hexagonos(numeros,terrenos);
 
     }
+
     public int buscarDesierto() {
         for (int i = 0; i < this.hexagonos.size(); i++) {
             if(hexagonos.get(i).esDesierto()){
