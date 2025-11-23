@@ -1,8 +1,65 @@
 package Recurso;
 
-public class Ladrillo extends Recurso {
+import Tablero.Vertice.Estructura.Estructura;
+
+public class Ladrillo implements Recurso {
     @Override
     public String nombre(){
         return "Ladrillo";
+    }
+    @Override
+    public Estructura construir(Recurso recurso){
+       return recurso.construir(this);
+    }
+    @Override
+    public Estructura construir(Madera madera){
+        return null;
+        //return new Carretera;
+    }
+    @Override
+    public Estructura construir(Ladrillo ladrillo){
+        return null;
+        //return new Carretera; podria ser algo para el trade con el banco
+    }
+    @Override
+    public Estructura construir(Piedra piedra){
+        return null;
+        //return new Carretera; podria ser algo para el trade con el banco
+    }
+    @Override
+    public Estructura construir(Trigo trigo){
+        return null;
+        //return new Carretera; podria ser algo para el trade con el banco
+    }
+    @Override
+    public Estructura construir(Oveja oveja){
+        return null;
+        //return new Carretera; podria ser algo para el trade con el banco
+    }
+
+    @Override
+    public Estructura construir(Piedra piedra, Oveja oveja, Trigo trigo) {
+        return null;
+    }
+
+    @Override
+    public Estructura construir(Ladrillo ladrillo, Oveja oveja,Madera madera, Trigo trigo){
+        return null;
+        // aca hay que devolver un poblado pero el poblado hay que mandarle un jugador, ta raro return new Poblado();
+    }
+    public Estructura construir(Ladrillo ladrillo, Oveja oveja,Madera madera, Trigo trigo){
+        return null;
+        // aca hay que devolver un poblado pero el poblado hay que mandarle un jugador, ta raro return new Poblado();
+    }
+
+    @Override
+    public Estructura construir(Ladrillo ladrillo,Madera madera, Oveja oveja, Trigo trigo){
+        return null;
+        // aca hay que devolver un poblado pero el poblado hay que mandarle un jugador, ta raro return new Poblado();
+    }
+
+    @Override
+    public Estructura construirPoblado(Recurso recurso1,Recurso recurso2, Recurso recurso3) {
+        return null;
     }
 }
