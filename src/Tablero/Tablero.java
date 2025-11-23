@@ -2,7 +2,6 @@ package Tablero;
 
 import Jugador.Jugador;
 import Ladron.Ladron;
-import Terreno.Terreno;
 
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class Tablero {
         //this.hexagonos = Hexagono.generar19Hexagonos();
 
     }*/
-    public Tablero(List<Terreno>  terrenos,List<Integer> numeros) {
+    public Tablero(List<Hexagono> hexagonos) {
 
-        this.hexagonos = Hexagono.generar19Hexagonos(numeros,terrenos);
+        this.hexagonos = hexagonos;
 
     }
 

@@ -2,6 +2,7 @@ package Tablero;
 
 import Errores.DesiertoNoProduceNada;
 import Jugador.Jugador;
+import Produccion.Carta;
 import Recurso.Recurso;
 import Tablero.Factory.Factory_MapaBasico;
 import Tablero.Vertice.Vertice;
@@ -13,8 +14,8 @@ import java.util.List;
 public class Hexagono {
 
     private Vertice[] vertices;
-    private Terreno terreno;
-    private int numero;
+    private final Terreno terreno;
+    private final int numero;
     private EstadoHexagono estado;
 
     public Hexagono(Terreno terreno, int numero) {
@@ -25,11 +26,12 @@ public class Hexagono {
     }
 
     public boolean contieneVertice(int numeroDeVertice){
-        for(int i = 0; i < vertices.length; i++){
-            if (vertices[i].numeroDeVerticeEs(numeroDeVertice)){
+        for (Vertice vertex : vertices) {
+            if (vertex.numeroDeVerticeEs(numeroDeVertice)) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -111,13 +113,16 @@ public class Hexagono {
     public void recibirLadron(Jugador jugador){
         this.estado = new BajoAsalto();
 
-        List<Jugador> jugadores = new ArrayList<Jugador>();
+        List<Jugador> jugadores = new ArrayList<>();
         for(Vertice vertice: vertices){
-            vertice.tieneDueño(jugadores);
+            vertice.tieneDuenio(jugadores);
         }
-        //jugadores.getFirst().descartarCarta(1, jugador);
 
-
+    }
+    public Carta robarCartaAJugador(Jugador jugador){
+        Carta carta = jugador.cartaRobada();
+        jugador.sumarCarta(carta);
+        return carta;
     }
 
 }

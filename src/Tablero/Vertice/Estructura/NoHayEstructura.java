@@ -7,6 +7,7 @@ import java.util.List;
 
 public class NoHayEstructura extends Estructura{
     @Override
+
     public void entregarRecursos(Recurso recurso) {
 
     }

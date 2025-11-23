@@ -1,8 +1,14 @@
 package Ladron;
 
-import Tablero.Tablero;
+import Jugador.Jugador;
+import Recurso.RecursoFactory;
+import Tablero.Factory.Factory_MapaBasico;
+import Tablero.Hexagono;
+import Terreno.Terreno;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class LadronTest {
 
@@ -41,6 +47,23 @@ public class LadronTest {
         Assertions.assertEquals(0, ladron.moverLadron(4));  // de 0 → 4
         Assertions.assertEquals(4, ladron.moverLadron(7));  // de 4 → 7
         Assertions.assertEquals(7, ladron.moverLadron(2));  // de 7 → 2
+    }
+
+    @Test
+    public void test05HexagonoRobado(){
+        List<Terreno> terrenos = Factory_MapaBasico.pedirTerrenos();
+        List<Integer> numerosMezclados = Factory_MapaBasico.generarNumerosMezclados();
+        List<Hexagono> hexagonos = Factory_MapaBasico.generarHexagonosNoFijos(numerosMezclados,terrenos);
+        Ladron ladron = Ladron.getLadron();
+        Jugador jugador1 = new Jugador("Neymar");
+        Jugador jugador2 = new Jugador("Pele");
+        jugador1.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
+        jugador1.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
+
+
+
+
+
     }
 
 

@@ -3,8 +3,8 @@ package Jugador;
 import Banco.Banco;
 import Negociantes.Negociantes;
 import Produccion.Carta;
-import Produccion.MazoProduccion;
 import Recurso.Recurso;
+import Tablero.Factory.Factory_MapaBasico;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,9 @@ public class Jugador extends Negociantes{
     public void pedirAlBanco(Recurso recurso){
 
         Banco banco = Banco.getBanco();
-        Carta cartanueva = banco.darRecurso(recurso);
-        System.out.println(cartanueva);
-        cartas.add(cartanueva);
+        Carta cartaNueva = banco.darRecurso(recurso);
+        System.out.println(cartaNueva);
+        sumarCarta(cartaNueva);
     }
 
     public void imprimirRecursos(){
@@ -56,9 +56,19 @@ public class Jugador extends Negociantes{
         for (int i = 0; i < cantidadCartasADescartar; i++) {
 
             Carta cartaDescartada = this.cartas.removeLast();
-            //Falta que el banco reciba e alguna manera
+            //Falta que el banco reciba de alguna manera
 
         }
+    }
+    public Carta cartaRobada(){
+        //se podria hacer un aleatorio de cartas en el factory mapaBasico haciendo que sea un FactoryRandom y mezclar las cartas
+        //y devolver un mazo mezclado y remover una
+        Factory_MapaBasico.mezclarCartas(this.cartas);
+        return this.cartas.removeLast();
+
+    }
+    public void sumarCarta(Carta carta){
+        this.cartas.add(carta);
     }
 
     public int cantidadCartas(){

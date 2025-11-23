@@ -97,7 +97,7 @@ public class Vertice {
 
     }
 
-    public List<Jugador> tieneDueño(List<Jugador> jugadores) {
-        return this.estructura.anotarDueño(jugadores);
+    public List<Jugador> tieneDuenio(List<Jugador> jugadores) {
+        return this.estructura.anotarDuenio(jugadores);
     }
 }

@@ -11,6 +11,6 @@ public abstract class Estructura {
 
     public abstract void entregarRecursos(Recurso recurso);
 
-    public abstract List<Jugador> anotarDueño(List<Jugador> jugadores);
+    public abstract List<Jugador> anotarDuenio(List<Jugador> jugadores);
 
 }

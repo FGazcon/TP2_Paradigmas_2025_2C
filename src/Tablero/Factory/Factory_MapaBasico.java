@@ -1,5 +1,6 @@
 package Tablero.Factory;
 
+import Produccion.Carta;
 import Tablero.Hexagono;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
@@ -108,6 +109,11 @@ public class Factory_MapaBasico {
 
     public static Vertice[] pedirVertices() {
         return Vertice.generarVertices();
+    }
+
+    public static List<Carta> mezclarCartas(List<Carta> cartas){
+        Collections.shuffle(cartas);
+        return cartas;
     }
 
 }

@@ -36,19 +36,5 @@ public class Madera implements Recurso {
         public Estructura construir(Piedra piedra) {
                 return null;
         }
-        @Override
-        public Estructura construirPoblado(Recurso recurso1,Recurso recurso2,Recurso recurso3){
-                return recurso1.construirPoblado(this,recurso2,recurso3);
-                // aca hay que devolver un poblado pero el poblado hay que mandarle un jugador, ta raro return new Poblado();
-        }
-        @Override
-        public Estructura construir(Madera madera, Ladrillo ladrillo, Oveja oveja, Trigo trigo){
-                return null;
-                // aca hay que devolver un poblado pero el poblado hay que mandarle un jugador, ta raro return new Poblado();
-        }
-        @Override
-        public Estructura construir(Piedra piedra, Oveja oveja, Trigo trigo){
-                return null;
-                //return new CartaDesarrollo();
-        }
+
 }

@@ -1,7 +1,5 @@
 package Ladron;
 
-import Tablero.Hexagono;
-
 public class Ladron {
 
     private int numeroDeHexagono;
@@ -20,7 +18,7 @@ public class Ladron {
     }
 
     //public Ladron();
-
+//devuelve el hexagono anterior
     public int moverLadron(int numeroDeHexagono){
         int aux = this.numeroDeHexagono;
         this.numeroDeHexagono = numeroDeHexagono;

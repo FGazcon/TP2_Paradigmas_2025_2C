@@ -16,7 +16,7 @@ public class MazoProduccion {
 
     public List<Carta> encontrarTipoCarta(Recurso recurso){
         for(List<Carta> mazo : mazosPorTipo) {
-           if(mazo.get(0).cartaEncontrada(recurso)){
+           if(mazo.getFirst().cartaEncontrada(recurso)){
                return mazo;
            }
         }
@@ -35,7 +35,7 @@ public class MazoProduccion {
 
     }
     private Carta buscarEliminarCartaRecurso(Recurso recurso){
-        List<Carta> mazoRecurso = new ArrayList<>();
+        List<Carta> mazoRecurso ;
         mazoRecurso = encontrarTipoCarta(recurso);
         return eliminarCartaRecurso(mazoRecurso);
     }
@@ -49,35 +49,35 @@ public class MazoProduccion {
 
 
     public  List<Carta> mazoDeMadera() {
-        List<Carta> cartas= new ArrayList<Carta>();
+        List<Carta> cartas= new ArrayList<>();
         for(int i=0;i<19;i++){
             cartas.add(new Carta("MADERA"));
         }
         return cartas;
     }
     public  List<Carta> mazoDeTrigo() {
-        List<Carta> cartas= new ArrayList<Carta>();
+        List<Carta> cartas= new ArrayList<>();
         for(int i=0;i<19;i++){
             cartas.add(new Carta("TRIGO"));
         }
         return cartas;
     }
     public  List<Carta> mazoDeOveja() {
-        List<Carta> cartas= new ArrayList<Carta>();
+        List<Carta> cartas= new ArrayList<>();
         for(int i=0;i<19;i++){
             cartas.add(new Carta("OVEJA"));
         }
         return cartas;
     }
     public  List<Carta> mazoDeLadrillo() {
-        List<Carta> cartas= new ArrayList<Carta>();
+        List<Carta> cartas= new ArrayList<>();
         for(int i=0;i<19;i++){
             cartas.add(new Carta("LADRILLO"));
         }
         return cartas;
     }
     public  List<Carta> mazoDePiedra() {
-        List<Carta> cartas= new ArrayList<Carta>();
+        List<Carta> cartas= new ArrayList<>();
         for(int i=0;i<19;i++){
             cartas.add(new Carta("PIEDRA"));
         }

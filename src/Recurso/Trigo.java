@@ -15,6 +15,21 @@ public class Trigo implements Recurso {
         }
 
         @Override
+        public Estructura construir(Oveja oveja) {
+                return null;
+        }
+
+        @Override
+        public Estructura construir(Trigo trigo) {
+                return null;
+        }
+
+        @Override
+        public Estructura construir(Piedra piedra) {
+                return null;
+        }
+
+        @Override
         public Estructura construir(Ladrillo ladrillo) {
                 return null;
         }

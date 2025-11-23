@@ -37,29 +37,4 @@ public class Ladrillo implements Recurso {
         //return new Carretera; podria ser algo para el trade con el banco
     }
 
-    @Override
-    public Estructura construir(Piedra piedra, Oveja oveja, Trigo trigo) {
-        return null;
-    }
-
-    @Override
-    public Estructura construir(Ladrillo ladrillo, Oveja oveja,Madera madera, Trigo trigo){
-        return null;
-        // aca hay que devolver un poblado pero el poblado hay que mandarle un jugador, ta raro return new Poblado();
-    }
-    public Estructura construir(Ladrillo ladrillo, Oveja oveja,Madera madera, Trigo trigo){
-        return null;
-        // aca hay que devolver un poblado pero el poblado hay que mandarle un jugador, ta raro return new Poblado();
-    }
-
-    @Override
-    public Estructura construir(Ladrillo ladrillo,Madera madera, Oveja oveja, Trigo trigo){
-        return null;
-        // aca hay que devolver un poblado pero el poblado hay que mandarle un jugador, ta raro return new Poblado();
-    }
-
-    @Override
-    public Estructura construirPoblado(Recurso recurso1,Recurso recurso2, Recurso recurso3) {
-        return null;
-    }
 }
