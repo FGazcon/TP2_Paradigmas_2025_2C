@@ -1,28 +1,20 @@
 package Ladron;
 
+import Jugador.Jugador;
+import Tablero.Hexagono;
+
 public class Ladron {
 
-    private int numeroDeHexagono;
-    private static Ladron ladron =  new Ladron();
+    private Hexagono hexagonoBajoAtaque;
 
-    Ladron() {
-        this.numeroDeHexagono = 0;
+    public Ladron(Hexagono hexagonoBajoAtaque){
+        this.hexagonoBajoAtaque = hexagonoBajoAtaque;
     }
 
-    public static Ladron getLadron(){
-        return ladron;
-    }
-
-    public void ubicarseEn(int numeroDeHexagono){
-        this.numeroDeHexagono = numeroDeHexagono;
-    }
-
-    //public Ladron();
-//devuelve el hexagono anterior
-    public int moverLadron(int numeroDeHexagono){
-        int aux = this.numeroDeHexagono;
-        this.numeroDeHexagono = numeroDeHexagono;
-        return aux;
+    public void moverLadron(Hexagono nuevoHexagono, Jugador jugadorQueMovio){
+        this.hexagonoBajoAtaque.liberarse();
+        this.hexagonoBajoAtaque = nuevoHexagono;
+        this.hexagonoBajoAtaque.recibirLadron(jugadorQueMovio);
     }
 
 }

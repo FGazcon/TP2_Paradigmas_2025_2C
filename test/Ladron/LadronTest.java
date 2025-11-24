@@ -1,5 +1,6 @@
 package Ladron;
 
+import Errores.HexagonoBajoAsalto;
 import Jugador.Jugador;
 import Recurso.RecursoFactory;
 import Tablero.Factory.Factory_MapaBasico;
@@ -10,51 +11,44 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
+
 public class LadronTest {
 
     @Test
-    public void test01LadronComienzaEnCero() {
-        Ladron ladron = new Ladron();
-        Assertions.assertEquals(0, ladron.moverLadron(0));
-    }
+    public void test01LadronSeMueve(){
+        Terreno terreno = mock(Terreno.class);
+        List<Hexagono> hexagonos = Factory_MapaBasico.crearHexagonosBasico();
+        Ladron ladron = new Ladron(hexagonos.get(1));
+        Jugador jugador1 = mock(Jugador.class);
 
-    @Test
-    public void test02SingletonDevuelveSiempreLaMismaInstancia() {
-        Ladron l1 = Ladron.getLadron();
-        Ladron l2 = Ladron.getLadron();
+        ladron.moverLadron(hexagonos.get(0), jugador1);
 
-        Assertions.assertSame(l1, l2);
-    }
-
-    @Test
-    public void test03LadronSeMueve(){
-
-        Ladron ladron = Ladron.getLadron();
-
-        ladron.moverLadron(14);
-
-        int ubicacionLadron = ladron.moverLadron(2);
-
-        Assertions.assertEquals(ubicacionLadron,14);
+        Assertions.assertThrows(HexagonoBajoAsalto.class, ()->{hexagonos.get(0).activarHexagono();});
 
     }
 
     @Test
-    public void test04MoverLadronVariasVeces() {
-        Ladron ladron = Ladron.getLadron();
-        ladron.ubicarseEn(0);
+    public void test02MoverLadronVariasVeces() {
+        Terreno terreno = mock(Terreno.class);
+        List<Hexagono> hexagonos = Factory_MapaBasico.crearHexagonosBasico();
+        Ladron ladron = new Ladron(hexagonos.get(1));
+        Jugador jugador1 = mock(Jugador.class);
 
-        Assertions.assertEquals(0, ladron.moverLadron(4));  // de 0 → 4
-        Assertions.assertEquals(4, ladron.moverLadron(7));  // de 4 → 7
-        Assertions.assertEquals(7, ladron.moverLadron(2));  // de 7 → 2
+        ladron.moverLadron(hexagonos.get(4), jugador1);
+        ladron.moverLadron(hexagonos.get(10), jugador1);
+        ladron.moverLadron(hexagonos.get(12), jugador1);
+        ladron.moverLadron(hexagonos.get(7), jugador1);
+
+        Assertions.assertThrows(HexagonoBajoAsalto.class, ()->{hexagonos.get(7).activarHexagono();});
     }
 
     @Test
-    public void test05HexagonoRobado(){
+    public void test03HexagonoRobado(){
         List<Terreno> terrenos = Factory_MapaBasico.pedirTerrenos();
         List<Integer> numerosMezclados = Factory_MapaBasico.generarNumerosMezclados();
         List<Hexagono> hexagonos = Factory_MapaBasico.generarHexagonosNoFijos(numerosMezclados,terrenos);
-        Ladron ladron = Ladron.getLadron();
+        Ladron ladron = new Ladron(hexagonos.get(0));
         Jugador jugador1 = new Jugador("Neymar");
         Jugador jugador2 = new Jugador("Pele");
         jugador1.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));

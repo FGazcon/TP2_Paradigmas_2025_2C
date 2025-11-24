@@ -24,8 +24,6 @@ public class Catan {
         this.banco = new Banco();
         this.jugadores = new ArrayList<Jugador>();
         this.tablero = Tablero.crearTableroBasico();
-        Ladron.getLadron();
-        Ladron.getLadron().moverLadron(this.tablero.buscarDesierto());
 
     }
     public Catan(List<Jugador> listaJugadores,Banco banco) {

@@ -4,7 +4,6 @@ import Errores.DesiertoNoProduceNada;
 import Jugador.Jugador;
 import Produccion.Carta;
 import Recurso.Recurso;
-import Tablero.Factory.Factory_MapaBasico;
 import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
@@ -52,7 +51,11 @@ public class Hexagono {
         }
     }
 
-    public void activarHexagonoNumero(int numero){
+    public void activarHexagono(){
+        this.estado.intentarProducir(this);
+    }
+
+    public void activarHexagonoParaNumero(int numero){
         if(this.numero == numero){
             this.estado.intentarProducir(this);
         }
@@ -94,6 +97,8 @@ public class Hexagono {
         for(Vertice vertice: vertices){
             vertice.tieneDuenio(jugadores);
         }
+
+        //FALTA IMPLEMENTAR EL ROBO  A UN JUGADOR, LA TRANSACCION ENTRE AMBOS.
 
     }
     public Carta robarCartaAJugador(Jugador jugador){

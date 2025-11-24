@@ -1,10 +1,7 @@
 package Tablero;
 
 import Errores.HexagonoBajoAsalto;
-import Errores.VerticeNoVacio;
 import Jugador.Jugador;
-import Ladron.Ladron;
-import Recurso.Madera;
 import Tablero.Vertice.Vertice;
 import Terreno.Productor.Bosque;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +22,7 @@ public class HexagonoTest {
 
         hexagono.recibirLadron(jugador);
 
-        Assertions.assertThrows(HexagonoBajoAsalto.class, ()->{hexagono.activarHexagonoNumero(10);});
+        Assertions.assertThrows(HexagonoBajoAsalto.class, ()->{hexagono.activarHexagonoParaNumero(10);});
 
     }
 

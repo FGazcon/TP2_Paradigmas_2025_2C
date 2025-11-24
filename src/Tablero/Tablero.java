@@ -32,7 +32,7 @@ public class Tablero {
 
     public void activarHexagonoPorNumero(int numero){
         for(Hexagono hexagono: hexagonos){
-            hexagono.activarHexagonoNumero(numero);
+            hexagono.activarHexagonoParaNumero(numero);
         }
     }
 
@@ -43,7 +43,6 @@ public class Tablero {
     }
 
     private Hexagono buscarHexagonoConVertice(int numeroDeVerice) {
-
         for (Hexagono hexagono : hexagonos) {
             if(hexagono.contieneVertice(numeroDeVerice)){
                 return hexagono;
@@ -58,12 +57,8 @@ public class Tablero {
         hexagonoConVertice.ubicarEstructura(estructura, numeroDeVertice);
     }
 
-    public void moveLadron(int nuevoHexagono, Jugador jugador){
-        Ladron ladron = Ladron.getLadron();
-        int viejoHexagono = ladron.moverLadron(nuevoHexagono);
-
-        hexagonos.get(nuevoHexagono).recibirLadron(jugador);
-        hexagonos.get(viejoHexagono).liberarse();
+    public void moverLadron(int nuevoHexagono, Jugador jugador){
+        ladron.moverLadron(this.hexagonos.get(nuevoHexagono), jugador);
     }
 
 }
