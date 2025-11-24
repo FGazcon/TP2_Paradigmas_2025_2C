@@ -1,7 +1,6 @@
 package Jugador;
 
 import Banco.Banco;
-import Negociantes.Negociantes;
 import Produccion.Carta;
 import Recurso.Recurso;
 import Tablero.Factory.Factory_MapaBasico;
@@ -9,7 +8,7 @@ import Tablero.Factory.Factory_MapaBasico;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador extends Negociantes{
+public class Jugador {
 
     private List<Carta> cartas;
     private String nombre;
@@ -63,7 +62,7 @@ public class Jugador extends Negociantes{
     public Carta cartaRobada(){
         //se podria hacer un aleatorio de cartas en el factory mapaBasico haciendo que sea un FactoryRandom y mezclar las cartas
         //y devolver un mazo mezclado y remover una
-        Factory_MapaBasico.mezclarCartas(this.cartas);
+        Carta.mezclarCartas(this.cartas);
         return this.cartas.removeLast();
 
     }

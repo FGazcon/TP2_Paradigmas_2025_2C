@@ -57,7 +57,6 @@ public class Aleatorio {
             assertEquals(19, hexagonos.size());
         }
 
-*/
 
     @Test
     public void testMismoHexagonoDaMaderaSiempre(){
@@ -101,5 +100,8 @@ public class Aleatorio {
         assertNotEquals(terrenosMock.removeFirst(), terrenos.removeFirst());
 
     }
+
+
+ */
 
 }

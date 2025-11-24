@@ -3,8 +3,17 @@ package Produccion;
 import Recurso.Recurso;
 import Recurso.RecursoFactory;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Carta  {
     Recurso recurso;
+
+    public static List<Carta> mezclarCartas(List<Carta> cartas){
+        Collections.shuffle(cartas);
+        return cartas;
+    }
+
     public void usar() {
         recurso.nombre();
     }

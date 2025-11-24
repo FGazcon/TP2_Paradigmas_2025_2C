@@ -2,6 +2,8 @@ package Tablero;
 
 import Jugador.Jugador;
 import Ladron.Ladron;
+import Tablero.Factory.Factory_MapaBasico;
+import Tablero.Vertice.Estructura.Estructura;
 
 import java.util.List;
 
@@ -9,16 +11,14 @@ public class Tablero {
 
     private List<Hexagono> hexagonos;
     private Ladron ladron;
-/*
-    public Tablero() {
 
-        //this.hexagonos = Hexagono.generar19Hexagonos();
-
-    }*/
     public Tablero(List<Hexagono> hexagonos) {
-
         this.hexagonos = hexagonos;
+    }
 
+    public static Tablero crearTableroBasico(){
+        List<Hexagono> hexagonos = Factory_MapaBasico.crearHexagonosBasico();
+        return new Tablero(hexagonos);
     }
 
     public int buscarDesierto() {
@@ -30,13 +30,13 @@ public class Tablero {
         return 0;
     }
 
-    public void activarHexagono(int numero){
+    public void activarHexagonoPorNumero(int numero){
         for(Hexagono hexagono: hexagonos){
             hexagono.activarHexagonoNumero(numero);
         }
     }
 
-    public void activarHexagonoParaSegundoPoblado(int vertice_segundo_poblado) {
+    public void activarHexagonoPorVertice(int vertice_segundo_poblado) {
         for (Hexagono hexagono : hexagonos) {
             hexagono.activarHexagonoParaVerticeEspecifico(vertice_segundo_poblado);
         }
@@ -52,22 +52,10 @@ public class Tablero {
         return null;
     }
 
-    public int ubicarPoblado(Jugador jugador, int numeroDeVerice) {
+    public void ubicarEstructura(Estructura estructura, int numeroDeVertice) {
+        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVertice);
 
-        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVerice);
-
-        hexagonoConVertice.ubicarPoblado(jugador, numeroDeVerice);
-
-        return numeroDeVerice;
-
-    }
-
-    public void ubicarCiudad(Jugador jugador, int numeroDeVerice) {
-
-        Hexagono hexagonoConVertice = buscarHexagonoConVertice(numeroDeVerice);
-
-        hexagonoConVertice.ubicarCiudad(jugador, numeroDeVerice);
-
+        hexagonoConVertice.ubicarEstructura(estructura, numeroDeVertice);
     }
 
     public void moveLadron(int nuevoHexagono, Jugador jugador){

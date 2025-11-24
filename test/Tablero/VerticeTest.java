@@ -3,6 +3,7 @@ package Tablero;
 import Errores.VerticeNoVacio;
 import Jugador.Jugador;
 import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Vertice.Estructura.Poblado;
 import Tablero.Vertice.Vertice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ public class VerticeTest {
 
         vertice.bloquearse();
 
-        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarPoblado(jugador);});
+        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(new Poblado(jugador));});
 
     }
 
@@ -28,9 +29,9 @@ public class VerticeTest {
         Vertice vertice = new Vertice();
         Jugador jugador = mock(Jugador.class);
 
-        vertice.ubicarPoblado(jugador);
+        vertice.ubicarEstructura(new Poblado(jugador));
 
-        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarPoblado(jugador);});
+        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(new Poblado(jugador));});
 
     }
 
@@ -39,7 +40,7 @@ public class VerticeTest {
         Vertice vertice = new Vertice();
         Jugador jugador = mock(Jugador.class);
 
-        vertice.ubicarPoblado(jugador);
+        vertice.ubicarEstructura(new Poblado(jugador));
 
         Assertions.assertEquals(vertice.estructuraEsDe(jugador), true);
 

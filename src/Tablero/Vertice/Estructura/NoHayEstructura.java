@@ -2,10 +2,17 @@ package Tablero.Vertice.Estructura;
 
 import Jugador.Jugador;
 import Recurso.Recurso;
+import Tablero.Vertice.Estado;
+import Tablero.Vertice.Vertice;
 
 import java.util.List;
 
 public class NoHayEstructura extends Estructura{
+    @Override
+    public void ubicarseEnVerticeEnEstado(Estado estado, Vertice vertice) {
+
+    }
+
     @Override
 
     public void entregarRecursos(Recurso recurso) {
@@ -13,7 +20,7 @@ public class NoHayEstructura extends Estructura{
     }
 
     @Override
-    public List<Jugador> anotarDueño(List<Jugador> jugadores) {
+    public List<Jugador> anotarDuenio(List<Jugador> jugadores) {
         return jugadores;
     }
 

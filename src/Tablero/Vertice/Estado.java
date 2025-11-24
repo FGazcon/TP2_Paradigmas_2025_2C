@@ -1,10 +1,12 @@
 package Tablero.Vertice;
 
-import Jugador.Jugador;
+import Tablero.Vertice.Estructura.Ciudad;
+import Tablero.Vertice.Estructura.Poblado;
 
 public abstract class Estado {
 
-    public abstract void intentarUbicarPoblado(Jugador jugador, Vertice vertice);
+    public abstract void intentarUbicarEstructura(Ciudad ciudad, Vertice vertice);
 
-    public abstract void intentarUbicarCiudad(Jugador jugador, Vertice vertice);
+    public abstract void intentarUbicarEstructura(Poblado poblado, Vertice vertice);
+
 }

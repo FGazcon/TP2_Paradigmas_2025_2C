@@ -5,6 +5,7 @@ import Jugador.Jugador;
 import Produccion.Carta;
 import Recurso.Recurso;
 import Tablero.Factory.Factory_MapaBasico;
+import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
 
@@ -73,33 +74,9 @@ public class Hexagono {
         return null;
     }
 
-    public void ubicarPoblado(Jugador jugador, int numeroDeVertice){
-        Vertice verticeDestino = buscarVerticeNumero(numeroDeVertice);
-        verticeDestino.ubicarPoblado(jugador);
-    }
-
-    public void ubicarCiudad(Jugador jugador, int numeroDeVertice){
-        Vertice verticeDestino = buscarVerticeNumero(numeroDeVertice);
-        verticeDestino.ubicarCiudad(jugador);
-    }
-
     //Consultar si esto esta bien.
     public void setVertices(Vertice[] vertices) {
         this.vertices = vertices;
-    }
-
-    public static List<Hexagono> generar19Hexagonos(List<Integer>  numerosMezclados,List<Terreno>  terrenos) {
-
-        List<Hexagono> hexagonos = Factory_MapaBasico.mezclarNumerosYHexagonos(numerosMezclados,terrenos);
-
-        for (int i = 0; i < hexagonos.size(); i++) {
-            System.out.println(hexagonos.get(i) + " " + i + " " + hexagonos.get(i).numero);
-            for (Vertice vertice : hexagonos.get(i).vertices) {
-                System.out.println(vertice);
-            }
-        }
-        return hexagonos;
-
     }
 
     public boolean esDesierto() {
@@ -125,4 +102,8 @@ public class Hexagono {
         return carta;
     }
 
+    public void ubicarEstructura(Estructura estructura, int numeroDeVertice) {
+        Vertice verticeDestino = buscarVerticeNumero(numeroDeVertice);
+        verticeDestino.ubicarEstructura(estructura);
+    }
 }

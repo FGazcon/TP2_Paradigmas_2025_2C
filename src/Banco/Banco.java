@@ -1,12 +1,11 @@
 package Banco;
 
 import Desarrollo.MazoDesarrolloGeneral;
-import Negociantes.Negociantes;
 import Produccion.Carta;
 import Produccion.MazoProduccion;
 import Recurso.Recurso;
 
-public class Banco extends Negociantes {
+public class Banco {
 
     private MazoProduccion mazoDeProduccion;
     private MazoDesarrolloGeneral mazoDesarrollo;

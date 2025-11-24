@@ -3,18 +3,20 @@ package Tablero.Vertice;
 import Errores.VerticeNoVacio;
 import Errores.VerticeVacio;
 import Jugador.Jugador;
+import Tablero.Vertice.Estructura.Ciudad;
 import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Estructura.Poblado;
 
 public class Vacio extends Estado {
 
-    public void intentarUbicarPoblado(Jugador jugador, Vertice vertice) {
-        vertice.ocuparse(new Poblado(jugador));
+    @Override
+    public void intentarUbicarEstructura(Poblado poblado, Vertice vertice) {
+        vertice.ocuparse(poblado);
         vertice.bloquearAdyacentes();
     }
 
-    public void intentarUbicarCiudad(Jugador jugador, Vertice vertice) {
+    @Override
+    public void intentarUbicarEstructura(Ciudad ciudad, Vertice vertice) {
         throw new VerticeVacio();
     }
-
 }

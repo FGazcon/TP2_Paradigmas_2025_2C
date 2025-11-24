@@ -1,9 +1,11 @@
 package Tablero.Vertice;
 
+import Errores.VerticeOcupadoPorAlguienMas;
 import Jugador.Jugador;
 import Recurso.Recurso;
 import Tablero.Arista;
 import Tablero.Factory.ConectorVertices_MapaBasico;
+import Tablero.Vertice.Estructura.Ciudad;
 import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Estructura.NoHayEstructura;
 
@@ -32,19 +34,12 @@ public class Vertice {
         this.estado = new Vacio();
     }
 
-    public void ubicarPoblado(Jugador jugador) {
-
-        this.estado.intentarUbicarPoblado(jugador, this);
-
-    }
-
-    public void ubicarCiudad(Jugador jugador) {
-        this.estado.intentarUbicarCiudad(jugador, this);
+    public void ubicarEstructura(Estructura estructura) {
+        estructura.ubicarseEnVerticeEnEstado(this.estado, this);
     }
 
     public boolean estructuraEsDe(Jugador jugador) {
-        //return this.estructura.esDe(jugador);
-        return true;
+        return this.estructura.esDe(jugador);
     }
 
     public void bloquearse() {
@@ -99,5 +94,13 @@ public class Vertice {
 
     public List<Jugador> tieneDuenio(List<Jugador> jugadores) {
         return this.estructura.anotarDuenio(jugadores);
+    }
+
+    public void gestionarCiudad(Ciudad ciudad) {
+        if(ciudad.esDe(this.estructura.getJugador())){
+            this.ocuparse(ciudad);
+        } else {
+            throw new VerticeOcupadoPorAlguienMas();
+        }
     }
 }

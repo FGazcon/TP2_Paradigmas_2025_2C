@@ -1,6 +1,5 @@
 package Tablero.Factory;
 
-import Produccion.Carta;
 import Tablero.Hexagono;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
@@ -11,31 +10,21 @@ import java.util.List;
 
 public class Factory_MapaBasico {
 
-    public static List<Hexagono> mezclarNumerosYHexagonos(List<Integer> numerosMezclados,List<Terreno>  terrenos) {
-
-        //List<Integer> numerosMezclados = generarNumerosMezclados();
-
-        List<Hexagono> hexagonos = generarHexagonosNoFijos(numerosMezclados,terrenos);
-
+    public static void mezclarListaHexagonos(List<Hexagono> hexagonos){
         Collections.shuffle(hexagonos);
+    }
 
-        Vertice[][] verticesAsignados = vertices_por_hexagono();
+    public static void asignarVerticesAHexagonos(List<Hexagono> hexagonos, Vertice[][] verticesAsignados) {
 
         for (int i = 0; i < hexagonos.size(); i++) {
             hexagonos.get(i).setVertices(verticesAsignados[i]); //Los fija en el mapa via vertices y orden.
         }
-
-        return hexagonos;
 
     }
 
     public static List<Hexagono> generarHexagonosNoFijos(List<Integer> numerosMezclados,List<Terreno>  terrenos) {
 
         List<Hexagono> hexagonos = new ArrayList<Hexagono>();
-
-        //List<Integer> numerosMezclados = generarNumerosMezclados();
-
-        //List<Terreno>  terrenos = pedirTerrenos();
 
         int size = numerosMezclados.size();
         for (int i = 0; i < size; i++) {
@@ -111,9 +100,20 @@ public class Factory_MapaBasico {
         return Vertice.generarVertices();
     }
 
-    public static List<Carta> mezclarCartas(List<Carta> cartas){
-        Collections.shuffle(cartas);
-        return cartas;
-    }
+    public static List<Hexagono> crearHexagonosBasico() {
+        //Esta funcion es el factory del tablero basico. Cada parte de este proceso puede cambiar sus parametros y pueden ser mockeados.
 
+        List<Terreno> terrenos = Terreno.generar19Terrenos();
+        List<Integer> numeros = generarNumerosMezclados();
+
+        Vertice[][] vertices = vertices_por_hexagono();
+
+        List<Hexagono> hexagonos = generarHexagonosNoFijos(numeros, terrenos);
+
+        asignarVerticesAHexagonos(hexagonos, vertices);
+
+        mezclarListaHexagonos(hexagonos);
+
+        return hexagonos;
+    }
 }

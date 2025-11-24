@@ -7,6 +7,8 @@ import Errores.VerticeVacio;
 import Jugador.Jugador;
 import Ladron.Ladron;
 import Tablero.Tablero;
+import Tablero.Vertice.Estructura.Estructura;
+import Tablero.Vertice.Estructura.Poblado;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class Catan {
 
         this.banco = new Banco();
         this.jugadores = new ArrayList<Jugador>();
-        //this.tablero = new Tablero();
+        this.tablero = Tablero.crearTableroBasico();
         Ladron.getLadron();
         Ladron.getLadron().moverLadron(this.tablero.buscarDesierto());
 
@@ -31,7 +33,7 @@ public class Catan {
         this.banco = banco;
         this.jugadores = new ArrayList<Jugador>();
         this.jugadores.addAll(listaJugadores);
-        //this.tablero = new Tablero();
+        this.tablero = Tablero.crearTableroBasico();
 
 
     }
@@ -39,28 +41,13 @@ public class Catan {
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
     }
 
-    public int intentarUbicarPoblado(Jugador jugador, int numeroDeVerice){
-
+    public int intentarUbicarEstructura(Estructura estructura, int numeroDeVerice){
         //Para que tenga sentido, la eleccion del numero de vertice tiene que estar aca.
-
         try{
-            this.tablero.ubicarPoblado(jugador, numeroDeVerice);
-        } catch (VerticeNoVacio e) {
+            this.tablero.ubicarEstructura(estructura, numeroDeVerice);
+        } catch (VerticeNoVacio | VerticeVacio | VerticeOcupadoPorAlguienMas e) {
             System.out.println("No se puede ubicar un vertice");
-            return this.intentarUbicarPoblado(jugador, numeroDeVerice);
-        }
-        return numeroDeVerice;
-    }
-
-    public int intentarUbicarCiudad(Jugador jugador, int numeroDeVerice){
-
-        //Para que tenga sentido, la eleccion del numero de vertice tiene que estar aca.
-
-        try{
-            this.tablero.ubicarCiudad(jugador, numeroDeVerice);
-        } catch (VerticeVacio | VerticeOcupadoPorAlguienMas e) {
-            System.out.println("No se puede ubicar un vertice");
-            return this.intentarUbicarCiudad(jugador, numeroDeVerice);
+            return this.intentarUbicarEstructura(estructura, numeroDeVerice);
         }
         return numeroDeVerice;
     }
@@ -69,13 +56,15 @@ public class Catan {
 
         int numeroDeVertice = 30;
         for(Jugador jugador: this.jugadores){
-            intentarUbicarPoblado(jugador, numeroDeVertice);
+            Estructura estructura = new Poblado(jugador);
+            intentarUbicarEstructura(estructura, numeroDeVertice);
             numeroDeVertice+=4;
         }
 
         for(Jugador jugador: this.jugadores){
-            int verticeSegundoPoblado = intentarUbicarPoblado(jugador, numeroDeVertice);
-            this.tablero.activarHexagonoParaSegundoPoblado(verticeSegundoPoblado);
+            Estructura estructura = new Poblado(jugador);
+            int verticeSegundoPoblado = intentarUbicarEstructura(estructura, numeroDeVertice);
+            this.tablero.activarHexagonoPorVertice(verticeSegundoPoblado);
             numeroDeVertice+=4;
         }
 
@@ -83,16 +72,15 @@ public class Catan {
 
 
     public void segundaEleccion(Jugador jugador,int verticeElegido){
-
-        intentarUbicarPoblado(jugador, verticeElegido);
-        tablero.activarHexagonoParaSegundoPoblado(verticeElegido);
-
+        Estructura estructura = new Poblado(jugador);
+        int verticeSegundoPoblado = intentarUbicarEstructura(estructura, verticeElegido);
+        tablero.activarHexagonoPorVertice(verticeSegundoPoblado);
     }
 
 
 
     public void lanzamientoDeDados(int numeroTirado){
-        tablero.activarHexagono(numeroTirado);
+        tablero.activarHexagonoPorNumero(numeroTirado);
     }/*
     public void descarte(){
         for(Jugador jugador : this.jugadores){
