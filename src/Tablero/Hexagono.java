@@ -2,7 +2,6 @@ package Tablero;
 
 import Errores.DesiertoNoProduceNada;
 import Jugador.Jugador;
-import Produccion.Carta;
 import Recurso.Recurso;
 import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Vertice;
@@ -77,7 +76,6 @@ public class Hexagono {
         return null;
     }
 
-    //Consultar si esto esta bien.
     public void setVertices(Vertice[] vertices) {
         this.vertices = vertices;
     }
@@ -100,11 +98,6 @@ public class Hexagono {
 
         //FALTA IMPLEMENTAR EL ROBO  A UN JUGADOR, LA TRANSACCION ENTRE AMBOS.
 
-    }
-    public Carta robarCartaAJugador(Jugador jugador){
-        Carta carta = jugador.cartaRobada();
-        jugador.sumarCarta(carta);
-        return carta;
     }
 
     public void ubicarEstructura(Estructura estructura, int numeroDeVertice) {

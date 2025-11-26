@@ -1,7 +1,7 @@
 package Jugador;
 
 import Produccion.MazoProduccion;
-import Recurso.RecursoFactory;
+import Recurso.Madera;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,15 +13,17 @@ public class JugadorTest {
         MazoProduccion mazoProduccion = new MazoProduccion();
         mazoProduccion.crearMazoParaBanco();
         Jugador jugador = new Jugador("Jeferson");
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
+        jugador.pedirAlBanco(new Madera());
+        jugador.pedirAlBanco(new Madera());
+        jugador.pedirAlBanco(new Madera());
+        jugador.pedirAlBanco(new Madera());
+        jugador.pedirAlBanco(new Madera());
+        jugador.pedirAlBanco(new Madera());
+        jugador.pedirAlBanco(new Madera());
+        jugador.pedirAlBanco(new Madera());
+        jugador.pedirAlBanco(new Madera());
+
+
 
         jugador.descartarMitad();
         int cantidadCartasRecibidas = jugador.cantidadCartas();

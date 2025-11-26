@@ -1,7 +1,6 @@
 package Banco;
 
 import Desarrollo.MazoDesarrolloGeneral;
-import Produccion.Carta;
 import Produccion.MazoProduccion;
 import Recurso.Recurso;
 
@@ -13,21 +12,19 @@ public class Banco {
 
     public Banco(){
         this.mazoDesarrollo = MazoDesarrolloGeneral.generarMazoDesarrolloBanco();
-        this.mazoDeProduccion = new MazoProduccion();
+        this.mazoDeProduccion = MazoProduccion.crearMazoParaBanco();
     }
 
     public static Banco getBanco() {
         return banco;
     }
 
-    public Carta darRecurso(Recurso recurso){
-
-        return this.mazoDeProduccion.recibirRecurso(recurso);
-
+    public boolean darRecurso(Recurso recurso){
+        return this.mazoDeProduccion.pedirRecurso(recurso);
     }
 
     public void recibirRecurso(Recurso recurso){
-        this.mazoDeProduccion.recibirRecurso(recurso);
+        this.mazoDeProduccion.añadirRecurso(recurso);
     }
 
 }

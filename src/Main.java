@@ -29,4 +29,6 @@ void main() {
     //catan.primeraEtapa();
     catan.segundaEleccion(jugador, 45);
     catan.segundaEleccion(jugador2, 47);
+    jugador.imprimirRecursos();
+    jugador2.imprimirRecursos();
 }

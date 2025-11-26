@@ -1,77 +1,64 @@
 package Jugador;
 
 import Banco.Banco;
-import Produccion.Carta;
 import Recurso.Recurso;
-import Tablero.Factory.Factory_MapaBasico;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
 
-    private List<Carta> cartas;
+    private List<Recurso> recursos;
     private String nombre;
 
     public Jugador(String nombre) {
-        this.cartas = new ArrayList<Carta>();
+        this.recursos = new ArrayList<Recurso>();
         this.nombre = nombre;
     }
 
     public void pedirAlBanco(Recurso recurso){
 
         Banco banco = Banco.getBanco();
-        Carta cartaNueva = banco.darRecurso(recurso);
-        System.out.println(cartaNueva);
-        sumarCarta(cartaNueva);
+        if(banco.darRecurso(recurso)){
+            this.recursos.add(recurso);
+        }
+
     }
 
     public void imprimirRecursos(){
-        for (Carta carta : cartas){
-            System.out.println(carta);
+        for (Recurso recurso : this.recursos){
+            System.out.println(recurso);
         }
     }
 
     public void descartarMitad(){
         if(this.cantidadCartas() > 7) {
-            descartarCarta(cantidadCartas() / 2);
+            descartarPorLadron(cantidadCartas() / 2);
         }
     }
 
-    public void descartarCarta(int cantidadCartasADescartar, Jugador jugador){
+    public void dejarseRobarPorJugador(int cantidadCartasADescartar, Jugador jugador){
+
         Banco banco = Banco.getBanco();
         //descarta la ultima carta
         for (int i = 0; i < cantidadCartasADescartar; i++) {
 
-            Carta cartaDescartada = this.cartas.removeLast();
-            jugador.pedirAlBanco(cartaDescartada.getRecurso());
+            Recurso recursoDescartado = this.recursos.removeLast();
+            banco.recibirRecurso(recursoDescartado);
+            jugador.pedirAlBanco(recursoDescartado);
 
         }
     }
 
-    public void descartarCarta(int cantidadCartasADescartar){
+    public void descartarPorLadron(int cantidadCartasADescartar){
         Banco banco = Banco.getBanco();
-        //descarta la ultima carta
         for (int i = 0; i < cantidadCartasADescartar; i++) {
-
-            Carta cartaDescartada = this.cartas.removeLast();
-            //Falta que el banco reciba de alguna manera
-
+            banco.recibirRecurso(this.recursos.removeLast());
         }
-    }
-    public Carta cartaRobada(){
-        //se podria hacer un aleatorio de cartas en el factory mapaBasico haciendo que sea un FactoryRandom y mezclar las cartas
-        //y devolver un mazo mezclado y remover una
-        Carta.mezclarCartas(this.cartas);
-        return this.cartas.removeLast();
-
-    }
-    public void sumarCarta(Carta carta){
-        this.cartas.add(carta);
     }
 
     public int cantidadCartas(){
-        return this.cartas.size();
+        return this.recursos.size();
     }
 
 }

@@ -2,7 +2,7 @@ package Ladron;
 
 import Errores.HexagonoBajoAsalto;
 import Jugador.Jugador;
-import Recurso.RecursoFactory;
+import Recurso.Madera;
 import Tablero.Factory.Factory_MapaBasico;
 import Tablero.Hexagono;
 import Terreno.Terreno;
@@ -51,8 +51,8 @@ public class LadronTest {
         Ladron ladron = new Ladron(hexagonos.get(0));
         Jugador jugador1 = new Jugador("Neymar");
         Jugador jugador2 = new Jugador("Pele");
-        jugador1.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
-        jugador1.pedirAlBanco(RecursoFactory.crearRecurso("MaderA"));
+        jugador1.pedirAlBanco(new Madera());
+        jugador1.pedirAlBanco(new Madera());
 
 
 
