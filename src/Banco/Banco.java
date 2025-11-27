@@ -1,6 +1,7 @@
 package Banco;
 
 import Desarrollo.MazoDesarrolloGeneral;
+import Jugador.Jugador;
 import Produccion.MazoProduccion;
 import Recurso.Recurso;
 
@@ -26,5 +27,24 @@ public class Banco {
     public void recibirRecurso(Recurso recurso){
         this.mazoDeProduccion.añadirRecurso(recurso);
     }
+
+    public boolean intercambiarConJugador(Jugador jugador, Recurso recursoPedido, Recurso recursoOfrecido) {
+
+        int recursosNecesarios = 4;
+
+        if (!jugador.puedeEntregarNDelMismoTipo(recursoOfrecido, recursosNecesarios)) {
+            return false;
+        }
+
+        if (!this.darRecurso(recursoPedido)) {
+            return false;
+        }
+
+        jugador.entregarNRecursosAlBanco(recursoOfrecido, recursosNecesarios);
+        jugador.recibirRecursoDesdeBanco(recursoPedido);
+
+        return true;
+    }
+
 
 }

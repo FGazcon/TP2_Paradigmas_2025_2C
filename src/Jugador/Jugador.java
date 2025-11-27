@@ -123,4 +123,39 @@ public class Jugador {
     public boolean tiene(Recurso recurso) {
         return recursos.contains(recurso);
     }
+
+    public boolean puedeEntregarNDelMismoTipo(Recurso recurso, int cantidad) {
+        int contadorDeRecursos = 0;
+
+        for (Recurso r : recursos) {
+            if (r.getClass() == recurso.getClass()) contadorDeRecursos++;
+        }
+
+        return contadorDeRecursos >= cantidad;
+    }
+
+    public void entregarNRecursosAlBanco(Recurso recurso, int cantidad) {
+        Banco banco = Banco.getBanco();
+
+        int recursosEntregados = 0;
+
+        for (int i = 0; i < cantidadCartas() && recursosEntregados < cantidad; i++) {
+            if (recursos.get(i).getClass() == recurso.getClass()) {
+                Recurso r = recursos.remove(i);
+                banco.recibirRecurso(r);
+                recursosEntregados++;
+                i--;
+            }
+        }
+    }
+
+    public void recibirRecursoDesdeBanco(Recurso recurso) {
+        recibir(recurso);
+    }
+
+    public boolean comerciarConBanco(Recurso ofrecido, Recurso pedido) {
+        Banco banco = Banco.getBanco();
+        return banco.intercambiarConJugador(this, pedido, ofrecido);
+    }
+
 }

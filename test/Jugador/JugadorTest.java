@@ -3,6 +3,7 @@ package Jugador;
 import Produccion.MazoProduccion;
 import Recurso.Madera;
 import Recurso.Oveja;
+import Recurso.Piedra;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -102,5 +103,69 @@ public class JugadorTest {
 
         Assertions.assertTrue(jugador2.tiene(m));
     }
+
+    @Test
+    public void test07JugadorPuedeComerciar4a1ConBanco() {
+        Jugador jugador = new Jugador("Jugador");
+
+        Madera madera1 = new Madera();
+        Madera madera2 = new Madera();
+        Madera madera3 = new Madera();
+        Madera madera4 = new Madera();
+        Piedra piedra = new Piedra();
+
+        jugador.pedirAlBanco(madera1);
+        jugador.pedirAlBanco(madera2);
+        jugador.pedirAlBanco(madera3);
+        jugador.pedirAlBanco(madera4);
+
+        boolean tradeo = jugador.comerciarConBanco(new Madera(), piedra);
+
+        Assertions.assertTrue(tradeo);
+        Assertions.assertTrue(jugador.tiene(piedra));
+    }
+
+    @Test
+    public void test08JugadorNoPuedeComerciarSiNoTiene4Iguales() {
+        Jugador jugador = new Jugador("Jugador");
+
+        Madera madera1 = new Madera();
+        Madera madera2 = new Madera();
+        Madera madera3 = new Madera();
+
+        jugador.pedirAlBanco(madera1);
+        jugador.pedirAlBanco(madera2);
+        jugador.pedirAlBanco(madera3);
+
+        boolean tradeo = jugador.comerciarConBanco(new Madera(), new Piedra());
+
+        Assertions.assertFalse(tradeo);
+        Assertions.assertFalse(jugador.tiene(new Piedra()));
+    }
+
+    @Test
+    public void test09JugadorEntregaExactamenteCuatroRecursosAlBanco() {
+        Jugador jugador = new Jugador("Jugador");
+
+        Madera madera1 = new Madera();
+        Madera madera2 = new Madera();
+        Madera madera3 = new Madera();
+        Madera madera4 = new Madera();
+        Madera madera5 = new Madera();
+
+        jugador.pedirAlBanco(madera1);
+        jugador.pedirAlBanco(madera2);
+        jugador.pedirAlBanco(madera3);
+        jugador.pedirAlBanco(madera4);
+        jugador.pedirAlBanco(madera5);
+
+        jugador.comerciarConBanco(new Madera(), new Piedra());
+
+        // Va a tener la madera que sobró y la piedra que recibió del tradeo
+
+        Assertions.assertEquals(2, jugador.cantidadCartas());
+    }
+
+
 
 }
