@@ -97,7 +97,9 @@ public class Hexagono {
         }
 
         //FALTA IMPLEMENTAR EL ROBO  A UN JUGADOR, LA TRANSACCION ENTRE AMBOS.
-
+        if(!jugadores.isEmpty()){
+            jugadores.getFirst().dejarseRobarPorJugador(1, jugador);
+        }
     }
 
     public void ubicarEstructura(Estructura estructura, int numeroDeVertice) {

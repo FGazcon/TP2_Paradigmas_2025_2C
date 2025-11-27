@@ -2,14 +2,13 @@ package Tablero;
 
 import Errores.VerticeNoVacio;
 import Jugador.Jugador;
-import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Estructura.Poblado;
+import Tablero.Vertice.Estructura.PobladoInicial;
 import Tablero.Vertice.Vertice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class VerticeTest {
 
@@ -20,7 +19,7 @@ public class VerticeTest {
 
         vertice.bloquearse();
 
-        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(new Poblado(jugador));});
+        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(new PobladoInicial(jugador));});
 
     }
 
@@ -29,9 +28,9 @@ public class VerticeTest {
         Vertice vertice = new Vertice();
         Jugador jugador = mock(Jugador.class);
 
-        vertice.ubicarEstructura(new Poblado(jugador));
+        vertice.ubicarEstructura(new PobladoInicial(jugador));
 
-        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(new Poblado(jugador));});
+        Assertions.assertThrows(VerticeNoVacio.class, ()->{vertice.ubicarEstructura(new PobladoInicial(jugador));});
 
     }
 
@@ -40,7 +39,7 @@ public class VerticeTest {
         Vertice vertice = new Vertice();
         Jugador jugador = mock(Jugador.class);
 
-        vertice.ubicarEstructura(new Poblado(jugador));
+        vertice.ubicarEstructura(new PobladoInicial(jugador));
 
         Assertions.assertEquals(vertice.estructuraEsDe(jugador), true);
 

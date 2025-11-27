@@ -1,14 +1,14 @@
 package Catan;
 
 import Banco.Banco;
-import Errores.VerticeNoVacio;
-import Errores.VerticeOcupadoPorAlguienMas;
-import Errores.VerticeVacio;
+import Errores.*;
 import Jugador.Jugador;
 import Ladron.Ladron;
+import Tablero.Arista.Carretera;
 import Tablero.Tablero;
 import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Estructura.Poblado;
+import Tablero.Vertice.Estructura.PobladoInicial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,24 +43,34 @@ public class Catan {
         //Para que tenga sentido, la eleccion del numero de vertice tiene que estar aca.
         try{
             this.tablero.ubicarEstructura(estructura, numeroDeVerice);
-        } catch (VerticeNoVacio | VerticeVacio | VerticeOcupadoPorAlguienMas e) {
-            System.out.println("No se puede ubicar un vertice");
+        } catch (VerticeNoVacio | VerticeVacio | VerticeOcupadoPorAlguienMas | VerticeOcupadoPorCiudad |
+                 VerticeFueraDeAlcance e) {
+            System.out.println("No se puede ubicar en un vertice");
             return this.intentarUbicarEstructura(estructura, numeroDeVerice);
         }
         return numeroDeVerice;
+    }
+
+    public void intentarUbicarCarretera(Carretera carretera, int numeroDeArista){
+        try{
+            this.tablero.ubicarCarretera(carretera, numeroDeArista);
+        } catch (AristaEstaOcupada | AristaFueraDeAlcance e) {
+            System.out.println("No se puede ubicar en un vertice");
+            this.intentarUbicarCarretera(carretera, numeroDeArista);
+        }
     }
 
     public void primeraEtapa(){
 
         int numeroDeVertice = 30;
         for(Jugador jugador: this.jugadores){
-            Estructura estructura = new Poblado(jugador);
+            Estructura estructura = new PobladoInicial(jugador);
             intentarUbicarEstructura(estructura, numeroDeVertice);
             numeroDeVertice+=4;
         }
 
         for(Jugador jugador: this.jugadores){
-            Estructura estructura = new Poblado(jugador);
+            Estructura estructura = new PobladoInicial(jugador);
             int verticeSegundoPoblado = intentarUbicarEstructura(estructura, numeroDeVertice);
             this.tablero.activarHexagonoPorVertice(verticeSegundoPoblado);
             numeroDeVertice+=4;
@@ -70,7 +80,7 @@ public class Catan {
 
 
     public void segundaEleccion(Jugador jugador,int verticeElegido){
-        Estructura estructura = new Poblado(jugador);
+        Estructura estructura = new PobladoInicial(jugador);
         int verticeSegundoPoblado = intentarUbicarEstructura(estructura, verticeElegido);
         tablero.activarHexagonoPorVertice(verticeSegundoPoblado);
     }

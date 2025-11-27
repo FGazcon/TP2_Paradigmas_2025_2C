@@ -1,9 +1,8 @@
 package Tablero.Vertice;
 
-import Errores.VerticeOcupadoPorAlguienMas;
 import Jugador.Jugador;
 import Recurso.Recurso;
-import Tablero.Arista;
+import Tablero.Arista.Arista;
 import Tablero.Factory.ConectorVertices_MapaBasico;
 import Tablero.Vertice.Estructura.Ciudad;
 import Tablero.Vertice.Estructura.Estructura;
@@ -34,10 +33,6 @@ public class Vertice {
         this.estado = new Vacio();
     }
 
-    public void ubicarEstructura(Estructura estructura) {
-        estructura.ubicarseEnVerticeEnEstado(this.estado, this);
-    }
-
     public boolean estructuraEsDe(Jugador jugador) {
         return this.estructura.esDe(jugador);
     }
@@ -49,6 +44,7 @@ public class Vertice {
     public void ocuparse(Estructura estructura) {
         this.estado = new Ocupado();
         this.estructura = estructura;
+        this.estructura.sumarAJugador();
     }
 
     public void bloquearAdyacentes() {
@@ -65,13 +61,16 @@ public class Vertice {
         return (this.numeroDeVertice == numeroDeVertice);
     }
 
-    public static void agregarArista(Vertice vertice1, Vertice vertice2) {
+    public static void agregarArista(Vertice vertice1, Vertice vertice2, int numeroDeArista) {
 
-        Arista arista1 = new Arista(vertice2);
-        Arista arista2 = new Arista(vertice1);
+        Arista arista1 = new Arista(vertice2, numeroDeArista);
+        Arista arista2 = new Arista(vertice1, numeroDeArista);
 
         vertice1.aristas.add(arista1);
         vertice2.aristas.add(arista2);
+
+        arista1.setPar(arista2);
+        arista2.setPar(arista1);
 
     }
 
@@ -96,11 +95,34 @@ public class Vertice {
         return this.estructura.anotarDuenio(jugadores);
     }
 
-    public void gestionarCiudad(Ciudad ciudad) {
-        if(ciudad.esDe(this.estructura.getJugador())){
-            this.ocuparse(ciudad);
-        } else {
-            throw new VerticeOcupadoPorAlguienMas();
+    public void intentarUbicarCiudad(Ciudad ciudad) {
+        this.estructura.intentarMejorar(ciudad, this);
+    }
+
+    public void ubicarEstructura(Estructura estructura) {
+        estructura.ubicarseEnVerticeEnEstado(this.estado, this);
+    }
+
+    //Tratar de evitar estos metodos de abajo.
+
+    public boolean permiteConstruccionDeAristaDe(Jugador jugador) {
+        if(this.estructuraEsDe(jugador)) {
+            return true;
         }
+        for (Arista arista : aristas) {
+            if (arista.esDe(jugador)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarConstruccionPara(Jugador jugador) {
+        for (Arista arista : aristas) {
+            if (arista.esDe(jugador)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

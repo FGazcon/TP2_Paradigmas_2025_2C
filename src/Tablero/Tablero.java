@@ -2,6 +2,7 @@ package Tablero;
 
 import Jugador.Jugador;
 import Ladron.Ladron;
+import Tablero.Arista.Carretera;
 import Tablero.Factory.Factory_MapaBasico;
 import Tablero.Vertice.Estructura.Estructura;
 
@@ -61,4 +62,9 @@ public class Tablero {
         ladron.moverLadron(this.hexagonos.get(nuevoHexagono), jugador);
     }
 
+    public void ubicarCarretera(Carretera carretera, int numeroDeArista) {
+        for (Hexagono hexagono : hexagonos) {
+
+        }
+    }
 }

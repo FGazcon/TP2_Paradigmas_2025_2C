@@ -110,6 +110,8 @@ public class Factory_MapaBasico {
 
         List<Hexagono> hexagonos = generarHexagonosNoFijos(numeros, terrenos);
 
+        Collections.shuffle(hexagonos);
+
         asignarVerticesAHexagonos(hexagonos, vertices);
 
         mezclarListaHexagonos(hexagonos);

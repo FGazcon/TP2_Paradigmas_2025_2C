@@ -17,7 +17,9 @@ public abstract class Estructura {
 
     public abstract List<Jugador> anotarDuenio(List<Jugador> jugadores);
 
+    public abstract void intentarMejorar(Ciudad estructura, Vertice vertice);
 
+    public abstract void intentarMejorar(Poblado estructura, Vertice vertice);
 
     public boolean esDe(Jugador jugador) {
         //ESTAM FUNDAMENTALMENTE MAL, CONSIDERAR COMO LO PODEMOS CAMBIAR
@@ -25,5 +27,9 @@ public abstract class Estructura {
     }
     public Jugador getJugador() {
         return this.jugador;
+    }
+
+    public void sumarAJugador() {
+        this.jugador.sumarPunto();
     }
 }

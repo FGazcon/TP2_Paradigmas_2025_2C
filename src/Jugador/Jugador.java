@@ -10,10 +10,12 @@ public class Jugador {
 
     private List<Recurso> recursos;
     private String nombre;
+    private int puntaje;
 
     public Jugador(String nombre) {
         this.recursos = new ArrayList<Recurso>();
         this.nombre = nombre;
+        this.puntaje = 0;
     }
 
     public void pedirAlBanco(Recurso recurso){
@@ -61,4 +63,22 @@ public class Jugador {
         return this.recursos.size();
     }
 
+    public void enviarAJugador(Jugador jugador, List<Recurso> recursos) {
+        Banco banco = Banco.getBanco();
+        for (Recurso recurso : recursos) {
+            banco.recibirRecurso(recurso);
+            jugador.pedirAlBanco(recurso);
+        }
+    }
+
+    public void sumarPunto(){
+        this.puntaje++;
+    }
+
+    public int calcularPuntaje() {
+        int puntaje = this.puntaje;
+        //Sumar PV
+        //Sumar Cartas especiales
+        return puntaje;
+    }
 }

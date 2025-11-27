@@ -11,7 +11,7 @@ public class Ocupado extends Estado{
 
     @Override
     public void intentarUbicarEstructura(Ciudad ciudad, Vertice vertice) {
-        vertice.gestionarCiudad(ciudad);
+        vertice.intentarUbicarCiudad(ciudad);
     }
 
     @Override

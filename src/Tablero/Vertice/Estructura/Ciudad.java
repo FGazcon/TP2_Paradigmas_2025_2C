@@ -1,5 +1,7 @@
 package Tablero.Vertice.Estructura;
 
+import Errores.VerticeOcupadoPorAlguienMas;
+import Errores.VerticeOcupadoPorCiudad;
 import Jugador.Jugador;
 import Recurso.Recurso;
 import Tablero.Vertice.Estado;
@@ -24,6 +26,16 @@ public class Ciudad extends Estructura {
     public List<Jugador> anotarDuenio(List<Jugador> jugadores) {
         jugadores.add(this.jugador);
         return jugadores;
+    }
+
+    @Override
+    public void intentarMejorar(Ciudad estructura, Vertice vertice) {
+        throw new VerticeOcupadoPorCiudad();
+    }
+
+    @Override
+    public void intentarMejorar(Poblado estructura, Vertice vertice) {
+        throw new VerticeOcupadoPorCiudad();
     }
 
     public Ciudad(Jugador jugador) {

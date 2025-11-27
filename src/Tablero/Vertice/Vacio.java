@@ -1,10 +1,7 @@
 package Tablero.Vertice;
 
-import Errores.VerticeNoVacio;
 import Errores.VerticeVacio;
-import Jugador.Jugador;
 import Tablero.Vertice.Estructura.Ciudad;
-import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Estructura.Poblado;
 
 public class Vacio extends Estado {

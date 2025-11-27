@@ -1,0 +1,23 @@
+package Tablero.Arista;
+
+import Errores.AristaFueraDeAlcance;
+import Jugador.Jugador;
+
+public class AristaVacia extends EstadoArista{
+
+    @Override
+    public void ubicarCarretera(Carretera carretera, Arista arista) {
+
+        if(arista.validarCarreteraPara(carretera.getJugador())){
+            arista.ocuparse(carretera);
+        } else {
+            throw new AristaFueraDeAlcance();
+        }
+
+    }
+
+    @Override
+    public boolean esDe(Jugador jugador, Carretera carretera) {
+        return false;
+    }
+}
