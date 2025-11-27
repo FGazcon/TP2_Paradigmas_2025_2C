@@ -82,7 +82,7 @@ public class Jugador {
         return puntaje;
     }
 
-    private void recibir(Recurso recurso) {
+    public void recibir(Recurso recurso) {
         this.recursos.add(recurso);
     }
 
