@@ -81,4 +81,46 @@ public class Jugador {
         //Sumar Cartas especiales
         return puntaje;
     }
+
+    private void recibir(Recurso recurso) {
+        this.recursos.add(recurso);
+    }
+
+    private boolean puedeEntregar(List<Recurso> ofrecidos) {
+        List<Recurso> copiaListaRecursos = new ArrayList<>(this.recursos);
+        for (Recurso r : ofrecidos) {
+            if (!copiaListaRecursos.remove(r)) return false;
+        }
+        return true;
+    }
+
+    private void entregarA(Jugador otro, List<Recurso> ofrecidos) {
+        for (Recurso r : ofrecidos) {
+            this.recursos.remove(r);
+            otro.recibir(r);
+        }
+    }
+
+    private void recibirDe(Jugador otro, List<Recurso> pedidos) {
+        for (Recurso r : pedidos) {
+            otro.recursos.remove(r);
+            this.recursos.add(r);
+        }
+    }
+
+    public boolean comerciarConJugador(Jugador otroJugador, List<Recurso> ofrecidos, List<Recurso> pedidos) {
+
+        if (!this.puedeEntregar(ofrecidos)) return false;
+        if (!otroJugador.puedeEntregar(pedidos)) return false;
+
+        this.entregarA(otroJugador, ofrecidos);
+        this.recibirDe(otroJugador, pedidos);
+
+        return true;
+    }
+
+    // Solamente para testear
+    public boolean tiene(Recurso recurso) {
+        return recursos.contains(recurso);
+    }
 }

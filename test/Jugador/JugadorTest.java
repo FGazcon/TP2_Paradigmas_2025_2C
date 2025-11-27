@@ -2,8 +2,11 @@ package Jugador;
 
 import Produccion.MazoProduccion;
 import Recurso.Madera;
+import Recurso.Oveja;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class JugadorTest {
 
@@ -50,6 +53,54 @@ public class JugadorTest {
         jugador.sumarPunto();
 
         Assertions.assertEquals(jugador.calcularPuntaje(), 2);
+    }
+
+    @Test
+    public void test04JugadorPuedeComerciarConOtro() {
+        Jugador jugador1 = new Jugador("Jugador1");
+        Jugador jugador2 = new Jugador("Jugador2");
+
+        Madera m = new Madera();
+        Oveja o = new Oveja();
+
+        jugador1.pedirAlBanco(m);
+        jugador2.pedirAlBanco(o);
+
+        boolean tradeo = jugador1.comerciarConJugador(jugador2, List.of(m), List.of(o));
+
+        Assertions.assertTrue(tradeo);
+    }
+
+    @Test
+    public void test05JugadorPierdeSuRecurso() {
+        Jugador jugador1 = new Jugador("Jugador1");
+        Jugador jugador2 = new Jugador("Jugador2");
+
+        Madera m = new Madera();
+        Oveja o = new Oveja();
+
+        jugador1.pedirAlBanco(m);
+        jugador2.pedirAlBanco(o);
+
+        jugador1.comerciarConJugador(jugador2, List.of(m), List.of(o));
+
+        Assertions.assertFalse(jugador1.tiene(m));
+    }
+
+    @Test
+    public void test06JugadorRecibeRecurso() {
+        Jugador jugador1 = new Jugador("Jugador1");
+        Jugador jugador2 = new Jugador("Jugador2");
+
+        Madera m = new Madera();
+        Oveja o = new Oveja();
+
+        jugador1.pedirAlBanco(m);
+        jugador2.pedirAlBanco(o);
+
+        jugador1.comerciarConJugador(jugador2, List.of(m), List.of(o));
+
+        Assertions.assertTrue(jugador2.tiene(m));
     }
 
 }
