@@ -3,6 +3,7 @@ package Tablero.Vertice;
 import Jugador.Jugador;
 import Recurso.Recurso;
 import Tablero.Arista.Arista;
+import Tablero.Arista.Carretera;
 import Tablero.Factory.ConectorVertices_MapaBasico;
 import Tablero.Vertice.Estructura.Ciudad;
 import Tablero.Vertice.Estructura.Estructura;
@@ -61,7 +62,7 @@ public class Vertice {
         return (this.numeroDeVertice == numeroDeVertice);
     }
 
-    public static void agregarArista(Vertice vertice1, Vertice vertice2, int numeroDeArista) {
+    public static void agregarArista(Vertice vertice1, Vertice vertice2, int[] numeroDeArista) {
 
         Arista arista1 = new Arista(vertice2, numeroDeArista);
         Arista arista2 = new Arista(vertice1, numeroDeArista);
@@ -124,5 +125,11 @@ public class Vertice {
             }
         }
         return false;
+    }
+
+    public void ubicarCarretera(Carretera carretera, int[] numeroDeArista) {
+        for (Arista arista : aristas) {
+            arista.ubicarCarretera(carretera, numeroDeArista);
+        }
     }
 }

@@ -51,7 +51,7 @@ public class Catan {
         return numeroDeVerice;
     }
 
-    public void intentarUbicarCarretera(Carretera carretera, int numeroDeArista){
+    public void intentarUbicarCarretera(Carretera carretera, int[] numeroDeArista){
         try{
             this.tablero.ubicarCarretera(carretera, numeroDeArista);
         } catch (AristaEstaOcupada | AristaFueraDeAlcance e) {

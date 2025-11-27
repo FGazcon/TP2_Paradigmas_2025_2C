@@ -7,14 +7,14 @@ import Tablero.Vertice.Vertice;
 public class Arista {
 
     private Vertice destino;
-    private int numeroDeArista;
+    private int[] numeroDeVertices;
     private Carretera carretera;
     private EstadoArista estadoArista;
     private Arista par;
 
-    public Arista(Vertice destino, int numeroDeArista) {
+    public Arista(Vertice destino, int[] numeroDeVertices) {
         this.destino = destino;
-        this.numeroDeArista = numeroDeArista;
+        this.numeroDeVertices = numeroDeVertices;
         this.carretera = null;
         this.estadoArista = new AristaVacia();
     }
@@ -28,6 +28,9 @@ public class Arista {
         this.estadoArista = new AristaOcupada();
     }
 
+    public void ocuparPar(Carretera carretera) {
+        this.par.ocuparse(carretera);
+    }
 
     //De aca para abajo hay que buscar un refactor, esta bastante mal la cantidad de cosas que pedimos.
 
@@ -47,13 +50,14 @@ public class Arista {
         return estadoArista.esDe(jugador, this.carretera);
     }
 
-    public void ubicarCarretera(Carretera carretera) {
+    public void ubicarCarretera(Carretera carretera, int[] numeroDeArista) {
 
-        if(aristaValidaPara(carretera.getJugador()) | par.aristaValidaPara(carretera.getJugador())) {
-            this.estadoArista.ubicarCarretera(carretera, this);
-        } else {
-            throw new AristaFueraDeAlcance();
+        if(this.destino.numeroDeVerticeEs(numeroDeArista[1])){
+            if(aristaValidaPara(carretera.getJugador()) | par.aristaValidaPara(carretera.getJugador())) {
+                this.estadoArista.ubicarCarretera(carretera, this);
+            } else {
+                throw new AristaFueraDeAlcance();
+            }
         }
-
     }
 }

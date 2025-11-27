@@ -3,6 +3,7 @@ package Tablero;
 import Errores.DesiertoNoProduceNada;
 import Jugador.Jugador;
 import Recurso.Recurso;
+import Tablero.Arista.Carretera;
 import Tablero.Vertice.Estructura.Estructura;
 import Tablero.Vertice.Vertice;
 import Terreno.Terreno;
@@ -105,5 +106,10 @@ public class Hexagono {
     public void ubicarEstructura(Estructura estructura, int numeroDeVertice) {
         Vertice verticeDestino = buscarVerticeNumero(numeroDeVertice);
         verticeDestino.ubicarEstructura(estructura);
+    }
+
+    public void ubicarCarretera(Carretera carretera, int[] numeroDeArista) {
+        Vertice verticeOrigen = buscarVerticeNumero(numeroDeArista[0]);
+        verticeOrigen.ubicarCarretera(carretera, numeroDeArista);
     }
 }

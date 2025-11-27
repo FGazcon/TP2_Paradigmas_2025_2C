@@ -62,9 +62,9 @@ public class Tablero {
         ladron.moverLadron(this.hexagonos.get(nuevoHexagono), jugador);
     }
 
-    public void ubicarCarretera(Carretera carretera, int numeroDeArista) {
-        for (Hexagono hexagono : hexagonos) {
+    public void ubicarCarretera(Carretera carretera, int[] numeroDeArista) {
+        Hexagono hexagonoOrigen = buscarHexagonoConVertice(numeroDeArista[0]);
 
-        }
+        hexagonoOrigen.ubicarCarretera(carretera, numeroDeArista);
     }
 }

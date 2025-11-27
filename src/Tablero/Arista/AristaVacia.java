@@ -10,6 +10,7 @@ public class AristaVacia extends EstadoArista{
 
         if(arista.validarCarreteraPara(carretera.getJugador())){
             arista.ocuparse(carretera);
+            arista.ocuparPar(carretera);
         } else {
             throw new AristaFueraDeAlcance();
         }
