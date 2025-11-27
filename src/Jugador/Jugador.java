@@ -1,6 +1,7 @@
 package Jugador;
 
 import Banco.Banco;
+import Comercio.ReglaDeComercio;
 import Recurso.Recurso;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class Jugador {
     private List<Recurso> recursos;
     private String nombre;
     private int puntaje;
+    private ReglaDeComercio reglaDeComercio;
 
     public Jugador(String nombre) {
         this.recursos = new ArrayList<Recurso>();
@@ -156,6 +158,38 @@ public class Jugador {
     public boolean comerciarConBanco(Recurso ofrecido, Recurso pedido) {
         Banco banco = Banco.getBanco();
         return banco.intercambiarConJugador(this, pedido, ofrecido);
+    }
+
+    public boolean tieneCantidadDe(Recurso recurso, int cantidad) {
+        int contador = 0;
+        for (Recurso r : this.recursos) {
+            if (r.getClass().equals(recurso.getClass())) contador++;
+            if (contador == cantidad) return true;
+        }
+        return false;
+    }
+
+    public void entregarRecurso(Recurso recurso, int cantidad) {
+        int recursosRemovidos = 0;
+        for (int i = 0; i < recursos.size() && recursosRemovidos < cantidad; i++) {
+            if (recursos.get(i).getClass().equals(recurso.getClass())) {
+                recursos.remove(i);
+                recursosRemovidos++;
+                i--;
+            }
+        }
+    }
+
+    public void asignarReglaDeComercio(ReglaDeComercio regla) {
+        this.reglaDeComercio = regla;
+    }
+
+    public boolean comerciarEnPuerto(Recurso ofrecido, Recurso pedido) {
+        if (reglaDeComercio == null) return false;
+        if (!reglaDeComercio.puedeHacerComercioMaritimo(this, ofrecido)) return false;
+
+        reglaDeComercio.realizarComercioMaritimo(this, ofrecido, pedido);
+        return true;
     }
 
 }
