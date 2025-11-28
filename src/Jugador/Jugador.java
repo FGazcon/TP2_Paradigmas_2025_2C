@@ -214,15 +214,16 @@ public class Jugador {
 
     }
 
-    public void entregarCartasSegunCosto(Map<Class<? extends Recurso>, Integer> costo){
+    public void entregarCartasSegunCosto(Map<Class<? extends Recurso>, Integer> costo) {
         for (var entry : costo.entrySet()) {
             Class<? extends Recurso> tipo = entry.getKey();
             int cantidad = entry.getValue();
 
             for (Recurso recurso : recursos) {
                 if (tipo == recurso.getClass()) {
-                    entregarNRecursosAlBanco(recurso,1);
+                    entregarNRecursosAlBanco(recurso, 1);
                 }
             }
+        }
     }
 }
