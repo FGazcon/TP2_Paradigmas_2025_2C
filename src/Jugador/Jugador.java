@@ -5,6 +5,7 @@ import Comercio.ReglaDeComercio;
 import Recurso.Recurso;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -195,10 +196,7 @@ public class Jugador {
 
 
     public void construirCarretera(Map<Class<? extends Recurso>, Integer> costo){
-
               entregarCartasSegunCosto(costo);
-
-
     }
 
     public void construirCiudad(Map<Class<? extends Recurso>, Integer> costo){
@@ -218,10 +216,14 @@ public class Jugador {
         for (var entry : costo.entrySet()) {
             Class<? extends Recurso> tipo = entry.getKey();
             int cantidad = entry.getValue();
+            Iterator<Recurso> it = recursos.iterator();
 
-            for (Recurso recurso : recursos) {
-                if (tipo == recurso.getClass()) {
+            while (it.hasNext() && cantidad > 0) {
+                Recurso recurso = it.next();
+
+                if (recurso.getClass() == tipo) {
                     entregarNRecursosAlBanco(recurso, 1);
+                    cantidad--;
                 }
             }
         }

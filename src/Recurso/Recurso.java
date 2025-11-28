@@ -60,10 +60,10 @@ public abstract class Recurso{
             jugador.construirPoblado(costoPoblado);
         }
     }
-    private boolean chequeoConstruccion(List<Recurso> recursos,Map<Class<? extends Recurso>, Integer> costoPoblado){
+    private boolean chequeoConstruccion(List<Recurso> recursos,Map<Class<? extends Recurso>, Integer> costo){
 
         int cantidadRecursos = 0;
-        for (var entry : costoCarretera.entrySet()) {
+        for (var entry : costo.entrySet()) {
             Class<? extends Recurso> tipo = entry.getKey();
             int cantidad = entry.getValue();
 
@@ -71,10 +71,11 @@ public abstract class Recurso{
                 if (tipo == recurso.getClass()) {
                     cantidadRecursos++;
                 }
+                if(cantidadRecursos < cantidad) {
+                    return false;
+                }
             }
-            if(cantidadRecursos < cantidad) {
-                return false;
-            }
+
         }
         return true;
 
