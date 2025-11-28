@@ -10,17 +10,20 @@ import javafx.event.ActionEvent;
 public class MenuController {
 
     @FXML
-    public void irARegistro(ActionEvent event) {
+    public void irARegistro(ActionEvent event)
+    {
         cambiarEscena(event, "/registro.fxml");
     }
 
     @FXML
-    public void salir(ActionEvent event) {
+    public void salir(ActionEvent event)
+    {
         System.exit(0);
     }
 
     private void cambiarEscena(ActionEvent event, String fxml) {
-        try {
+        try
+        {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Scene nueva = new Scene(loader.load());
 
@@ -28,7 +31,10 @@ public class MenuController {
             stage.setScene(nueva);
             stage.show();
 
-        } catch (Exception e) {
+        }
+
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

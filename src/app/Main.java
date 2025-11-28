@@ -14,7 +14,8 @@ public class Main extends Application {
 
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
-        stage.setTitle("Catán - FIUBA");
+        stage.setResizable(false);
+        stage.setTitle("CATAN - Paradigmas de Programación - Grupo 10");
         stage.show();
     }
 

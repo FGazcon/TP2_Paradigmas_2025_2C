@@ -12,7 +12,8 @@ import javafx.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistroController {
+public class RegistroController
+{
 
     @FXML private TextField txtJugador1;
     @FXML private TextField txtJugador2;
@@ -20,7 +21,8 @@ public class RegistroController {
     @FXML private TextField txtJugador4;
 
     @FXML
-    public void comenzarPartida(ActionEvent event) {
+    public void comenzarPartida(ActionEvent event)
+    {
         List<String> nombres = new ArrayList<>();
 
         nombres.add(txtJugador1.getText().trim());
@@ -28,25 +30,31 @@ public class RegistroController {
         nombres.add(txtJugador3.getText().trim());
         nombres.add(txtJugador4.getText().trim());
 
-        // Validación simple
-        if (nombres.stream().anyMatch(n -> n.isEmpty())) {
+        if (nombres.stream().anyMatch(n -> n.isEmpty()))
+        {
             System.out.println("Faltan nombres!");
             return;
         }
 
-        // TODO: Crear jugadores reales y pasarlos al juego
         System.out.println("Jugadores registrados: " + nombres);
 
         cambiarEscena(event, "/juego.fxml");
+
+        // Para mostrar pantalla de ganador comentar linea 40 y descomentar la 44 (POR AHORA)
+
+        // cambiarEscena(event, "/ganador.fxml");
     }
 
     @FXML
-    public void salir(ActionEvent event) {
+    public void salir(ActionEvent event)
+    {
         System.exit(0);
     }
 
-    private void cambiarEscena(ActionEvent event, String fxml) {
-        try {
+    private void cambiarEscena(ActionEvent event, String fxml)
+    {
+        try
+        {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Scene nueva = new Scene(loader.load());
 
@@ -54,7 +62,10 @@ public class RegistroController {
             stage.setScene(nueva);
             stage.show();
 
-        } catch (Exception e) {
+        }
+
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
