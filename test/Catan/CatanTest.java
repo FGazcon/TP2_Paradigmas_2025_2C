@@ -21,7 +21,7 @@ public class CatanTest {
         Jugador jugador = new Jugador("Wilmar");
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
-        Catan catan = new Catan(jugadores,banco);
+        Catan catan = new Catan(jugadores);
         int numeroDeVertice = 20;
         catan.segundaEleccion(jugador,numeroDeVertice); //esto deberia darle los recursos al jugador
         //aca deberia implementar para saber que recursos gano el jugador
@@ -33,45 +33,16 @@ public class CatanTest {
          Assertions.assertNotEquals(0,recursosObtenidos);
 
     }
-    @Test
-    public void test02SeRecibenLosRecursosCorrectamenteSegunElNumero(){
-        Banco banco = new Banco();
-        Jugador jugador = new Jugador("Wilmar");
-        ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-        jugadores.add(jugador);
-        Catan catan = new Catan(jugadores,banco);
 
-        int numeroSacado;
-        Dados dados = new Dados();
-        numeroSacado = dados.tirarDados();
-        catan.lanzamientoDeDados(numeroSacado);
-
-        //int recursosObtenidos = jugador.cantidadCartas();
-
-
-        // Assertions.assertNotEquals(0,recursosObtenidos);
-
-    }
     //Verificar que el Terreno bajo el Ladrón no produzca recursos.
     //      ● Verificar que si un jugador tiene más de 7 cartas, descarte correctamente la mitad,
     //redondeando hacia abajo, al lanzar un 7.
     //      ● Verificar que el jugador activo pueda mover el Ladrón y robar una carta aleatoria
     //de un jugador adyacente a la nueva ubicación.
 
-    @Test
-    public void test03HayLadronNoSaleRecurso(){
-        Banco banco = new Banco();
-        Jugador jugador = new Jugador("Wilmar");
-        ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-        jugadores.add(jugador);
-        Catan catan = new Catan(jugadores,banco);
-        //Ladron ladron = new Ladron();
-        catan.activarLadron(jugador);
-
-    }
 
     @Test
-    public void test04JugadorPierdeLaMitadDeLasCartas(){
+    public void test02JugadorPierdeLaMitadDeLasCartas(){
         Banco banco = new Banco();
         Jugador jugador = new Jugador("Wilmar");
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
@@ -85,7 +56,7 @@ public class CatanTest {
         jugador.pedirAlBanco(new Madera());
         jugador.pedirAlBanco(new Madera());
 
-        Catan catan = new Catan(jugadores,banco);
+        Catan catan = new Catan(jugadores);
         jugador.descartarMitad();
 
 
@@ -96,15 +67,4 @@ public class CatanTest {
 
     }
 
-    @Test
-    public void testMismoHexagonoDaMaderaSiempre(){
-
-    }
-
-
-    @Test
-    public void testNumerosAleatorios(){
-
-
-    }
 }

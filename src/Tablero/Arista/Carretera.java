@@ -17,6 +17,6 @@ public class Carretera {
 
     //Ver si podemos sacar esto. Arreglar mecanica entera de chequeo de adyacencia.
     public boolean perteneceA(Jugador jugador) {
-        return jugador == jugador;
+        return this.jugador == jugador;
     }
 }

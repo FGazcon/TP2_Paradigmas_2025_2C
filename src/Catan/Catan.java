@@ -1,6 +1,7 @@
 package Catan;
 
 import Banco.Banco;
+import Dados.Dados;
 import Errores.*;
 import Jugador.Jugador;
 import Ladron.Ladron;
@@ -18,23 +19,27 @@ public class Catan {
     private Banco banco;
     private List<Jugador> jugadores;
     private Tablero tablero;
+    private Dados dados;
 
     public Catan() {
 
-        this.banco = new Banco();
+        this.banco = Banco.getBanco();
         this.jugadores = new ArrayList<Jugador>();
         this.tablero = Tablero.crearTableroBasico();
+        this.dados = new Dados();
 
     }
-    public Catan(List<Jugador> listaJugadores,Banco banco) {
 
-        this.banco = banco;
+    public Catan(List<Jugador> listaJugadores) {
+
+        this.banco = Banco.getBanco();
         this.jugadores = new ArrayList<Jugador>();
         this.jugadores.addAll(listaJugadores);
         this.tablero = Tablero.crearTableroBasico();
 
 
     }
+
     public void prepararJugadores(){
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
     }
@@ -70,14 +75,10 @@ public class Catan {
         }
 
         for(Jugador jugador: this.jugadores){
-            Estructura estructura = new PobladoInicial(jugador);
-            int verticeSegundoPoblado = intentarUbicarEstructura(estructura, numeroDeVertice);
-            this.tablero.activarHexagonoPorVertice(verticeSegundoPoblado);
-            numeroDeVertice+=4;
+            segundaEleccion(jugador, numeroDeVertice);
         }
 
     }
-
 
     public void segundaEleccion(Jugador jugador,int verticeElegido){
         Estructura estructura = new PobladoInicial(jugador);
@@ -85,29 +86,17 @@ public class Catan {
         tablero.activarHexagonoPorVertice(verticeSegundoPoblado);
     }
 
+    public void cicloDeJuego(){
+        for(Jugador jugador: this.jugadores){
+            Turno turno = new Turno();
+            turno.ejecutarTurno(this, this.tablero, jugador, this.dados);
+        }
+    }
 
-
-    public void lanzamientoDeDados(int numeroTirado){
-        tablero.activarHexagonoPorNumero(numeroTirado);
-    }/*
-    public void descarte(){
-        for(Jugador jugador : this.jugadores){
+    public void avisarQueSalioLadron() {
+        for(Jugador jugador: this.jugadores){
             jugador.descartarMitad();
         }
-    }*/
-    public void jugadorMueveLadron(Jugador jugador){
-        //ladron.moverLadron();
-    }
-    public void robo(){
-
-    }/*
-    public void resultado7(){
-        descarte();
-        //jugadorMueveLadron();
-        robo();
-    }*/
-    public void activarLadron(Jugador jugador){
-        //ladron.moverLadron();
     }
 
 }
