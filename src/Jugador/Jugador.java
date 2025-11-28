@@ -6,6 +6,7 @@ import Recurso.Recurso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Jugador {
 
@@ -192,4 +193,36 @@ public class Jugador {
         return true;
     }
 
+
+    public void construirCarretera(Map<Class<? extends Recurso>, Integer> costo){
+
+              entregarCartasSegunCosto(costo);
+
+
+    }
+
+    public void construirCiudad(Map<Class<? extends Recurso>, Integer> costo){
+         entregarCartasSegunCosto(costo);
+
+    }
+    public void construirPoblado(Map<Class<? extends Recurso>, Integer> costo){
+         entregarCartasSegunCosto(costo);
+
+    }
+    public void construirDesarrollo(Map<Class<? extends Recurso>, Integer> costo){
+         entregarCartasSegunCosto(costo);
+
+    }
+
+    public void entregarCartasSegunCosto(Map<Class<? extends Recurso>, Integer> costo){
+        for (var entry : costo.entrySet()) {
+            Class<? extends Recurso> tipo = entry.getKey();
+            int cantidad = entry.getValue();
+
+            for (Recurso recurso : recursos) {
+                if (tipo == recurso.getClass()) {
+                    entregarNRecursosAlBanco(recurso,1);
+                }
+            }
+    }
 }

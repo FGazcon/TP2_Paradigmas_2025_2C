@@ -1,40 +1,22 @@
 package Recurso;
 
-import Tablero.Vertice.Estructura.Estructura;
+import Jugador.Jugador;
 
-public class Piedra implements Recurso {
+import java.util.List;
+
+public class Piedra extends Recurso {
         @Override
         public String nombre(){
                 return "Piedra";
         }
 
         @Override
-        public Estructura construir(Madera madera) {
-                return null;
+        public void construirPoblado(List<Recurso> recursos,Jugador jugador) {
+        }
+        @Override
+        public void construirCarretera(List<Recurso> recursos,Jugador jugador) {
+
         }
 
-        @Override
-        public Estructura construir(Oveja oveja) {
-                return null;
-        }
-
-        @Override
-        public Estructura construir(Trigo trigo) {
-                return null;
-        }
-
-        @Override
-        public Estructura construir(Piedra piedra) {
-                return null;
-        }
-
-        @Override
-        public Estructura construir(Ladrillo ladrillo) {
-                return null;
-        }
-
-        @Override
-        public Estructura construir(Recurso recurso) {
-                return recurso.construir(this);
-        }
 }
+
