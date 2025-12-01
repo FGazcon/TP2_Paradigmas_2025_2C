@@ -156,17 +156,20 @@ public class Jugador {
     }
 
     public void comerciarConJugador(Jugador jugador, List<Recurso> recursosOfertados, List<Recurso> recursosDeseados){
+        System.out.println("Hola");
         if(tieneSuficientesParaOfertar(recursosOfertados)){
-            jugador.recibirComercioConJugador(jugador, recursosDeseados, recursosOfertados);
+            System.out.println("Se envia oferta");
+            jugador.recibirComercioConJugador(this, recursosDeseados, recursosOfertados);
         }
     }
 
     public void recibirComercioConJugador(Jugador jugador, List<Recurso> recursosQueEnviaria, List<Recurso> recursosQueRecibiria){
         if(tieneSuficientesParaOfertar(recursosQueEnviaria)){
+            System.out.println("Se recibe oferta");
             jugador.sumarVariosRecursos(recursosQueEnviaria);
             jugador.restarVariosRecursos(recursosQueRecibiria);
-            sumarVariosRecursos(recursosQueRecibiria);
-            restarVariosRecursos(recursosQueEnviaria);
+            this.sumarVariosRecursos(recursosQueRecibiria);
+            this.restarVariosRecursos(recursosQueEnviaria);
         }
     }
 
@@ -184,6 +187,8 @@ public class Jugador {
 
     public boolean tieneSuficientesParaOfertar(List<Recurso> recursosOfertados){
         for (Recurso recurso : recursosOfertados){
+            System.out.println("Jugador necesita: " + recurso.sumadorCantidad(0) + " " + recurso.nombre());
+            System.out.println("Jugador tiene: " + mapaRecursos.get(recurso.nombre()).sumadorCantidad(0) + " " + recurso.nombre());
             if(!recurso.jugadorTieneAlMenos(this, recurso.sumadorCantidad(0))){
                 return false;
             }
@@ -228,6 +233,12 @@ public class Jugador {
     public void darReglaATodos(ReglaDeComercio reglaDeComercio) {
         for (Recurso recurso : this.mapaRecursos.values()){
             recurso.cambiarRegla(reglaDeComercio);
+        }
+    }
+
+    public void imprimirRecursos(){
+        for (Recurso recurso : this.mapaRecursos.values()){
+            System.out.println("Jugador tiene: " + recurso.sumadorCantidad(0) + " " + recurso.nombre());
         }
     }
 

@@ -23,7 +23,6 @@ public class HexagonoTest {
         hexagono.recibirLadron(jugador);
 
         Assertions.assertThrows(HexagonoBajoAsalto.class, ()->{hexagono.activarHexagonoParaNumero(10);});
-
     }
 
 }

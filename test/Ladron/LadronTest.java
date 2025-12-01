@@ -51,8 +51,8 @@ public class LadronTest {
         Ladron ladron = new Ladron(hexagonos.get(0));
         Jugador jugador1 = new Jugador("Neymar");
         Jugador jugador2 = new Jugador("Pele");
-        jugador1.pedirAlBanco(new Madera());
-        jugador1.pedirAlBanco(new Madera());
+        jugador1.pedirAlBanco(new Madera(), 1);
+        jugador1.pedirAlBanco(new Madera(), 1);
 
 
 

@@ -1,5 +1,6 @@
 package Puerto;
 
+import Comercio.DosPorUno;
 import Comercio.TresPorUno;
 import Jugador.Jugador;
 
@@ -11,7 +12,6 @@ public class TresXUno extends Puerto {
 //    }
 
     public void darReglaAJugador(Jugador jugador){
-        this.recurso.darReglaA(jugador, new DosPorUno());
-        jugador.darleReglaA(new TresPorUno());
+        jugador.darReglaATodos(new TresPorUno());
     }
 }

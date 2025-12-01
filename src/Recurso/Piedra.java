@@ -22,7 +22,6 @@ public class Piedra extends Recurso {
     public void transferirAlBanco(Banco banco, int cantidad){
         banco.sumarRecurso(this, cantidad);
     }
-
     public void transferirAJugador(Jugador jugador, int cantidad){
         jugador.sumarRecurso(this, cantidad);
     }

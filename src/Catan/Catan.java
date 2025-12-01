@@ -44,6 +44,11 @@ public class Catan {
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
     }
 
+    public void ejecutarTurnoInicial(){
+        TurnoInicial turnoInicial = new TurnoInicial(this.tablero, this.jugadores);
+        turnoInicial.primeraEtapa();
+    }
+
     public void cicloDeJuego(){
         for(Jugador jugador: this.jugadores){
             TurnoPersonal turno = new TurnoPersonal(this, this.tablero, jugador, this.dados);

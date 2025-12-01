@@ -1,7 +1,6 @@
 package Catan;
 
 import Banco.Banco;
-import Dados.Dados;
 import Jugador.Jugador;
 import Recurso.Madera;
 import org.junit.jupiter.api.Assertions;
@@ -22,8 +21,7 @@ public class CatanTest {
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
         Catan catan = new Catan(jugadores);
-        int numeroDeVertice = 20;
-        catan.segundaEleccion(jugador,numeroDeVertice); //esto deberia darle los recursos al jugador
+        catan.ejecutarTurnoInicial(); //esto deberia darle los recursos al jugador
         //aca deberia implementar para saber que recursos gano el jugador
 
 
@@ -47,16 +45,7 @@ public class CatanTest {
         Jugador jugador = new Jugador("Wilmar");
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-
-        Catan catan = new Catan(jugadores);
+        jugador.pedirAlBanco(new Madera(), 8);
         jugador.descartarMitad();
 
 

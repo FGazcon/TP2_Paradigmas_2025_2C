@@ -101,25 +101,25 @@ public class Banco {
         }
     }
     public void jugadorLeSolicitaRecurso(Jugador jugador, Ladrillo ladrillo, int cantidad){
-        if(mazoDeProduccion.get("").tieneAlMenos(cantidad)){
+        if(mazoDeProduccion.get("Ladrillo").tieneAlMenos(cantidad)){
             ladrillo.transferirAJugador(jugador, cantidad);
             ladrillo.descartarAlBanco(this, cantidad);
         }
     }
     public void jugadorLeSolicitaRecurso(Jugador jugador, Oveja oveja, int cantidad){
-        if(mazoDeProduccion.get("").tieneAlMenos(cantidad)){
+        if(mazoDeProduccion.get("Oveja").tieneAlMenos(cantidad)){
             oveja.transferirAJugador(jugador, cantidad);
             oveja.descartarAlBanco(this, cantidad);
         }
     }
     public void jugadorLeSolicitaRecurso(Jugador jugador, Trigo trigo, int cantidad){
-        if(mazoDeProduccion.get("").tieneAlMenos(cantidad)){
+        if(mazoDeProduccion.get("Trigo").tieneAlMenos(cantidad)){
             trigo.transferirAJugador(jugador, cantidad);
             trigo.descartarAlBanco(this, cantidad);
         }
     }
     public void jugadorLeSolicitaRecurso(Jugador jugador, Piedra piedra, int cantidad){
-        if(mazoDeProduccion.get("").tieneAlMenos(cantidad)){
+        if(mazoDeProduccion.get("Piedra").tieneAlMenos(cantidad)){
             piedra.transferirAJugador(jugador, cantidad);
             piedra.descartarAlBanco(this, cantidad);
         }

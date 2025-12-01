@@ -1,8 +1,6 @@
 package Desarrollo;
 
 import Desarrollo.CartasDesarrollo.*;
-import Produccion.MazoProduccion;
-import Recurso.Recurso;
 
 import java.util.*;
 

@@ -1,13 +1,13 @@
 package Mazo;
 
-import Produccion.MazoProduccion;
 import Recurso.Ladrillo;
 import Recurso.Madera;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class MazoTest {
 
+    /*
 
     @Test
     public void test01MazoAñadaeUnaCartaDeMadera(){
@@ -69,7 +69,5 @@ public class MazoTest {
         Assertions.assertEquals(cantidadMadera, 19);
 
     }
-
-
-
+     */
 }

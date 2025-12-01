@@ -9,8 +9,8 @@ import java.util.Map;
 
 public abstract class Recurso{
 
-    private int cantidad;
-    private ReglaDeComercio reglaDeComercio;
+    protected int cantidad;
+    protected ReglaDeComercio reglaDeComercio;
 
     public static Map<String,Recurso> crearMazoProduccionBanco() {
         Map<String, Recurso> map = new HashMap<>();
@@ -49,11 +49,11 @@ public abstract class Recurso{
     public abstract String nombre();
 
     public void descartar(int cantidad){
-        this.cantidad = this.cantidad - cantidad;
+        this.cantidad -= cantidad;
     }
 
     public void sumar(int cantidad){
-        this.cantidad = this.cantidad + cantidad;
+        this.cantidad += cantidad;
     }
 
     public boolean tieneAlMenos(int cantidad){
@@ -61,7 +61,7 @@ public abstract class Recurso{
     }
 
     public int sumadorCantidad(int cantidad) {
-        return cantidad + this.cantidad;
+        return (cantidad + this.cantidad);
     }
 
     public abstract boolean jugadorTieneAlMenos(Jugador jugador, int cantidad);
@@ -69,7 +69,7 @@ public abstract class Recurso{
     public abstract void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio);
 
     public void comerciar(int cantidad, Recurso recursoDeseado){
-        reglaDeComercio.intentarComerciar(this, cantidad, recursoDeseado);
+        //reglaDeComercio.intentarComerciar(this, cantidad, recursoDeseado);
     }
 
     public void cambiarRegla(ReglaDeComercio reglaDeComercio){
