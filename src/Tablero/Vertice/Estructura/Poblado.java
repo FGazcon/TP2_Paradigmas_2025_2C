@@ -25,7 +25,7 @@ public class Poblado extends Estructura{
     @Override
     public void  entregarRecursos(Recurso recurso) {
         List<Recurso> recursosEntregados = new ArrayList<Recurso>();
-        this.jugador.pedirAlBanco(recurso);
+        this.jugador.pedirAlBanco(recurso.nombre(), 1);
         //return recursosEntregados;
     }
 

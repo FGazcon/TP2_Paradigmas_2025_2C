@@ -2,82 +2,58 @@ package Recurso;
 
 import Jugador.Jugador;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public abstract class Recurso{
-     Map<Class<? extends Recurso>, Integer> costoCiudad = Map.of(
-             Piedra.class, 3,
-             Trigo.class, 2
-     );
 
-    Map<Class<? extends Recurso>, Integer> costoPoblado = Map.of(
-            Madera.class, 1,
-            Ladrillo.class, 1,
-            Oveja.class, 1,
-            Trigo.class, 1
-    );
+    private int cantidad;
 
-    Map<Class<? extends Recurso>, Integer> costoCarretera = Map.of(
-            Madera.class, 1,
-            Ladrillo.class, 1
-    );
-
-    Map<Class<? extends Recurso>, Integer> costoDesarrollo = Map.of(
-        Oveja.class, 1,
-        Trigo.class, 1,
-        Piedra.class, 1
-    );
-
-
-
-     abstract String nombre();
-
-    public void construirCarretera(List<Recurso> recursos,Jugador jugador) {
-
-            if(chequeoConstruccion(recursos,costoCarretera)){
-                jugador.construirCarretera(costoCarretera);
-            }
-
-
+    public static Map<String,Recurso> crearMazoProduccionBanco() {
+        Map<String, Recurso> map = new HashMap<>();
+        map.put("Madera", new Madera(19));
+        map.put("Trigo", new Trigo(19));
+        map.put("Oveja", new Oveja(19));
+        map.put("Ladrillo", new Ladrillo(19));
+        map.put("Piedra", new Piedra(19));
+        return map;
     }
-    public void construirCiudad(List<Recurso> recursos,Jugador jugador) {
-        if(chequeoConstruccion(recursos,costoCiudad)){
-            jugador.construirCiudad(costoCiudad);
-        }
-        //si devolvemos new ciudad() hay que sacar las cartas de la lista y devolversela al banco.
 
+    public static Map<String,Recurso> crearMazoProduccionJugador() {
+        Map<String, Recurso> map = new HashMap<>();
+        map.put("Madera", new Madera());
+        map.put("Trigo", new Trigo());
+        map.put("Oveja", new Oveja());
+        map.put("Ladrillo", new Ladrillo());
+        map.put("Piedra", new Piedra());
+        return map;
     }
-    public void construirDesarrollo(List<Recurso> recursos,Jugador jugador) {
 
-        if(chequeoConstruccion(recursos,costoDesarrollo)){
-            jugador.construirDesarrollo(costoDesarrollo);
-        }
-
+    public Recurso(){
+        this.cantidad = 0;
     }
-    public void construirPoblado(List<Recurso> recursos,Jugador jugador) {
-        if(chequeoConstruccion(recursos,costoPoblado)){
-            jugador.construirPoblado(costoPoblado);
-        }
+
+    public Recurso(int cantidad){
+        this.cantidad = cantidad;
     }
-    private boolean chequeoConstruccion(List<Recurso> recursos,Map<Class<? extends Recurso>, Integer> costoPoblado){
 
-        int cantidadRecursos = 0;
-        for (var entry : costoCarretera.entrySet()) {
-            Class<? extends Recurso> tipo = entry.getKey();
-            int cantidad = entry.getValue();
+    public abstract String nombre();
 
-            for (Recurso recurso : recursos) {
-                if (tipo == recurso.getClass()) {
-                    cantidadRecursos++;
-                }
-            }
-            if(cantidadRecursos < cantidad) {
-                return false;
-            }
-        }
-        return true;
+    public void descartar(int cantidad){
+        this.cantidad = this.cantidad - cantidad;
+    }
 
+    public void sumar(int cantidad){
+        this.cantidad = this.cantidad + cantidad;
+    }
+
+    public boolean tieneAlMenos(int cantidad){
+        return this.cantidad >= cantidad;
+    }
+
+    public int getCantidad(int cantidad) {
+        return cantidad + this.cantidad;
     }
 }
 

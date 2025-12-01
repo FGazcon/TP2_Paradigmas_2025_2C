@@ -5,21 +5,30 @@ import Jugador.Jugador;
 import java.util.List;
 
 public class Ladrillo extends Recurso {
+
+    public Ladrillo(){
+        super();
+    }
+
+    public Ladrillo(int i) {
+        super(i);
+    }
+
     @Override
     public String nombre(){
         return "Ladrillo";
     }
 
-
-
-    @Override
-    public void construirCiudad(List<Recurso> recursos,Jugador jugador) {
-
-    }
-    @Override
-    public void construirDesarrollo(List<Recurso> recursos,Jugador jugador) {
-
+    public static void indicarleAJugadorQueReste(int cantidad, Jugador jugador) {
+        jugador.descartarRecurso("Ladrillo", cantidad);
     }
 
+    public static void indicarleAJugadorQueSume(int cantidad, Jugador jugador) {
+        jugador.sumarRecurso("Ladrillo", cantidad);
+    }
+
+    public static void hacerQueJugadorLePidaAlBanco(int cantidad, Jugador jugador) {
+        jugador.pedirAlBanco("Ladrillo", cantidad);
+    }
 
 }

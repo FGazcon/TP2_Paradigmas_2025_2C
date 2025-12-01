@@ -6,19 +6,30 @@ import java.util.List;
 
 public class Trigo extends Recurso {
 
-        @Override
-        public String nombre() {
-                return "Trigo";
-        }
+    public Trigo(){
+        super();
+    }
 
-        @Override
-        public void construirCarretera(List<Recurso> recursos,Jugador jugador){
+    public Trigo(int i) {
+        super(i);
+    }
 
-        }
+    @Override
+    public String nombre(){
+        return "Trigo";
+    }
+
+    public static void indicarleAJugadorQueReste(int cantidad, Jugador jugador) {
+        jugador.descartarRecurso("Trigo", cantidad);
+    }
+
+    public static void indicarleAJugadorQueSume(int cantidad, Jugador jugador) {
+        jugador.sumarRecurso("Trigo", cantidad);
+    }
+
+    public static void hacerQueJugadorLePidaAlBanco(int cantidad, Jugador jugador) {
+        jugador.pedirAlBanco("Trigo", cantidad);
+    }
 
 }
-
-
-
-
 

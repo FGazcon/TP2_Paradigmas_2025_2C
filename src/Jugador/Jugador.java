@@ -2,76 +2,66 @@ package Jugador;
 
 import Banco.Banco;
 import Comercio.ReglaDeComercio;
-import Recurso.Recurso;
+import Recurso.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Jugador {
 
-    private List<Recurso> recursos;
     private String nombre;
     private int puntaje;
     private ReglaDeComercio reglaDeComercio;
+    private Map<String, Recurso> mapaRecursos;
+    private Madera madera;
+    private Ladrillo ladrillo;
+    private Oveja oveja;
+    private Trigo trigo;
+    private Piedra piedra;
 
     public Jugador(String nombre) {
-        this.recursos = new ArrayList<Recurso>();
         this.nombre = nombre;
         this.puntaje = 0;
+        this.mapaRecursos = Recurso.crearMazoProduccionJugador();
     }
 
-    public void pedirAlBanco(Recurso recurso){
+    public String elegirCartaRandomADescartar(){
+        List<Recurso> disponibles = this.mapaRecursos.values().stream().filter(r -> r.tieneAlMenos(1)).toList();
 
-        Banco banco = Banco.getBanco();
-        if(banco.darRecurso(recurso)){
-            this.recursos.add(recurso);
+        if (disponibles.isEmpty()) {
+            return null;
         }
 
-    }
+        Recurso elegido = disponibles.get(
+                (int) (Math.random() * disponibles.size())
+        );
 
-    public void imprimirRecursos(){
-        for (Recurso recurso : this.recursos){
-            System.out.println(recurso);
-        }
+        elegido.descartar(1);
+
+        return elegido.nombre();
     }
 
     public void descartarMitad(){
+        Banco banco = new Banco();
         if(this.cantidadCartas() > 7) {
-            descartarPorLadron(cantidadCartas() / 2);
+            for (int i = 1; i <= this.cantidadCartas(); i++) {
+                banco.sumarRecurso(elegirCartaRandomADescartar(), 1);
+            }
         }
     }
 
-    public void dejarseRobarPorJugador(int cantidadCartasADescartar, Jugador jugador){
-
-        Banco banco = Banco.getBanco();
-        //descarta la ultima carta
-        for (int i = 0; i < cantidadCartasADescartar; i++) {
-
-            Recurso recursoDescartado = this.recursos.removeLast();
-            banco.recibirRecurso(recursoDescartado);
-            jugador.pedirAlBanco(recursoDescartado);
-
-        }
-    }
-
-    public void descartarPorLadron(int cantidadCartasADescartar){
-        Banco banco = Banco.getBanco();
-        for (int i = 0; i < cantidadCartasADescartar; i++) {
-            banco.recibirRecurso(this.recursos.removeLast());
-        }
+    public void dejarseRobarPorJugador(Jugador jugador) {
+        jugador.sumarRecurso(elegirCartaRandomADescartar(), 1);
     }
 
     public int cantidadCartas(){
-        return this.recursos.size();
-    }
-
-    public void enviarAJugador(Jugador jugador, List<Recurso> recursos) {
-        Banco banco = Banco.getBanco();
-        for (Recurso recurso : recursos) {
-            banco.recibirRecurso(recurso);
-            jugador.pedirAlBanco(recurso);
+        int cantidad = 0;
+        for (Map.Entry<String, Recurso> recurso : mapaRecursos.entrySet()) {
+            cantidad = recurso.getValue().getCantidad(cantidad);
         }
+        return cantidad;
     }
 
     public void sumarPunto(){
@@ -85,141 +75,81 @@ public class Jugador {
         return puntaje;
     }
 
-    public void recibir(Recurso recurso) {
-        this.recursos.add(recurso);
+    public void comerciarConOtroJugador(Jugador jugador, Map<String, Integer> recursosOfrecidos, Map<String, Integer> recursosDeseados) {
+        if(puedeEntregar(recursosOfrecidos)){
+            jugador.recibirOfertaComercio(this, recursosOfrecidos, recursosDeseados);
+        }
     }
 
-    private boolean puedeEntregar(List<Recurso> ofrecidos) {
-        List<Recurso> copiaListaRecursos = new ArrayList<>(this.recursos);
-        for (Recurso r : ofrecidos) {
-            if (!copiaListaRecursos.remove(r)) return false;
+    public void recibirOfertaComercio(Jugador jugador, Map<String, Integer> recursosOfrecidos, Map<String, Integer> recursosDeseados){
+        if(puedeEntregar(recursosDeseados)){
+            jugador.sumarVariosRecursos(recursosDeseados);
+            sumarVariosRecursos(recursosOfrecidos);
+        }
+    }
+
+    private void sumarVariosRecursos(Map<String, Integer> recursosOfrecidos){
+        for (Map.Entry<String, Integer> recurso : recursosOfrecidos.entrySet()) {
+            mapaRecursos.get(recurso.getKey()).sumar(recurso.getValue());
+        }
+    }
+
+    public boolean puedeEntregar(Map<String, Integer> recursosAEntregar) {
+        for (Map.Entry<String, Integer> entry : recursosAEntregar.entrySet()) {
+            if(!mapaRecursos.get(entry.getKey()).tieneAlMenos(entry.getValue())){
+                return false;
+            }
         }
         return true;
     }
 
-    private void entregarA(Jugador otro, List<Recurso> ofrecidos) {
-        for (Recurso r : ofrecidos) {
-            this.recursos.remove(r);
-            otro.recibir(r);
-        }
+    public void sumarRecurso(Piedra piedra, int cantidad){
+        this.piedra.sumar(cantidad);
     }
 
-    private void recibirDe(Jugador otro, List<Recurso> pedidos) {
-        for (Recurso r : pedidos) {
-            otro.recursos.remove(r);
-            this.recursos.add(r);
-        }
+    public void sumarRecurso(Ladrillo ladrillo, int cantidad){
+        this.ladrillo.sumar(cantidad);
     }
 
-    public boolean comerciarConJugador(Jugador otroJugador, List<Recurso> ofrecidos, List<Recurso> pedidos) {
-
-        if (!this.puedeEntregar(ofrecidos)) return false;
-        if (!otroJugador.puedeEntregar(pedidos)) return false;
-
-        this.entregarA(otroJugador, ofrecidos);
-        this.recibirDe(otroJugador, pedidos);
-
-        return true;
+    public void sumarRecurso(Oveja oveja, int cantidad){
+        this.oveja.sumar(cantidad);
     }
 
-    // Solamente para testear
-    public boolean tiene(Recurso recurso) {
-        return recursos.contains(recurso);
+    public void sumarRecurso(Madera madera, int cantidad){
+        this.madera.sumar(cantidad);
     }
 
-    public boolean puedeEntregarNDelMismoTipo(Recurso recurso, int cantidad) {
-        int contadorDeRecursos = 0;
-
-        for (Recurso r : recursos) {
-            if (r.getClass() == recurso.getClass()) contadorDeRecursos++;
-        }
-
-        return contadorDeRecursos >= cantidad;
+    public void sumarRecurso(Trigo trigo, int cantidad){
+        this.trigo.sumar(cantidad);
     }
 
-    public void entregarNRecursosAlBanco(Recurso recurso, int cantidad) {
-        Banco banco = Banco.getBanco();
-
-        int recursosEntregados = 0;
-
-        for (int i = 0; i < cantidadCartas() && recursosEntregados < cantidad; i++) {
-            if (recursos.get(i).getClass() == recurso.getClass()) {
-                Recurso r = recursos.remove(i);
-                banco.recibirRecurso(r);
-                recursosEntregados++;
-                i--;
-            }
-        }
+    public void descartarRecurso(, int cantidad){
+        this.mapaRecursos.get().descartar(cantidad);
     }
 
-    public void recibirRecursoDesdeBanco(Recurso recurso) {
-        recibir(recurso);
+    public void descartarRecurso(, int cantidad){
+        this.mapaRecursos.get().descartar(cantidad);
     }
 
-    public boolean comerciarConBanco(Recurso ofrecido, Recurso pedido) {
-        Banco banco = Banco.getBanco();
-        return banco.intercambiarConJugador(this, pedido, ofrecido);
+    public void descartarRecurso(, int cantidad){
+        this.mapaRecursos.get().descartar(cantidad);
     }
 
-    public boolean tieneCantidadDe(Recurso recurso, int cantidad) {
-        int contador = 0;
-        for (Recurso r : this.recursos) {
-            if (r.getClass().equals(recurso.getClass())) contador++;
-            if (contador == cantidad) return true;
-        }
-        return false;
+    public void descartarRecurso(, int cantidad){
+        this.mapaRecursos.get().descartar(cantidad);
     }
 
-    public void entregarRecurso(Recurso recurso, int cantidad) {
-        int recursosRemovidos = 0;
-        for (int i = 0; i < recursos.size() && recursosRemovidos < cantidad; i++) {
-            if (recursos.get(i).getClass().equals(recurso.getClass())) {
-                recursos.remove(i);
-                recursosRemovidos++;
-                i--;
-            }
-        }
+    public void descartarRecurso(, int cantidad){
+        this.mapaRecursos.get().descartar(cantidad);
     }
 
-    public void asignarReglaDeComercio(ReglaDeComercio regla) {
-        this.reglaDeComercio = regla;
+    public boolean tieneAlMenos(String recurso, int cantidad){
+        return this.mapaRecursos.get(recurso).tieneAlMenos(cantidad);
     }
 
-    public boolean comerciarEnPuerto(Recurso ofrecido, Recurso pedido) {
-        if (reglaDeComercio == null) return false;
-        if (!reglaDeComercio.puedeHacerComercioMaritimo(this, ofrecido)) return false;
-
-        reglaDeComercio.realizarComercioMaritimo(this, ofrecido, pedido);
-        return true;
+    public void pedirAlBanco(String recurso, int cantidad){
+        Banco banco =  Banco.getBanco();
+        banco.jugadorLeSolicitaRecurso(this, recurso, cantidad);
     }
 
-
-    public void construirCarretera(Map<Class<? extends Recurso>, Integer> costo){
-        entregarCartasSegunCosto(costo);
-    }
-
-    public void construirCiudad(Map<Class<? extends Recurso>, Integer> costo){
-        entregarCartasSegunCosto(costo);
-    }
-
-    public void construirPoblado(Map<Class<? extends Recurso>, Integer> costo){
-        entregarCartasSegunCosto(costo);
-    }
-
-    public void construirDesarrollo(Map<Class<? extends Recurso>, Integer> costo){
-        entregarCartasSegunCosto(costo);
-    }
-
-    public void entregarCartasSegunCosto(Map<Class<? extends Recurso>, Integer> costo) {
-        for (var entry : costo.entrySet()) {
-            Class<? extends Recurso> tipo = entry.getKey();
-            int cantidad = entry.getValue();
-
-            for (Recurso recurso : recursos) {
-                if (tipo == recurso.getClass()) {
-                    entregarNRecursosAlBanco(recurso, 1);
-                }
-            }
-        }
-    }
 }

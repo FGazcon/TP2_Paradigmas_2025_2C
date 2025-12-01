@@ -6,23 +6,29 @@ import java.util.List;
 
 public class Madera extends Recurso {
 
-        @Override
-        public String nombre(){
-                return "Madera";
-        }
+    public Madera(){
+        super();
+    }
 
+    public Madera(int i) {
+        super(i);
+    }
 
-        @Override
-        public void construirDesarrollo(List<Recurso> recursos, Jugador jugador) {
+    @Override
+    public String nombre(){
+        return "Madera";
+    }
 
-        }
+    public static void indicarleAJugadorQueReste(int cantidad, Jugador jugador) {
+        jugador.descartarRecurso("Madera", cantidad);
+    }
 
-        @Override
-        public void construirCiudad(List<Recurso> recursos, Jugador jugador) {
+    public static void indicarleAJugadorQueSume(int cantidad, Jugador jugador) {
+        jugador.sumarRecurso("Madera", cantidad);
+    }
 
-        }
-
-
-
+    public static void hacerQueJugadorLePidaAlBanco(int cantidad, Jugador jugador) {
+        jugador.pedirAlBanco("Madera", cantidad);
+    }
 
 }

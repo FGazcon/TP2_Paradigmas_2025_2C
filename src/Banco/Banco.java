@@ -5,46 +5,40 @@ import Jugador.Jugador;
 import Produccion.MazoProduccion;
 import Recurso.Recurso;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Banco {
 
-    private MazoProduccion mazoDeProduccion;
     private MazoDesarrolloGeneral mazoDesarrollo;
+    private Map<String, Recurso> mazoDeProduccion;
     private static Banco banco =  new Banco();
 
     public Banco(){
+        this.mazoDeProduccion = Recurso.crearMazoProduccionBanco();
         this.mazoDesarrollo = MazoDesarrolloGeneral.generarMazoDesarrolloBanco();
-        this.mazoDeProduccion = MazoProduccion.crearMazoParaBanco();
     }
 
     public static Banco getBanco() {
         return banco;
     }
 
-    public boolean darRecurso(Recurso recurso){
-        return this.mazoDeProduccion.pedirRecurso(recurso);
+    public void sumarRecurso(String recurso, int cantidad){
+        this.mazoDeProduccion.get(recurso).sumar(cantidad);
     }
 
-    public void recibirRecurso(Recurso recurso){
-        this.mazoDeProduccion.añadirRecurso(recurso);
+    public void descartarRecurso(String recurso, int cantidad){
+        this.mazoDeProduccion.get(recurso).descartar(cantidad);
     }
 
-    public boolean intercambiarConJugador(Jugador jugador, Recurso recursoPedido, Recurso recursoOfrecido) {
+    public void tieneAlMenos(String recurso, int cantidad){
+        this.mazoDeProduccion.get(recurso).tieneAlMenos(cantidad);
+    }
 
-        int recursosNecesarios = 4;
-
-        if (!jugador.puedeEntregarNDelMismoTipo(recursoOfrecido, recursosNecesarios)) {
-            return false;
+    public void jugadorLeSolicitaRecurso(Jugador jugador, String recurso, int cantidad) {
+        if(mazoDeProduccion.get(recurso).tieneAlMenos(cantidad)){
+            jugador.sumarRecurso(recurso, cantidad);
+            descartarRecurso(recurso, cantidad);
         }
-
-        if (!this.darRecurso(recursoPedido)) {
-            return false;
-        }
-
-        jugador.entregarNRecursosAlBanco(recursoOfrecido, recursosNecesarios);
-        jugador.recibirRecursoDesdeBanco(recursoPedido);
-
-        return true;
     }
-
-
 }

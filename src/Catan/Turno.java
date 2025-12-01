@@ -1,33 +1,39 @@
 package Catan;
 
 import Dados.Dados;
+import Errores.*;
 import Jugador.Jugador;
+import Tablero.Arista.Carretera;
 import Tablero.Tablero;
+import Tablero.Vertice.Estructura.Estructura;
 
 public class Turno {
 
-    public void ejecutarTurno(Catan catan, Tablero tablero, Jugador jugador, Dados dados){
+    private Tablero tablero;
 
-        int resultadoDados = dados.tirarDados();
+    public Turno(Tablero tablero) {
+        this.tablero = tablero;
+    }
 
-        if(resultadoDados == 7){
-            catan.avisarQueSalioLadron();
-
-            //El jugador elige a donde
-            tablero.moverLadron(0, jugador);
-
-        } else {
-
-            tablero.activarHexagonoPorNumero(resultadoDados);
-
+    public int intentarUbicarEstructura(Estructura estructura, int numeroDeVerice){
+        //Para que tenga sentido, la eleccion del numero de vertice tiene que estar aca.
+        try{
+            this.tablero.ubicarEstructura(estructura, numeroDeVerice);
+        } catch (VerticeNoVacio | VerticeVacio | VerticeOcupadoPorAlguienMas | VerticeOcupadoPorCiudad |
+                 VerticeFueraDeAlcance e) {
+            System.out.println("No se puede ubicar en un vertice");
+            return this.intentarUbicarEstructura(estructura, numeroDeVerice);
         }
+        return numeroDeVerice;
+    }
 
-        //Comercio
-
-        //Construccion
-
-        //Desarrollo
-
+    public void intentarUbicarCarretera(Carretera carretera, int[] numeroDeArista){
+        try{
+            this.tablero.ubicarCarretera(carretera, numeroDeArista);
+        } catch (AristaEstaOcupada | AristaFueraDeAlcance e) {
+            System.out.println("No se puede ubicar en un vertice");
+            this.intentarUbicarCarretera(carretera, numeroDeArista);
+        }
     }
 
 }
