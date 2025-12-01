@@ -1,13 +1,10 @@
 package Mazo;
 
-import Jugador.Jugador;
 import Produccion.MazoProduccion;
-import Recurso.*;
+import Recurso.Ladrillo;
+import Recurso.Madera;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.mockito.Mockito.mock;
 
 public class MazoTest {
 

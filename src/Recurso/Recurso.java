@@ -9,6 +9,7 @@ import java.util.Map;
 public abstract class Recurso{
 
     private int cantidad;
+    private ReglaDeComercio reglaDeComercio;
 
     public static Map<String,Recurso> crearMazoProduccionBanco() {
         Map<String, Recurso> map = new HashMap<>();

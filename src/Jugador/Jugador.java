@@ -5,7 +5,6 @@ import Comercio.ReglaDeComercio;
 import Recurso.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -123,8 +122,8 @@ public class Jugador {
         this.trigo.sumar(cantidad);
     }
 
-    public void descartarRecurso(, int cantidad){
-        this.mapaRecursos.get().descartar(cantidad);
+    public void descartarRecurso(Trigo trigo, int cantidad){
+        this.mapaRecursos.get("Trigo").descartar(cantidad);
     }
 
     public void descartarRecurso(, int cantidad){

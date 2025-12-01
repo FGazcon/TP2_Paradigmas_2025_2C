@@ -1,8 +1,8 @@
 package Recurso;
 
+import Banco.Banco;
+import Comercio.ReglaDeComercio;
 import Jugador.Jugador;
-
-import java.util.List;
 
 public class Trigo extends Recurso {
 

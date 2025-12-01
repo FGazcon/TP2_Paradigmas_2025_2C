@@ -2,8 +2,6 @@ package Recurso;
 
 import Jugador.Jugador;
 
-import java.util.List;
-
 public class Ladrillo extends Recurso {
 
     public Ladrillo(){

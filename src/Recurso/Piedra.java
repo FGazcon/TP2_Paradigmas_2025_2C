@@ -2,8 +2,6 @@ package Recurso;
 
 import Jugador.Jugador;
 
-import java.util.List;
-
 public class Piedra extends Recurso {
 
     public Piedra(){
@@ -19,16 +17,19 @@ public class Piedra extends Recurso {
         return "Piedra";
     }
 
-    public static void indicarleAJugadorQueReste(int cantidad, Jugador jugador) {
-        jugador.descartarRecurso("Piedra", cantidad);
+    public void transferirAlBanco(Banco banco, int cantidad){
+        banco.sumarRecurso(this, cantidad);
     }
 
-    public static void indicarleAJugadorQueSume(int cantidad, Jugador jugador) {
-        jugador.sumarRecurso("Piedra", cantidad);
+    public void transferirAJugador(Jugador jugador, int cantidad){
+        jugador.sumarRecurso(this, cantidad);
     }
 
-    public static void hacerQueJugadorLePidaAlBanco(int cantidad, Jugador jugador) {
-        jugador.pedirAlBanco("Piedra", cantidad);
+    public void descartarAlBanco(Banco banco, int cantidad){
+        banco.descartarRecurso(this, cantidad);
+    }
+    public void descartarAJugador(Jugador jugador, int cantidad){
+        jugador.descartarRecurso(this, cantidad);
     }
 
 }

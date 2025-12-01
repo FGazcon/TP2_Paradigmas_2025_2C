@@ -2,8 +2,6 @@ package Recurso;
 
 import Jugador.Jugador;
 
-import java.util.List;
-
 public class Madera extends Recurso {
 
     public Madera(){
@@ -29,6 +27,11 @@ public class Madera extends Recurso {
 
     public static void hacerQueJugadorLePidaAlBanco(int cantidad, Jugador jugador) {
         jugador.pedirAlBanco("Madera", cantidad);
+    }
+
+    @Override
+    public void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio) {
+        jugador.darReglaA(this, reglaDeComercio);
     }
 
 }

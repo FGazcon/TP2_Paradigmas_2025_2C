@@ -1,11 +1,12 @@
 package Comercio;
 
-import Jugador.Jugador;
-import Recurso.Recurso;
-
 public interface ReglaDeComercio {
 
-    boolean puedeHacerComercioMaritimo(Jugador jugador, Recurso ofrecido);
+    ReglaDeComercio intentarCambiarA(CuatroPorUno reglaDeComercio);
 
-    void realizarComercioMaritimo(Jugador jugador, Recurso ofrecido, Recurso pedido);
+    ReglaDeComercio intentarCambiarA(TresPorUno reglaDeComercio);
+
+    ReglaDeComercio intentarCambiarA(DosPorUno reglaDeComercio);
+
+    ReglaDeComercio intentarCambiarA(ReglaDeComercio reglaDeComercio);
 }
