@@ -1,8 +1,5 @@
 package Comercio;
 
-import Jugador.Jugador;
-import Recurso.Recurso;
-
 public class DosPorUno implements ReglaDeComercio {
     @Override
     public ReglaDeComercio intentarCambiarA(TresPorUno reglaNueva) {

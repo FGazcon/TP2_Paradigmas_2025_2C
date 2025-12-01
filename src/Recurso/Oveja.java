@@ -1,5 +1,7 @@
 package Recurso;
 
+import Banco.Banco;
+import Comercio.ReglaDeComercio;
 import Jugador.Jugador;
 
 public class Oveja extends Recurso {
@@ -15,18 +17,6 @@ public class Oveja extends Recurso {
     @Override
     public String nombre(){
         return "Oveja";
-    }
-
-    public static void indicarleAJugadorQueReste(int cantidad, Jugador jugador) {
-        jugador.descartarRecurso("Oveja", cantidad);
-    }
-
-    public static void indicarleAJugadorQueSume(int cantidad, Jugador jugador) {
-        jugador.sumarRecurso("Oveja", cantidad);
-    }
-
-    public static void hacerQueJugadorLePidaAlBanco(int cantidad, Jugador jugador) {
-        jugador.pedirAlBanco("Oveja", cantidad);
     }
 
     public void transferirAlBanco(Banco banco, int cantidad){

@@ -1,5 +1,7 @@
 package Recurso;
 
+import Banco.Banco;
+import Comercio.ReglaDeComercio;
 import Jugador.Jugador;
 
 public class Madera extends Recurso {
@@ -17,16 +19,27 @@ public class Madera extends Recurso {
         return "Madera";
     }
 
-    public static void indicarleAJugadorQueReste(int cantidad, Jugador jugador) {
-        jugador.descartarRecurso("Madera", cantidad);
+    public void transferirAlBanco(Banco banco, int cantidad){
+        banco.sumarRecurso(this, cantidad);
     }
 
-    public static void indicarleAJugadorQueSume(int cantidad, Jugador jugador) {
-        jugador.sumarRecurso("Madera", cantidad);
+    public void transferirAJugador(Jugador jugador, int cantidad){
+        jugador.sumarRecurso(this, cantidad);
     }
 
-    public static void hacerQueJugadorLePidaAlBanco(int cantidad, Jugador jugador) {
-        jugador.pedirAlBanco("Madera", cantidad);
+    public void descartarAlBanco(Banco banco, int cantidad){
+        banco.descartarRecurso(this, cantidad);
+    }
+    public void descartarAJugador(Jugador jugador, int cantidad){
+        jugador.descartarRecurso(this, cantidad);
+    }
+
+    public void hacerQuejugadorSoliciteABanco(Jugador jugador, int cantidad){
+        jugador.pedirAlBanco(this, cantidad);
+    }
+
+    public boolean jugadorTieneAlMenos(Jugador jugador, int cantidad){
+        return jugador.tieneAlMenos(this, cantidad);
     }
 
     @Override

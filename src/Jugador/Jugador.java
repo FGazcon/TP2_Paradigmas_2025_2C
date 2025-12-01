@@ -12,13 +12,7 @@ public class Jugador {
 
     private String nombre;
     private int puntaje;
-    private ReglaDeComercio reglaDeComercio;
     private Map<String, Recurso> mapaRecursos;
-    private Madera madera;
-    private Ladrillo ladrillo;
-    private Oveja oveja;
-    private Trigo trigo;
-    private Piedra piedra;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
@@ -26,7 +20,7 @@ public class Jugador {
         this.mapaRecursos = Recurso.crearMazoProduccionJugador();
     }
 
-    public String elegirCartaRandomADescartar(){
+    public Recurso elegirCartaRandomADescartar(){
         List<Recurso> disponibles = this.mapaRecursos.values().stream().filter(r -> r.tieneAlMenos(1)).toList();
 
         if (disponibles.isEmpty()) {
@@ -39,26 +33,28 @@ public class Jugador {
 
         elegido.descartar(1);
 
-        return elegido.nombre();
+        return elegido;
     }
 
     public void descartarMitad(){
-        Banco banco = new Banco();
+        Banco banco = Banco.getBanco();
         if(this.cantidadCartas() > 7) {
-            for (int i = 1; i <= this.cantidadCartas(); i++) {
-                banco.sumarRecurso(elegirCartaRandomADescartar(), 1);
+            int cantidadADescartar = this.cantidadCartas() / 2;
+            for (int i = 1; i <= cantidadADescartar; i++) {
+                Recurso recursoDescartado = elegirCartaRandomADescartar();
+                recursoDescartado.transferirAlBanco(banco, 1);
             }
         }
     }
 
     public void dejarseRobarPorJugador(Jugador jugador) {
-        jugador.sumarRecurso(elegirCartaRandomADescartar(), 1);
+        elegirCartaRandomADescartar().transferirAJugador(jugador, 1);
     }
 
     public int cantidadCartas(){
         int cantidad = 0;
         for (Map.Entry<String, Recurso> recurso : mapaRecursos.entrySet()) {
-            cantidad = recurso.getValue().getCantidad(cantidad);
+            cantidad = recurso.getValue().sumadorCantidad(cantidad);
         }
         return cantidad;
     }
@@ -74,81 +70,166 @@ public class Jugador {
         return puntaje;
     }
 
-    public void comerciarConOtroJugador(Jugador jugador, Map<String, Integer> recursosOfrecidos, Map<String, Integer> recursosDeseados) {
-        if(puedeEntregar(recursosOfrecidos)){
-            jugador.recibirOfertaComercio(this, recursosOfrecidos, recursosDeseados);
-        }
-    }
-
-    public void recibirOfertaComercio(Jugador jugador, Map<String, Integer> recursosOfrecidos, Map<String, Integer> recursosDeseados){
-        if(puedeEntregar(recursosDeseados)){
-            jugador.sumarVariosRecursos(recursosDeseados);
-            sumarVariosRecursos(recursosOfrecidos);
-        }
-    }
-
-    private void sumarVariosRecursos(Map<String, Integer> recursosOfrecidos){
-        for (Map.Entry<String, Integer> recurso : recursosOfrecidos.entrySet()) {
-            mapaRecursos.get(recurso.getKey()).sumar(recurso.getValue());
-        }
-    }
-
-    public boolean puedeEntregar(Map<String, Integer> recursosAEntregar) {
-        for (Map.Entry<String, Integer> entry : recursosAEntregar.entrySet()) {
-            if(!mapaRecursos.get(entry.getKey()).tieneAlMenos(entry.getValue())){
-                return false;
-            }
-        }
-        return true;
-    }
-
     public void sumarRecurso(Piedra piedra, int cantidad){
-        this.piedra.sumar(cantidad);
+        this.mapaRecursos.get("Piedra").sumar(cantidad);
     }
 
     public void sumarRecurso(Ladrillo ladrillo, int cantidad){
-        this.ladrillo.sumar(cantidad);
+        this.mapaRecursos.get("Ladrillo").sumar(cantidad);
     }
 
     public void sumarRecurso(Oveja oveja, int cantidad){
-        this.oveja.sumar(cantidad);
+        this.mapaRecursos.get("Oveja").sumar(cantidad);
     }
 
     public void sumarRecurso(Madera madera, int cantidad){
-        this.madera.sumar(cantidad);
+        this.mapaRecursos.get("Madera").sumar(cantidad);
     }
 
     public void sumarRecurso(Trigo trigo, int cantidad){
-        this.trigo.sumar(cantidad);
+        this.mapaRecursos.get("Trigo").sumar(cantidad);
     }
 
     public void descartarRecurso(Trigo trigo, int cantidad){
         this.mapaRecursos.get("Trigo").descartar(cantidad);
     }
 
-    public void descartarRecurso(, int cantidad){
-        this.mapaRecursos.get().descartar(cantidad);
+    public void descartarRecurso(Madera madera, int cantidad){
+        this.mapaRecursos.get("Madera").descartar(cantidad);
     }
 
-    public void descartarRecurso(, int cantidad){
-        this.mapaRecursos.get().descartar(cantidad);
+    public void descartarRecurso(Oveja oveja, int cantidad){
+        this.mapaRecursos.get("Oveja").descartar(cantidad);
     }
 
-    public void descartarRecurso(, int cantidad){
-        this.mapaRecursos.get().descartar(cantidad);
+    public void descartarRecurso(Piedra piedra, int cantidad){
+        this.mapaRecursos.get("Piedra").descartar(cantidad);
     }
 
-    public void descartarRecurso(, int cantidad){
-        this.mapaRecursos.get().descartar(cantidad);
+    public void descartarRecurso(Ladrillo ladrillo, int cantidad){
+        this.mapaRecursos.get("Ladrillo").descartar(cantidad);
     }
 
-    public boolean tieneAlMenos(String recurso, int cantidad){
-        return this.mapaRecursos.get(recurso).tieneAlMenos(cantidad);
+    public boolean tieneAlMenos(Madera madera, int cantidad){
+        return this.mapaRecursos.get("Madera").tieneAlMenos(cantidad);
     }
 
-    public void pedirAlBanco(String recurso, int cantidad){
+    public boolean tieneAlMenos(Ladrillo ladrillo, int cantidad){
+        return this.mapaRecursos.get("Ladrillo").tieneAlMenos(cantidad);
+    }
+
+    public boolean tieneAlMenos(Piedra piedra, int cantidad){
+        return this.mapaRecursos.get("Piedra").tieneAlMenos(cantidad);
+    }
+
+    public boolean tieneAlMenos(Oveja oveja, int cantidad){
+        return this.mapaRecursos.get("Oveja").tieneAlMenos(cantidad);
+    }
+
+    public boolean tieneAlMenos(Trigo trigo, int cantidad){
+        return this.mapaRecursos.get("Trigo").tieneAlMenos(cantidad);
+    }
+
+    public void pedirAlBanco(Trigo trigo, int cantidad){
         Banco banco =  Banco.getBanco();
-        banco.jugadorLeSolicitaRecurso(this, recurso, cantidad);
+        banco.jugadorLeSolicitaRecurso(this, trigo, cantidad);
     }
+
+    public void pedirAlBanco(Madera madera, int cantidad){
+        Banco banco =  Banco.getBanco();
+        banco.jugadorLeSolicitaRecurso(this, madera, cantidad);
+    }
+
+    public void pedirAlBanco(Oveja oveja, int cantidad){
+        Banco banco =  Banco.getBanco();
+        banco.jugadorLeSolicitaRecurso(this, oveja, cantidad);
+    }
+
+    public void pedirAlBanco(Ladrillo ladrillo, int cantidad){
+        Banco banco =  Banco.getBanco();
+        banco.jugadorLeSolicitaRecurso(this, ladrillo, cantidad);
+    }
+
+    public void pedirAlBanco(Piedra piedra, int cantidad){
+        Banco banco =  Banco.getBanco();
+        banco.jugadorLeSolicitaRecurso(this, piedra, cantidad);
+    }
+
+    public void comerciarConJugador(Jugador jugador, List<Recurso> recursosOfertados, List<Recurso> recursosDeseados){
+        if(tieneSuficientesParaOfertar(recursosOfertados)){
+            jugador.recibirComercioConJugador(jugador, recursosDeseados, recursosOfertados);
+        }
+    }
+
+    public void recibirComercioConJugador(Jugador jugador, List<Recurso> recursosQueEnviaria, List<Recurso> recursosQueRecibiria){
+        if(tieneSuficientesParaOfertar(recursosQueEnviaria)){
+            jugador.sumarVariosRecursos(recursosQueEnviaria);
+            jugador.restarVariosRecursos(recursosQueRecibiria);
+            sumarVariosRecursos(recursosQueRecibiria);
+            restarVariosRecursos(recursosQueEnviaria);
+        }
+    }
+
+    private void sumarVariosRecursos(List<Recurso> recursosQueRecibe){
+        for(Recurso recurso : recursosQueRecibe){
+            recurso.transferirAJugador(this, recurso.sumadorCantidad(0));
+        }
+    }
+
+    private void restarVariosRecursos(List<Recurso> recursosQueEnvia){
+        for(Recurso recurso : recursosQueEnvia){
+            recurso.descartarAJugador(this, recurso.sumadorCantidad(0));
+        }
+    }
+
+    public boolean tieneSuficientesParaOfertar(List<Recurso> recursosOfertados){
+        for (Recurso recurso : recursosOfertados){
+            if(!recurso.jugadorTieneAlMenos(this, recurso.sumadorCantidad(0))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //comerciarConBanco( new Madera(4) )
+
+    // Madera( 6 ) -> reglaDeComercio
+
+    public void comerciarConBanco(Recurso recursoOfertado, int cantidad, Recurso recursoDeseado){
+        List<Recurso> recursos = new ArrayList<>();
+        recursos.add(recursoOfertado);
+
+        if (tieneSuficientesParaOfertar(recursos)){
+            recursoOfertado.comerciar(cantidad, recursoDeseado);
+        }
+
+    }
+
+    public void darReglaA(Madera madera, ReglaDeComercio reglaDeComercio) {
+        this.mapaRecursos.get("Madera").cambiarRegla(reglaDeComercio);
+    }
+
+    public void darReglaA(Ladrillo ladrillo, ReglaDeComercio reglaDeComercio) {
+        this.mapaRecursos.get("Ladrillo").cambiarRegla(reglaDeComercio);
+    }
+
+    public void darReglaA(Piedra piedra, ReglaDeComercio reglaDeComercio) {
+        this.mapaRecursos.get("Piedra").cambiarRegla(reglaDeComercio);
+    }
+
+    public void darReglaA(Oveja oveja, ReglaDeComercio reglaDeComercio) {
+        this.mapaRecursos.get("Oveja").cambiarRegla(reglaDeComercio);
+    }
+
+    public void darReglaA(Trigo trigo, ReglaDeComercio reglaDeComercio) {
+        this.mapaRecursos.get("Trigo").cambiarRegla(reglaDeComercio);
+    }
+
+    public void darReglaATodos(ReglaDeComercio reglaDeComercio) {
+        for (Recurso recurso : this.mapaRecursos.values()){
+            recurso.cambiarRegla(reglaDeComercio);
+        }
+    }
+
 
 }

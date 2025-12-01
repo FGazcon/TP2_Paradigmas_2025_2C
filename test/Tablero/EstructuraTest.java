@@ -9,7 +9,6 @@ import Tablero.Vertice.Estructura.PobladoInicial;
 import Tablero.Vertice.Vertice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import static org.mockito.Mockito.mock;
 
 public class EstructuraTest {

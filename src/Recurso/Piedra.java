@@ -1,5 +1,7 @@
 package Recurso;
 
+import Banco.Banco;
+import Comercio.ReglaDeComercio;
 import Jugador.Jugador;
 
 public class Piedra extends Recurso {
@@ -32,4 +34,16 @@ public class Piedra extends Recurso {
         jugador.descartarRecurso(this, cantidad);
     }
 
+    public void hacerQuejugadorSoliciteABanco(Jugador jugador, int cantidad){
+        jugador.pedirAlBanco(this, cantidad);
+    }
+
+    public boolean jugadorTieneAlMenos(Jugador jugador, int cantidad){
+        return jugador.tieneAlMenos(this, cantidad);
+    }
+
+    @Override
+    public void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio) {
+        jugador.darReglaA(this, reglaDeComercio);
+    }
 }

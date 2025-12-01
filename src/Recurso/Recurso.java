@@ -1,9 +1,10 @@
 package Recurso;
 
+import Banco.Banco;
+import Comercio.ReglaDeComercio;
 import Jugador.Jugador;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class Recurso{
@@ -35,6 +36,12 @@ public abstract class Recurso{
         this.cantidad = 0;
     }
 
+    public abstract void transferirAlBanco(Banco banco, int cantidad);
+    public abstract void transferirAJugador(Jugador jugador, int cantidad);
+    public abstract void descartarAlBanco(Banco banco, int cantidad);
+    public abstract void descartarAJugador(Jugador jugador, int cantidad);
+    public abstract void hacerQuejugadorSoliciteABanco(Jugador jugador, int cantidad);
+
     public Recurso(int cantidad){
         this.cantidad = cantidad;
     }
@@ -53,8 +60,20 @@ public abstract class Recurso{
         return this.cantidad >= cantidad;
     }
 
-    public int getCantidad(int cantidad) {
+    public int sumadorCantidad(int cantidad) {
         return cantidad + this.cantidad;
+    }
+
+    public abstract boolean jugadorTieneAlMenos(Jugador jugador, int cantidad);
+
+    public abstract void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio);
+
+    public void comerciar(int cantidad, Recurso recursoDeseado){
+        reglaDeComercio.intentarComerciar(this, cantidad, recursoDeseado);
+    }
+
+    public void cambiarRegla(ReglaDeComercio reglaDeComercio){
+        this.reglaDeComercio = reglaDeComercio.intentarCambiarA(this.reglaDeComercio);
     }
 }
 

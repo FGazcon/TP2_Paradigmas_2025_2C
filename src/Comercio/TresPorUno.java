@@ -18,4 +18,5 @@ public class TresPorUno implements ReglaDeComercio {
     public ReglaDeComercio intentarCambiarA(CuatroPorUno reglaNueva) {
         return this;
     }
+
 }

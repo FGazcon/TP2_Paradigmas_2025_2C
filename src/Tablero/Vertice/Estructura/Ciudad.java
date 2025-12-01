@@ -18,7 +18,7 @@ public class Ciudad extends Estructura {
 
     @Override
     public void entregarRecursos(Recurso recurso) {
-        this.jugador.pedirAlBanco(recurso, 2);
+        recurso.hacerQuejugadorSoliciteABanco(this.jugador, 2);
     }
 
     @Override
