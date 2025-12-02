@@ -12,5 +12,10 @@ public class PuntoDeVictoria extends CartaDesarrollo{
 
     }
 
+    @Override
+    public int modificarPuntaje(int puntaje){
+        return puntaje + 1;
+    }
+
 
 }

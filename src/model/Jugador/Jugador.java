@@ -2,6 +2,7 @@ package model.Jugador;
 
 import model.Banco.Banco;
 import model.Comercio.ReglaDeComercio;
+import model.Desarrollo.CartasDesarrollo.CartaDesarrollo;
 import model.Recurso.*;
 
 import java.util.ArrayList;
@@ -14,11 +15,13 @@ public class Jugador {
     private String nombre;
     private int puntaje;
     private Map<String, Recurso> mapaRecursos;
+    private List<CartaDesarrollo> cartasDesarrollo;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.puntaje = 0;
         this.mapaRecursos = Recurso.crearMazoProduccionJugador();
+        this.cartasDesarrollo = new ArrayList<>();
     }
     public int getCantidadDeRecursoEspecifico(String recurso){
         return Objects.requireNonNull(buscarRecurso(recurso)).getCantidad();
@@ -80,7 +83,9 @@ public class Jugador {
 
     public int calcularPuntaje() {
         int puntaje = this.puntaje;
-        //Sumar PV
+        for(CartaDesarrollo carta :  this.cartasDesarrollo) {
+            puntaje = carta.modificarPuntaje(puntaje);
+        }
         //Sumar Cartas especiales
         return puntaje;
     }

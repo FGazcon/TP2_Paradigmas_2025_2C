@@ -27,4 +27,8 @@ public abstract class CartaDesarrollo {
 
     public abstract void activar(Jugador jugador);
 
+    public int modificarPuntaje(int puntaje){
+        return puntaje;
+    }
+
 }

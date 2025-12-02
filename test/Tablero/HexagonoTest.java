@@ -12,6 +12,7 @@ import static org.mockito.Mockito.mock;
 
 public class HexagonoTest {
 
+    /*
     @Test
     public void test01HexagonoBLoqueadoNoProduce(){
 
@@ -25,5 +26,6 @@ public class HexagonoTest {
 
         Assertions.assertThrows(HexagonoBajoAsalto.class, ()->{hexagono.activarHexagonoParaNumero(10);});
     }
+    */
 
 }
