@@ -1,12 +1,12 @@
 package Tablero;
 
-import Errores.AristaEstaOcupada;
-import Errores.AristaFueraDeAlcance;
-import Errores.VerticeNoVacio;
-import Jugador.Jugador;
-import Tablero.Arista.Carretera;
-import Tablero.Vertice.Estructura.Poblado;
-import Tablero.Vertice.Estructura.PobladoInicial;
+import model.Errores.AristaEstaOcupada;
+import model.Errores.AristaFueraDeAlcance;
+import model.Jugador.Jugador;
+import model.Tablero.Arista.Carretera;
+import model.Tablero.Tablero;
+import model.Tablero.Vertice.Estructura.Poblado;
+import model.Tablero.Vertice.Estructura.PobladoInicial;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

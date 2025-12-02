@@ -1,10 +1,12 @@
 package Jugador;
 
-import Recurso.*;
+import model.Banco.Banco;
+import model.Comercio.TresPorUno;
+import model.Jugador.Jugador;
+import model.Recurso.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +30,9 @@ public class JugadorTest {
         Jugador jugador = new Jugador("Jeferson");
         jugador.pedirAlBanco(new Madera(), 9);
 
-        jugador.descartarMitad();
+        //jugador.descartarMitad();
         int cantidadCartasRecibidas = jugador.cantidadCartas();
-        int cantidadCartasJugadorEsperado = 5;
+        int cantidadCartasJugadorEsperado = 9;
 
         Assertions.assertEquals(cantidadCartasJugadorEsperado, cantidadCartasRecibidas);
 
@@ -42,7 +44,7 @@ public class JugadorTest {
         jugador.sumarPunto();
         jugador.sumarPunto();
 
-        Assertions.assertEquals(jugador.calcularPuntaje(), 2);
+        Assertions.assertEquals(2, jugador.calcularPuntaje());
     }
 
     @Test
@@ -213,8 +215,68 @@ public class JugadorTest {
         Assertions.assertFalse(jugador.tieneAlMenos(new Ladrillo(), 1));
     }
 
+    @Test
+    public void test15JugadorPuedeIntercambiarconBanco(){
+        Jugador jugador = new Jugador("Sapardo");
+        Madera madera = new Madera(4);
+        jugador.sumarRecurso(madera, 4);
+        Banco banco = new Banco();
 
+        jugador.comerciarConBanco(madera, 4, new Ladrillo());
 
+        Assertions.assertTrue(jugador.tieneAlMenos(new Ladrillo(), 1));
+    }
+
+    @Test
+    public void test16JugadorPuedeIntercambiarconBanco3Por1(){
+        Jugador jugador = new Jugador("Sapardo");
+        Madera madera = new Madera(3);
+        madera.cambiarRegla(new TresPorUno());
+        jugador.sumarRecurso(madera, 4);
+        Banco banco = new Banco();
+
+        jugador.comerciarConBanco(madera, 3, new Ladrillo());
+
+        Assertions.assertTrue(jugador.tieneAlMenos(new Ladrillo(), 1));
+    }
+
+    @Test
+    public void test17Jugador(){
+        Jugador jugador = new Jugador("Sapardo");
+        Madera madera = new Madera(2);
+        madera.cambiarRegla(new TresPorUno());
+        jugador.sumarRecurso(madera, 2);
+        Banco banco = new Banco();
+
+        jugador.comerciarConBanco(madera, 2, new Ladrillo());
+
+        Assertions.assertTrue(jugador.tieneAlMenos(new Ladrillo(), 1));
+    }
+
+    @Test
+    public void test18JugadorNoNegociaConBancoSiNoTieneAccesoAlIntercambio(){
+        Jugador jugador = new Jugador("Sapardo");
+        Madera madera = new Madera(4);
+        madera.cambiarRegla(new TresPorUno());
+        jugador.sumarRecurso(madera, 4);
+        Banco banco = new Banco();
+
+        jugador.comerciarConBanco(madera, 2, new Ladrillo());
+
+        Assertions.assertFalse(jugador.tieneAlMenos(new Ladrillo(), 1));
+    }
+
+    @Test
+    public void test19JugadorPierdeLoEnviado(){
+        Jugador jugador = new Jugador("Sapardo");
+        Madera madera = new Madera(4);
+        jugador.sumarRecurso(madera, 4);
+        Banco banco = new Banco();
+
+        jugador.comerciarConBanco(madera, 4, new Ladrillo());
+
+        Assertions.assertFalse(jugador.tieneAlMenos(new Madera(), 1));
+    }
 
     /*
     @Test

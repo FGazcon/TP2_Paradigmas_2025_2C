@@ -1,13 +1,5 @@
 package Comercio;
 
-import Jugador.Jugador;
-import Recurso.Madera;
-import Recurso.Trigo;
-import Recurso.Oveja;
-import Recurso.Piedra;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 public class ComercioTest {
     /*
     @Test

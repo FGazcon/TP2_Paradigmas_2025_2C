@@ -1,11 +1,11 @@
 package Catan;
 
-import Banco.Banco;
-import Jugador.Jugador;
-import Recurso.Madera;
+import model.Banco.Banco;
+import model.Catan.Catan;
+import model.Jugador.Jugador;
+import model.Recurso.Madera;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.util.*;
 
 
 import java.util.ArrayList;

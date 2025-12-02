@@ -1,9 +1,10 @@
 package Tablero;
 
-import Errores.HexagonoBajoAsalto;
-import Jugador.Jugador;
-import Tablero.Vertice.Vertice;
-import Terreno.Productor.Bosque;
+import model.Errores.HexagonoBajoAsalto;
+import model.Jugador.Jugador;
+import model.Tablero.Hexagono;
+import model.Tablero.Vertice.Vertice;
+import model.Terreno.Productor.Bosque;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

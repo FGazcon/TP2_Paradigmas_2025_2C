@@ -1,17 +1,7 @@
 package Tablero;
 
-import Recurso.Recurso;
-import Tablero.Factory.Factory_MapaBasico;
-import Terreno.Productor.Bosque;
-import Terreno.Terreno;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class Aleatorio {
 

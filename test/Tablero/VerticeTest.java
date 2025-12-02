@@ -1,10 +1,9 @@
 package Tablero;
 
-import Errores.VerticeNoVacio;
-import Jugador.Jugador;
-import Tablero.Vertice.Estructura.Poblado;
-import Tablero.Vertice.Estructura.PobladoInicial;
-import Tablero.Vertice.Vertice;
+import model.Errores.VerticeNoVacio;
+import model.Jugador.Jugador;
+import model.Tablero.Vertice.Estructura.PobladoInicial;
+import model.Tablero.Vertice.Vertice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

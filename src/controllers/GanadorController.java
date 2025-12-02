@@ -21,7 +21,7 @@ public class GanadorController {
 
     @FXML
     public void volverAlMenu(ActionEvent event) {
-        cambiarEscena(event, "/menu.fxml");
+        cambiarEscena(event, "/fxml/menu.fxml");
     }
 
     @FXML

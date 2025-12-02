@@ -12,7 +12,7 @@ public class MenuController {
     @FXML
     public void irARegistro(ActionEvent event)
     {
-        cambiarEscena(event, "/registro.fxml");
+        cambiarEscena(event, "/fxml/registro.fxml");
     }
 
     @FXML

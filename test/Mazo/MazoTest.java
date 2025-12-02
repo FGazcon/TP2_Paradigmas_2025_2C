@@ -1,10 +1,5 @@
 package Mazo;
 
-import Recurso.Ladrillo;
-import Recurso.Madera;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 public class MazoTest {
 
     /*

@@ -1,12 +1,11 @@
 package Tablero;
 
-import Errores.VerticeOcupadoPorCiudad;
-import Jugador.Jugador;
-import Recurso.Piedra;
-import Tablero.Vertice.Estructura.Ciudad;
-import Tablero.Vertice.Estructura.Poblado;
-import Tablero.Vertice.Estructura.PobladoInicial;
-import Tablero.Vertice.Vertice;
+import model.Errores.VerticeOcupadoPorCiudad;
+import model.Jugador.Jugador;
+import model.Recurso.Piedra;
+import model.Tablero.Vertice.Estructura.Ciudad;
+import model.Tablero.Vertice.Estructura.PobladoInicial;
+import model.Tablero.Vertice.Vertice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;

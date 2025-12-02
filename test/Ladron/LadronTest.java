@@ -1,11 +1,12 @@
 package Ladron;
 
-import Errores.HexagonoBajoAsalto;
-import Jugador.Jugador;
-import Recurso.Madera;
-import Tablero.Factory.Factory_MapaBasico;
-import Tablero.Hexagono;
-import Terreno.Terreno;
+import model.Errores.HexagonoBajoAsalto;
+import model.Jugador.Jugador;
+import model.Ladron.Ladron;
+import model.Recurso.Madera;
+import model.Tablero.Factory.Factory_MapaBasico;
+import model.Tablero.Hexagono;
+import model.Terreno.Terreno;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
