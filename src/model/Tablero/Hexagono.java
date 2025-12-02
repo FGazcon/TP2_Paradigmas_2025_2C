@@ -1,6 +1,7 @@
 package model.Tablero;
 
 import model.Errores.DesiertoNoProduceNada;
+import model.Errores.HexagonoBajoAsalto;
 import model.Jugador.Jugador;
 import model.Recurso.Recurso;
 import model.Tablero.Arista.Carretera;
@@ -90,7 +91,11 @@ public class Hexagono {
 
     public void activarHexagonoParaNumero(int numero){
         if(this.numero == numero){
-            this.estado.intentarProducir(this);
+            try{
+                this.estado.intentarProducir(this);
+            } catch (HexagonoBajoAsalto e){
+                System.out.println("Se intento generar recursos del Desierto");
+            }
         }
     }
 

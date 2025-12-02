@@ -15,6 +15,7 @@ public class Tablero {
 
     public Tablero(List<Hexagono> hexagonos) {
         this.hexagonos = hexagonos;
+        this.ladron = new Ladron(buscarDesierto());
     }
 
     public static Tablero crearTableroBasico(){
@@ -22,13 +23,13 @@ public class Tablero {
         return new Tablero(hexagonos);
     }
 
-    public int buscarDesierto() {
+    public Hexagono buscarDesierto() {
         for (int i = 0; i < this.hexagonos.size(); i++) {
             if(hexagonos.get(i).esDesierto()){
-                return i;
+                return hexagonos.get(i);
             }
         }
-        return 0;
+        return null;
     }
 
     public void activarHexagonoPorNumero(int numero){
@@ -69,6 +70,6 @@ public class Tablero {
     }
 
     public List<Hexagono> getHexagonos() {
-        return Factory_MapaBasico.crearHexagonosBasico();
+        return this.hexagonos;
     }
 }

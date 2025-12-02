@@ -58,4 +58,8 @@ public class Catan {
         }
     }
 
+    public Tablero getTablero() {
+        return this.tablero;
+    }
+
 }

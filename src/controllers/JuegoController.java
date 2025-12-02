@@ -76,7 +76,7 @@ public class JuegoController implements Initializable {
         List<Hexagono> hexs = Factory_MapaBasico.crearHexagonosBasico();
         this.lblRecursos = crearMapRecursos() ;
 
-        tableroModelo = new Tablero(hexs);
+        tableroModelo = catan.getTablero();
 
         jugadorActual = new Jugador("Jugador");
 
@@ -189,6 +189,9 @@ public class JuegoController implements Initializable {
         if (hex.getNumero() != 7) {
             tile.getChildren().add(numeroLabel);
         }
+
+        tile.setLayoutX(hex.getCoordenadaX());
+        tile.setLayoutY(hex.getCoordenadaY());
 
         hexagon.setOnMouseClicked(e -> System.out.println("Clic en hex " + hex.getNumero()));
 
