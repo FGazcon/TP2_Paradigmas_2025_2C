@@ -215,15 +215,56 @@ public class Jugador {
 
     // Madera( 6 ) -> reglaDeComercio
 
-    public void comerciarConBanco(Recurso recursoOfertado, int cantidad, Recurso recursoDeseado){
+    public void comerciarConBanco(Madera recursoOfertado, int cantidad, Recurso recursoDeseado){
         List<Recurso> recursos = new ArrayList<>();
         recursos.add(recursoOfertado);
 
         if (tieneSuficientesParaOfertar(recursos)){
-            recursoOfertado.comerciarConBanco(this, cantidad, recursoDeseado);
+            mapaRecursos.get("Madera").comerciarConBanco(this, cantidad, recursoDeseado);
         }
 
     }
+
+    public void comerciarConBanco(Ladrillo recursoOfertado, int cantidad, Recurso recursoDeseado){
+        List<Recurso> recursos = new ArrayList<>();
+        recursos.add(recursoOfertado);
+
+        if (tieneSuficientesParaOfertar(recursos)){
+            mapaRecursos.get("Ladrillo").comerciarConBanco(this, cantidad, recursoDeseado);
+        }
+
+    }
+
+    public void comerciarConBanco(Piedra recursoOfertado, int cantidad, Recurso recursoDeseado){
+        List<Recurso> recursos = new ArrayList<>();
+        recursos.add(recursoOfertado);
+
+        if (tieneSuficientesParaOfertar(recursos)){
+            mapaRecursos.get("Piedra").comerciarConBanco(this, cantidad, recursoDeseado);
+        }
+
+    }
+
+    public void comerciarConBanco(Trigo recursoOfertado, int cantidad, Recurso recursoDeseado){
+        List<Recurso> recursos = new ArrayList<>();
+        recursos.add(recursoOfertado);
+
+        if (tieneSuficientesParaOfertar(recursos)){
+            mapaRecursos.get("Trigo").comerciarConBanco(this, cantidad, recursoDeseado);
+        }
+
+    }
+
+    public void comerciarConBanco(Oveja recursoOfertado, int cantidad, Recurso recursoDeseado){
+        List<Recurso> recursos = new ArrayList<>();
+        recursos.add(recursoOfertado);
+
+        if (tieneSuficientesParaOfertar(recursos)){
+            mapaRecursos.get("Oveja").comerciarConBanco(this, cantidad, recursoDeseado);
+        }
+
+    }
+
 
     public void darReglaA(Madera madera, ReglaDeComercio reglaDeComercio) {
         this.mapaRecursos.get("Madera").cambiarRegla(reglaDeComercio);

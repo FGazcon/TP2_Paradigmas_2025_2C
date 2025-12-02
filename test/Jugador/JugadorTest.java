@@ -1,6 +1,7 @@
 package Jugador;
 
 import model.Banco.Banco;
+import model.Comercio.DosPorUno;
 import model.Comercio.TresPorUno;
 import model.Jugador.Jugador;
 import model.Recurso.*;
@@ -230,8 +231,8 @@ public class JugadorTest {
     @Test
     public void test16JugadorPuedeIntercambiarconBanco3Por1(){
         Jugador jugador = new Jugador("Sapardo");
+        jugador.darReglaA(new Madera(), new TresPorUno());
         Madera madera = new Madera(3);
-        madera.cambiarRegla(new TresPorUno());
         jugador.sumarRecurso(madera, 4);
         Banco banco = new Banco();
 
@@ -241,10 +242,10 @@ public class JugadorTest {
     }
 
     @Test
-    public void test17Jugador(){
+    public void test17JugadorPuedeIntercambiarCOnBanco2Por1(){
         Jugador jugador = new Jugador("Sapardo");
+        jugador.darReglaA(new Madera(), new DosPorUno());
         Madera madera = new Madera(2);
-        madera.cambiarRegla(new TresPorUno());
         jugador.sumarRecurso(madera, 2);
         Banco banco = new Banco();
 
@@ -257,7 +258,7 @@ public class JugadorTest {
     public void test18JugadorNoNegociaConBancoSiNoTieneAccesoAlIntercambio(){
         Jugador jugador = new Jugador("Sapardo");
         Madera madera = new Madera(4);
-        madera.cambiarRegla(new TresPorUno());
+        jugador.darReglaA(new Madera(),  new TresPorUno());
         jugador.sumarRecurso(madera, 4);
         Banco banco = new Banco();
 
@@ -277,64 +278,5 @@ public class JugadorTest {
 
         Assertions.assertFalse(jugador.tieneAlMenos(new Madera(), 1));
     }
-
-    /*
-    @Test
-    public void test07JugadorPuedeComerciar4a1ConBanco() {
-        Jugador jugador = new Jugador("Jugador");
-
-        Madera madera = new Madera();
-        Piedra piedra = new Piedra();
-
-        jugador.pedirAlBanco(madera, 4);
-
-        boolean tradeo = jugador.comerciarConBanco(new Madera(), piedra);
-
-        Assertions.assertTrue(tradeo);
-        Assertions.assertTrue(jugador.tiene(piedra));
-    }
-
-    @Test
-    public void test08JugadorNoPuedeComerciarSiNoTiene4Iguales() {
-        Jugador jugador = new Jugador("Jugador");
-
-        Madera madera1 = new Madera();
-        Madera madera2 = new Madera();
-        Madera madera3 = new Madera();
-
-        jugador.pedirAlBanco(madera1);
-        jugador.pedirAlBanco(madera2);
-        jugador.pedirAlBanco(madera3);
-
-        boolean tradeo = jugador.comerciarConBanco(new Madera(), new Piedra());
-
-        Assertions.assertFalse(tradeo);
-        Assertions.assertFalse(jugador.tiene(new Piedra()));
-    }
-
-    @Test
-    public void test09JugadorEntregaExactamenteCuatroRecursosAlBanco() {
-        Jugador jugador = new Jugador("Jugador");
-
-        Madera madera1 = new Madera();
-        Madera madera2 = new Madera();
-        Madera madera3 = new Madera();
-        Madera madera4 = new Madera();
-        Madera madera5 = new Madera();
-
-        jugador.pedirAlBanco(madera1);
-        jugador.pedirAlBanco(madera2);
-        jugador.pedirAlBanco(madera3);
-        jugador.pedirAlBanco(madera4);
-        jugador.pedirAlBanco(madera5);
-
-        jugador.comerciarConBanco(new Madera(), new Piedra());
-
-        // Va a tener la madera que sobró y la piedra que recibió del tradeo
-
-        Assertions.assertEquals(2, jugador.cantidadCartas());
-    }
-
-    */
 
 }

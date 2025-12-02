@@ -1,102 +1,82 @@
 package Comercio;
 
+import model.Banco.Banco;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import model.Jugador.Jugador;
+import model.Recurso.*;
+import model.Comercio.*;
+
 public class ComercioTest {
-    /*
+
     @Test
     public void test01ComercioCuatroPorUnoFunciona() {
         Jugador jugador = new Jugador("Jugador");
-        jugador.asignarReglaDeComercio(new CuatroPorUno());
 
         Madera madera = new Madera();
         Trigo trigo = new Trigo();
 
-        jugador.pedirAlBanco(madera);
-        jugador.pedirAlBanco(madera);
-        jugador.pedirAlBanco(madera);
-        jugador.pedirAlBanco(madera);
+        jugador.pedirAlBanco(madera, 4);
 
-        boolean tradeo = jugador.comerciarEnPuerto(madera, trigo);
+        jugador.comerciarConBanco(madera, 4, trigo);
 
-        Assertions.assertTrue(tradeo);
-        Assertions.assertTrue(jugador.tiene(trigo));
-        Assertions.assertFalse(jugador.tieneCantidadDe(madera, 1));
+        Assertions.assertTrue(jugador.tieneAlMenos(trigo, 1));
     }
 
     @Test
     public void test02ComercioTresPorUnoFunciona() {
         Jugador jugador = new Jugador("Jugador");
-        jugador.asignarReglaDeComercio(new TresPorUno());
+        jugador.darReglaA(new Oveja(), new TresPorUno());
 
         Oveja oveja = new Oveja();
         Piedra piedra = new Piedra();
 
-        jugador.pedirAlBanco(oveja);
-        jugador.pedirAlBanco(oveja);
-        jugador.pedirAlBanco(oveja);
+        jugador.pedirAlBanco(oveja, 3);
 
-        boolean tradeo = jugador.comerciarEnPuerto(oveja, piedra);
+        jugador.comerciarConBanco(oveja, 3, piedra);
 
-        Assertions.assertTrue(tradeo);
-        Assertions.assertTrue(jugador.tiene(piedra));
+        Assertions.assertTrue(jugador.tieneAlMenos(piedra, 1));
     }
 
     @Test
     public void test03ComercioDosPorUnoFunciona() {
         Jugador jugador = new Jugador("Jugador");
-        jugador.asignarReglaDeComercio(new DosPorUno(Madera.class));
+        jugador.darReglaA(new Madera(), new DosPorUno());
 
-        Madera madera = new Madera();
-        Oveja oveja = new Oveja();
+        Madera madera = new Madera(2);
+        Oveja oveja = new Oveja(1);
 
-        jugador.pedirAlBanco(madera);
-        jugador.pedirAlBanco(madera);
+        jugador.pedirAlBanco(madera, 2);
 
-        boolean tradeo = jugador.comerciarEnPuerto(madera, oveja);
+        jugador.comerciarConBanco(madera, 2, oveja);
 
-        Assertions.assertTrue(tradeo);
-        Assertions.assertTrue(jugador.tiene(oveja));
+        Assertions.assertTrue(jugador.tieneAlMenos(oveja, 1));
     }
 
     @Test
-    public void test04SeTrataDeNegociarConTresPorUnoPeroNoHaySuficientesCartas() {
-        Jugador jugador = new Jugador("Jugador");
-        jugador.asignarReglaDeComercio(new TresPorUno());
+    public void test04ElComercioNoseEfectuaSiFaltanRecursos(){
+        Jugador jugador = new Jugador("Sapardo");
+        Madera madera = new Madera(4);
+        madera.cambiarRegla(new TresPorUno());
+        jugador.sumarRecurso(madera, 4);
+        Banco banco = new Banco();
 
-        Piedra piedra = new Piedra();
-        Trigo trigo = new Trigo();
+        jugador.comerciarConBanco(madera, 2, new Ladrillo());
 
-        jugador.pedirAlBanco(piedra);
-        jugador.pedirAlBanco(piedra);
-
-        boolean tradeo = jugador.comerciarEnPuerto(piedra, trigo);
-
-        Assertions.assertFalse(tradeo);
+        Assertions.assertFalse(jugador.tieneAlMenos(new Ladrillo(), 1));
     }
 
     @Test
-    public void test05PuertoDosPorUnoPeroRecursoIncorrecto() {
-        Jugador jugador = new Jugador("Jugador");
-        jugador.asignarReglaDeComercio(new DosPorUno(Trigo.class));
+    public void test05ElComercioQuitaLosRecursosEnviados(){
+        Jugador jugador = new Jugador("Sapardo");
+        Madera madera = new Madera(4);
+        jugador.sumarRecurso(madera, 4);
+        Banco banco = new Banco();
 
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
+        jugador.comerciarConBanco(madera, 4, new Ladrillo());
 
-        boolean tradeo = jugador.comerciarEnPuerto(new Madera(), new Piedra());
-
-        Assertions.assertFalse(tradeo);
+        Assertions.assertFalse(jugador.tieneAlMenos(new Madera(), 1));
     }
 
-    @Test
-    public void test06SinReglaNoHayComercio() {
-        Jugador jugador = new Jugador("Jugador");
-
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-        jugador.pedirAlBanco(new Madera());
-
-        boolean tradeo = jugador.comerciarEnPuerto(new Madera(), new Trigo());
-
-        Assertions.assertFalse(tradeo);
-    }
-    */
 }
