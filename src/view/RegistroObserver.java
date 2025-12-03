@@ -1,4 +1,18 @@
 package view;
 
-public class RegistroObserver {
+import model.Catan.Catan;
+
+public class RegistroObserver implements Observador {
+
+    private final Catan modelo;
+
+    public RegistroObserver(Catan modelo) {
+        this.modelo = modelo;
+        modelo.agregarObservador(this);
+    }
+
+    @Override
+    public void actualizar() {
+        System.out.println("El modelo cambió. (RegistroObserver)");
+    }
 }

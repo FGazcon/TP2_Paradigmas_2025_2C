@@ -72,12 +72,29 @@ public abstract class Recurso{
 
     public abstract void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio);
 
-    public void comerciarConBanco(Jugador jugador, int cantidad, Recurso recursoDeseado){
-        reglaDeComercio.intentarComerciar(jugador, this, cantidad, recursoDeseado);
+    public void comerciarConBanco(Jugador jugador, int cantidad, Recurso recursoDeseado, Banco banco) {
+        reglaDeComercio.intentarComerciar(jugador, this, cantidad, recursoDeseado, banco);
     }
 
     public void cambiarRegla(ReglaDeComercio reglaDeComercio){
         this.reglaDeComercio = reglaDeComercio.intentarCambiarA(this.reglaDeComercio);
     }
+
+    public abstract Recurso getRecursoJugador(Jugador jugad);
+    public abstract Recurso getRecursoBanco(Banco banco);
+
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null) return false;
+        return this.getClass() == o.getClass();
+    }
+
+    @Override
+    public int hashCode(){
+        return getClass().hashCode();
+    }
+
 }
 

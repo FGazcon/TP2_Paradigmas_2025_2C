@@ -114,7 +114,7 @@ public class Factory_MapaBasico {
 
         asignarVerticesAHexagonos(hexagonos, vertices);
 
-        mezclarListaHexagonos(hexagonos);
+        //mezclarListaHexagonos(hexagonos);
 
         return hexagonos;
     }

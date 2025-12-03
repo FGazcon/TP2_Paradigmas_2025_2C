@@ -4,10 +4,11 @@ import model.Errores.VerticeFueraDeAlcance;
 import model.Errores.VerticeNoVacio;
 import model.Errores.VerticeOcupadoPorAlguienMas;
 import model.Jugador.Jugador;
-import model.Recurso.Recurso;
+import model.Recurso.*;
 import model.Tablero.Vertice.Estado;
 import model.Tablero.Vertice.Vertice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Poblado extends Estructura{
@@ -28,6 +29,12 @@ public class Poblado extends Estructura{
 
     public Poblado(Jugador jugador){
         this.jugador = jugador;
+
+        this.costo = new ArrayList<>();
+        this.costo.add(new Oveja(1));
+        this.costo.add(new Trigo(1));
+        this.costo.add(new Piedra(1));
+        this.costo.add(new Madera(1));
     }
 
     @Override

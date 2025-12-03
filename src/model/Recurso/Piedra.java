@@ -52,4 +52,12 @@ public class Piedra extends Recurso {
     public void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio) {
         jugador.darReglaA(this, reglaDeComercio);
     }
+
+    public Recurso getRecursoJugador(Jugador jugador){
+        return  jugador.getPiedra();
+    }
+
+    public Recurso getRecursoBanco(Banco banco){
+        return  banco.getPiedra();
+    }
 }

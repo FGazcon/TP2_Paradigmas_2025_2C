@@ -57,6 +57,12 @@ public class Trigo extends Recurso {
         jugador.darReglaA(this, reglaDeComercio);
     }
 
+    public Recurso getRecursoJugador(Jugador jugador){
+        return  jugador.getTrigo();
+    }
 
+    public Recurso getRecursoBanco(Banco banco){
+        return  banco.getTrigo();
+    }
 }
 

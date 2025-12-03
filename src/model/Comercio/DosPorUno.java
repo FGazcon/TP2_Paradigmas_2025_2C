@@ -21,9 +21,8 @@ public class DosPorUno implements ReglaDeComercio {
     public ReglaDeComercio intentarCambiarA(ReglaDeComercio reglaDeComercio) {
          return reglaDeComercio.intentarCambiarA(this);
     }
-    public void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado){
+    public void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado, Banco banco) {
         if (cantidad == 2){
-            Banco banco = Banco.getBanco();
             banco.jugadorQuiereIntercambiar(jugador, recursoOfrecido, cantidad, recursoDeseado);
         }
     }

@@ -2,10 +2,13 @@ package model.Tablero.Vertice.Estructura;
 
 import model.Errores.VerticeOcupadoPorCiudad;
 import model.Jugador.Jugador;
+import model.Recurso.Piedra;
 import model.Recurso.Recurso;
+import model.Recurso.Trigo;
 import model.Tablero.Vertice.Estado;
 import model.Tablero.Vertice.Vertice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ciudad extends Estructura {
@@ -38,5 +41,9 @@ public class Ciudad extends Estructura {
 
     public Ciudad(Jugador jugador) {
         this.jugador = jugador;
+
+        this.costo = new ArrayList<>();
+        this.costo.add(new Piedra(3));
+        this.costo.add(new Trigo(2));
     }
 }

@@ -23,9 +23,8 @@ public class TresPorUno implements ReglaDeComercio {
         return this;
     }
 
-    public void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado){
+    public void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado, Banco banco) {
         if (cantidad == 3){
-            Banco banco = Banco.getBanco();
             banco.jugadorQuiereIntercambiar(jugador, recursoOfrecido, cantidad, recursoDeseado);
         }
     }

@@ -55,4 +55,12 @@ public class Ladrillo extends Recurso {
     public void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio) {
         jugador.darReglaA(this, reglaDeComercio);
     }
+
+    public Recurso getRecursoJugador(Jugador jugador){
+        return  jugador.getLadrillo();
+    }
+
+    public Recurso getRecursoBanco(Banco banco){
+        return  banco.getLadrillo();
+    }
 }

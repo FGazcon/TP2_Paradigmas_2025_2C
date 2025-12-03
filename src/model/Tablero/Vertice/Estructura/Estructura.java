@@ -10,6 +10,7 @@ import java.util.List;
 public abstract class Estructura {
 
     protected Jugador jugador;
+    protected List<Recurso> costo;
 
     public abstract void ubicarseEnVerticeEnEstado(Estado estado, Vertice vertice);
 
@@ -32,5 +33,9 @@ public abstract class Estructura {
 
     public void sumarAJugador() {
         this.jugador.sumarPunto();
+    }
+
+    public boolean jugadorMePuedePagar(){
+        return this.jugador.tieneSuficientesParaOfertar(this.costo);
     }
 }

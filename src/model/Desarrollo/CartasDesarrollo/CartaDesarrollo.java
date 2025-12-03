@@ -3,14 +3,23 @@ package model.Desarrollo.CartasDesarrollo;
 import model.Desarrollo.CartasDesarrollo.EstadoCartaDesarrollo.EstadoCartaDesarrollo;
 import model.Desarrollo.CartasDesarrollo.EstadoCartaDesarrollo.RecienComprada;
 import model.Jugador.Jugador;
-import model.Recurso.Recurso;
+import model.Recurso.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class CartaDesarrollo {
 
     private EstadoCartaDesarrollo estado;
+    private static List<Recurso> costo;
 
     public CartaDesarrollo(){
         this.estado = new RecienComprada();
+        this.costo = new ArrayList<>();
+
+        this.costo.add(new Piedra());
+        this.costo.add(new Oveja());
+        this.costo.add(new Trigo());
     }
 
     public void pasarTurnoDeCompra(){
@@ -29,6 +38,10 @@ public abstract class CartaDesarrollo {
 
     public int modificarPuntaje(int puntaje){
         return puntaje;
+    }
+
+    public static boolean jugadorMePuedePagar(Jugador jugador){
+        return jugador.tieneSuficientesParaOfertar(costo);
     }
 
 }

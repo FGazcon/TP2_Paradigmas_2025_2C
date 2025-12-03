@@ -19,7 +19,7 @@ public class PreparadoDeJugadores {
 
         System.out.print("Ingresa un nombre: ");
         String nombre = sc.nextLine();
-        Jugador jugador = new Jugador(nombre);
+        Jugador jugador = new Jugador(nombre, banco);
         jugadores.add(jugador);
 
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.InicialController"
+            prefWidth="1280" prefHeight="720"
+            style="-fx-background-color: #E6D0B4;">
+
+    <!-- HEADER -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="40"
+              style="-fx-background-color: #F0B340; -fx-padding: 12; -fx-border-color: black; -fx-border-width: 0 0 2 0;">
+            <padding><Insets left="30" right="30"/></padding>
+            <Label text="CATAN"
+                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #9C2626;"/>
+
+            <Label fx:id="lblTurnoInicial"
+                   text="Turno inicial de: -"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+        </HBox>
+    </top>
+
+    <!-- TABLERO -->
+    <center>
+        <StackPane alignment="CENTER" style="-fx-padding: 10;">
+            <Pane fx:id="tableroPane" prefWidth="800" prefHeight="600"/>
+        </StackPane>
+    </center>
+
+    <!-- BOTÓN SIGUIENTE -->
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 20;">
+            <Button fx:id="btnSiguiente"
+                    text="SIGUIENTE JUGADOR"
+                    onAction="#siguiente"
+                    prefWidth="280" prefHeight="50"
+                    style="-fx-background-color: #9C2626; -fx-text-fill: white;
+                           -fx-font-size: 22px; -fx-font-weight: bold; -fx-background-radius: 6;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

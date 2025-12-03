@@ -22,9 +22,8 @@ public class CuatroPorUno implements ReglaDeComercio {
     public ReglaDeComercio intentarCambiarA(CuatroPorUno reglaNueva) {
         return this;
     }
-    public void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado){
+    public void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado, Banco banco) {
         if (cantidad == 4){
-            Banco banco = Banco.getBanco();
             banco.jugadorQuiereIntercambiar(jugador, recursoOfrecido, cantidad, recursoDeseado);
         }
     }

@@ -1,5 +1,6 @@
 package Tablero;
 
+import model.Banco.Banco;
 import model.Errores.VerticeOcupadoPorCiudad;
 import model.Jugador.Jugador;
 import model.Recurso.Piedra;
@@ -14,9 +15,10 @@ public class EstructuraTest {
 
     @Test
     public void test01LosPobladosDan1Recurso() {
+        Banco banco = new Banco();
 
         Vertice vertice = new Vertice();
-        Jugador jugador = new Jugador("jaime");
+        Jugador jugador = new Jugador("jaime", banco);
         PobladoInicial poblado = new PobladoInicial(jugador);
         Piedra piedrita = new Piedra();
 
@@ -29,9 +31,10 @@ public class EstructuraTest {
 
     @Test
     public void test02LasCiudadesDan2Recursos() {
+        Banco banco = new Banco();
 
         Vertice vertice = new Vertice();
-        Jugador jugador = new Jugador("jaime");
+        Jugador jugador = new Jugador("jaime", banco);
         Piedra piedrita = new Piedra();
 
         vertice.ubicarEstructura(new PobladoInicial(jugador));
@@ -44,8 +47,9 @@ public class EstructuraTest {
 
     @Test
     public void test03LosPobladosAumentanElPuntaje() {
+        Banco banco = new Banco();
         Vertice vertice = new Vertice();
-        Jugador jugador = new Jugador("Ariel");
+        Jugador jugador = new Jugador("Ariel", banco);
         PobladoInicial poblado = new PobladoInicial(jugador);
 
         vertice.ubicarEstructura(poblado);
@@ -55,8 +59,9 @@ public class EstructuraTest {
 
     @Test
     public void test04LasCiudadesAumentanElPuntaje() {
+        Banco banco = new Banco();
         Vertice vertice = new Vertice();
-        Jugador jugador = new Jugador("Ariel");
+        Jugador jugador = new Jugador("Ariel", banco);
         PobladoInicial poblado = new PobladoInicial(jugador);
         Ciudad ciudad = new Ciudad(jugador);
 
@@ -68,8 +73,9 @@ public class EstructuraTest {
 
     @Test
     public void test05NoPuedoPonerUnaCiudadSobreUnaCiudad() {
+        Banco banco = new Banco();
         Vertice vertice = new Vertice();
-        Jugador jugador = new Jugador("Ariel");
+        Jugador jugador = new Jugador("Ariel", banco);
         PobladoInicial poblado = new PobladoInicial(jugador);
         Ciudad ciudad = new Ciudad(jugador);
         Ciudad ciudad2 = new Ciudad(jugador);

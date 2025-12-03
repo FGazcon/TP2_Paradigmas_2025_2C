@@ -1,5 +1,6 @@
 package Ladron;
 
+import model.Banco.Banco;
 import model.Errores.HexagonoBajoAsalto;
 import model.Jugador.Jugador;
 import model.Ladron.Ladron;
@@ -50,8 +51,9 @@ public class LadronTest {
         List<Integer> numerosMezclados = Factory_MapaBasico.generarNumerosMezclados();
         List<Hexagono> hexagonos = Factory_MapaBasico.generarHexagonosNoFijos(numerosMezclados,terrenos);
         Ladron ladron = new Ladron(hexagonos.get(0));
-        Jugador jugador1 = new Jugador("Neymar");
-        Jugador jugador2 = new Jugador("Pele");
+        Banco banco = new Banco();
+        Jugador jugador1 = new Jugador("Neymar", banco);
+        Jugador jugador2 = new Jugador("Pele", banco);
         jugador1.pedirAlBanco(new Madera(), 1);
         jugador1.pedirAlBanco(new Madera(), 1);
 

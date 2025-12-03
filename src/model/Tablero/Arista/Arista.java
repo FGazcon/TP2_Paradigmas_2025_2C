@@ -60,4 +60,16 @@ public class Arista {
             }
         }
     }
+
+    public Vertice getDestino() {
+        return destino;
+    }
+
+    public Arista getPar() {
+        return par;
+    }
+
+    public int[] getNumeroDeVertices() {
+        return numeroDeVertices;
+    }
 }

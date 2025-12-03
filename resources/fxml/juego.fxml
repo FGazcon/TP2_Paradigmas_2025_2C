@@ -62,12 +62,12 @@
                 <Label text="COMERCIO Y DESARROLLO" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
                 <Button fx:id="btnComercio"
-                        text="COMERCIO" onAction="#abrirComercio"
+                        text="COMERCIO"
                         prefWidth="180"
                         style="-fx-background-color: #F0B340; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 5;"/>
 
-                <Button fx:id="btnComprarDesarrollo" text="COMPRAR DESARROLLO" onAction="#comprarDesarrollo" prefWidth="180" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"/>
-                <Button fx:id="btnUsarDesarrollo" text="USAR DESARROLLO" onAction="#usarDesarrollo" prefWidth="180" style="-fx-background-color: #87CEEB; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+                <Button fx:id="btnComprarDesarrollo" text="COMPRAR DESARROLLO"  prefWidth="180" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+                <Button fx:id="btnUsarDesarrollo" text="USAR DESARROLLO"  prefWidth="180" style="-fx-background-color: #87CEEB; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 5;"/>
             </VBox>
 
             <Region VBox.vgrow="ALWAYS"/> </VBox>

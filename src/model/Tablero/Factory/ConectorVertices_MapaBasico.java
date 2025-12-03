@@ -9,8 +9,8 @@ public class ConectorVertices_MapaBasico {
         //Esta secuencia horrible genera las 72 Aristas entre los 54 Vertices.
 
         Vertice.agregarArista(vertices[0],vertices[1], new int[]{0,1});
-        Vertice.agregarArista(vertices[0],vertices[29], new int[]{0,29});
         Vertice.agregarArista(vertices[1],vertices[2], new int[]{1,2});
+        Vertice.agregarArista(vertices[0],vertices[29], new int[]{0,29});
         Vertice.agregarArista(vertices[2],vertices[3], new int[]{2,3});
         Vertice.agregarArista(vertices[2],vertices[31],new int[]{2,31});
         Vertice.agregarArista(vertices[3],vertices[4], new int[]{3,4});

@@ -94,7 +94,7 @@ public class Hexagono {
             try{
                 this.estado.intentarProducir(this);
             } catch (HexagonoBajoAsalto e){
-                System.out.println("Se intento generar recursos del Desierto");
+                System.out.println("Hexagono Bajo asalto no produce.");
             }
         }
     }

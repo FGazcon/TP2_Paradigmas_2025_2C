@@ -158,4 +158,9 @@ public class Vertice {
             arista.ubicarCarretera(carretera, numeroDeArista);
         }
     }
+
+    public List<Arista> getAristas() {
+        return this.aristas;
+    }
+
 }

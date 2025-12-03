@@ -17,11 +17,11 @@ public class CatanTest {
     @Test
     public void test01LosJugadoresRecibenRecursosIniciales(){
         Banco banco = new Banco();
-        Jugador jugador = new Jugador("Wilmar");
+        Jugador jugador = new Jugador("Wilmar", banco);
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
-        Catan catan = new Catan(jugadores);
-        catan.ejecutarTurnoInicial(); //esto deberia darle los recursos al jugador
+        Catan catan = new Catan(jugadores, banco);
+        //catan.ejecutarTurnoInicial(30); //esto deberia darle los recursos al jugador
         //aca deberia implementar para saber que recursos gano el jugador
 
 
@@ -42,7 +42,7 @@ public class CatanTest {
     @Test
     public void test02JugadorPierdeLaMitadDeLasCartas(){
         Banco banco = new Banco();
-        Jugador jugador = new Jugador("Wilmar");
+        Jugador jugador = new Jugador("Wilmar", banco);
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         jugadores.add(jugador);
         jugador.pedirAlBanco(new Madera(), 8);

@@ -56,4 +56,12 @@ public class Oveja extends Recurso {
     public void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio) {
         jugador.darReglaA(this, reglaDeComercio);
     }
+
+    public Recurso getRecursoJugador(Jugador jugador){
+        return  jugador.getOveja();
+    }
+
+    public Recurso getRecursoBanco(Banco banco){
+        return  banco.getOveja();
+    }
 }

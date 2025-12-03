@@ -15,9 +15,9 @@ public class JugadorTest {
 
     @Test
     public void test01JugadorLePasaCartaAOtroJugadorAlSerRobado(){
-
-        Jugador jugador = new Jugador("Sapardo");
-        Jugador jugador1 = new Jugador("Abuelacho");
+        Banco banco = new Banco();
+        Jugador jugador =  new Jugador("Sapardo", banco);
+        Jugador jugador1 = new Jugador("Abuelacho", banco);
 
         jugador.pedirAlBanco(new Madera(), 1);
         jugador.dejarseRobarPorJugador(jugador1);
@@ -27,8 +27,8 @@ public class JugadorTest {
 
     @Test
     public void test02JugadorDescartaMitad(){
-
-        Jugador jugador = new Jugador("Jeferson");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Jeferson", banco);
         jugador.pedirAlBanco(new Madera(), 9);
 
         //jugador.descartarMitad();
@@ -41,7 +41,9 @@ public class JugadorTest {
 
     @Test
     public void test03JugadorAumentaSuPuntaje(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarPunto();
         jugador.sumarPunto();
 
@@ -50,7 +52,9 @@ public class JugadorTest {
 
     @Test
     public void test04JugadorAumentaLaCantidadDeMadera(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Sapardo", banco);
 
         System.out.println(jugador.cantidadCartas());
 
@@ -61,7 +65,9 @@ public class JugadorTest {
 
     @Test
     public void test05JugadorReduceLaCantidadDeMadera(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 1);
 
         jugador.descartarRecurso(new Madera(), 1);
@@ -71,7 +77,9 @@ public class JugadorTest {
 
     @Test
     public void test06JugadorTienesuficienteParaOfertar(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 1);
 
         List<Recurso> recursos = new ArrayList<>();
@@ -82,7 +90,9 @@ public class JugadorTest {
 
     @Test
     public void test07JugadorTienesuficienteParaOfertarConMasElementos(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 5);
 
         List<Recurso> recursos = new ArrayList<>();
@@ -93,7 +103,9 @@ public class JugadorTest {
 
     @Test
     public void test08LosRecursosExternosManipulanLosInternos(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 5);
 
         Madera madera = new Madera();
@@ -104,9 +116,10 @@ public class JugadorTest {
 
     @Test
     public void test09JugadorPuedeComerciarConOtroJugador(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 1);
-        Jugador jugador1 = new Jugador("Menzo Perez");
+        Jugador jugador1 = new Jugador("Menzo Perez", banco);
         jugador1.sumarRecurso(new Ladrillo(), 1);
 
         jugador.imprimirRecursos();
@@ -127,9 +140,10 @@ public class JugadorTest {
 
     @Test
     public void test10JugadorPuedeComerciarConOtroJugador(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 1);
-        Jugador jugador1 = new Jugador("Menzo Perez");
+        Jugador jugador1 = new Jugador("Menzo Perez", banco);
         jugador1.sumarRecurso(new Ladrillo(), 1);
 
         List<Recurso> recursos = new ArrayList<>();
@@ -144,10 +158,11 @@ public class JugadorTest {
 
     @Test
     public void test11JugadorPuedeComerciarConOtroJugadorVariosElementos(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 1);
         jugador.sumarRecurso(new Trigo(), 4);
-        Jugador jugador1 = new Jugador("Menzo Perez");
+        Jugador jugador1 = new Jugador("Menzo Perez", banco);
         jugador1.sumarRecurso(new Ladrillo(), 1);
         jugador1.sumarRecurso(new Piedra(), 3);
         jugador1.sumarRecurso(new Oveja(), 1);
@@ -167,9 +182,10 @@ public class JugadorTest {
 
     @Test
     public void test12JugadorDescartaLasCartasEnviadas(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 1);
-        Jugador jugador1 = new Jugador("Menzo Perez");
+        Jugador jugador1 = new Jugador("Menzo Perez", banco);
         jugador1.sumarRecurso(new Ladrillo(), 1);
 
         List<Recurso> recursos = new ArrayList<>();
@@ -184,9 +200,10 @@ public class JugadorTest {
 
     @Test
     public void test13ElIntercambioNoSeIniciaSiElJugadorNoLoPuedePagar(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 1);
-        Jugador jugador1 = new Jugador("Menzo Perez");
+        Jugador jugador1 = new Jugador("Menzo Perez", banco);
         jugador1.sumarRecurso(new Ladrillo(), 1);
 
         List<Recurso> recursos = new ArrayList<>();
@@ -201,9 +218,10 @@ public class JugadorTest {
 
     @Test
     public void test14ElIntercambioNoSeIniciaSiElReceptorNoLoPuedePagar(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.sumarRecurso(new Madera(), 1);
-        Jugador jugador1 = new Jugador("Menzo Perez");
+        Jugador jugador1 = new Jugador("Menzo Perez", banco);
         jugador1.sumarRecurso(new Ladrillo(), 1);
 
         List<Recurso> recursos = new ArrayList<>();
@@ -218,7 +236,7 @@ public class JugadorTest {
 
     @Test
     public void test15JugadorPuedeIntercambiarconBanco(){
-        Jugador jugador = new Jugador("Sapardo");
+        Jugador jugador = new Jugador("Sapardo", new Banco());
         Madera madera = new Madera(4);
         jugador.sumarRecurso(madera, 4);
         Banco banco = new Banco();
@@ -230,11 +248,12 @@ public class JugadorTest {
 
     @Test
     public void test16JugadorPuedeIntercambiarconBanco3Por1(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Sapardo", banco);
         jugador.darReglaA(new Madera(), new TresPorUno());
         Madera madera = new Madera(3);
         jugador.sumarRecurso(madera, 4);
-        Banco banco = new Banco();
 
         jugador.comerciarConBanco(madera, 3, new Ladrillo());
 
@@ -243,7 +262,7 @@ public class JugadorTest {
 
     @Test
     public void test17JugadorPuedeIntercambiarCOnBanco2Por1(){
-        Jugador jugador = new Jugador("Sapardo");
+        Jugador jugador = new Jugador("Sapardo", new Banco());
         jugador.darReglaA(new Madera(), new DosPorUno());
         Madera madera = new Madera(2);
         jugador.sumarRecurso(madera, 2);
@@ -256,7 +275,7 @@ public class JugadorTest {
 
     @Test
     public void test18JugadorNoNegociaConBancoSiNoTieneAccesoAlIntercambio(){
-        Jugador jugador = new Jugador("Sapardo");
+        Jugador jugador = new Jugador("Sapardo", new Banco());
         Madera madera = new Madera(4);
         jugador.darReglaA(new Madera(),  new TresPorUno());
         jugador.sumarRecurso(madera, 4);
@@ -269,7 +288,7 @@ public class JugadorTest {
 
     @Test
     public void test19JugadorPierdeLoEnviado(){
-        Jugador jugador = new Jugador("Sapardo");
+        Jugador jugador = new Jugador("Sapardo", new Banco());
         Madera madera = new Madera(4);
         jugador.sumarRecurso(madera, 4);
         Banco banco = new Banco();

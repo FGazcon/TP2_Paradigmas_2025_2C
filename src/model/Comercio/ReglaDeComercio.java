@@ -1,5 +1,6 @@
 package model.Comercio;
 
+import model.Banco.Banco;
 import model.Recurso.Recurso;
 import model.Jugador.Jugador;
 
@@ -13,5 +14,5 @@ public interface ReglaDeComercio {
 
     ReglaDeComercio intentarCambiarA(ReglaDeComercio reglaDeComercio);
 
-    void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado);
+    void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado, Banco banco);
 }

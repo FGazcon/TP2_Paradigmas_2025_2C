@@ -12,7 +12,7 @@ public class ComercioTest {
 
     @Test
     public void test01ComercioCuatroPorUnoFunciona() {
-        Jugador jugador = new Jugador("Jugador");
+        Jugador jugador = new Jugador("Jugador", new Banco());
 
         Madera madera = new Madera();
         Trigo trigo = new Trigo();
@@ -26,7 +26,9 @@ public class ComercioTest {
 
     @Test
     public void test02ComercioTresPorUnoFunciona() {
-        Jugador jugador = new Jugador("Jugador");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Jugador", banco);
         jugador.darReglaA(new Oveja(), new TresPorUno());
 
         Oveja oveja = new Oveja();
@@ -41,7 +43,9 @@ public class ComercioTest {
 
     @Test
     public void test03ComercioDosPorUnoFunciona() {
-        Jugador jugador = new Jugador("Jugador");
+        Banco banco = new Banco();
+
+        Jugador jugador = new Jugador("Jugador", banco);
         jugador.darReglaA(new Madera(), new DosPorUno());
 
         Madera madera = new Madera(2);
@@ -56,11 +60,11 @@ public class ComercioTest {
 
     @Test
     public void test04ElComercioNoseEfectuaSiFaltanRecursos(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Sapardo", banco);
         Madera madera = new Madera(4);
         madera.cambiarRegla(new TresPorUno());
         jugador.sumarRecurso(madera, 4);
-        Banco banco = new Banco();
 
         jugador.comerciarConBanco(madera, 2, new Ladrillo());
 
@@ -69,10 +73,10 @@ public class ComercioTest {
 
     @Test
     public void test05ElComercioQuitaLosRecursosEnviados(){
-        Jugador jugador = new Jugador("Sapardo");
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Sapardo", banco);
         Madera madera = new Madera(4);
         jugador.sumarRecurso(madera, 4);
-        Banco banco = new Banco();
 
         jugador.comerciarConBanco(madera, 4, new Ladrillo());
 

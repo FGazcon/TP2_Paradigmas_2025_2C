@@ -57,4 +57,11 @@ public class Madera extends Recurso {
         jugador.darReglaA(this, reglaDeComercio);
     }
 
+    public Recurso getRecursoJugador(Jugador jugador){
+        return  jugador.getMadera();
+    }
+
+    public Recurso getRecursoBanco(Banco banco){
+        return  banco.getMadera();
+    }
 }

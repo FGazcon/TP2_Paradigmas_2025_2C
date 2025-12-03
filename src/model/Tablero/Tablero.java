@@ -2,16 +2,19 @@ package model.Tablero;
 
 import model.Jugador.Jugador;
 import model.Ladron.Ladron;
+import model.Tablero.Arista.Arista;
 import model.Tablero.Arista.Carretera;
 import model.Tablero.Factory.Factory_MapaBasico;
 import model.Tablero.Vertice.Estructura.Estructura;
+import model.Tablero.Vertice.Vertice;
 
-import java.util.List;
+import java.util.*;
 
 public class Tablero {
 
     private List<Hexagono> hexagonos;
     private Ladron ladron;
+    private List<Vertice> verticesUnicos;
 
     public Tablero(List<Hexagono> hexagonos) {
         this.hexagonos = hexagonos;
@@ -72,4 +75,29 @@ public class Tablero {
     public List<Hexagono> getHexagonos() {
         return this.hexagonos;
     }
+
+    public List<Vertice> getVerticesUnicos() {
+        if (verticesUnicos == null) {
+            Set<Vertice> set = new HashSet<>();
+            for (Hexagono h : this.hexagonos) {
+                set.addAll(Arrays.asList(h.getVertices()));
+            }
+            verticesUnicos = new ArrayList<>(set);
+        }
+        return verticesUnicos;
+    }
+
+    public List<Arista> getAristasUnicas() {
+        Set<Arista> unicas = new HashSet<>();
+
+        for (Vertice v : getVerticesUnicos()) {
+            for (Arista a : v.getAristas()) {
+                unicas.add(a);
+            }
+        }
+
+        return new ArrayList<>(unicas);
+    }
+
+
 }
