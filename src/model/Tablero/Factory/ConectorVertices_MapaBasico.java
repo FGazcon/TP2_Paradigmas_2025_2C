@@ -22,7 +22,7 @@ public class ConectorVertices_MapaBasico {
         Vertice.agregarArista(vertices[7],vertices[34], new int[]{7,34});
         Vertice.agregarArista(vertices[8],vertices[9], new int[]{8,9});
         Vertice.agregarArista(vertices[9],vertices[10], new int[]{9,10});
-        Vertice.agregarArista(vertices[9],vertices[16], new int[]{9,16});
+        Vertice.agregarArista(vertices[9],vertices[36], new int[]{9,36});
         Vertice.agregarArista(vertices[10],vertices[11], new int[]{10,11});
         Vertice.agregarArista(vertices[11],vertices[12], new int[]{11,12});
         Vertice.agregarArista(vertices[12],vertices[13], new int[]{12,13});
@@ -39,7 +39,7 @@ public class ConectorVertices_MapaBasico {
         Vertice.agregarArista(vertices[19],vertices[42], new int[]{19,42});
         Vertice.agregarArista(vertices[20],vertices[21], new int[]{20,21});
         Vertice.agregarArista(vertices[21],vertices[22], new int[]{21,22});
-        Vertice.agregarArista(vertices[22],vertices[44], new int[]{22,44});
+        Vertice.agregarArista(vertices[22],vertices[43], new int[]{22,43});
         Vertice.agregarArista(vertices[22],vertices[23], new int[]{22,23});
         Vertice.agregarArista(vertices[23],vertices[24], new int[]{23,24});
         Vertice.agregarArista(vertices[24],vertices[25], new int[]{24,25});

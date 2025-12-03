@@ -41,32 +41,32 @@ public class TurnoGeneral extends Turno {
     }
 
     public void moverLadron(int numeroDeHexagono){
-        this.tablero.moverLadron(numeroDeHexagono, this.jugadr);
+        this.tablero.moverLadron(numeroDeHexagono, this.jugador);
     }
 
     public void construirCarretera(int[] numeroDeArista){
-        Carretera carretera = new Carretera(this.jugadr);
+        Carretera carretera = new Carretera(this.jugador);
         if(carretera.jugadorMePuedePagar()){
             tablero.ubicarCarretera(carretera, numeroDeArista);
         }
     }
 
     public void construirPoblado(int numeroDeVertice){
-        Poblado poblado = new Poblado(this.jugadr);
+        Poblado poblado = new Poblado(this.jugador);
         if(poblado.jugadorMePuedePagar()){
             tablero.ubicarEstructura(poblado, numeroDeVertice);
         }
     }
 
     public void construirCiudad(int numeroDeVertice){
-        Ciudad ciudad = new Ciudad(this.jugadr);
+        Ciudad ciudad = new Ciudad(this.jugador);
         if(ciudad.jugadorMePuedePagar()){
             tablero.ubicarEstructura(ciudad, numeroDeVertice);
         }
     }
 
     public void comprarDesarrollo(){
-        if(CartaDesarrollo.jugadorMePuedePagar(this.jugadr)){
+        if(CartaDesarrollo.jugadorMePuedePagar(this.jugador)){
 
         }
     }
@@ -80,7 +80,7 @@ public class TurnoGeneral extends Turno {
     }
 
     public String getNombreJugador() {
-        return this.jugadr.getNombre();
+        return this.jugador.getNombre();
     }
 
 }

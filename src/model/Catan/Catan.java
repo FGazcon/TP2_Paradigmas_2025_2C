@@ -67,4 +67,8 @@ public class Catan extends Observable {
         notificar();
     }
 
+    public Turno getTurno(){
+        return this.turno;
+    }
+
 }

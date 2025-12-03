@@ -30,16 +30,10 @@ public class InicialController extends BaseTableroController implements Initiali
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-
-    }
-
-
-    public void init(List<Jugador> jugadores) {
-
         this.jugadores = jugadores;
         // Modelo (luego Registro enviará los jugadores reales)
         //jugadores = crearJugadoresDummyParaTest();
-        jugadorActual = jugadores.get(indiceJugador);
+        jugadorActual = catan.getTurno().getJugadorActual();
 
         lblTurnoInicial.setText("Turno inicial de: " + jugadorActual.getNombre());
 

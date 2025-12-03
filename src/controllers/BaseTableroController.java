@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -27,56 +28,32 @@ import java.util.*;
 
 public abstract class BaseTableroController implements Initializable {
 
-    // ----------------------------
-    // CAMPOS COMPARTIDOS
-    // ----------------------------
     @FXML protected Pane tableroPane;
+
     protected Tablero tableroModelo;
     protected Jugador jugadorActual;
-
     protected enum ModoJuego { SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD }
     protected ModoJuego modoActual = ModoJuego.SELECCIONAR_NADA;
-
-    // ----------------------------
-    // CONSTANTES DE UI DEL TABLERO
-    // ----------------------------
     protected final double RADIO = 60.0;
     protected final double DIST_X = RADIO * Math.sqrt(3.0);
     protected final double DIST_Y = RADIO * 1.5;
+    // Usa las dimensiones reales del Pane
     protected final double X_INICIAL = 400.0 - (2.5 * DIST_X);
-    protected final double Y_INICIAL = 300.0 - (2 * DIST_Y);
+    protected final double Y_INICIAL = 300.0 - (2.0 * DIST_Y);
 
-    // ----------------------------
-    // DIBUJAR TABLERO COMPLETO
-    // ----------------------------
-// En controllers.BaseTableroController
-
-    // ----------------------------
-// DIBUJAR TABLERO COMPLETO
-// ----------------------------
     protected void dibujarTablero(Tablero modelo) {
         for (Hexagono hex : modelo.getHexagonos()) {
-            // Ahora se añade el Polygon directamente
             tableroPane.getChildren().add(crearTile(hex));
         }
-        // tableroPane.getChildren().add(crearTile(modelo.getHexagonos().get(0)));
-        // tableroPane.getChildren().add(crearTile(modelo.getHexagonos().get(1)));
-        // tableroPane.getChildren().add(crearTile(modelo.getHexagonos().get(14)));
 
-        //dibujarAristas(modelo.getAristasUnicas());
-        // Asegúrate de que esta línea esté DESCOMENTADA para ver los poblados
+        dibujarAristas(modelo.getAristasUnicas());
         dibujarVertices(modelo.getVerticesUnicos());
     }
 
-    // ----------------------------
-    // ASIGNAR COORDENADAS A HEXAGONOS
-    // ----------------------------
 
     protected void asignarCoordenadas(List<Hexagono> hexagonos) {
         int[] hexagonosPorFila = {3, 4, 5, 4, 3};
         int hexIndex = 0;
-
-
 
         for (int fila = 0; fila < hexagonosPorFila.length; fila++) {
             int numHexs = hexagonosPorFila[fila];
@@ -89,36 +66,11 @@ public abstract class BaseTableroController implements Initializable {
                 double y = Y_INICIAL + (fila * DIST_Y);
 
                 hexagonos.get(hexIndex).setCoordenadas(x, y);
-            //asignarCoordenadasVertices(hexagonos.get(hexIndex));
+                //asignarCoordenadasVertices(hexagonos.get(hexIndex));
                 hexIndex++;
             }
         }
     }
-/*
-    protected void asignarCoordenadasVertices(Hexagono hex) {
-
-        double Cx = hex.getCoordenadaX();   // centro X del hexágono
-        double Cy = hex.getCoordenadaY();   // centro Y del hexágono
-
-        Vertice[] vertices = hex.getVertices();
-
-        for (int i = 0; i < 6; i++) {
-
-            // ángulo del vértice i
-            double ang = Math.PI / 2 + i * Math.PI / 3;
-
-            // coordenadas del vértice
-            double Vx = Cx + RADIO * Math.cos(ang);
-            double Vy = Cy - RADIO * Math.sin(ang);
-
-            Vertice v = vertices[i];
-
-            // Solo asigno si ese vértice aún no fue asignado por otro hexágono vecino
-            if (!v.tieneCoordenadasAsignadas()) {
-            }
-            v.setCoordenadas(Vx, Vy);
-        }
-    }*/
 
     protected void asignarCoordenadasVertices(Hexagono hex) {
 
@@ -129,11 +81,8 @@ public abstract class BaseTableroController implements Initializable {
 
         for (int i = 0; i < 6; i++) {
 
-            // Para un hexágono flat-topped (Catan):
-            // ángulo del vértice i
             double ang = Math.PI / 2 + i * Math.PI / 3;
 
-            // coordenadas del vértice
             double Vx = Cx + RADIO * Math.cos(ang);
             double Vy = Cy - RADIO * Math.sin(ang);
 
@@ -145,70 +94,68 @@ public abstract class BaseTableroController implements Initializable {
         }
     }
 
-    // ----------------------------
-    // ASIGNAR COORDENADAS A VÉRTICES
-    // ----------------------------
     protected void asignarCoordenadasVertices(Tablero tableroModelo) {
+        Vertice[] vertices;
         for (Hexagono hex : tableroModelo.getHexagonos()) {
             double Cx = hex.getCoordenadaX();
             double Cy = hex.getCoordenadaY();
-
-            Vertice[] vertices = hex.getVertices();
+            vertices = hex.getVertices();
 
             for (int i = 0; i < 6; i++) {
                 Vertice v = vertices[i];
 
-                double ang = Math.PI / 2 + i * Math.PI / 3;
+                double ang = (5 * Math.PI / 6) - (i * Math.PI / 3);
+
                 double Vx = Cx + RADIO * Math.cos(ang);
                 double Vy = Cy - RADIO * Math.sin(ang);
 
                 if (!v.tieneCoordenadasAsignadas()) {
                     v.setCoordenadas(Vx, Vy);
                 }
+                System.out.println(
+                        "  Vértice [" + i + "]: Número=" + vertices[i].getNumeroDeVertice() +
+                                ", Coords Asignadas=(" + vertices[i].getCoordenadaX() + ", " + vertices[i].getCoordenadaY() + ")"
+                );
             }
         }
     }
 
-    // ----------------------------
-    // DIBUJAR UN HEXÁGONO
-    // ----------------------------
-
-// En controllers.BaseTableroController
-
-    // ----------------------------
-// DIBUJAR UN HEXÁGONO
-// ----------------------------
-// El tipo de retorno AHORA es Polygon, no StackPane
-    protected Polygon crearTile(Hexagono hex) {
+    protected StackPane crearTile(Hexagono hex) {
         Color colorHex = obtenerColor(hex.getTerreno());
 
         Polygon polygon = new Polygon();
-        Vertice[] vertices = hex.getVertices();
 
-        // Cargar puntos del polígono usando las coordenadas DEL VÉRTICE (COORDENADAS ABSOLUTAS)
         for (int i = 0; i < 6; i++) {
-            Vertice v = vertices[i];
+            double ang = Math.PI / 2 + i * Math.PI / 3;
 
-            polygon.getPoints().addAll(
-                    v.getCoordenadaX(),
-                    v.getCoordenadaY()
-            );
+            double x = RADIO * Math.cos(ang);
+            double y = -RADIO * Math.sin(ang);
+
+            polygon.getPoints().addAll(x, y);
         }
 
         polygon.setFill(colorHex);
         polygon.setStroke(Color.BLACK);
+        polygon.setStrokeWidth(2.0);
 
-        // ¡IMPORTANTE! Eliminamos el StackPane.
-        // return new StackPane(polygon);
+        StackPane tile = new StackPane(polygon);
 
-        return polygon; // Devolvemos el Polygon directamente.
+        tile.relocate(hex.getCoordenadaX() - (RADIO-2.5), hex.getCoordenadaY() - (RADIO-1));
+        tile.setPickOnBounds(false);
+
+        if (!(hex.getTerreno() instanceof Desierto)) {
+            Label lbl = new Label(String.valueOf(hex.getNumero()));
+            lbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold;");
+            tile.getChildren().add(lbl);
+        }
+
+        tile.setOnMouseClicked(e -> {
+            System.out.println("Click en hexágono " + hex.getNumero());
+        });
+
+        return tile;
     }
 
-
-
-    // ----------------------------
-    // COLOR DE TERRENO
-    // ----------------------------
     protected Color obtenerColor(Terreno t) {
         return switch (t) {
             case Bosque b -> Color.rgb(107, 142, 35);
@@ -221,9 +168,6 @@ public abstract class BaseTableroController implements Initializable {
         };
     }
 
-    // ----------------------------
-    // DIBUJAR VÉRTICES
-    // ----------------------------
     protected void dibujarVertices(List<Vertice> vertices) {
         for (Vertice v : vertices)
             tableroPane.getChildren().add(crearVerticeUI(v));
@@ -244,44 +188,26 @@ public abstract class BaseTableroController implements Initializable {
         return c;
     }
 
-    // ----------------------------
-    // DIBUJAR ARISTAS
-    // ----------------------------
-// En controllers.BaseTableroController
-
-    // ----------------------------
-// DIBUJAR ARISTAS (CORREGIDO)
-// ----------------------------
     protected void dibujarAristas(List<Arista> aristas) {
 
-        // Este set almacena las aristas que YA hemos añadido al tablero
         Set<Arista> aristasYaDibujadas = new HashSet<>();
 
         for (Arista a : aristas) {
-            // Si la arista o su par ya fueron dibujadas, la saltamos.
             if (aristasYaDibujadas.contains(a) || aristasYaDibujadas.contains(a.getPar())) {
                 continue;
             }
 
-            // 1. Dibujamos la arista
             tableroPane.getChildren().add(crearAristaUI(a));
 
-            // 2. Marcamos esta arista y su par como dibujadas
             aristasYaDibujadas.add(a);
             aristasYaDibujadas.add(a.getPar());
         }
     }
 
-
-
-// En controllers.BaseTableroController
-
     protected Line crearAristaUI(Arista a) {
 
-        // Origen: Es el destino del par (el punto A)
         Vertice origen = a.getPar().getDestino();
 
-        // Destino: Es el destino de la arista actual (el punto B)
         Vertice destino = a.getDestino();
 
         Line l = new Line(
@@ -291,9 +217,9 @@ public abstract class BaseTableroController implements Initializable {
                 destino.getCoordenadaY()
         );
 
-        l.setStroke(Color.GRAY);
+        l.setStroke(Color.BLACK);
         l.setStrokeWidth(6);
-        l.setOpacity(0.6);
+        l.setOpacity(0.8);
 
         l.setOnMouseEntered(e -> l.setOpacity(1));
         l.setOnMouseExited(e -> l.setOpacity(0.6));
@@ -302,9 +228,6 @@ public abstract class BaseTableroController implements Initializable {
         return l;
     }
 
-    // ----------------------------
-    // CLICK EN VÉRTICE
-    // ----------------------------
     protected void manejarClickVertice(Vertice v, Circle ui) {
 
         try {
@@ -325,9 +248,6 @@ public abstract class BaseTableroController implements Initializable {
         modoActual = ModoJuego.SELECCIONAR_NADA;
     }
 
-    // ----------------------------
-    // CLICK EN ARISTA
-    // ----------------------------
     protected void manejarClickArista(Arista a, Line ui) {
         if (modoActual != ModoJuego.CONSTRUIR_CARRETERA) {
             System.out.println("No estás en modo carretera.");

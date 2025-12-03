@@ -12,13 +12,13 @@ import model.Tablero.Vertice.Estructura.PobladoInicial;
 public abstract class Turno {
 
     protected Tablero tablero;
-    protected Jugador jugadr;
+    protected Jugador jugador;
     protected Catan catan;
     protected Dados dados;
 
     public Turno(Catan catan, Tablero tablero, Jugador jugador, Dados dados){
         this.tablero = tablero;
-        this.jugadr = jugador;
+        this.jugador = jugador;
         this.catan = catan;
         this.dados = dados;
     }
@@ -51,6 +51,10 @@ public abstract class Turno {
     //fijarse si hace falta que el Turno este metido en todo esto.
     public Turno terminarTurno(AdministradorDeJugadores administrador){
         return administrador.nuevoTurno(catan, tablero, dados);
+    }
+
+    public Jugador getJugadorActual(){
+        return this.jugador;
     }
 
 }

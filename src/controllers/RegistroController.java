@@ -40,6 +40,7 @@ public class RegistroController
 
         Banco banco = new Banco();
 
+
         if(!nombre1.isEmpty()){
             Jugador jugador1 = new Jugador(nombre1, banco);
             jugadores.add(jugador1);
@@ -71,7 +72,9 @@ public class RegistroController
 
         //modelo.prepararJugadoresConNombres(nombres);
 
-        cambiarEscena(event, "/fxml/juego.fxml",jugadores);
+        Catan catan = new Catan(jugadores, banco);
+
+        cambiarEscena(event, "/fxml/inicial.fxml", catan); 
 
         // Para mostrar pantalla de ganador comentar linea 40 y descomentar la 44 (POR AHORA)
 
@@ -85,7 +88,7 @@ public class RegistroController
     }
 
 
-    private void cambiarEscena(ActionEvent event, String fxml,List<Jugador> jugadores)
+    private void cambiarEscena(ActionEvent event, String fxml, Catan catan)
     {
         try
         {
@@ -94,26 +97,6 @@ public class RegistroController
 
             //InicialController controller = loader.getController();
             //controller.init(jugadores);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(nueva);
-            stage.show();
-
-        }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void cambiarEscena(ActionEvent event, String fxml)
-    {
-        try
-        {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-            Scene nueva = new Scene(loader.load());
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(nueva);
