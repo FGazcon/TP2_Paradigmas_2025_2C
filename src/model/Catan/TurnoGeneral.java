@@ -48,6 +48,7 @@ public class TurnoGeneral extends Turno {
         Carretera carretera = new Carretera(this.jugador);
         if(carretera.jugadorMePuedePagar()){
             tablero.ubicarCarretera(carretera, numeroDeArista);
+            carretera.cobrarleAJugador();
         }
     }
 
@@ -55,6 +56,7 @@ public class TurnoGeneral extends Turno {
         Poblado poblado = new Poblado(this.jugador);
         if(poblado.jugadorMePuedePagar()){
             tablero.ubicarEstructura(poblado, numeroDeVertice);
+            poblado.cobrarleAJugador();
         }
     }
 
@@ -62,6 +64,7 @@ public class TurnoGeneral extends Turno {
         Ciudad ciudad = new Ciudad(this.jugador);
         if(ciudad.jugadorMePuedePagar()){
             tablero.ubicarEstructura(ciudad, numeroDeVertice);
+            ciudad.cobrarleAJugador();
         }
     }
 

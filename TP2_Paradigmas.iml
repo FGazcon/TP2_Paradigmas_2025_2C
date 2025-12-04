@@ -82,5 +82,6 @@
     <orderEntry type="library" name="byte-buddy-agent-1.18.1" level="project" />
     <orderEntry type="library" name="mockito-core-5.20.0" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="lib1" level="project" />
   </component>
 </module>

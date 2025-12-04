@@ -38,4 +38,8 @@ public abstract class Estructura {
     public boolean jugadorMePuedePagar(){
         return this.jugador.tieneSuficientesParaOfertar(this.costo);
     }
+
+    public void cobrarleAJugador(){
+        this.jugador.pagarleAlBanco(this.costo);
+    }
 }

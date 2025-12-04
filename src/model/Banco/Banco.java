@@ -5,6 +5,7 @@ import model.Jugador.Jugador;
 import model.Recurso.*;
 import model.Recurso.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class Banco {
@@ -88,5 +89,11 @@ public class Banco {
 
     public Recurso getTrigo(){
         return this.mazoDeProduccion.get("Trigo");
+    }
+
+    public void sumarVariosRecursos(List<Recurso> recursosQueRecibe){
+        for(Recurso recurso : recursosQueRecibe){
+            recurso.transferirAlBanco(this, recurso.sumadorCantidad(0));
+        }
     }
 }

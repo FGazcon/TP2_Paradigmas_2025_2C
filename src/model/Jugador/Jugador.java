@@ -189,4 +189,9 @@ public class Jugador {
     public Recurso getTrigo(){
         return this.mapaRecursos.get("Trigo");
     }
+
+    public void pagarleAlBanco(List<Recurso> costo){
+        restarVariosRecursos(costo);
+        this.banco.sumarVariosRecursos(costo);
+    }
 }

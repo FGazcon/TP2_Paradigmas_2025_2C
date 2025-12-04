@@ -32,4 +32,8 @@ public class Carretera {
     public boolean jugadorMePuedePagar(){
         return this.jugador.tieneSuficientesParaOfertar(this.costo);
     }
+
+    public void cobrarleAJugador(){
+        this.jugador.pagarleAlBanco(this.costo);
+    }
 }

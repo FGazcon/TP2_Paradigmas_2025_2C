@@ -10,20 +10,27 @@ import model.Tablero.Vertice.Estructura.PobladoInicial;
 
 import java.util.List;
 
-public class TurnoInicial extends Turno{
+public class TurnoInicial extends Turno {
 
     private Jugador jugador;
+    private int pobladosUbicados = 0;
+    private int carreterasUbicadas = 0;
 
-    public TurnoInicial(Catan catan, Tablero tablero, Jugador jugador, Dados dados){
+    public TurnoInicial(Catan catan, Tablero tablero, Jugador jugador, Dados dados) {
         super(catan, tablero, jugador, dados);
     }
 
-    public void construirCarretera(int[] numeroDeArista){
-        intentarUbicarCarretera(new Carretera(jugador), numeroDeArista);
+    public void construirCarretera(int[] numeroDeArista) {
+        if (pobladosUbicados < 1) {
+            intentarUbicarCarretera(new Carretera(jugador), numeroDeArista);
+        }
+        pobladosUbicados++;
     }
 
-    public void construirPoblado(int numeroDeVertice){
-        intentarUbicarEstructura(new PobladoInicial(jugador), numeroDeVertice);
+    public void construirPoblado(int numeroDeVertice) {
+        if (carreterasUbicadas < 1) {
+            intentarUbicarEstructura(new PobladoInicial(jugador), numeroDeVertice);
+        }
+        carreterasUbicadas++;
     }
-
 }
