@@ -1,16 +1,22 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 import model.Banco.Banco;
 import model.Catan.Catan;
 import model.Catan.Turno;
+import model.Catan.TurnoGeneral;
 import model.Catan.TurnoInicial;
 import model.Dados.Dados;
 import model.Jugador.Jugador;
@@ -78,6 +84,7 @@ public class InicialController extends BaseTableroController implements Initiali
     public void setValores(){
         this.jugadorActual = this.catan.getTurno().getJugadorActual();
         this.lblJugadorActual.setText(jugadorActual.getNombre());
+        this.lblTurno.setText("Turno Inicial de " + jugadorActual.getNombre());
     }
 
     @Override
@@ -139,19 +146,45 @@ public class InicialController extends BaseTableroController implements Initiali
     }
 
     @FXML
-    public void terminarTurnoInicial() {
+    public void terminarTurnoInicial(ActionEvent event) {
         System.out.println("Turno inicial terminado.");
         this.catan.terminarTurno();
+        this.cambiarAJuegoController(event);
         setValores();
+
         // TODO: aca llamás al administrador de jugadores y verificas si pasas al turno general
     }
 
-    public void cambariAJuegoController(){
-
+    public void cambiarAJuegoController(ActionEvent event){
+        if (turnoActual instanceof TurnoGeneral){
+            cambiarEscena(event, "/fxml/Juego.fxml", catan);
+        }
     }
 
     @FXML
     public void salir() {
         System.exit(0);
+    }
+
+    private void cambiarEscena(ActionEvent event, String fxml, Catan catan)
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Scene nueva = new Scene(loader.load());
+
+            JuegoController controller = loader.getController();
+            controller.init(catan);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(nueva);
+            stage.show();
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

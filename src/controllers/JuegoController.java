@@ -54,19 +54,32 @@ public class JuegoController extends BaseTableroController implements Initializa
 
         // Llamar a una instancia de Tablero que contenga la lista de Hexagonos
         List<Hexagono> hexs = Factory_MapaBasico.crearHexagonosBasico();
-        this.lblRecursos = crearMapRecursos() ;
-        catan = new Catan(jugadores,banco);
-        tableroModelo = catan.getTablero();
+        this.lblRecursos = crearMapRecursos();
+    }
+    public void init(Catan catan){
+        this.catan = catan;
+        this.jugadorActual = this.catan.getTurno().getJugadorActual();
+        this.tableroModelo = this.catan.getTablero();
+        this.jugadores = catan.getJugadores();
+        // Turno inicial
+        //this.turnoInicial = new TurnoInicial(catan, tableroModelo, jugadorActual, dados);
 
-        jugadorActual = new Jugador("Jugador",banco);
+        setTurnoActual(this.catan.getTurno());
+        System.out.println(turnoActual);
+        modoActual = ModoJuego.CONSTRUIR_POBLADO;
+        this.lblJugadorActual.setText(jugadorActual.getNombre()); // Ojo!
 
-        turnoActual = new TurnoGeneral(catan, tableroModelo, jugadorActual, dados);
+        lblTurno.setText("Turno Inicial de " + jugadorActual.getNombre());
 
         asignarCoordenadas(tableroModelo.getHexagonos());
-
         asignarCoordenadasVertices(tableroModelo);
-
         dibujarTablero(tableroModelo);
+    }
+
+    public void setValores(){
+        this.jugadorActual = this.catan.getTurno().getJugadorActual();
+        this.lblJugadorActual.setText(jugadorActual.getNombre());
+        this.lblTurno.setText("Turno Inicial de " + jugadorActual.getNombre());
     }
 
     @Override

@@ -28,7 +28,7 @@
             <Separator orientation="VERTICAL" prefHeight="20" />
 
             <Label fx:id="lblTurno"
-                   text="Turno Inicial de #lblTurno"
+                   text="Turno Inicial de Jugador 1"
                    style="-fx-font-size: 24px;
                           -fx-font-weight: bold;
                           -fx-text-fill: #333;"/>
