@@ -20,7 +20,7 @@ public class TurnoInicial extends Turno {
     }
     @Override
     public void construirCarretera(int[] numeroDeArista) {
-        if (pobladosUbicados < 1) {
+        if (this.pobladosUbicados < 1) {
             if(intentarUbicarCarretera(new Carretera(jugador), numeroDeArista)){
                 pobladosUbicados = 1;
             }
@@ -29,7 +29,7 @@ public class TurnoInicial extends Turno {
     @Override
     public void construirPoblado(int numeroDeVertice) {
         System.out.println(this.jugador.getNombre());
-        if (carreterasUbicadas < 1) {
+        if (this.carreterasUbicadas < 1) {
             if(intentarUbicarEstructura(new PobladoInicial(jugador), numeroDeVertice)){
                 carreterasUbicadas++;
             }

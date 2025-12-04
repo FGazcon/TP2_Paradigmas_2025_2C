@@ -27,6 +27,7 @@ public abstract class Turno {
         //Para que tenga sentido, la eleccion del numero de vertice tiene que estar aca.
         try{
             this.tablero.ubicarEstructura(estructura, numeroDeVerice);
+            System.out.println("Poblado/Estructura ubicados");
             return true;
         } catch (VerticeNoVacio | VerticeVacio | VerticeOcupadoPorAlguienMas | VerticeOcupadoPorCiudad |
                  VerticeFueraDeAlcance e) {
@@ -38,10 +39,10 @@ public abstract class Turno {
     public boolean intentarUbicarCarretera(Carretera carretera, int[] numeroDeArista){
         try{
             this.tablero.ubicarCarretera(carretera, numeroDeArista);
+            System.out.println("Carretera ubicada");
             return true;
         } catch (AristaEstaOcupada | AristaFueraDeAlcance e) {
-            System.out.println("No se puede ubicar en un vertice");
-            this.intentarUbicarCarretera(carretera, numeroDeArista);
+            System.out.println("No se puede ubicar en esta arista");
             return false;
         }
     }

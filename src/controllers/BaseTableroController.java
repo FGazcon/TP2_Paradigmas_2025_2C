@@ -118,10 +118,6 @@ public abstract class BaseTableroController implements Initializable {
                 if (!v.tieneCoordenadasAsignadas()) {
                     v.setCoordenadas(Vx, Vy);
                 }
-                System.out.println(
-                        "  Vértice [" + i + "]: Número=" + vertices[i].getNumeroDeVertice() +
-                                ", Coords Asignadas=(" + vertices[i].getCoordenadaX() + ", " + vertices[i].getCoordenadaY() + ")"
-                );
             }
         }
     }
