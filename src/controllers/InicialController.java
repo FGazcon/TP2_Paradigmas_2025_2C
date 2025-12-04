@@ -74,6 +74,12 @@ public class InicialController extends BaseTableroController implements Initiali
         asignarCoordenadasVertices(tableroModelo);
         dibujarTablero(tableroModelo);
     }
+
+    public void setValores(){
+        this.jugadorActual = this.catan.getTurno().getJugadorActual();
+        this.lblJugadorActual.setText(jugadorActual.getNombre());
+    }
+
     @Override
     protected void manejarClickVertice(Vertice v, Circle ui) {
         try {
@@ -135,6 +141,8 @@ public class InicialController extends BaseTableroController implements Initiali
     @FXML
     public void terminarTurnoInicial() {
         System.out.println("Turno inicial terminado.");
+        this.catan.terminarTurno();
+        setValores();
         // TODO: aca llamás al administrador de jugadores y verificas si pasas al turno general
     }
 

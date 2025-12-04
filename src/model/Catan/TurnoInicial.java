@@ -23,16 +23,18 @@ public class TurnoInicial extends Turno {
         if (this.pobladosUbicados < 1) {
             if(intentarUbicarCarretera(new Carretera(jugador), numeroDeArista)){
                 pobladosUbicados = 1;
+                System.out.println("Ya construiste carretera.");
             }
         }
     }
     @Override
     public void construirPoblado(int numeroDeVertice) {
-        System.out.println(this.jugador.getNombre());
         if (this.carreterasUbicadas < 1) {
             if(intentarUbicarEstructura(new PobladoInicial(jugador), numeroDeVertice)){
                 carreterasUbicadas++;
             }
+        } else {
+            System.out.println("Ya construiste poblado.");
         }
     }
 }
