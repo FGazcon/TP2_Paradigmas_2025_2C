@@ -27,7 +27,7 @@
     </top>
 
     <center>
-        <StackPane alignment="CENTER" style="-fx-padding: 10;">
+        <StackPane alignment="CENTER" style="-fx-padding: 0 0 0 100;">
             <Pane fx:id="tableroPane" prefWidth="800" prefHeight="600" />
 
         </StackPane>

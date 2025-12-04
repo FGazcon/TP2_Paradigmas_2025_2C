@@ -23,24 +23,26 @@ public abstract class Turno {
         this.dados = dados;
     }
 
-    public int intentarUbicarEstructura(Estructura estructura, int numeroDeVerice){
+    public boolean intentarUbicarEstructura(Estructura estructura, int numeroDeVerice){
         //Para que tenga sentido, la eleccion del numero de vertice tiene que estar aca.
         try{
             this.tablero.ubicarEstructura(estructura, numeroDeVerice);
+            return true;
         } catch (VerticeNoVacio | VerticeVacio | VerticeOcupadoPorAlguienMas | VerticeOcupadoPorCiudad |
                  VerticeFueraDeAlcance e) {
             System.out.println("No se puede ubicar en un vertice");
-            return this.intentarUbicarEstructura(estructura, numeroDeVerice);
+            return false;
         }
-        return numeroDeVerice;
     }
 
-    public void intentarUbicarCarretera(Carretera carretera, int[] numeroDeArista){
+    public boolean intentarUbicarCarretera(Carretera carretera, int[] numeroDeArista){
         try{
             this.tablero.ubicarCarretera(carretera, numeroDeArista);
+            return true;
         } catch (AristaEstaOcupada | AristaFueraDeAlcance e) {
             System.out.println("No se puede ubicar en un vertice");
             this.intentarUbicarCarretera(carretera, numeroDeArista);
+            return false;
         }
     }
 
@@ -48,8 +50,14 @@ public abstract class Turno {
 
     public abstract void construirPoblado(int numeroDeVertice);
 
+    public void construirCiudad(int numeroDeVertice) {
+        throw new UnsupportedOperationException("No se puede construir ciudad en este tipo de turno.");
+    }
+
+
     //fijarse si hace falta que el Turno este metido en todo esto.
     public Turno terminarTurno(AdministradorDeJugadores administrador){
+        jugador.actualizarTurnoCartas();
         return administrador.nuevoTurno(catan, tablero, dados);
     }
 

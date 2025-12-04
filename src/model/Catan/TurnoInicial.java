@@ -12,25 +12,27 @@ import java.util.List;
 
 public class TurnoInicial extends Turno {
 
-    private Jugador jugador;
     private int pobladosUbicados = 0;
     private int carreterasUbicadas = 0;
 
     public TurnoInicial(Catan catan, Tablero tablero, Jugador jugador, Dados dados) {
         super(catan, tablero, jugador, dados);
     }
-
+    @Override
     public void construirCarretera(int[] numeroDeArista) {
         if (pobladosUbicados < 1) {
-            intentarUbicarCarretera(new Carretera(jugador), numeroDeArista);
+            if(intentarUbicarCarretera(new Carretera(jugador), numeroDeArista)){
+                pobladosUbicados = 1;
+            }
         }
-        pobladosUbicados++;
     }
-
+    @Override
     public void construirPoblado(int numeroDeVertice) {
+        System.out.println(this.jugador.getNombre());
         if (carreterasUbicadas < 1) {
-            intentarUbicarEstructura(new PobladoInicial(jugador), numeroDeVertice);
+            if(intentarUbicarEstructura(new PobladoInicial(jugador), numeroDeVertice)){
+                carreterasUbicadas++;
+            }
         }
-        carreterasUbicadas++;
     }
 }

@@ -74,7 +74,7 @@ public class RegistroController
 
         Catan catan = new Catan(jugadores, banco);
 
-        cambiarEscena(event, "/fxml/inicial.fxml", catan); 
+        cambiarEscena(event, "/fxml/inicial.fxml", catan);
 
         // Para mostrar pantalla de ganador comentar linea 40 y descomentar la 44 (POR AHORA)
 
@@ -95,8 +95,8 @@ public class RegistroController
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Scene nueva = new Scene(loader.load());
 
-            //InicialController controller = loader.getController();
-            //controller.init(jugadores);
+            InicialController controller = loader.getController();
+            controller.init(catan);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(nueva);

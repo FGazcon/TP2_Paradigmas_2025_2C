@@ -71,4 +71,8 @@ public class Catan extends Observable {
         return this.turno;
     }
 
+    public List<Jugador> getJugadores(){
+        return jugadores;
+    }
+
 }

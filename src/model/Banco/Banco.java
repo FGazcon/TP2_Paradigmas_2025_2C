@@ -1,8 +1,9 @@
 package model.Banco;
 
+import model.Desarrollo.CartasDesarrollo.CartaDesarrollo;
 import model.Desarrollo.MazoDesarrolloGeneral;
+import model.Errores.NoQuedanMasDesarrollo;
 import model.Jugador.Jugador;
-import model.Recurso.*;
 import model.Recurso.*;
 
 import java.util.List;
@@ -95,5 +96,17 @@ public class Banco {
         for(Recurso recurso : recursosQueRecibe){
             recurso.transferirAlBanco(this, recurso.sumadorCantidad(0));
         }
+    }
+
+    public void jugadorSolicitaDesarrollo(Jugador jugador){
+
+        try{
+            CartaDesarrollo carta = this.mazoDesarrollo.jugadorSolicitaDesarrollo();
+            jugador.registrarDesarrollo(carta);
+            carta.cobrarleAJugador(jugador);
+        } catch(NoQuedanMasDesarrollo e){
+            System.out.println("No Quedan mas desarrollo");
+        }
+
     }
 }

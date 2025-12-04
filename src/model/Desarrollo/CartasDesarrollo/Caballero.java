@@ -1,14 +1,29 @@
 package model.Desarrollo.CartasDesarrollo;
 
+import model.Catan.Catan;
+import model.Desarrollo.*;
 import model.Jugador.Jugador;
+import model.Tablero.Tablero;
 
-public class Caballero extends CartaDesarrollo{
+import java.util.List;
 
-    //Debera tener acceso al Gestor de Ladron.
+public class Caballero extends CartaDesarrollo {
 
     @Override
-    public void activar(Jugador jugador) {
-        //tablero.moverLadron(10, jugador);
-    }
+    public ActivacionDesarrollo prepararActivacion() {
 
+        return new ActivacionDesarrollo() {
+
+            private int hexElegido;
+
+            public void setHex(int hex) {
+                this.hexElegido = hex;
+            }
+
+            @Override
+            public void ejecutar(Jugador jugador, Tablero tablero, List <Jugador> jugadores) {
+                tablero.moverLadron(hexElegido, jugador);
+            }
+        };
+    }
 }

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.MusicPlayer;
 
 public class Main extends Application {
 
@@ -15,6 +16,8 @@ public class Main extends Application {
 
         new view.MenuObserver(catan);
         new view.RegistroObserver(catan);
+
+        MusicPlayer.play("resources/audio/musica_fondo_ok.wav");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
         Scene scene = new Scene(loader.load());

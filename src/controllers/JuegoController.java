@@ -5,14 +5,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import model.Banco.Banco;
+import model.Catan.TurnoGeneral;
 import model.Dados.Dados;
 import model.Catan.Catan;
 import model.Recurso.*;
 import model.Jugador.Jugador;
+import model.Tablero.Arista.Arista;
+import model.Tablero.Arista.Carretera;
 import model.Tablero.Factory.Factory_MapaBasico;
 import model.Tablero.Hexagono;
 import model.Tablero.Tablero;
+import model.Tablero.Vertice.Vertice;
 
 import java.net.URL;
 import java.util.*;
@@ -40,6 +47,7 @@ public class JuegoController extends BaseTableroController implements Initializa
     private List<Jugador> jugadores = new ArrayList<>();
     private Jugador jugadorActual;
     private Map<Label, Recurso> lblRecursos;
+    private TurnoGeneral turnoActual;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,13 +60,68 @@ public class JuegoController extends BaseTableroController implements Initializa
 
         jugadorActual = new Jugador("Jugador",banco);
 
-        //turnoActual = new TurnoPersonal(catan, tableroModelo, jugadorActual, dados);
+        turnoActual = new TurnoGeneral(catan, tableroModelo, jugadorActual, dados);
 
         asignarCoordenadas(tableroModelo.getHexagonos());
 
         asignarCoordenadasVertices(tableroModelo);
 
         dibujarTablero(tableroModelo);
+    }
+
+    @Override
+    protected void manejarClickVertice(Vertice v, Circle ui) {
+        try {
+            if (modoActual == ModoJuego.CONSTRUIR_POBLADO) {
+                try {
+                    turnoActual.construirPoblado(v.getNumeroDeVertice());
+                    ui.setFill(Color.BLUE);
+                } catch (Exception ex) {
+                    System.err.println("Error construir poblado: " + ex.getMessage());
+                }
+            }
+
+            if (modoActual == ModoJuego.CONSTRUIR_CIUDAD) {
+                try {
+                    turnoActual.construirCiudad(v.getNumeroDeVertice());
+                    ui.setFill(Color.BLUE);
+                } catch (Exception ex) {
+                    System.err.println("Error construir ciudad: " + ex.getMessage());
+                }
+            }
+
+
+        } catch (Exception ex) {
+            System.err.println("Error en vértice: " + ex.getMessage());
+        }
+
+        modoActual = ModoJuego.SELECCIONAR_NADA;
+    }
+    @Override
+    protected void manejarClickArista(Arista a, Line ui) {
+        if (modoActual == ModoJuego.CONSTRUIR_CARRETERA) {
+            try {
+                int origen = a.getPar().getDestino().getNumeroDeVertice();
+                int destino = a.getDestino().getNumeroDeVertice();
+                turnoActual.construirCarretera(new int[]{origen, destino});
+                ui.setStroke(Color.BLUE);
+            } catch (Exception ex) {
+                System.err.println("Error construir carretera: " + ex.getMessage());
+            }
+        }
+
+        try {
+            Carretera c = new Carretera(jugadorActual);
+            a.ubicarCarretera(c, a.getNumeroDeVertices());
+
+            ui.setStroke(Color.BLUE);
+            ui.setOpacity(1);
+
+        } catch (Exception ex) {
+            System.err.println("Error en arista: " + ex.getMessage());
+        }
+
+        modoActual = ModoJuego.SELECCIONAR_NADA;
     }
 
     private Map<Label, Recurso> crearMapRecursos() {

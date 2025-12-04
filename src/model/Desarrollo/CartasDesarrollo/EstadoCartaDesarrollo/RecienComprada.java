@@ -3,6 +3,8 @@ package model.Desarrollo.CartasDesarrollo.EstadoCartaDesarrollo;
 import model.Desarrollo.CartasDesarrollo.CartaDesarrollo;
 import model.Jugador.Jugador;
 
+import java.util.List;
+
 public class RecienComprada extends EstadoCartaDesarrollo {
 
     @Override
@@ -10,8 +12,9 @@ public class RecienComprada extends EstadoCartaDesarrollo {
         cartaDesarrollo.setEstado(new Activable());
     }
 
-    @Override
-    public void intentarActivarse(CartaDesarrollo cartaDesarrollo, Jugador jugador) {
-
+    public List<CartaDesarrollo> sumarRecienComprada(List<CartaDesarrollo> cartasDesarrollo, CartaDesarrollo cartaDesarrollo){
+        cartasDesarrollo.add(cartaDesarrollo);
+        return cartasDesarrollo;
     }
+
 }

@@ -33,7 +33,7 @@ public class Poblado extends Estructura{
         this.costo = new ArrayList<>();
         this.costo.add(new Oveja(1));
         this.costo.add(new Trigo(1));
-        this.costo.add(new Piedra(1));
+        this.costo.add(new Ladrillo(1));
         this.costo.add(new Madera(1));
     }
 

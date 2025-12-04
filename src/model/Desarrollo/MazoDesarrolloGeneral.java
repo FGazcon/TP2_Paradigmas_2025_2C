@@ -2,6 +2,8 @@ package model.Desarrollo;
 
 import model.Desarrollo.CartasDesarrollo.*;
 import model.Desarrollo.CartasDesarrollo.*;
+import model.Errores.NoQuedanMasDesarrollo;
+import model.Jugador.Jugador;
 
 import java.util.*;
 
@@ -22,15 +24,6 @@ public class MazoDesarrolloGeneral {
 
     public MazoDesarrolloGeneral(){
         mapaCartaDesarrollo = new ArrayList<>();
-    }
-
-    public CartaDesarrollo pedirRecurso(){
-
-        Random rnd = new Random();
-        int nro = rnd.nextInt(0, 4);
-
-        return mapaCartaDesarrollo.get(nro);
-
     }
 
     public static List<CartaDesarrollo> mazoCaballeros() {
@@ -71,6 +64,18 @@ public class MazoDesarrolloGeneral {
             monopolios.add(new Monopolio());
         }
         return monopolios;
+    }
+
+    public CartaDesarrollo jugadorSolicitaDesarrollo(){
+        if(this.mapaCartaDesarrollo.isEmpty()){
+            throw new NoQuedanMasDesarrollo();
+        } else {
+
+            int posicion = (int) (this.mapaCartaDesarrollo.size() * Math.random());
+
+            return this.mapaCartaDesarrollo.remove(posicion);
+
+        }
     }
 
 }

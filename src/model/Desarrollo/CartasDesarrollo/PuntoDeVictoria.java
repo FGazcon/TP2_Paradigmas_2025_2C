@@ -1,21 +1,11 @@
 package model.Desarrollo.CartasDesarrollo;
 
-import model.Jugador.Jugador;
+import model.Desarrollo.*;
 
-public class PuntoDeVictoria extends CartaDesarrollo{
-
-    //Debera tener acceso al conteo de puntos
-    //Podria no implementarse, y directamente sumar cuando se saque del Banco.
+public class PuntoDeVictoria extends CartaDesarrollo {
 
     @Override
-    public void activar(Jugador jugador) {
-
+    public ActivacionDesarrollo prepararActivacion() {
+        return (jugador, tablero, jugadores) -> jugador.sumarPunto();
     }
-
-    @Override
-    public int modificarPuntaje(int puntaje){
-        return puntaje + 1;
-    }
-
-
 }

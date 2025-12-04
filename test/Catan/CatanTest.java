@@ -2,14 +2,19 @@ package Catan;
 
 import model.Banco.Banco;
 import model.Catan.Catan;
+import model.Catan.TurnoGeneral;
+import model.Dados.Dados;
 import model.Jugador.Jugador;
+import model.Recurso.Ladrillo;
 import model.Recurso.Madera;
+import model.Recurso.Oveja;
+import model.Recurso.Trigo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class CatanTest {
@@ -55,5 +60,25 @@ public class CatanTest {
         Assertions.assertEquals(4,recursosObtenidos);
 
     }
+
+    @Test
+    public void test03JugadorCompraUnPoblado(){
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Williberto", banco);
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador);
+
+        Catan catan = new Catan(jugadores, banco);
+
+        jugador.pedirAlBanco(new Madera(), 1);
+        jugador.pedirAlBanco(new Ladrillo(), 1);
+        jugador.pedirAlBanco(new Trigo(), 1);
+        jugador.pedirAlBanco(new Oveja(), 1);
+
+        TurnoGeneral turno = new TurnoGeneral(catan, catan.getTablero(), jugador, new Dados());
+
+        //turno.construirPoblado();
+    }
+
 
 }

@@ -11,6 +11,9 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.layout.StackPane;
 import model.Catan.Catan;
+import model.Catan.Turno;
+import model.Catan.TurnoGeneral;
+import model.Catan.TurnoInicial;
 import model.Jugador.Jugador;
 import model.Tablero.Arista.Arista;
 import model.Tablero.Arista.Carretera;
@@ -40,6 +43,9 @@ public abstract class BaseTableroController implements Initializable {
     // Usa las dimensiones reales del Pane
     protected final double X_INICIAL = 400.0 - (2.5 * DIST_X);
     protected final double Y_INICIAL = 300.0 - (2.0 * DIST_Y);
+
+    protected Turno turnoActual; // Puede ser inicial o general
+
 
     protected void dibujarTablero(Tablero modelo) {
         for (Hexagono hex : modelo.getHexagonos()) {
@@ -228,43 +234,12 @@ public abstract class BaseTableroController implements Initializable {
         return l;
     }
 
-    protected void manejarClickVertice(Vertice v, Circle ui) {
+    protected abstract void manejarClickVertice(Vertice v, Circle ui);
 
-        try {
-            if (modoActual == ModoJuego.CONSTRUIR_POBLADO) {
-                v.ubicarEstructura(new Poblado(jugadorActual));
-                ui.setFill(Color.BLUE);
-            }
+    protected abstract void manejarClickArista(Arista a, Line ui);
 
-            if (modoActual == ModoJuego.CONSTRUIR_CIUDAD) {
-                v.ubicarEstructura(new Ciudad(jugadorActual));
-                ui.setFill(Color.BLUE);
-            }
-
-        } catch (Exception ex) {
-            System.err.println("Error en vértice: " + ex.getMessage());
-        }
-
-        modoActual = ModoJuego.SELECCIONAR_NADA;
+    public void setTurnoActual(Turno turno) {
+        this.turnoActual = turno;
     }
 
-    protected void manejarClickArista(Arista a, Line ui) {
-        if (modoActual != ModoJuego.CONSTRUIR_CARRETERA) {
-            System.out.println("No estás en modo carretera.");
-            return;
-        }
-
-        try {
-            Carretera c = new Carretera(jugadorActual);
-            a.ubicarCarretera(c, a.getNumeroDeVertices());
-
-            ui.setStroke(Color.BLUE);
-            ui.setOpacity(1);
-
-        } catch (Exception ex) {
-            System.err.println("Error en arista: " + ex.getMessage());
-        }
-
-        modoActual = ModoJuego.SELECCIONAR_NADA;
-    }
 }

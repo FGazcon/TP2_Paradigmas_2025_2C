@@ -2,14 +2,13 @@ package model.Jugador;
 
 import model.Banco.Banco;
 import model.Comercio.ReglaDeComercio;
+import model.Desarrollo.CartasDesarrollo.ActivacionDesarrollo;
 import model.Desarrollo.CartasDesarrollo.CartaDesarrollo;
 import model.Recurso.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set; //Ahi vengo. Entra ds cuando vuelvasss!!!
 
 public class Jugador {
 
@@ -18,6 +17,7 @@ public class Jugador {
     private Map<String, Recurso> mapaRecursos;
     private List<CartaDesarrollo> cartasDesarrollo;
     private Banco banco;
+    private int cantidadCabelleros;
 
     public Jugador(String nombre, Banco banco) {
         this.nombre = nombre;
@@ -194,4 +194,47 @@ public class Jugador {
         restarVariosRecursos(costo);
         this.banco.sumarVariosRecursos(costo);
     }
+
+    public void adquirirDesarrollo(){
+        this.banco.jugadorSolicitaDesarrollo(this);
+    }
+
+    public void registrarDesarrollo(CartaDesarrollo carta){
+        this.cartasDesarrollo.add(carta);
+    }
+
+    public List<CartaDesarrollo> getCartasDesarrolloSinActivar(){
+        List<CartaDesarrollo> cartasDesarrollo = new ArrayList<>();
+        for(CartaDesarrollo carta : this.cartasDesarrollo){
+            carta.sumarActivable(cartasDesarrollo);
+        }
+        return cartasDesarrollo;
+    }
+
+    public List<CartaDesarrollo> getCartasDesarrolloUsadas(){
+        List<CartaDesarrollo> cartasDesarrollo = new ArrayList<>();
+        for(CartaDesarrollo carta : this.cartasDesarrollo){
+            carta.sumarUsada(cartasDesarrollo);
+        }
+        return cartasDesarrollo;
+    }
+
+    public List<CartaDesarrollo> getCartasDesarrolloRecienCompradas(){
+        List<CartaDesarrollo> cartasDesarrollo = new ArrayList<>();
+        for(CartaDesarrollo carta : this.cartasDesarrollo){
+            carta.sumarRecienComprada(cartasDesarrollo);
+        }
+        return cartasDesarrollo;
+    }
+
+    public void actualizarTurnoCartas(){
+        for (CartaDesarrollo carta : this.cartasDesarrollo){
+            carta.pasarTurnoDeCompra();
+        }
+    }
+
+    public ActivacionDesarrollo getActivacionParaCartaEnPosicion(int posicion){
+        return getCartasDesarrolloSinActivar().get(posicion).intentarActivarse();
+    }
+
 }

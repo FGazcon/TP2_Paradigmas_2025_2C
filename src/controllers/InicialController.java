@@ -5,80 +5,145 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import model.Banco.Banco;
 import model.Catan.Catan;
+import model.Catan.Turno;
+import model.Catan.TurnoInicial;
 import model.Dados.Dados;
 import model.Jugador.Jugador;
 import model.Recurso.*;
+import model.Tablero.Arista.Arista;
+import model.Tablero.Arista.Carretera;
 import model.Tablero.Factory.Factory_MapaBasico;
 import model.Tablero.Hexagono;
 import model.Tablero.Tablero;
+import model.Tablero.Vertice.Vertice;
 
 import java.net.URL;
 import java.util.*;
 
 public class InicialController extends BaseTableroController implements Initializable {
 
-    @FXML private Label lblTurnoInicial;   // "Turno inicial de: Jugador ..."
-    @FXML private Pane tableroPane;
-    @FXML private Button btnSiguiente;
+    @FXML private Label lblJugadorActual;
+    @FXML private Label lblTurno;
 
+    @FXML private Pane tableroPane;
+    //@FXML private Button btnCarretera;
+   // @FXML private Button btnPoblado;
+
+    private Banco banco = new Banco();
     private Catan catan;
+    private Dados dados = new Dados();
     private List<Jugador> jugadores = new ArrayList<>();
-    private int indiceJugador = 0;
+    private Jugador jugadorActual;
+    private TurnoInicial turnoInicial;
+    private Turno turno;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL location, ResourceBundle resources) {
 
-        this.jugadores = jugadores;
-        // Modelo (luego Registro enviará los jugadores reales)
-        //jugadores = crearJugadoresDummyParaTest();
-        jugadorActual = catan.getTurno().getJugadorActual();
+        // Crear tablero
+        List<Hexagono> hexs = Factory_MapaBasico.crearHexagonosBasico();
 
-        lblTurnoInicial.setText("Turno inicial de: " + jugadorActual.getNombre());
 
-        catan = new Catan(jugadores, new Banco());
-        tableroModelo = catan.getTablero();
+
+
+
+
+    }
+    public void init(Catan catan){
+        this.catan = catan;
+        this.jugadorActual = this.catan.getTurno().getJugadorActual();
+        this.tableroModelo = this.catan.getTablero();
+        this.jugadores = catan.getJugadores();
+        // Turno inicial
+        //this.turnoInicial = new TurnoInicial(catan, tableroModelo, jugadorActual, dados);
+        System.out.println(jugadores.getFirst().getNombre());
+        System.out.println(jugadores.getLast().getNombre());
+        setTurnoActual(this.catan.getTurno());
+        System.out.println(turnoActual);
+        modoActual = ModoJuego.CONSTRUIR_POBLADO;
+        this.lblJugadorActual.setText(jugadorActual.getNombre()); // Ojo!
+
+        lblTurno.setText("Turno Inicial de " + jugadorActual.getNombre());
 
         asignarCoordenadas(tableroModelo.getHexagonos());
         asignarCoordenadasVertices(tableroModelo);
-
         dibujarTablero(tableroModelo);
+    }
+    @Override
+    protected void manejarClickVertice(Vertice v, Circle ui) {
+        try {
+            if (modoActual == ModoJuego.CONSTRUIR_POBLADO) {
+                try {
+                    turnoActual.construirPoblado(v.getNumeroDeVertice());
+                    ui.setFill(Color.BLUE);
+                    modoActual = ModoJuego.CONSTRUIR_CARRETERA;
+                } catch (Exception ex) {
+                    System.err.println("Error construir poblado: " + ex.getMessage());
+                }
+            }
 
-        // En el turno inicial SOLO se construyen poblados
+
+        } catch (Exception ex) {
+            System.err.println("Error en vértice: " + ex.getMessage());
+        }
+
+        //modoActual = ModoJuego.SELECCIONAR_NADA;
+    }
+    @Override
+    protected  void manejarClickArista(Arista a, Line ui) {
+        if (modoActual == ModoJuego.CONSTRUIR_CARRETERA) {
+            try {
+                int origen = a.getPar().getDestino().getNumeroDeVertice();
+                int destino = a.getDestino().getNumeroDeVertice();
+                turnoActual.construirCarretera(new int[]{origen, destino});
+                ui.setStroke(Color.BLUE);
+                catan.terminarTurno();
+            } catch (Exception ex) {
+                System.err.println("Error construir carretera: " + ex.getMessage());
+            }
+        }
+/*
+        try {
+            Carretera c = new Carretera(jugadorActual);
+            a.ubicarCarretera(c, a.getNumeroDeVertices());
+
+            ui.setStroke(Color.BLUE);
+            ui.setOpacity(1);
+
+        } catch (Exception ex) {
+            System.err.println("Error en arista: " + ex.getMessage());
+        }*/
+
+        modoActual = ModoJuego.SELECCIONAR_NADA;
+    }
+
+    @FXML
+    public void construirPoblado() {
         modoActual = ModoJuego.CONSTRUIR_POBLADO;
     }
 
     @FXML
-    public void siguiente() {
-        indiceJugador++;
-
-        if (indiceJugador >= jugadores.size()) {
-            System.out.println("Fin de los turnos iniciales → ahora va juego normal");
-            volverAJuego();
-            return;
-        }
-
-        jugadorActual = jugadores.get(indiceJugador);
-        lblTurnoInicial.setText("Turno inicial de: " + jugadorActual.getNombre());
-
-        modoActual = ModoJuego.CONSTRUIR_POBLADO;
-        System.out.println("El siguiente jugador debe elegir un vértice.");
+    public void construirCarretera() {
+        modoActual = ModoJuego.CONSTRUIR_CARRETERA;
     }
 
-    private void volverAJuego() {
-        try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/juego.fxml"));
-            javafx.scene.Scene scene = new javafx.scene.Scene(loader.load());
-            javafx.stage.Stage stage = (javafx.stage.Stage) tableroPane.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void terminarTurnoInicial() {
+        System.out.println("Turno inicial terminado.");
+        // TODO: aca llamás al administrador de jugadores y verificas si pasas al turno general
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public void cambariAJuegoController(){
+
+    }
+
+    @FXML
+    public void salir() {
+        System.exit(0);
     }
 }

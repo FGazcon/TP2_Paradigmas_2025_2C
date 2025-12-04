@@ -11,37 +11,120 @@
             prefWidth="1280" prefHeight="720"
             style="-fx-background-color: #E6D0B4;">
 
-    <!-- HEADER -->
+    <!-- ======= TOP BAR ======= -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="40"
-              style="-fx-background-color: #F0B340; -fx-padding: 12; -fx-border-color: black; -fx-border-width: 0 0 2 0;">
+        <HBox alignment="CENTER_LEFT" spacing="60"
+              style="-fx-background-color: #F0B340;
+                     -fx-padding: 10;
+                     -fx-border-color: black;
+                     -fx-border-width: 0 0 2 0;">
             <padding><Insets left="30" right="30"/></padding>
-            <Label text="CATAN"
-                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #9C2626;"/>
 
-            <Label fx:id="lblTurnoInicial"
-                   text="Turno inicial de: -"
-                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Label text="CATAN"
+                   style="-fx-font-size: 32px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #9C2626;"/>
+
+            <Separator orientation="VERTICAL" prefHeight="20" />
+
+            <Label fx:id="lblTurno"
+                   text="Turno Inicial de Jugador 1"
+                   style="-fx-font-size: 24px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #333;"/>
         </HBox>
     </top>
 
-    <!-- TABLERO -->
+    <!-- ======= TABLERO CENTRADO ======= -->
     <center>
-        <StackPane alignment="CENTER" style="-fx-padding: 10;">
-            <Pane fx:id="tableroPane" prefWidth="800" prefHeight="600"/>
+        <StackPane alignment="CENTER" style="-fx-padding: 0 0 0 100;">
+            <Pane fx:id="tableroPane" />
         </StackPane>
     </center>
 
-    <!-- BOTÓN SIGUIENTE -->
-    <bottom>
-        <HBox alignment="CENTER" style="-fx-padding: 20;">
-            <Button fx:id="btnSiguiente"
-                    text="SIGUIENTE JUGADOR"
-                    onAction="#siguiente"
-                    prefWidth="280" prefHeight="50"
-                    style="-fx-background-color: #9C2626; -fx-text-fill: white;
-                           -fx-font-size: 22px; -fx-font-weight: bold; -fx-background-radius: 6;"/>
-        </HBox>
-    </bottom>
+    <!-- ======= PANEL DERECHO ======= -->
+    <right>
+        <VBox spacing="20" alignment="TOP_CENTER" prefWidth="260"
+              style="-fx-background-color: #D2B48C;
+                     -fx-padding: 20;
+                     -fx-border-color: black;
+                     -fx-border-width: 0 0 0 2;">
+
+            <!-- Título -->
+            <Label text="ACCIONES"
+                   style="-fx-font-size: 24px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #000;" />
+
+            <Separator/>
+
+            <!-- Jugador actual -->
+            <Label fx:id="lblJugadorActual"
+                   text="Jugador 1"
+                   style="-fx-font-size: 18px;
+                          -fx-font-weight: bold;" />
+
+            <Separator/>
+
+            <!-- Construcciones -->
+            <VBox spacing="10" alignment="CENTER">
+                <Label text="CONSTRUCCIÓN"
+                       style="-fx-font-size: 18px;
+                              -fx-font-weight: bold;"/>
+
+                <Button fx:id="btnCarretera"
+                        text="Carretera Inicial"
+                        onAction="#construirCarretera"
+                        prefWidth="180"
+                        style="-fx-background-color: #8B4513;
+                               -fx-text-fill: white;
+                               -fx-font-size: 16px;" />
+
+                <Button fx:id="btnPoblado"
+                        text="Poblado Inicial"
+                        onAction="#construirPoblado"
+                        prefWidth="180"
+                        style="-fx-background-color: #3D9970;
+                               -fx-text-fill: white;
+                               -fx-font-size: 16px;" />
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <AnchorPane prefHeight="120"
+                        style="-fx-background-color: #D2B48C;
+                   -fx-border-color: black;
+                   -fx-border-width: 2 0 0 0;">
+
+                <VBox spacing="10" alignment="CENTER"
+                      prefWidth="220" prefHeight="120"
+                      AnchorPane.bottomAnchor="0"
+                      style="-fx-padding: 10;">
+
+                    <Button fx:id="btnTerminarTurnoInicial"
+                            text="TERMINAR TURNO >>"
+                            onAction="#terminarTurnoInicial"
+                            prefWidth="220" prefHeight="35"
+                            style="-fx-background-color: #E5A32A;
+                       -fx-text-fill: black;
+                       -fx-font-size: 16px;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 5;" />
+
+                    <Button fx:id="btnSalir"
+                            text="SALIR AL MENÚ"
+                            onAction="#salir"
+                            prefWidth="220" prefHeight="35"
+                            style="-fx-background-color: #9C2626;
+                       -fx-text-fill: white;
+                       -fx-font-size: 16px;
+                       -fx-background-radius: 5;" />
+                </VBox>
+
+            </AnchorPane>
+
+        </VBox>
+    </right>
+
 
 </BorderPane>

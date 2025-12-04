@@ -1,23 +1,32 @@
 package model.Desarrollo.CartasDesarrollo;
 
+import model.Catan.Catan;
+import model.Desarrollo.*;
 import model.Jugador.Jugador;
-import model.Recurso.Madera;
 import model.Recurso.Recurso;
+import model.Tablero.Tablero;
 
 import java.util.List;
 
 public class Descubrimiento extends CartaDesarrollo {
 
-    //Debera tener acceso al Banco, o activar directamente desde el banco con el dato del jugador activo.
-
-    public void activar(Jugador jugador, Recurso recurso1, Recurso recurso2) {
-        recurso1.hacerQuejugadorSoliciteABanco(jugador, 1);
-        recurso2.hacerQuejugadorSoliciteABanco(jugador, 1);
-    }
-
     @Override
-    public void activar(Jugador jugador){
+    public ActivacionDesarrollo prepararActivacion() {
 
+        return new ActivacionDesarrollo() {
+
+            private Recurso r1, r2;
+
+            public void setRecursos(Recurso a, Recurso b) {
+                this.r1 = a;
+                this.r2 = b;
+            }
+
+            @Override
+            public void ejecutar(Jugador jugador, Tablero tablero, List<Jugador> jugadores) {
+                jugador.pedirAlBanco(r1, 1);
+                jugador.pedirAlBanco(r2, 1);
+            }
+        };
     }
-
 }
