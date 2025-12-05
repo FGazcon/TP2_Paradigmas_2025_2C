@@ -96,5 +96,55 @@ public abstract class Recurso{
         return getClass().hashCode();
     }
 
+    public Recurso obtenerRecursoDeJugador(Jugador jugador) {
+        return this.getRecursoJugador(jugador);
+    }
+
+    public Recurso obtenerRecursoDeBanco(Banco banco) {
+        return this.getRecursoBanco(banco);
+    }
+
+    public void sumarCantidadDeUnRecursoAJugador(Jugador jugador, int cantidad) {
+        Recurso recurso = this.obtenerRecursoDeJugador(jugador);
+        recurso.sumar(cantidad);
+    }
+
+    public void descartarCantidadDeUnRecursoAJugador(Jugador jugador, int cantidad) {
+        Recurso recurso = this.obtenerRecursoDeJugador(jugador);
+        recurso.descartar(cantidad);
+    }
+
+    public boolean verificarSiJugadorTieneAlMenosUnaCantidadDeUnRecurso(Jugador jugador, int cantidad) {
+        Recurso recurso = this.obtenerRecursoDeJugador(jugador);
+        return recurso.tieneAlMenos(cantidad);
+    }
+
+    public void sumarCantidadDeUnRecursoABanco(Banco banco, int cantidad) {
+        Recurso recurso = this.obtenerRecursoDeBanco(banco);
+        recurso.sumar(cantidad);
+    }
+
+    public void descartarCantidadDeUnRecursoABanco(Banco banco, int cantidad) {
+        Recurso recurso = this.obtenerRecursoDeBanco(banco);
+        recurso.descartar(cantidad);
+    }
+
+    public boolean verificarSiBancoTieneAlMenosUnaCantidadDeUnRecurso(Banco banco, int cantidad) {
+        Recurso recurso = this.obtenerRecursoDeBanco(banco);
+        return recurso.tieneAlMenos(cantidad);
+    }
+
+    public void cambiarReglaDeComercioDeUnJugador(Jugador jugador, ReglaDeComercio reglaDeComercio) {
+        Recurso recurso = this.obtenerRecursoDeJugador(jugador);
+        recurso.cambiarRegla(reglaDeComercio);
+    }
+
+    public void comerciarRecursoDeUnJugadorConElBanco(Jugador jugador, int cantidad,  Recurso recursoDeseado, Banco banco) {
+        Recurso recurso = this.obtenerRecursoDeJugador(jugador);
+        recurso.comerciarConBanco(jugador, cantidad, recursoDeseado, banco);
+    }
+
+
+
 }
 

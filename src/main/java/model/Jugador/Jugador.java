@@ -83,18 +83,20 @@ public class Jugador {
         return puntaje;
     }
 
-    public void sumarRecurso(Recurso recurso, int cantidad){
-        recurso.getRecursoJugador(this).sumar(cantidad);
+    public void sumarRecurso(Recurso recurso, int cantidad) {
+        recurso.sumarCantidadDeUnRecursoAJugador(this, cantidad);
     }
 
-    public void descartarRecurso(Recurso recurso, int cantidad){
-        recurso.getRecursoJugador(this).descartar(cantidad);
+    public void descartarRecurso(Recurso recurso, int cantidad) {
+        recurso.descartarCantidadDeUnRecursoAJugador(this, cantidad);
     }
 
-    public boolean tieneAlMenos(Recurso recurso, int cantidad){return recurso.getRecursoJugador(this).tieneAlMenos(cantidad); }
+    public boolean tieneAlMenos(Recurso recurso, int cantidad) {
+        return recurso.verificarSiJugadorTieneAlMenosUnaCantidadDeUnRecurso(this, cantidad);
+    }
 
     public void pedirAlBanco(Recurso recurso, int cantidad){
-        banco.jugadorLeSolicitaRecurso(this, recurso.getRecursoJugador(this), cantidad);
+        banco.jugadorLeSolicitaRecurso(this, recurso.obtenerRecursoDeJugador(this), cantidad);
     }
 
     public void comerciarConJugador(Jugador jugador, List<Recurso> recursosOfertados, List<Recurso> recursosDeseados){
@@ -146,17 +148,17 @@ public class Jugador {
         recursos.add(recursoOfertado);
 
         if (tieneSuficientesParaOfertar(recursos)){
-            recursoOfertado.getRecursoJugador(this).comerciarConBanco(this, cantidad, recursoDeseado, banco);
+            recursoOfertado.comerciarRecursoDeUnJugadorConElBanco(this, cantidad, recursoDeseado, banco);
         }
     }
 
     public void darReglaA(Recurso recurso, ReglaDeComercio reglaDeComercio) {
-        recurso.getRecursoJugador(this).cambiarRegla(reglaDeComercio);
+        recurso.cambiarReglaDeComercioDeUnJugador(this, reglaDeComercio);
     }
 
     public void darReglaATodos(ReglaDeComercio reglaDeComercio) {
         for (Recurso recurso : this.mapaRecursos.values()){
-            recurso.getRecursoJugador(this).cambiarRegla(reglaDeComercio);
+            recurso.cambiarReglaDeComercioDeUnJugador(this, reglaDeComercio);
         }
     }
 
@@ -166,28 +168,32 @@ public class Jugador {
         }
     }
 
+    public Recurso obtenerRecurso(String nombre) {
+        return mapaRecursos.get(nombre);
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public Recurso getMadera(){
-        return this.mapaRecursos.get("Madera");
+        return this.obtenerRecurso("Madera");
     }
 
     public Recurso getLadrillo(){
-        return this.mapaRecursos.get("Ladrillo");
+        return this.obtenerRecurso("Ladrillo");
     }
 
     public Recurso getPiedra(){
-        return this.mapaRecursos.get("Piedra");
+        return this.obtenerRecurso("Piedra");
     }
 
     public Recurso getOveja(){
-        return this.mapaRecursos.get("Oveja");
+        return this.obtenerRecurso("Oveja");
     }
 
     public Recurso getTrigo(){
-        return this.mapaRecursos.get("Trigo");
+        return this.obtenerRecurso("Trigo");
     }
 
     public void pagarleAlBanco(List<Recurso> costo){
@@ -233,8 +239,17 @@ public class Jugador {
         }
     }
 
-    public ActivacionDesarrollo getActivacionParaCartaEnPosicion(int posicion){
-        return getCartasDesarrolloSinActivar().get(posicion).intentarActivarse();
+    private CartaDesarrollo obtenerCartaDesarrolloEn(int posicion) {
+        return getCartasDesarrolloSinActivar().get(posicion);
+    }
+
+    private ActivacionDesarrollo activarCarta(CartaDesarrollo carta) {
+        return carta.intentarActivarse();
+    }
+
+    public ActivacionDesarrollo getActivacionParaCartaEnPosicion(int posicion) {
+        CartaDesarrollo carta = obtenerCartaDesarrolloEn(posicion);
+        return activarCarta(carta);
     }
 
 }

@@ -20,32 +20,16 @@ public class Banco {
     }
 
     public void sumarRecurso(Recurso recurso, int cantidad) {
-        recurso.getRecursoBanco(this).sumar(cantidad);
+        recurso.sumarCantidadDeUnRecursoABanco(this, cantidad);
     }
 
     public void descartarRecurso(Recurso recurso, int cantidad) {
-        recurso.getRecursoBanco(this).descartar(cantidad);
+        recurso.descartarCantidadDeUnRecursoABanco(this, cantidad);
     }
 
     public boolean tieneAlMenos(Recurso recurso, int cantidad) {
-        return recurso.getRecursoBanco(this).tieneAlMenos(cantidad);
+        return recurso.verificarSiBancoTieneAlMenosUnaCantidadDeUnRecurso(this, cantidad);
     }
-
-    /*
-     * public java.Recurso encontrarRecurso(java.Recurso recurso){
-     *
-     * }
-     *
-     * */
-
-
-/*
-    public void jugadorLeSolicitaRecurso(java.Jugador jugador,java.Recurso recurso, int cantidad){
-        if(recurso.tieneAlMenos(cantidad)){
-            recurso.transferirAJugador(jugador,cantidad);
-            recurso.descartarAlBanco(this,cantidad);
-        }*/
-
 
     public void jugadorLeSolicitaRecurso(Jugador jugador, Recurso recurso, int cantidad){
         Recurso recursoPropio = recurso.getRecursoBanco(this);
@@ -72,24 +56,28 @@ public class Banco {
 
     }
 
+    public Recurso obtenerRecurso(String nombre) {
+        return mazoDeProduccion.get(nombre);
+    }
+
     public Recurso getMadera(){
-        return this.mazoDeProduccion.get("Madera");
+        return this.obtenerRecurso("Madera");
     }
 
     public Recurso getLadrillo(){
-        return this.mazoDeProduccion.get("Ladrillo");
+        return this.obtenerRecurso("Ladrillo");
     }
 
     public Recurso getPiedra(){
-        return this.mazoDeProduccion.get("Piedra");
+        return this.obtenerRecurso("Piedra");
     }
 
     public Recurso getOveja(){
-        return this.mazoDeProduccion.get("Oveja");
+        return this.obtenerRecurso("Oveja");
     }
 
     public Recurso getTrigo(){
-        return this.mazoDeProduccion.get("Trigo");
+        return this.obtenerRecurso("Trigo");
     }
 
     public void sumarVariosRecursos(List<Recurso> recursosQueRecibe){
