@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Tablero.AristaTest" time="0.017" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/test-classes:/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/classes:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/joaquin-saladino/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/joaquin-saladino/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/joaquin-saladino/.m2/repository/org/mockito/mockito-core/5.20.0/mockito-core-5.20.0.jar:/home/joaquin-saladino/.m2/repository/net/bytebuddy/byte-buddy/1.17.7/byte-buddy-1.17.7.jar:/home/joaquin-saladino/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.7/byte-buddy-agent-1.17.7.jar:/home/joaquin-saladino/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/joaquin-saladino/.m2/repository/org/mockito/mockito-junit-jupiter/5.20.0/mockito-junit-jupiter-5.20.0.jar:"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="user.timezone" value="America/Argentina/Buenos_Aires"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/home/joaquin-saladino/.jdks/ms-21.0.9/lib"/>
+    <property name="sun.java.command" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/surefire/surefirebooter-20251205122447517_3.jar /home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/surefire 2025-12-05T12-24-47_477-jvmRun1 surefire-20251205122447517_1tmp surefire_0-20251205122447517_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/test-classes:/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/classes:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/joaquin-saladino/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/joaquin-saladino/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/joaquin-saladino/.m2/repository/org/mockito/mockito-core/5.20.0/mockito-core-5.20.0.jar:/home/joaquin-saladino/.m2/repository/net/bytebuddy/byte-buddy/1.17.7/byte-buddy-1.17.7.jar:/home/joaquin-saladino/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.7/byte-buddy-agent-1.17.7.jar:/home/joaquin-saladino/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/joaquin-saladino/.m2/repository/org/mockito/mockito-junit-jupiter/5.20.0/mockito-junit-jupiter-5.20.0.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/joaquin-saladino"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="/home/joaquin-saladino/.jdks/ms-21.0.9"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C"/>
+    <property name="style.color" value="always"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/surefire/surefirebooter-20251205122447517_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.9+10-LTS"/>
+    <property name="user.name" value="joaquin-saladino"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.14.0-36-generic"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-12574458"/>
+    <property name="maven.ext.class.path" value="/snap/intellij-idea-ultimate/690/plugins/maven/lib/maven-event-listener.jar"/>
+    <property name="localRepository" value="/home/joaquin-saladino/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="idea.version" value="2025.2.5"/>
+    <property name="java.version" value="21.0.9"/>
+    <property name="user.dir" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="jansi.passthrough" value="true"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="21.0.9+10-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="maven.repo.local" value="/home/joaquin-saladino/.m2/repository"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="test02UbicarUnaCarreteraEsPosibleConUnPuebloCercano" classname="Tablero.AristaTest" time="0.009">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@466d49f0
+1 model.Tablero.Vertice.Vertice@710d7aff
+2 model.Tablero.Vertice.Vertice@2d7e1102
+3 model.Tablero.Vertice.Vertice@65327f5
+4 model.Tablero.Vertice.Vertice@2adddc06
+5 model.Tablero.Vertice.Vertice@301d8120
+6 model.Tablero.Vertice.Vertice@6d367020
+7 model.Tablero.Vertice.Vertice@72458efc
+8 model.Tablero.Vertice.Vertice@36bc415e
+9 model.Tablero.Vertice.Vertice@6a74d228
+10 model.Tablero.Vertice.Vertice@349d0836
+11 model.Tablero.Vertice.Vertice@6a714237
+12 model.Tablero.Vertice.Vertice@3e134896
+13 model.Tablero.Vertice.Vertice@72ba28ee
+14 model.Tablero.Vertice.Vertice@2e3a5237
+15 model.Tablero.Vertice.Vertice@4ebadd3d
+16 model.Tablero.Vertice.Vertice@6ac97b84
+17 model.Tablero.Vertice.Vertice@4917d36b
+18 model.Tablero.Vertice.Vertice@35c09b94
+19 model.Tablero.Vertice.Vertice@2d0bfb24
+20 model.Tablero.Vertice.Vertice@c3fa05a
+21 model.Tablero.Vertice.Vertice@7b44b63d
+22 model.Tablero.Vertice.Vertice@4a699efa
+23 model.Tablero.Vertice.Vertice@38499e48
+24 model.Tablero.Vertice.Vertice@4905c46b
+25 model.Tablero.Vertice.Vertice@17ae7628
+26 model.Tablero.Vertice.Vertice@1136b469
+27 model.Tablero.Vertice.Vertice@6579c3d9
+28 model.Tablero.Vertice.Vertice@2b87581
+29 model.Tablero.Vertice.Vertice@66434cc8
+30 model.Tablero.Vertice.Vertice@42f22995
+31 model.Tablero.Vertice.Vertice@693e4d19
+32 model.Tablero.Vertice.Vertice@286b39c2
+33 model.Tablero.Vertice.Vertice@5432050b
+34 model.Tablero.Vertice.Vertice@75f2099
+35 model.Tablero.Vertice.Vertice@1c12f3ee
+36 model.Tablero.Vertice.Vertice@6d467c87
+37 model.Tablero.Vertice.Vertice@29182679
+38 model.Tablero.Vertice.Vertice@57bd802b
+39 model.Tablero.Vertice.Vertice@5cbb84b1
+40 model.Tablero.Vertice.Vertice@2c779e5
+41 model.Tablero.Vertice.Vertice@6a84bc2a
+42 model.Tablero.Vertice.Vertice@5183d589
+43 model.Tablero.Vertice.Vertice@511d5d04
+44 model.Tablero.Vertice.Vertice@682c1e93
+45 model.Tablero.Vertice.Vertice@27068a50
+46 model.Tablero.Vertice.Vertice@68e62ca4
+47 model.Tablero.Vertice.Vertice@5328a9c1
+48 model.Tablero.Vertice.Vertice@5b78fdb1
+49 model.Tablero.Vertice.Vertice@48bfb884
+50 model.Tablero.Vertice.Vertice@11653e3b
+51 model.Tablero.Vertice.Vertice@715fb77
+52 model.Tablero.Vertice.Vertice@1b9c1b51
+53 model.Tablero.Vertice.Vertice@2e52fb3e
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+]]></system-out>
+  </testcase>
+  <testcase name="test04SePuedenUbicarCarreterasConCoordenadasInvertidas" classname="Tablero.AristaTest" time="0.002">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@64f555e7
+1 model.Tablero.Vertice.Vertice@71178a52
+2 model.Tablero.Vertice.Vertice@ff6077
+3 model.Tablero.Vertice.Vertice@abbc908
+4 model.Tablero.Vertice.Vertice@44afefd5
+5 model.Tablero.Vertice.Vertice@9a7a808
+6 model.Tablero.Vertice.Vertice@72209d93
+7 model.Tablero.Vertice.Vertice@2687f956
+8 model.Tablero.Vertice.Vertice@1ded7b14
+9 model.Tablero.Vertice.Vertice@29be7749
+10 model.Tablero.Vertice.Vertice@5f84abe8
+11 model.Tablero.Vertice.Vertice@4650a407
+12 model.Tablero.Vertice.Vertice@30135202
+13 model.Tablero.Vertice.Vertice@6a4d7f76
+14 model.Tablero.Vertice.Vertice@10ec523c
+15 model.Tablero.Vertice.Vertice@53dfacba
+16 model.Tablero.Vertice.Vertice@79767781
+17 model.Tablero.Vertice.Vertice@78411116
+18 model.Tablero.Vertice.Vertice@aced190
+19 model.Tablero.Vertice.Vertice@245a060f
+20 model.Tablero.Vertice.Vertice@6edaa77a
+21 model.Tablero.Vertice.Vertice@1e63d216
+22 model.Tablero.Vertice.Vertice@62ddd21b
+23 model.Tablero.Vertice.Vertice@16c3ca31
+24 model.Tablero.Vertice.Vertice@2d195ee4
+25 model.Tablero.Vertice.Vertice@2d6aca33
+26 model.Tablero.Vertice.Vertice@21ab988f
+27 model.Tablero.Vertice.Vertice@29314cc9
+28 model.Tablero.Vertice.Vertice@4e38d975
+29 model.Tablero.Vertice.Vertice@35f8a9d3
+30 model.Tablero.Vertice.Vertice@48ea2003
+31 model.Tablero.Vertice.Vertice@6b1e7ad3
+32 model.Tablero.Vertice.Vertice@63e5e5b4
+33 model.Tablero.Vertice.Vertice@13a37e2a
+34 model.Tablero.Vertice.Vertice@a50ae65
+35 model.Tablero.Vertice.Vertice@1280851e
+36 model.Tablero.Vertice.Vertice@5e840abf
+37 model.Tablero.Vertice.Vertice@56de6d6b
+38 model.Tablero.Vertice.Vertice@5972d253
+39 model.Tablero.Vertice.Vertice@4fcc0416
+40 model.Tablero.Vertice.Vertice@31e32ea2
+41 model.Tablero.Vertice.Vertice@1473b8c0
+42 model.Tablero.Vertice.Vertice@5b5c0057
+43 model.Tablero.Vertice.Vertice@749f539e
+44 model.Tablero.Vertice.Vertice@5ca1f591
+45 model.Tablero.Vertice.Vertice@551de37d
+46 model.Tablero.Vertice.Vertice@6ef81f31
+47 model.Tablero.Vertice.Vertice@6075b2d3
+48 model.Tablero.Vertice.Vertice@33abde31
+49 model.Tablero.Vertice.Vertice@997d532
+50 model.Tablero.Vertice.Vertice@273842a6
+51 model.Tablero.Vertice.Vertice@6a969fb8
+52 model.Tablero.Vertice.Vertice@7a18e8d
+53 model.Tablero.Vertice.Vertice@3028e50e
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+]]></system-out>
+  </testcase>
+  <testcase name="test01UbicarUnaCarreteraSinAdyacenciaEsImposible" classname="Tablero.AristaTest" time="0.001">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@bb095
+1 model.Tablero.Vertice.Vertice@777c350f
+2 model.Tablero.Vertice.Vertice@27aae97b
+3 model.Tablero.Vertice.Vertice@4c9e38
+4 model.Tablero.Vertice.Vertice@5d1e09bc
+5 model.Tablero.Vertice.Vertice@4bdc8b5d
+6 model.Tablero.Vertice.Vertice@3bcd426c
+7 model.Tablero.Vertice.Vertice@5f14a673
+8 model.Tablero.Vertice.Vertice@726a17c4
+9 model.Tablero.Vertice.Vertice@5dc3fcb7
+10 model.Tablero.Vertice.Vertice@c4c0b41
+11 model.Tablero.Vertice.Vertice@76911385
+12 model.Tablero.Vertice.Vertice@5467eea4
+13 model.Tablero.Vertice.Vertice@160396db
+14 model.Tablero.Vertice.Vertice@7a799159
+15 model.Tablero.Vertice.Vertice@40ab8a8
+16 model.Tablero.Vertice.Vertice@6ff37443
+17 model.Tablero.Vertice.Vertice@65cc8228
+18 model.Tablero.Vertice.Vertice@53093491
+19 model.Tablero.Vertice.Vertice@21719a0
+20 model.Tablero.Vertice.Vertice@76b224cd
+21 model.Tablero.Vertice.Vertice@77ee25f1
+22 model.Tablero.Vertice.Vertice@6dd93a21
+23 model.Tablero.Vertice.Vertice@57b9e423
+24 model.Tablero.Vertice.Vertice@304a3655
+25 model.Tablero.Vertice.Vertice@368d5c00
+26 model.Tablero.Vertice.Vertice@12a160c2
+27 model.Tablero.Vertice.Vertice@aa10649
+28 model.Tablero.Vertice.Vertice@6b3871d6
+29 model.Tablero.Vertice.Vertice@37095ded
+30 model.Tablero.Vertice.Vertice@2eb79cbe
+31 model.Tablero.Vertice.Vertice@2ca6546f
+32 model.Tablero.Vertice.Vertice@43826ec
+33 model.Tablero.Vertice.Vertice@7923f5b3
+34 model.Tablero.Vertice.Vertice@6b63d445
+35 model.Tablero.Vertice.Vertice@7578e06a
+36 model.Tablero.Vertice.Vertice@30b2b76f
+37 model.Tablero.Vertice.Vertice@56da52a7
+38 model.Tablero.Vertice.Vertice@23ee75c5
+39 model.Tablero.Vertice.Vertice@11a7ba62
+40 model.Tablero.Vertice.Vertice@340b7ef6
+41 model.Tablero.Vertice.Vertice@30404dba
+42 model.Tablero.Vertice.Vertice@6050462a
+43 model.Tablero.Vertice.Vertice@4c0884e8
+44 model.Tablero.Vertice.Vertice@231baf51
+45 model.Tablero.Vertice.Vertice@11841b15
+46 model.Tablero.Vertice.Vertice@73877e19
+47 model.Tablero.Vertice.Vertice@7b208b45
+48 model.Tablero.Vertice.Vertice@5bfc257
+49 model.Tablero.Vertice.Vertice@34523d46
+50 model.Tablero.Vertice.Vertice@7cedfa63
+51 model.Tablero.Vertice.Vertice@3e83c18
+52 model.Tablero.Vertice.Vertice@783efb48
+53 model.Tablero.Vertice.Vertice@5d235104
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+]]></system-out>
+  </testcase>
+  <testcase name="test03UbicarUnaCarreteraEsPosibleConUnaCarreteraCercana" classname="Tablero.AristaTest" time="0.001">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@4443ef6f
+1 model.Tablero.Vertice.Vertice@7e46d648
+2 model.Tablero.Vertice.Vertice@51751e5f
+3 model.Tablero.Vertice.Vertice@2b0b4d53
+4 model.Tablero.Vertice.Vertice@7068f7ca
+5 model.Tablero.Vertice.Vertice@38548b19
+6 model.Tablero.Vertice.Vertice@41aaedaa
+7 model.Tablero.Vertice.Vertice@303a5119
+8 model.Tablero.Vertice.Vertice@75b3673
+9 model.Tablero.Vertice.Vertice@1bcb79c2
+10 model.Tablero.Vertice.Vertice@d1a10ac
+11 model.Tablero.Vertice.Vertice@6fca2a8f
+12 model.Tablero.Vertice.Vertice@31fc71ab
+13 model.Tablero.Vertice.Vertice@71391b3f
+14 model.Tablero.Vertice.Vertice@2cfbeac4
+15 model.Tablero.Vertice.Vertice@12db3386
+16 model.Tablero.Vertice.Vertice@4078695f
+17 model.Tablero.Vertice.Vertice@79a1728c
+18 model.Tablero.Vertice.Vertice@a7f0ab6
+19 model.Tablero.Vertice.Vertice@41f35f7c
+20 model.Tablero.Vertice.Vertice@42c2f48c
+21 model.Tablero.Vertice.Vertice@3005db4a
+22 model.Tablero.Vertice.Vertice@425d5d46
+23 model.Tablero.Vertice.Vertice@198ef2ce
+24 model.Tablero.Vertice.Vertice@4cbd03e7
+25 model.Tablero.Vertice.Vertice@52fc5eb1
+26 model.Tablero.Vertice.Vertice@7a639ec5
+27 model.Tablero.Vertice.Vertice@14151bc5
+28 model.Tablero.Vertice.Vertice@3013909b
+29 model.Tablero.Vertice.Vertice@2a49fe
+30 model.Tablero.Vertice.Vertice@66596a88
+31 model.Tablero.Vertice.Vertice@5aae8eb5
+32 model.Tablero.Vertice.Vertice@76954a33
+33 model.Tablero.Vertice.Vertice@24a298a6
+34 model.Tablero.Vertice.Vertice@982bb90
+35 model.Tablero.Vertice.Vertice@27f74733
+36 model.Tablero.Vertice.Vertice@7bef452c
+37 model.Tablero.Vertice.Vertice@4bb8855f
+38 model.Tablero.Vertice.Vertice@57fae983
+39 model.Tablero.Vertice.Vertice@4a29f290
+40 model.Tablero.Vertice.Vertice@4bee18dc
+41 model.Tablero.Vertice.Vertice@44f3fe83
+42 model.Tablero.Vertice.Vertice@44c5a16f
+43 model.Tablero.Vertice.Vertice@417d6615
+44 model.Tablero.Vertice.Vertice@7a6ebe1e
+45 model.Tablero.Vertice.Vertice@21325036
+46 model.Tablero.Vertice.Vertice@489543a6
+47 model.Tablero.Vertice.Vertice@6272c96f
+48 model.Tablero.Vertice.Vertice@6de30571
+49 model.Tablero.Vertice.Vertice@5ee34b1b
+50 model.Tablero.Vertice.Vertice@3c89bb12
+51 model.Tablero.Vertice.Vertice@48c4245d
+52 model.Tablero.Vertice.Vertice@3df978b9
+53 model.Tablero.Vertice.Vertice@7906578e
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+]]></system-out>
+  </testcase>
+</testsuite>

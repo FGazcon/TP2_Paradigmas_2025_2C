@@ -1,0 +1,14 @@
+Comercio/ComercioTest.class
+Tablero/EstructuraTest.class
+Tablero/HexagonoTest.class
+Catan/CatanTest.class
+Tablero/AristaTest.class
+Jugador/JugadorTest.class
+Mazo/MazoTest.class
+Tablero/VerticeTest.class
+Ladron/LadronTest.class
+Catan/ComprasTest.class
+Recurso/RecursoTest.class
+Tablero/Aleatorio.class
+Dados/DadosTest.class
+Terreno/TerrenosTest.class
