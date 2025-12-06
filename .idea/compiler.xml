@@ -7,10 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="TP2_Paradigmas_2025_2C" />
+        <module name="tp-catan" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="tp-catan" target="25" />
       <module name="TP2_Paradigmas_2025_2C (1)" target="21" />
     </bytecodeTargetLevel>
   </component>

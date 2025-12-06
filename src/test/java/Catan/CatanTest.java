@@ -2,6 +2,7 @@ package Catan;
 
 import model.Banco.Banco;
 import model.Catan.Catan;
+import model.Catan.Turno;
 import model.Catan.TurnoGeneral;
 import model.Dados.Dados;
 import model.Jugador.Jugador;
@@ -78,6 +79,57 @@ public class CatanTest {
         TurnoGeneral turno = new TurnoGeneral(catan, catan.getTablero(), jugador, new Dados());
 
         //turno.construirPoblado();
+    }
+
+    @Test
+    public void test04ElCatanGeneraTurnosParaSusJugadores(){
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Gibby", banco);
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador);
+        Catan catan = new Catan(jugadores, banco);
+
+        Turno turno = catan.getTurno();
+
+        turno.getJugadorActual();
+
+        Assertions.assertEquals(jugador,turno.getJugadorActual());
+    }
+
+    @Test
+    public void test05ElPrimerPobladoNoGeneraNada(){
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Gibby", banco);
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador);
+        Catan catan = new Catan(jugadores, banco);
+
+        Turno turno = catan.getTurno();
+
+        turno.getJugadorActual();
+
+        turno.construirPoblado(53);
+
+        Assertions.assertEquals(jugador.cantidadCartas(), 0);
+    }
+
+    @Test
+    public void test06ElSegundoPobladoInicialGeneraRecursos(){
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Gibby", banco);
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador);
+        Catan catan = new Catan(jugadores, banco);
+
+        catan.terminarTurno();
+
+        Turno turno = catan.getTurno();
+
+        turno.getJugadorActual();
+
+        turno.construirPoblado(53);
+
+        Assertions.assertNotEquals(jugador.cantidadCartas(), 0);
     }
 
 

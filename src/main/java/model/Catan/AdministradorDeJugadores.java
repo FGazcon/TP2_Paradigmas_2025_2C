@@ -39,7 +39,7 @@ public class AdministradorDeJugadores {
         }
 
         if(!jugadoresVuelta.isEmpty()){
-            return new TurnoInicial(catan, tablero, jugadoresVuelta.removeFirst(), dados);
+            return new SegundoTurnoInicial(catan, tablero, jugadoresVuelta.removeFirst(), dados);
         }
 
 

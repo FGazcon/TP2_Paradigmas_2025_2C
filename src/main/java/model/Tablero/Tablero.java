@@ -14,7 +14,6 @@ public class Tablero {
 
     private List<Hexagono> hexagonos;
     private Ladron ladron;
-    private List<Vertice> verticesUnicos;
 
     public Tablero(List<Hexagono> hexagonos) {
         this.hexagonos = hexagonos;
@@ -77,14 +76,11 @@ public class Tablero {
     }
 
     public List<Vertice> getVerticesUnicos() {
-        if (verticesUnicos == null) {
-            Set<Vertice> set = new HashSet<>();
-            for (Hexagono h : this.hexagonos) {
-                set.addAll(Arrays.asList(h.getVertices()));
-            }
-            verticesUnicos = new ArrayList<>(set);
+        Set<Vertice> set = new HashSet<>();
+        for (Hexagono h : this.hexagonos) {
+            set.addAll(Arrays.asList(h.getVertices()));
         }
-        return verticesUnicos;
+        return new ArrayList<>(set);
     }
 
     public List<Arista> getAristasUnicas() {
@@ -98,6 +94,4 @@ public class Tablero {
 
         return new ArrayList<>(unicas);
     }
-
-
 }
