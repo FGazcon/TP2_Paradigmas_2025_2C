@@ -2,6 +2,7 @@ package model.Catan;
 
 import model.Banco.Banco;
 import model.Dados.Dados;
+import model.EventoCatan;
 import model.Jugador.Jugador;
 import model.Observable;
 import model.Tablero.Tablero;
@@ -17,6 +18,7 @@ public class Catan extends Observable {
     private Dados dados;
     private Turno turno;
     private AdministradorDeJugadores administrador;
+    private Jugador ganador;
 
     public Catan(Banco banco) {
         this.banco = banco;
@@ -40,19 +42,19 @@ public class Catan extends Observable {
 
     public void prepararJugadores(){
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
-       // notificar();
+        notificar(EventoCatan.PREPARADO_DE_JUGADORES);
     }
 
     public void terminarTurno() {
         this.turno = turno.terminarTurno(administrador);
-        //notificar();
+        notificar(EventoCatan.CAMBIO_TURNO);
     }
 
     public void avisarQueSalioLadron() {
         for(Jugador jugador: this.jugadores){
             jugador.descartarMitad();
         }
-       // notificar();
+        notificar(EventoCatan.SALIO_LADRON);
     }
 
     public Tablero getTablero() {
@@ -64,7 +66,7 @@ public class Catan extends Observable {
         for (String nombre : nombres) {
             this.jugadores.add(new Jugador(nombre, this.banco));
         }
-       // notificar();
+        notificar(EventoCatan.JUGADORES_PREPARADOS_CON_NOMBRE);
     }
 
     public Turno getTurno(){
@@ -73,6 +75,15 @@ public class Catan extends Observable {
 
     public List<Jugador> getJugadores(){
         return jugadores;
+    }
+
+    public void declararGanador(Jugador j) {
+        this.ganador = j;
+        notificar(EventoCatan.GANADOR);
+    }
+
+    public Jugador getGanador() {
+        return ganador;
     }
 
 }

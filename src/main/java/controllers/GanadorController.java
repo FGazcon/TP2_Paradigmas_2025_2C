@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
+import view.GanadorObserver;
+import model.Catan.Catan;
 
 public class GanadorController {
 
@@ -17,6 +19,13 @@ public class GanadorController {
     public void setGanador(String nombre) {
         this.nombreGanador = nombre;
         lblGanador.setText("Ganador: " + nombre);
+    }
+
+    public void init(Catan modelo) {
+        new GanadorObserver(modelo, this);
+
+        if (modelo.getGanador() != null)
+            setGanador(modelo.getGanador().getNombre());
     }
 
     @FXML

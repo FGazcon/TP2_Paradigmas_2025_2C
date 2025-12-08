@@ -8,8 +8,6 @@ import controllers.MenuController;
 import model.Banco.Banco;
 import model.Catan.Catan;
 import utils.MusicPlayer;
-import view.MenuObserver;
-import view.RegistroObserver;
 
 public class Main extends Application {
 
@@ -18,9 +16,6 @@ public class Main extends Application {
 
         Banco banco = new Banco();
         Catan catan = new Catan(banco);
-
-        new MenuObserver(catan);
-        new RegistroObserver(catan);
 
         MusicPlayer.play("/audio/musica_fondo_ok.wav");
 

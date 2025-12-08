@@ -2,3 +2,4 @@ model/Tablero/Puerto/SinPuerto.class
 model/Tablero/Puerto/Puerto.class
 model/Tablero/Puerto/DosXUno.class
 model/Tablero/Puerto/TresXUno.class
+model/EventoCatan.class
