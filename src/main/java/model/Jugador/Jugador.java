@@ -18,6 +18,7 @@ public class Jugador {
     private List<CartaDesarrollo> cartasDesarrollo;
     private Banco banco;
     private int cantidadCabelleros;
+    private int caminoMasLArgo;
 
     public Jugador(String nombre, Banco banco) {
         this.nombre = nombre;
@@ -25,6 +26,14 @@ public class Jugador {
         this.mapaRecursos = Recurso.crearMazoProduccionJugador();
         this.cartasDesarrollo = new ArrayList<>();
         this.banco = banco;
+        this.cantidadCabelleros = 0;
+        this.caminoMasLArgo = 0;
+    }
+
+    public void setCaminoMasLArgo(int caminoMasLArgo) {
+        if (caminoMasLArgo > this.caminoMasLArgo) {
+            this.caminoMasLArgo = caminoMasLArgo;
+        }
     }
 
     public int getCantidadDeRecursoEspecifico(Recurso recurso){
@@ -256,4 +265,7 @@ public class Jugador {
         return this.puntaje;
     }
 
+    public int getCaminoMasLargo() {
+        return this.caminoMasLArgo;
+    }
 }

@@ -1,10 +1,14 @@
 package Jugador;
 
 import model.Banco.Banco;
+import model.Catan.Catan;
+import model.Catan.Turno;
 import model.Comercio.DosPorUno;
 import model.Comercio.TresPorUno;
 import model.Jugador.Jugador;
 import model.Recurso.*;
+import model.Tablero.Arista.Carretera;
+import model.Tablero.Vertice.Estructura.PobladoInicial;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -296,6 +300,42 @@ public class JugadorTest {
         jugador.comerciarConBanco(madera, 4, new Ladrillo());
 
         Assertions.assertFalse(jugador.tieneAlMenos(new Madera(), 1));
+    }
+
+    @Test
+    public void test20JugadorActualizaSucaminoMasLArgo(){
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Fabian de Firenze", banco);
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador);
+        Catan catan = new Catan(jugadores, banco);
+
+        catan.getTablero().ubicarEstructura(new PobladoInicial(jugador), 40);
+        catan.getTablero().ubicarCarretera(new Carretera(jugador), new int[]{40, 41});
+        catan.getTablero().ubicarCarretera(new Carretera(jugador), new int[]{41, 42});
+        catan.getTablero().ubicarCarretera(new Carretera(jugador), new int[]{42, 43});
+
+        Assertions.assertEquals(3, jugador.getCaminoMasLargo());
+
+    }
+
+    @Test
+    public void test21JugadorActualizaSucaminoMasLArgo(){
+        Banco banco = new Banco();
+        Jugador jugador = new Jugador("Fabian de Firenze", banco);
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador);
+        Catan catan = new Catan(jugadores, banco);
+
+        catan.getTablero().ubicarEstructura(new PobladoInicial(jugador), 40);
+        catan.getTablero().ubicarCarretera(new Carretera(jugador), new int[]{40, 41});
+
+        catan.getTablero().ubicarEstructura(new PobladoInicial(jugador), 30);
+        catan.getTablero().ubicarCarretera(new Carretera(jugador), new int[]{30, 31});
+        catan.getTablero().ubicarCarretera(new Carretera(jugador), new int[]{32, 31});
+
+        Assertions.assertEquals(2, jugador.getCaminoMasLargo());
+
     }
 
 }

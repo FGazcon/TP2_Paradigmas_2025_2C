@@ -38,4 +38,8 @@ public class Carretera {
     public void cobrarleAJugador(){
         this.jugador.pagarleAlBanco(this.costo);
     }
+
+    public void actualizarDistanciaJugador(int i) {
+        this.jugador.setCaminoMasLArgo(i);
+    }
 }

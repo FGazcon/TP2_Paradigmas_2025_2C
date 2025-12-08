@@ -3,6 +3,7 @@ package Tablero;
 import model.Errores.AristaEstaOcupada;
 import model.Errores.AristaFueraDeAlcance;
 import model.Jugador.Jugador;
+import model.Tablero.Arista.Arista;
 import model.Tablero.Arista.Carretera;
 import model.Tablero.Tablero;
 import model.Tablero.Vertice.Estructura.Poblado;
@@ -69,6 +70,29 @@ public class AristaTest {
 
         Assertions.assertThrows(AristaEstaOcupada.class, ()->{tablero.ubicarCarretera(carretera, new int[]{1, 0});});
 
+    }
+
+    @Test
+    public void test05LasAristasCuentanSuCamino(){
+
+        Tablero tablero = Tablero.crearTableroBasico();
+        Jugador jugador = mock(Jugador.class);
+        Carretera carretera = new Carretera(jugador);
+        Poblado poblado = new PobladoInicial(jugador);
+        tablero.ubicarEstructura(poblado, 0);
+
+        tablero.ubicarCarretera(carretera, new int[]{0,1});
+
+
+        int conteo = 0;
+
+        //No Podemos acceder al arista especifica, pero si podemos comprobar que una calculo 1.
+        for (Arista arista : tablero.getAristasUnicas()){
+            conteo += arista.iniciarConteoCamino();
+            System.out.println(arista + " " + conteo);
+        }
+
+        Assertions.assertNotEquals(0, conteo);
     }
 
 

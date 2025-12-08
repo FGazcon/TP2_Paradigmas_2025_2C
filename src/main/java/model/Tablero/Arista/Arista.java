@@ -4,6 +4,9 @@ import model.Errores.AristaFueraDeAlcance;
 import model.Jugador.Jugador;
 import model.Tablero.Vertice.Vertice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Arista {
 
     private Vertice destino;
@@ -30,6 +33,33 @@ public class Arista {
 
     public void ocuparPar(Carretera carretera) {
         this.par.ocuparse(carretera);
+    }
+
+    public int iniciarConteoCamino(){
+
+        if (this.carretera == null) {
+            return 0;
+        }
+
+        Jugador jugador = this.carretera.getJugador();
+
+        Vertice vertice1 = this.par.getDestino();
+        Vertice vertice2 = this.destino;
+
+        List<Arista> aristasVisitadas = new ArrayList<>();
+
+        aristasVisitadas.add(this);
+        aristasVisitadas.add(this.par);
+
+        int largoDesdeV1 = vertice1.getLongitudMaximaDeCamino(jugador, aristasVisitadas);
+
+        aristasVisitadas.clear();
+        aristasVisitadas.add(this);
+        aristasVisitadas.add(this.par);
+
+        int largoDesdeV2 = vertice2.getLongitudMaximaDeCamino(jugador, aristasVisitadas);
+
+        return 1 + largoDesdeV1 + largoDesdeV2;
     }
 
     //De aca para abajo hay que buscar un refactor, esta bastante mal la cantidad de cosas que pedimos.

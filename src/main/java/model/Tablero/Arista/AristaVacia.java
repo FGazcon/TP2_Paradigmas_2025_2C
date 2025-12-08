@@ -11,6 +11,7 @@ public class AristaVacia extends EstadoArista{
         if(arista.validarCarreteraPara(carretera.getJugador())){
             arista.ocuparse(carretera);
             arista.ocuparPar(carretera);
+            carretera.actualizarDistanciaJugador(arista.iniciarConteoCamino());
         } else {
             throw new AristaFueraDeAlcance();
         }

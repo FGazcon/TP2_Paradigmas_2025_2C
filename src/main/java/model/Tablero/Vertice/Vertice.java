@@ -177,4 +177,26 @@ public class Vertice {
         return this.aristas;
     }
 
+    public int getLongitudMaximaDeCamino(Jugador jugador, List<Arista> aristasVisitadas) {
+        int maxLongitud = 0;
+
+        for (Arista arista : this.aristas) {
+
+            if (arista.esDe(jugador) && !aristasVisitadas.contains(arista)) {
+
+                aristasVisitadas.add(arista);
+                aristasVisitadas.add(arista.getPar());
+
+                int longitudActual = 1 + arista.getDestino().getLongitudMaximaDeCamino(jugador, aristasVisitadas);
+
+                aristasVisitadas.remove(arista);
+                aristasVisitadas.remove(arista.getPar());
+
+                if (longitudActual > maxLongitud) {
+                    maxLongitud = longitudActual;
+                }
+            }
+        }
+        return maxLongitud;
+    }
 }
