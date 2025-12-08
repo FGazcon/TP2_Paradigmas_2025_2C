@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Shape;
 import model.Catan.Turno;
 import model.Jugador.Jugador;
 import model.Tablero.Arista.Arista;
@@ -38,10 +37,11 @@ public abstract class BaseTableroController implements Initializable {
     protected final double X_INICIAL = 400.0 - (2.5 * DIST_X);
     protected final double Y_INICIAL = 300.0 - (2.0 * DIST_Y);
     protected BaseTableroController controller;
+    protected Label cruz;
 
 
     protected Turno turnoActual; // Puede ser inicial o general
-    protected Map<Hexagono, Shape> uiHexagonos = new HashMap<>();
+    Map<Hexagono, StackPane> uiHexagonos = new HashMap<>();
 
     protected void crearTablero(Tablero modelo) {
         for (Hexagono hex : modelo.getHexagonos()) {
@@ -123,7 +123,6 @@ public abstract class BaseTableroController implements Initializable {
 
         Polygon polygon = new Polygon();
 
-        uiHexagonos.put(hex, polygon);
         //tile.setOnMouseClicked(event -> manejarClickHexagono(hex));
         //tableroPane.getChildren().add(polygon);
 
@@ -141,6 +140,8 @@ public abstract class BaseTableroController implements Initializable {
         polygon.setStrokeWidth(2.0);
 
         StackPane tile = new StackPane(polygon);
+        uiHexagonos.put(hex, tile);
+
 
         tile.relocate(hex.getCoordenadaX() - (RADIO-2.5), hex.getCoordenadaY() - (RADIO-1));
         tile.setPickOnBounds(false);
@@ -154,9 +155,9 @@ public abstract class BaseTableroController implements Initializable {
 
         tile.setOnMouseClicked(e -> {
             System.out.println("Click en hexágono " + hex.getNumero());
-            testController();
-            this.controller.manejarClickHexagono(hex);
-            System.out.println("Fin manejarClickHexagono");
+            //testController();
+            this.controller.manejarClickHexagono(hex,uiHexagonos);
+            //System.out.println("Fin manejarClickHexagono");
         });
 
         return tile;
@@ -172,8 +173,6 @@ public abstract class BaseTableroController implements Initializable {
             case Desierto d -> Color.rgb(250, 214, 165);
             default -> Color.GRAY;
         };
-    }
-    protected void dibujarTablero(){
     }
 
     protected void aniadirVertices(List<Vertice> vertices) {
@@ -248,7 +247,7 @@ public abstract class BaseTableroController implements Initializable {
     //
 
 
-    protected abstract void manejarClickHexagono(Hexagono h);
+    protected abstract void manejarClickHexagono(Hexagono h,Map<Hexagono, StackPane> uiH);
     protected void testController() {
         System.out.println("Soy: " + this.getClass().getName());
     }

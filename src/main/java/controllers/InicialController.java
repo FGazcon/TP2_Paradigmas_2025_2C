@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -27,6 +28,7 @@ import model.Tablero.Vertice.Vertice;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class InicialController extends BaseTableroController implements Initializable {
@@ -48,7 +50,7 @@ public class InicialController extends BaseTableroController implements Initiali
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.controller= this;
         // Crear tablero
         // List<Hexagono> hexs = Factory_MapaBasico.crearHexagonosBasico();
 
@@ -105,8 +107,7 @@ public class InicialController extends BaseTableroController implements Initiali
 
         //modoActual = ModoJuego.SELECCIONAR_NADA;
     }
-    //tenemos que colorear dependiendo las aristas o vertices que tiene cada jugador, cada que un jugador gana
-    //una arista hay que colorearla, estamos coloreando en el mapa pero no tiene persistencia.
+    // hay que hacer un chequeo de si deja colocar arista o vertice, porque pintamos aunque no se pueda y se saltea de una.
     @Override
     protected  void manejarClickArista(Arista a, Line ui) {
         if (modoActual == ModoJuego.CONSTRUIR_CARRETERA) {
@@ -116,7 +117,7 @@ public class InicialController extends BaseTableroController implements Initiali
                 turnoActual.construirCarretera(new int[]{origen, destino});
                 colorear(ui);
                 //catan.terminarTurno();
-                this.turnoActual= catan.getTurno();
+                //this.turnoActual= catan.getTurno();
             } catch (Exception ex) {
                 System.err.println("Error construir carretera: " + ex.getMessage());
             }
@@ -137,8 +138,7 @@ public class InicialController extends BaseTableroController implements Initiali
     }
 
     @Override
-    protected void manejarClickHexagono(Hexagono h) {
-
+    protected void manejarClickHexagono(Hexagono h, Map<Hexagono, StackPane> uiH) {
     }
 
     public void colorear(Shape ui){
@@ -178,6 +178,7 @@ public class InicialController extends BaseTableroController implements Initiali
         this.turnoActual= catan.getTurno();
         this.cambiarAJuegoController(event);
         setValores();
+        modoActual = ModoJuego.CONSTRUIR_POBLADO;
 
         // TODO: aca llamás al administrador de jugadores y verificas si pasas al turno general
     }

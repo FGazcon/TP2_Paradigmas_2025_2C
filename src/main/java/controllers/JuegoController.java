@@ -6,10 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 import model.Banco.Banco;
 import model.Catan.Catan;
 import model.Catan.TurnoGeneral;
@@ -61,6 +61,7 @@ public class JuegoController extends BaseTableroController implements Initializa
         this.tableroModelo = this.catan.getTablero();
         this.jugadores = catan.getJugadores();
         this.tableroPane.getChildren().add(tablero);
+        bloqueador();
 
         // Turno inicial
         //this.turnoInicial = new TurnoInicial(catan, tableroModelo, jugadorActual, dados);
@@ -158,7 +159,7 @@ public class JuegoController extends BaseTableroController implements Initializa
     public void cambiarLadronImagen() {
         Hexagono hex = this.tableroModelo.getLadron().getHexagonoBajoAtaque();
 
-        pintarHexagonoLadron(hex);
+        //pintarHexagonoLadron(hex);
     }
 
     @FXML
@@ -208,7 +209,11 @@ public class JuegoController extends BaseTableroController implements Initializa
         lblPV.setText("PV: " + jugadorActual.calcularPuntaje() + " / 10");
 
     }
-
+    public void bloqueador(){
+        this.cruz = new Label("✖");
+        cruz.setStyle("-fx-font-size: 40px; -fx-text-fill: red;");
+        cruz.setMouseTransparent(true);
+    }
 
     @FXML
     public void terminarTurno(ActionEvent event) {
@@ -222,45 +227,40 @@ public class JuegoController extends BaseTableroController implements Initializa
         // TODO: aca llamás al administrador de jugadores y verificas si pasas al turno general
     }
 
-    public void pintarHexagonoLadron(Hexagono hex) {
-
+    public void pintarHexagonoLadron(Hexagono hex, Map<Hexagono, StackPane> uiH ) {
         // 1. Despintar hexágono anterior
+
         if (hexagonoPrevioLadron != null) {
-            Shape uiPrevio = uiHexagonos.get(hexagonoPrevioLadron);
+            StackPane uiPrevio = uiH.get(hexagonoPrevioLadron);
             if (uiPrevio != null) {
-                uiPrevio.setFill(Color.BEIGE);
-                uiPrevio.setOpacity(1);
-                uiPrevio.setStroke(Color.DARKGRAY);
-                uiPrevio.setStrokeWidth(1.5);
+                uiPrevio.getChildren().remove(cruz);
             }
         }
 
         // 2. Pintar hexágono actual
-        Shape uiActual = uiHexagonos.get(hex);
+        StackPane uiActual = uiH.get(hex);
         if (uiActual != null) {
-            uiActual.setFill(Color.DARKRED);
-            uiActual.setOpacity(0.75);
-            uiActual.setStroke(Color.BLACK);
-            uiActual.setStrokeWidth(3);
+
+            uiActual.getChildren().add(cruz);
         }
 
         // 3. Guardar referencia para la próxima
         hexagonoPrevioLadron = hex;
     }
     @Override
-    protected void manejarClickHexagono(Hexagono h) {
+    protected void manejarClickHexagono(Hexagono h,Map<Hexagono, StackPane> uiH) {
         System.out.println("cambiar ladron");
         if (modoActual == ModoJuego.MODO_MOVER_LADRON) {
-            moverLadronAHexagono(h);
+            moverLadronAHexagono(h,uiH);
         }
     }
 
-    private void moverLadronAHexagono(Hexagono nuevoHex) {
+    private void moverLadronAHexagono(Hexagono nuevoHex,Map<Hexagono, StackPane> uiH) {
         // 1. Mover ladrón en el modelo
         turnoActual.moverLadron(nuevoHex.getNumero());
 
         // 2. Pintar en la UI
-        pintarHexagonoLadron(nuevoHex);
+        pintarHexagonoLadron(nuevoHex,uiH);
 
         // 3. Salir del modo
         modoActual = ModoJuego.SELECCIONAR_NADA;

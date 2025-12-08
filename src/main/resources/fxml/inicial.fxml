@@ -66,7 +66,7 @@
 
             <Separator/>
 
-            <!-- Construcciones -->
+            <!-- Construcciones
             <VBox spacing="10" alignment="CENTER">
                 <Label text="CONSTRUCCIÓN"
                        style="-fx-font-size: 18px;
@@ -87,8 +87,9 @@
                         style="-fx-background-color: #3D9970;
                                -fx-text-fill: white;
                                -fx-font-size: 16px;" />
-            </VBox>
 
+            </VBox>
+-->
             <Region VBox.vgrow="ALWAYS"/>
 
             <AnchorPane prefHeight="120"
