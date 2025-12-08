@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import model.Banco.Banco;
 import model.Catan.Catan;
@@ -20,12 +21,13 @@ import model.Catan.TurnoInicial;
 import model.Dados.Dados;
 import model.Jugador.Jugador;
 import model.Tablero.Arista.Arista;
-import model.Tablero.Factory.Factory_MapaBasico;
 import model.Tablero.Hexagono;
 import model.Tablero.Vertice.Vertice;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class InicialController extends BaseTableroController implements Initializable {
 
@@ -34,7 +36,7 @@ public class InicialController extends BaseTableroController implements Initiali
 
     @FXML private Pane tableroPane;
     //@FXML private Button btnCarretera;
-   // @FXML private Button btnPoblado;
+    //@FXML private Button btnPoblado;
 
     private Banco banco = new Banco();
     private Catan catan;
@@ -48,7 +50,7 @@ public class InicialController extends BaseTableroController implements Initiali
     public void initialize(URL location, ResourceBundle resources) {
 
         // Crear tablero
-        List<Hexagono> hexs = Factory_MapaBasico.crearHexagonosBasico();
+        // List<Hexagono> hexs = Factory_MapaBasico.crearHexagonosBasico();
 
 
 
@@ -74,7 +76,7 @@ public class InicialController extends BaseTableroController implements Initiali
 
         asignarCoordenadas(tableroModelo.getHexagonos());
         asignarCoordenadasVertices(tableroModelo);
-        dibujarTablero(tableroModelo);
+        crearTablero(tableroModelo);
     }
 
     public void setValores(){
@@ -89,7 +91,7 @@ public class InicialController extends BaseTableroController implements Initiali
             if (modoActual == ModoJuego.CONSTRUIR_POBLADO) {
                 try {
                     turnoActual.construirPoblado(v.getNumeroDeVertice());
-                    ui.setFill(Color.BLUE);
+                    colorear(ui);
                     modoActual = ModoJuego.CONSTRUIR_CARRETERA;
                 } catch (Exception ex) {
                     System.err.println("Error construir poblado: " + ex.getMessage());
@@ -103,6 +105,8 @@ public class InicialController extends BaseTableroController implements Initiali
 
         //modoActual = ModoJuego.SELECCIONAR_NADA;
     }
+    //tenemos que colorear dependiendo las aristas o vertices que tiene cada jugador, cada que un jugador gana
+    //una arista hay que colorearla, estamos coloreando en el mapa pero no tiene persistencia.
     @Override
     protected  void manejarClickArista(Arista a, Line ui) {
         if (modoActual == ModoJuego.CONSTRUIR_CARRETERA) {
@@ -110,8 +114,9 @@ public class InicialController extends BaseTableroController implements Initiali
                 int origen = a.getPar().getDestino().getNumeroDeVertice();
                 int destino = a.getDestino().getNumeroDeVertice();
                 turnoActual.construirCarretera(new int[]{origen, destino});
-                ui.setStroke(Color.BLUE);
-                catan.terminarTurno();
+                colorear(ui);
+                //catan.terminarTurno();
+                this.turnoActual= catan.getTurno();
             } catch (Exception ex) {
                 System.err.println("Error construir carretera: " + ex.getMessage());
             }
@@ -131,6 +136,30 @@ public class InicialController extends BaseTableroController implements Initiali
         modoActual = ModoJuego.SELECCIONAR_NADA;
     }
 
+    @Override
+    protected void manejarClickHexagono(Hexagono h) {
+
+    }
+
+    public void colorear(Shape ui){
+
+            if(this.jugadorActual.equals(jugadores.getFirst())){
+                ui.setStroke(Color.BLUE);
+                ui.setFill(Color.BLUE);
+            }else if(this.jugadorActual.equals(jugadores.get(1))){
+                ui.setFill(Color.TAN);
+                ui.setStroke(Color.TAN);
+            }else if(this.jugadorActual.equals(jugadores.get(2))){
+                ui.setStroke(Color.PINK);
+                ui.setFill(Color.PINK);
+            }else if ( !jugadores.getLast().equals(jugadores.get(2))
+                    && this.jugadorActual.equals(jugadores.getLast()) ) {
+                ui.setStroke(Color.CORNSILK);
+                ui.setFill(Color.CORNSILK);
+            }
+
+    }
+
     @FXML
     public void construirPoblado() {
         modoActual = ModoJuego.CONSTRUIR_POBLADO;
@@ -144,7 +173,9 @@ public class InicialController extends BaseTableroController implements Initiali
     @FXML
     public void terminarTurnoInicial(ActionEvent event) {
         System.out.println("Turno inicial terminado.");
+        System.out.println(this.turnoActual);
         this.catan.terminarTurno();
+        this.turnoActual= catan.getTurno();
         this.cambiarAJuegoController(event);
         setValores();
 
@@ -170,7 +201,8 @@ public class InicialController extends BaseTableroController implements Initiali
             Scene nueva = new Scene(loader.load());
 
             JuegoController controller = loader.getController();
-            controller.init(catan);
+            this.controller = controller;
+            controller.init(catan,tableroPane);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(nueva);

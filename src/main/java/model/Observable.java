@@ -16,9 +16,9 @@ public abstract class Observable {
         observadores.remove(o);
     }
 
-    protected void notificar() {
+    protected void notificar(Object evento) {
         for (Observador o : observadores) {
-            o.actualizar();
+            o.actualizar(evento);
         }
     }
 }

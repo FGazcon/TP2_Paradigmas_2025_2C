@@ -252,4 +252,8 @@ public class Jugador {
         return activarCarta(carta);
     }
 
+    public int getPuntos(){
+        return this.puntaje;
+    }
+
 }

@@ -94,4 +94,9 @@ public class Tablero {
 
         return new ArrayList<>(unicas);
     }
+    /////getters para la app
+    public Ladron getLadron(){
+        return this.ladron;
+    }
+
 }

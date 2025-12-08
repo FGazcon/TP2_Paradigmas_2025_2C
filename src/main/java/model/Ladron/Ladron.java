@@ -17,4 +17,7 @@ public class Ladron {
         this.hexagonoBajoAtaque.recibirLadron(jugadorQueMovio);
     }
 
+    public Hexagono getHexagonoBajoAtaque() {
+        return this.hexagonoBajoAtaque;
+    }
 }

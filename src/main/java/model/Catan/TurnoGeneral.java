@@ -64,6 +64,18 @@ public class TurnoGeneral extends Turno {
         }
     }
 
+    @Override
+    public TurnoInicial getTurnoInicial() {
+        return null;
+    }
+
+    @Override
+    public TurnoGeneral getTurnoGeneral() {
+        return this;
+    }
+
+
+
     public void comprarDesarrollo(){
         if(CartaDesarrollo.jugadorMePuedePagar(this.jugador)){
             this.jugador.adquirirDesarrollo();

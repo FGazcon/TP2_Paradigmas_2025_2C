@@ -33,4 +33,14 @@ public class TurnoInicial extends Turno {
             System.out.println("Ya construiste poblado.");
         }
     }
+
+    @Override
+    public TurnoGeneral getTurnoGeneral() {
+        return null;
+    }
+
+    @Override
+    public TurnoInicial getTurnoInicial() {
+        return this;
+    }
 }

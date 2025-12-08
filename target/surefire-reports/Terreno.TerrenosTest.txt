@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: Terreno.TerrenosTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in Terreno.TerrenosTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 s -- in Terreno.TerrenosTest

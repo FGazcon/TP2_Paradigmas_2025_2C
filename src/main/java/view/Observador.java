@@ -1,5 +1,5 @@
 package view;
 
 public interface Observador {
-    void actualizar();
+    void actualizar(Object evento);
 }

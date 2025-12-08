@@ -11,8 +11,9 @@ public class InicialObserver implements Observador {
         modelo.agregarObservador(this);    // Se registra
     }
 
+
     @Override
-    public void actualizar() {
-        System.out.println("El modelo cambió. (InicialObserver)");
+    public void actualizar(Object evento) {
+
     }
 }

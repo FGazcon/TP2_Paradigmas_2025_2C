@@ -12,7 +12,7 @@ public class RegistroObserver implements Observador {
     }
 
     @Override
-    public void actualizar() {
-        System.out.println("El modelo cambió. (RegistroObserver)");
+    public void actualizar(Object evento) {
+
     }
 }

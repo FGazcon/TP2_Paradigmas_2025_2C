@@ -2,6 +2,8 @@ package view;
 
 import model.Catan.Catan;
 
+
+
 public class JuegoObserver implements Observador {
 
     private final Catan modelo;
@@ -11,8 +13,9 @@ public class JuegoObserver implements Observador {
         modelo.agregarObservador(this);    // Se registra
     }
 
+
     @Override
-    public void actualizar() {
-        System.out.println("El modelo cambió. (JuegoObserver)");
+    public void actualizar(Object evento) {
+
     }
 }

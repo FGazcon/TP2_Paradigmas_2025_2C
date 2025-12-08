@@ -40,19 +40,19 @@ public class Catan extends Observable {
 
     public void prepararJugadores(){
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
-        notificar();
+       // notificar();
     }
 
     public void terminarTurno() {
         this.turno = turno.terminarTurno(administrador);
-        notificar();
+        //notificar();
     }
 
     public void avisarQueSalioLadron() {
         for(Jugador jugador: this.jugadores){
             jugador.descartarMitad();
         }
-        notificar();
+       // notificar();
     }
 
     public Tablero getTablero() {
@@ -64,7 +64,7 @@ public class Catan extends Observable {
         for (String nombre : nombres) {
             this.jugadores.add(new Jugador(nombre, this.banco));
         }
-        notificar();
+       // notificar();
     }
 
     public Turno getTurno(){

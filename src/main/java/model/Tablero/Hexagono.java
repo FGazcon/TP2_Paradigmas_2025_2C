@@ -132,6 +132,7 @@ public class Hexagono {
 
         //Ley de Demeter, cambiar esto a que el vertice/Estructura le avise al jugador que fue robado
         List<Jugador> jugadores = new ArrayList<>();
+        //chequera no se bloquea el hexagono
         for(Vertice vertice: vertices){
             vertice.tieneDuenio(jugadores);
         }

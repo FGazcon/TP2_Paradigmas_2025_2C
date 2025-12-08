@@ -159,6 +159,10 @@ public class Vertice {
         }
     }
 
+    public Estructura getEstructura(){
+        return this.estructura;
+    }
+
     public List<Arista> getAristas() {
         return this.aristas;
     }

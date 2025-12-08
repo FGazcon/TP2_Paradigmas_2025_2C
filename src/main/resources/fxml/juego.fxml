@@ -41,10 +41,10 @@
             <Separator/>
 
             <VBox alignment="CENTER" spacing="10" style="-fx-border-color: #333; -fx-border-width: 1; -fx-padding: 10;">
-                <Label fx:id="lblJugadorActual" text="java.Jugador Actual: JUGADOR 1" wrapText="true" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #000;"/>
+                <Label fx:id="lblJugadorActual" text="Jugador Actual: JUGADOR 1" wrapText="true" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #000;"/>
                 <Button text="TIRAR DADOS" fx:id="btnDados" onAction="#tirarDados" prefWidth="180" prefHeight="40"
                         style="-fx-background-color: #9C2626; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold; -fx-background-radius: 5;"/>
-                <Label fx:id="lblValorDados" text="java.Dados: -" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label fx:id="lblValorDados" text="Dados: -" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
             </VBox>
 
             <Separator/>

@@ -34,28 +34,28 @@
 
                 <HBox spacing="15" alignment="CENTER_LEFT">
                     <Circle radius="10" fill="green"/>
-                    <Label text="java.Jugador 1" style="-fx-text-fill: black; -fx-font-size: 20;"/>
+                    <Label text="Jugador 1" style="-fx-text-fill: black; -fx-font-size: 20;"/>
                     <TextField fx:id="txtJugador1" promptText="Ingresar nombre..."
                                prefWidth="200" style="-fx-background-color: #F0B340; -fx-background-radius: 5;"/>
                 </HBox>
 
                 <HBox spacing="15" alignment="CENTER_LEFT">
                     <Circle radius="10" fill="green"/>
-                    <Label text="java.Jugador 2" style="-fx-text-fill: black; -fx-font-size: 20;"/>
+                    <Label text="Jugador 2" style="-fx-text-fill: black; -fx-font-size: 20;"/>
                     <TextField fx:id="txtJugador2" promptText="Ingresar nombre..."
                                prefWidth="200" style="-fx-background-color: #F0B340; -fx-background-radius: 5;"/>
                 </HBox>
 
                 <HBox spacing="15" alignment="CENTER_LEFT">
                     <Circle radius="10" fill="green"/>
-                    <Label text="java.Jugador 3" style="-fx-text-fill: black; -fx-font-size: 20;"/>
+                    <Label text="Jugador 3" style="-fx-text-fill: black; -fx-font-size: 20;"/>
                     <TextField fx:id="txtJugador3" promptText="Ingresar nombre..."
                                prefWidth="200" style="-fx-background-color: #F0B340; -fx-background-radius: 5;"/>
                 </HBox>
 
                 <HBox spacing="15" alignment="CENTER_LEFT">
                     <Circle radius="10" fill="green"/>
-                    <Label text="java.Jugador 4" style="-fx-text-fill: black; -fx-font-size: 20;"/>
+                    <Label text="Jugador 4" style="-fx-text-fill: black; -fx-font-size: 20;"/>
                     <TextField fx:id="txtJugador4" promptText="Ingresar nombre..."
                                prefWidth="200" style="-fx-background-color: #F0B340; -fx-background-radius: 5;"/>
                 </HBox>

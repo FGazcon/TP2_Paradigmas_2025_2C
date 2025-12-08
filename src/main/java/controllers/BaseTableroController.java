@@ -5,11 +5,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Shape;
 import model.Catan.Turno;
 import model.Jugador.Jugador;
 import model.Tablero.Arista.Arista;
@@ -28,7 +29,7 @@ public abstract class BaseTableroController implements Initializable {
 
     protected Tablero tableroModelo;
     protected Jugador jugadorActual;
-    protected enum ModoJuego { SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD }
+    protected enum ModoJuego { SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD, MODO_MOVER_LADRON }
     protected ModoJuego modoActual = ModoJuego.SELECCIONAR_NADA;
     protected final double RADIO = 60.0;
     protected final double DIST_X = RADIO * Math.sqrt(3.0);
@@ -36,17 +37,19 @@ public abstract class BaseTableroController implements Initializable {
     // Usa las dimensiones reales del Pane
     protected final double X_INICIAL = 400.0 - (2.5 * DIST_X);
     protected final double Y_INICIAL = 300.0 - (2.0 * DIST_Y);
+    protected BaseTableroController controller;
+
 
     protected Turno turnoActual; // Puede ser inicial o general
+    protected Map<Hexagono, Shape> uiHexagonos = new HashMap<>();
 
-
-    protected void dibujarTablero(Tablero modelo) {
+    protected void crearTablero(Tablero modelo) {
         for (Hexagono hex : modelo.getHexagonos()) {
             tableroPane.getChildren().add(crearTile(hex));
         }
 
-        dibujarAristas(modelo.getAristasUnicas());
-        dibujarVertices(modelo.getVerticesUnicos());
+        aniadirAristas(modelo.getAristasUnicas());
+        aniadirVertices(modelo.getVerticesUnicos());
     }
 
 
@@ -120,6 +123,10 @@ public abstract class BaseTableroController implements Initializable {
 
         Polygon polygon = new Polygon();
 
+        uiHexagonos.put(hex, polygon);
+        //tile.setOnMouseClicked(event -> manejarClickHexagono(hex));
+        //tableroPane.getChildren().add(polygon);
+
         for (int i = 0; i < 6; i++) {
             double ang = Math.PI / 2 + i * Math.PI / 3;
 
@@ -144,8 +151,12 @@ public abstract class BaseTableroController implements Initializable {
             tile.getChildren().add(lbl);
         }
 
+
         tile.setOnMouseClicked(e -> {
             System.out.println("Click en hexágono " + hex.getNumero());
+            testController();
+            this.controller.manejarClickHexagono(hex);
+            System.out.println("Fin manejarClickHexagono");
         });
 
         return tile;
@@ -162,14 +173,17 @@ public abstract class BaseTableroController implements Initializable {
             default -> Color.GRAY;
         };
     }
+    protected void dibujarTablero(){
+    }
 
-    protected void dibujarVertices(List<Vertice> vertices) {
+    protected void aniadirVertices(List<Vertice> vertices) {
         for (Vertice v : vertices)
             tableroPane.getChildren().add(crearVerticeUI(v));
     }
 
     protected Circle crearVerticeUI(Vertice v) {
         Circle c = new Circle(10);
+
         c.setCenterX(v.getCoordenadaX());
         c.setCenterY(v.getCoordenadaY());
         c.setFill(Color.WHITE);
@@ -183,7 +197,7 @@ public abstract class BaseTableroController implements Initializable {
         return c;
     }
 
-    protected void dibujarAristas(List<Arista> aristas) {
+    protected void aniadirAristas(List<Arista> aristas) {
 
         Set<Arista> aristasYaDibujadas = new HashSet<>();
 
@@ -229,6 +243,14 @@ public abstract class BaseTableroController implements Initializable {
 
     public void setTurnoActual(Turno turno) {
         this.turnoActual = turno;
+    }
+
+    //
+
+
+    protected abstract void manejarClickHexagono(Hexagono h);
+    protected void testController() {
+        System.out.println("Soy: " + this.getClass().getName());
     }
 
 }

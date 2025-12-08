@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Catan.CatanTest" time="0.003" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Catan.CatanTest" time="0.535" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/test-classes:/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/classes:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/joaquin-saladino/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/joaquin-saladino/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/joaquin-saladino/.m2/repository/org/mockito/mockito-core/5.20.0/mockito-core-5.20.0.jar:/home/joaquin-saladino/.m2/repository/net/bytebuddy/byte-buddy/1.17.7/byte-buddy-1.17.7.jar:/home/joaquin-saladino/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.7/byte-buddy-agent-1.17.7.jar:/home/joaquin-saladino/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/joaquin-saladino/.m2/repository/org/mockito/mockito-junit-jupiter/5.20.0/mockito-junit-jupiter-5.20.0.jar:"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\santi\TP2_Paradigmas_2025_2C\target\test-classes;C:\Users\santi\TP2_Paradigmas_2025_2C\target\classes;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\santi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\santi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-core\5.20.0\mockito-core-5.20.0.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy\1.17.7\byte-buddy-1.17.7.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar;C:\Users\santi\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-junit-jupiter\5.20.0\mockito-junit-jupiter-5.20.0.jar;"/>
     <property name="java.vm.vendor" value="Microsoft"/>
     <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="https://www.microsoft.com"/>
-    <property name="user.timezone" value="America/Argentina/Buenos_Aires"/>
-    <property name="os.name" value="Linux"/>
+    <property name="user.timezone" value="America/Buenos_Aires"/>
+    <property name="os.name" value="Windows 11"/>
     <property name="java.vm.specification.version" value="21"/>
-    <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.boot.library.path" value="/home/joaquin-saladino/.jdks/ms-21.0.9/lib"/>
-    <property name="sun.java.command" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/surefire/surefirebooter-20251205122447517_3.jar /home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/surefire 2025-12-05T12-24-47_477-jvmRun1 surefire-20251205122447517_1tmp surefire_0-20251205122447517_2tmp"/>
+    <property name="user.country" value="AR"/>
+    <property name="sun.boot.library.path" value="C:\Users\santi\.jdks\ms-21.0.9\bin"/>
+    <property name="sun.java.command" value="C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203\surefirebooter-20251205161631422_3.jar C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203 2025-12-05T16-16-27_749-jvmRun1 surefire-20251205161631422_1tmp surefire_0-20251205161631422_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/test-classes:/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/classes:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/home/joaquin-saladino/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-linux.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/joaquin-saladino/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/joaquin-saladino/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/joaquin-saladino/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/joaquin-saladino/.m2/repository/org/mockito/mockito-core/5.20.0/mockito-core-5.20.0.jar:/home/joaquin-saladino/.m2/repository/net/bytebuddy/byte-buddy/1.17.7/byte-buddy-1.17.7.jar:/home/joaquin-saladino/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.7/byte-buddy-agent-1.17.7.jar:/home/joaquin-saladino/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/joaquin-saladino/.m2/repository/org/mockito/mockito-junit-jupiter/5.20.0/mockito-junit-jupiter-5.20.0.jar:"/>
+    <property name="surefire.test.class.path" value="C:\Users\santi\TP2_Paradigmas_2025_2C\target\test-classes;C:\Users\santi\TP2_Paradigmas_2025_2C\target\classes;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\santi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\santi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-core\5.20.0\mockito-core-5.20.0.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy\1.17.7\byte-buddy-1.17.7.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar;C:\Users\santi\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-junit-jupiter\5.20.0\mockito-junit-jupiter-5.20.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/home/joaquin-saladino"/>
+    <property name="user.home" value="C:\Users\santi"/>
     <property name="user.language" value="es"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2025-10-21"/>
-    <property name="java.home" value="/home/joaquin-saladino/.jdks/ms-21.0.9"/>
-    <property name="file.separator" value="/"/>
-    <property name="basedir" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C"/>
-    <property name="style.color" value="always"/>
+    <property name="java.home" value="C:\Users\santi\.jdks\ms-21.0.9"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\santi\TP2_Paradigmas_2025_2C"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C/target/surefire/surefirebooter-20251205122447517_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203\surefirebooter-20251205161631422_3.jar"/>
+    <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.9+10-LTS"/>
-    <property name="user.name" value="joaquin-saladino"/>
-    <property name="stdout.encoding" value="UTF-8"/>
-    <property name="path.separator" value=":"/>
-    <property name="os.version" value="6.14.0-36-generic"/>
+    <property name="user.name" value="santi"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="java.vendor.version" value="Microsoft-12574458"/>
-    <property name="maven.ext.class.path" value="/snap/intellij-idea-ultimate/690/plugins/maven/lib/maven-event-listener.jar"/>
-    <property name="localRepository" value="/home/joaquin-saladino/.m2/repository"/>
+    <property name="java.vendor.version" value="Microsoft-12574459"/>
+    <property name="localRepository" value="C:\Users\santi\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
-    <property name="java.io.tmpdir" value="/tmp"/>
-    <property name="idea.version" value="2025.2.5"/>
+    <property name="java.io.tmpdir" value="C:\Users\santi\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2024.1.1"/>
     <property name="java.version" value="21.0.9"/>
-    <property name="user.dir" value="/home/joaquin-saladino/TP2_Paradigmas_2025_2C"/>
+    <property name="user.dir" value="C:\Users\santi\TP2_Paradigmas_2025_2C"/>
     <property name="os.arch" value="amd64"/>
-    <property name="jansi.passthrough" value="true"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="native.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\santi\.jdks\ms-21.0.9\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Vagrant\bin;C:\Users\santi\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\santi\AppData\Local\Programs\Python\Python313\;C:\Users\santi\AppData\Local\Programs\Python\Launcher\;C:\Users\santi\AppData\Local\Microsoft\WindowsApps;C:\Users\santi\AppData\Local\GitHubDesktop\bin;C:\Users\santi\AppData\Local\Programs\Microsoft VS Code\bin;C:\MinGW\bin;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Microsoft"/>
     <property name="java.vm.version" value="21.0.9+10-LTS"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="maven.repo.local" value="/home/joaquin-saladino/.m2/repository"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="test02JugadorPierdeLaMitadDeLasCartas" classname="Catan.CatanTest" time="0.001">
+  <testcase name="test02JugadorPierdeLaMitadDeLasCartas" classname="Catan.CatanTest" time="0.266">
     <system-out><![CDATA[java.Mazo desarrollo generado 25
 Madera tiene: 8
 Madera tiene: 1
@@ -69,63 +69,63 @@ Madera tiene: 1
 Madera tiene: 1
 ]]></system-out>
   </testcase>
-  <testcase name="test01LosJugadoresRecibenRecursosIniciales" classname="Catan.CatanTest" time="0.001">
+  <testcase name="test01LosJugadoresRecibenRecursosIniciales" classname="Catan.CatanTest" time="0.198">
     <system-out><![CDATA[java.Mazo desarrollo generado 25
 Mezclados 18
-0 model.Tablero.Vertice.Vertice@d176a31
-1 model.Tablero.Vertice.Vertice@3a91d146
-2 model.Tablero.Vertice.Vertice@4784013e
-3 model.Tablero.Vertice.Vertice@6f952d6c
-4 model.Tablero.Vertice.Vertice@5965844d
-5 model.Tablero.Vertice.Vertice@6d4a65c6
-6 model.Tablero.Vertice.Vertice@aa004a0
-7 model.Tablero.Vertice.Vertice@4c98a6d5
-8 model.Tablero.Vertice.Vertice@392a04e7
-9 model.Tablero.Vertice.Vertice@7f02251
-10 model.Tablero.Vertice.Vertice@dffa30b
-11 model.Tablero.Vertice.Vertice@4d8126f
-12 model.Tablero.Vertice.Vertice@6d3c232f
-13 model.Tablero.Vertice.Vertice@6b587673
-14 model.Tablero.Vertice.Vertice@1bcf67e8
-15 model.Tablero.Vertice.Vertice@5f404594
-16 model.Tablero.Vertice.Vertice@53692008
-17 model.Tablero.Vertice.Vertice@7b2a3ff8
-18 model.Tablero.Vertice.Vertice@1bbae752
-19 model.Tablero.Vertice.Vertice@460b6d54
-20 model.Tablero.Vertice.Vertice@5cf87cfd
-21 model.Tablero.Vertice.Vertice@76075d65
-22 model.Tablero.Vertice.Vertice@3a4ba480
-23 model.Tablero.Vertice.Vertice@27b71f50
-24 model.Tablero.Vertice.Vertice@383790cf
-25 model.Tablero.Vertice.Vertice@74971ed9
-26 model.Tablero.Vertice.Vertice@131fcb6f
-27 model.Tablero.Vertice.Vertice@ccd1bc3
-28 model.Tablero.Vertice.Vertice@878537d
-29 model.Tablero.Vertice.Vertice@4455f57d
-30 model.Tablero.Vertice.Vertice@29fc1a2b
-31 model.Tablero.Vertice.Vertice@4d0b0fd4
-32 model.Tablero.Vertice.Vertice@7a24eb3
-33 model.Tablero.Vertice.Vertice@6c37bd27
-34 model.Tablero.Vertice.Vertice@25d3cfc8
-35 model.Tablero.Vertice.Vertice@30331109
-36 model.Tablero.Vertice.Vertice@2571066a
-37 model.Tablero.Vertice.Vertice@74fe5966
-38 model.Tablero.Vertice.Vertice@4fe875be
-39 model.Tablero.Vertice.Vertice@677b8e13
-40 model.Tablero.Vertice.Vertice@4a9486c0
-41 model.Tablero.Vertice.Vertice@4c27d39d
-42 model.Tablero.Vertice.Vertice@40ee0a22
-43 model.Tablero.Vertice.Vertice@7bde1f3a
-44 model.Tablero.Vertice.Vertice@15923407
-45 model.Tablero.Vertice.Vertice@67dba613
-46 model.Tablero.Vertice.Vertice@57540fd0
-47 model.Tablero.Vertice.Vertice@5cf8edcf
-48 model.Tablero.Vertice.Vertice@58cec85b
-49 model.Tablero.Vertice.Vertice@629f066f
-50 model.Tablero.Vertice.Vertice@1542af63
-51 model.Tablero.Vertice.Vertice@ecfbe91
-52 model.Tablero.Vertice.Vertice@20ed3303
-53 model.Tablero.Vertice.Vertice@3adbe50f
+0 model.Tablero.Vertice.Vertice@7d20d0b
+1 model.Tablero.Vertice.Vertice@69453e37
+2 model.Tablero.Vertice.Vertice@6f4a47c7
+3 model.Tablero.Vertice.Vertice@ae13544
+4 model.Tablero.Vertice.Vertice@3d34d211
+5 model.Tablero.Vertice.Vertice@7dc0f706
+6 model.Tablero.Vertice.Vertice@4009e306
+7 model.Tablero.Vertice.Vertice@43c1b556
+8 model.Tablero.Vertice.Vertice@587e5365
+9 model.Tablero.Vertice.Vertice@22fcf7ab
+10 model.Tablero.Vertice.Vertice@2de23121
+11 model.Tablero.Vertice.Vertice@63475ace
+12 model.Tablero.Vertice.Vertice@4988d8b8
+13 model.Tablero.Vertice.Vertice@c0c2f8d
+14 model.Tablero.Vertice.Vertice@305b7c14
+15 model.Tablero.Vertice.Vertice@6913c1fb
+16 model.Tablero.Vertice.Vertice@66d18979
+17 model.Tablero.Vertice.Vertice@bccb269
+18 model.Tablero.Vertice.Vertice@609cd4d8
+19 model.Tablero.Vertice.Vertice@17f7cd29
+20 model.Tablero.Vertice.Vertice@7d8704ef
+21 model.Tablero.Vertice.Vertice@13b6aecc
+22 model.Tablero.Vertice.Vertice@158a8276
+23 model.Tablero.Vertice.Vertice@3c3d9b6b
+24 model.Tablero.Vertice.Vertice@79d8407f
+25 model.Tablero.Vertice.Vertice@5fbe4146
+26 model.Tablero.Vertice.Vertice@1e66f1f5
+27 model.Tablero.Vertice.Vertice@4e50c791
+28 model.Tablero.Vertice.Vertice@7530ad9c
+29 model.Tablero.Vertice.Vertice@58a9760d
+30 model.Tablero.Vertice.Vertice@71e9ddb4
+31 model.Tablero.Vertice.Vertice@394df057
+32 model.Tablero.Vertice.Vertice@4961f6af
+33 model.Tablero.Vertice.Vertice@5aebe890
+34 model.Tablero.Vertice.Vertice@65d09a04
+35 model.Tablero.Vertice.Vertice@33c911a1
+36 model.Tablero.Vertice.Vertice@75db5df9
+37 model.Tablero.Vertice.Vertice@707194ba
+38 model.Tablero.Vertice.Vertice@1190200a
+39 model.Tablero.Vertice.Vertice@6a2f6f80
+40 model.Tablero.Vertice.Vertice@45b4c3a9
+41 model.Tablero.Vertice.Vertice@399c4be1
+42 model.Tablero.Vertice.Vertice@291caca8
+43 model.Tablero.Vertice.Vertice@385e9564
+44 model.Tablero.Vertice.Vertice@5b94b04d
+45 model.Tablero.Vertice.Vertice@8c3b9d
+46 model.Tablero.Vertice.Vertice@4c39bec8
+47 model.Tablero.Vertice.Vertice@f79e
+48 model.Tablero.Vertice.Vertice@7ee8290b
+49 model.Tablero.Vertice.Vertice@1f59a598
+50 model.Tablero.Vertice.Vertice@1e178745
+51 model.Tablero.Vertice.Vertice@192c3f1e
+52 model.Tablero.Vertice.Vertice@26b3fd41
+53 model.Tablero.Vertice.Vertice@7494f96a
 0
 1
 2
@@ -146,63 +146,63 @@ Mezclados 18
 17
 ]]></system-out>
   </testcase>
-  <testcase name="test03JugadorCompraUnPoblado" classname="Catan.CatanTest" time="0.001">
+  <testcase name="test03JugadorCompraUnPoblado" classname="Catan.CatanTest" time="0.009">
     <system-out><![CDATA[java.Mazo desarrollo generado 25
 Mezclados 18
-0 model.Tablero.Vertice.Vertice@562c877a
-1 model.Tablero.Vertice.Vertice@67001148
-2 model.Tablero.Vertice.Vertice@989da1
-3 model.Tablero.Vertice.Vertice@31cb96e1
-4 model.Tablero.Vertice.Vertice@3eed0f5
-5 model.Tablero.Vertice.Vertice@64030b91
-6 model.Tablero.Vertice.Vertice@2032e725
-7 model.Tablero.Vertice.Vertice@4d23015c
-8 model.Tablero.Vertice.Vertice@383f1975
-9 model.Tablero.Vertice.Vertice@441cc260
-10 model.Tablero.Vertice.Vertice@73a00e09
-11 model.Tablero.Vertice.Vertice@26dcd8c0
-12 model.Tablero.Vertice.Vertice@66e889df
-13 model.Tablero.Vertice.Vertice@444548a0
-14 model.Tablero.Vertice.Vertice@3766c667
-15 model.Tablero.Vertice.Vertice@773c0293
-16 model.Tablero.Vertice.Vertice@55b8dbda
-17 model.Tablero.Vertice.Vertice@3b569985
-18 model.Tablero.Vertice.Vertice@3a022576
-19 model.Tablero.Vertice.Vertice@2dbd803f
-20 model.Tablero.Vertice.Vertice@3e48e859
-21 model.Tablero.Vertice.Vertice@31ddd4a4
-22 model.Tablero.Vertice.Vertice@1a5f7e7c
-23 model.Tablero.Vertice.Vertice@5b22b970
-24 model.Tablero.Vertice.Vertice@22d1886d
-25 model.Tablero.Vertice.Vertice@7df60067
-26 model.Tablero.Vertice.Vertice@1cbb3d3b
-27 model.Tablero.Vertice.Vertice@529cfee5
-28 model.Tablero.Vertice.Vertice@7ca0863b
-29 model.Tablero.Vertice.Vertice@319854f0
-30 model.Tablero.Vertice.Vertice@748fe51d
-31 model.Tablero.Vertice.Vertice@415156bf
-32 model.Tablero.Vertice.Vertice@393881f0
-33 model.Tablero.Vertice.Vertice@4af46df3
-34 model.Tablero.Vertice.Vertice@4158debd
-35 model.Tablero.Vertice.Vertice@af78c87
-36 model.Tablero.Vertice.Vertice@773dab28
-37 model.Tablero.Vertice.Vertice@1ecfcbc9
-38 model.Tablero.Vertice.Vertice@1965539b
-39 model.Tablero.Vertice.Vertice@2fc07784
-40 model.Tablero.Vertice.Vertice@353efdbf
-41 model.Tablero.Vertice.Vertice@55cff952
-42 model.Tablero.Vertice.Vertice@660591fb
-43 model.Tablero.Vertice.Vertice@4a55a6e8
-44 model.Tablero.Vertice.Vertice@8c46918
-45 model.Tablero.Vertice.Vertice@226b143b
-46 model.Tablero.Vertice.Vertice@682bd3c4
-47 model.Tablero.Vertice.Vertice@f2e4acf
-48 model.Tablero.Vertice.Vertice@24097e9b
-49 model.Tablero.Vertice.Vertice@5eb97ced
-50 model.Tablero.Vertice.Vertice@68ba310d
-51 model.Tablero.Vertice.Vertice@153f66e7
-52 model.Tablero.Vertice.Vertice@7aad3f7d
-53 model.Tablero.Vertice.Vertice@6f667ad1
+0 model.Tablero.Vertice.Vertice@6aaceffd
+1 model.Tablero.Vertice.Vertice@c86b9e3
+2 model.Tablero.Vertice.Vertice@10aa41f2
+3 model.Tablero.Vertice.Vertice@3af9c5b7
+4 model.Tablero.Vertice.Vertice@37271612
+5 model.Tablero.Vertice.Vertice@ed7f8b4
+6 model.Tablero.Vertice.Vertice@4c309d4d
+7 model.Tablero.Vertice.Vertice@38102d01
+8 model.Tablero.Vertice.Vertice@37883b97
+9 model.Tablero.Vertice.Vertice@6ab778a
+10 model.Tablero.Vertice.Vertice@4e3958e7
+11 model.Tablero.Vertice.Vertice@77f80c04
+12 model.Tablero.Vertice.Vertice@1dac5ef
+13 model.Tablero.Vertice.Vertice@5c90e579
+14 model.Tablero.Vertice.Vertice@58ea606c
+15 model.Tablero.Vertice.Vertice@6f45df59
+16 model.Tablero.Vertice.Vertice@38e79ae3
+17 model.Tablero.Vertice.Vertice@63070bab
+18 model.Tablero.Vertice.Vertice@68e5eea7
+19 model.Tablero.Vertice.Vertice@291b4bf5
+20 model.Tablero.Vertice.Vertice@2d2ffcb7
+21 model.Tablero.Vertice.Vertice@762ef0ea
+22 model.Tablero.Vertice.Vertice@31f9b85e
+23 model.Tablero.Vertice.Vertice@424e1977
+24 model.Tablero.Vertice.Vertice@10d68fcd
+25 model.Tablero.Vertice.Vertice@117e949d
+26 model.Tablero.Vertice.Vertice@6db9f5a4
+27 model.Tablero.Vertice.Vertice@5f8edcc5
+28 model.Tablero.Vertice.Vertice@7b02881e
+29 model.Tablero.Vertice.Vertice@1ebd319f
+30 model.Tablero.Vertice.Vertice@3c0be339
+31 model.Tablero.Vertice.Vertice@15ca7889
+32 model.Tablero.Vertice.Vertice@7a675056
+33 model.Tablero.Vertice.Vertice@d21a74c
+34 model.Tablero.Vertice.Vertice@6e509ffa
+35 model.Tablero.Vertice.Vertice@2898ac89
+36 model.Tablero.Vertice.Vertice@683dbc2c
+37 model.Tablero.Vertice.Vertice@68267da0
+38 model.Tablero.Vertice.Vertice@2638011
+39 model.Tablero.Vertice.Vertice@6ff29830
+40 model.Tablero.Vertice.Vertice@6a2b953e
+41 model.Tablero.Vertice.Vertice@313b2ea6
+42 model.Tablero.Vertice.Vertice@2f465398
+43 model.Tablero.Vertice.Vertice@548e6d58
+44 model.Tablero.Vertice.Vertice@623a8092
+45 model.Tablero.Vertice.Vertice@a1cdc6d
+46 model.Tablero.Vertice.Vertice@175b9425
+47 model.Tablero.Vertice.Vertice@3098cf3b
+48 model.Tablero.Vertice.Vertice@610f7aa
+49 model.Tablero.Vertice.Vertice@6a03bcb1
+50 model.Tablero.Vertice.Vertice@21b2e768
+51 model.Tablero.Vertice.Vertice@57250572
+52 model.Tablero.Vertice.Vertice@5609159b
+53 model.Tablero.Vertice.Vertice@2118cddf
 0
 1
 2

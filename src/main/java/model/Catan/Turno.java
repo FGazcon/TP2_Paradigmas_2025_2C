@@ -64,4 +64,6 @@ public abstract class Turno {
         return this.jugador;
     }
 
+    public abstract TurnoGeneral getTurnoGeneral();
+    public abstract TurnoInicial getTurnoInicial();
 }

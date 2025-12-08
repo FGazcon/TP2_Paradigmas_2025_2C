@@ -28,7 +28,7 @@
             <Separator orientation="VERTICAL" prefHeight="20" />
 
             <Label fx:id="lblTurno"
-                   text="Turno Inicial de java.Jugador 1"
+                   text="Turno Inicial de Jugador 1"
                    style="-fx-font-size: 24px;
                           -fx-font-weight: bold;
                           -fx-text-fill: #333;"/>
@@ -58,9 +58,9 @@
 
             <Separator/>
 
-            <!-- java.Jugador actual -->
+            <!-- Jugador actual -->
             <Label fx:id="lblJugadorActual"
-                   text="java.Jugador 1"
+                   text="Jugador 1"
                    style="-fx-font-size: 18px;
                           -fx-font-weight: bold;" />
 

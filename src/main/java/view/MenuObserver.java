@@ -10,9 +10,14 @@ public class MenuObserver implements Observador {
         this.modelo = modelo;
         modelo.agregarObservador(this);
     }
-
+/*
     @Override
     public void actualizar() {
         System.out.println("El modelo cambió. (MenuObserver)");
+    }*/
+
+    @Override
+    public void actualizar(Object evento) {
+
     }
 }
