@@ -1,6 +1,14 @@
 package model.Tablero.Factory;
 
+import model.Recurso.*;
+import model.Tablero.Puerto.DosXUno;
+import model.Tablero.Puerto.Puerto;
+import model.Tablero.Puerto.TresXUno;
 import model.Tablero.Vertice.Vertice;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ConectorVertices_MapaBasico {
 
@@ -81,6 +89,48 @@ public class ConectorVertices_MapaBasico {
         Vertice.agregarArista(vertices[51],vertices[52], new int[]{51,52});
         Vertice.agregarArista(vertices[52],vertices[53], new int[]{52,53});
 
+        generarPuertos(vertices);
     }
 
+    public static void generarPuertos(Vertice[] vertices){
+        List<Puerto> puertos = new ArrayList<>();
+        puertos.add(new TresXUno());
+        puertos.add(new TresXUno());
+        puertos.add(new TresXUno());
+        puertos.add(new TresXUno());
+        puertos.add(new DosXUno(new Madera()));
+        puertos.add(new DosXUno(new Ladrillo()));
+        puertos.add(new DosXUno(new Piedra()));
+        puertos.add(new DosXUno(new Oveja()));
+        puertos.add(new DosXUno(new Trigo()));
+
+        Collections.shuffle(puertos);
+
+        vertices[0].setPuerto(puertos.get(0));
+        vertices[1].setPuerto(puertos.get(0));
+
+        vertices[3].setPuerto(puertos.get(1));
+        vertices[4].setPuerto(puertos.get(1));
+
+        vertices[7].setPuerto(puertos.get(2));
+        vertices[8].setPuerto(puertos.get(2));
+
+        vertices[10].setPuerto(puertos.get(3));
+        vertices[11].setPuerto(puertos.get(3));
+
+        vertices[13].setPuerto(puertos.get(4));
+        vertices[14].setPuerto(puertos.get(4));
+
+        vertices[17].setPuerto(puertos.get(5));
+        vertices[18].setPuerto(puertos.get(5));
+
+        vertices[20].setPuerto(puertos.get(6));
+        vertices[21].setPuerto(puertos.get(6));
+
+        vertices[23].setPuerto(puertos.get(7));
+        vertices[24].setPuerto(puertos.get(7));
+
+        vertices[27].setPuerto(puertos.get(8));
+        vertices[28].setPuerto(puertos.get(8));
+    }
 }

@@ -1,4 +1,4 @@
-package model.Puerto;
+package model.Tablero.Puerto;
 
 import model.Comercio.DosPorUno;
 import model.Jugador.Jugador;

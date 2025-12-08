@@ -184,7 +184,7 @@ public class InicialController extends BaseTableroController implements Initiali
 
     public void cambiarAJuegoController(ActionEvent event){
         if (turnoActual instanceof TurnoGeneral){
-            cambiarEscena(event, "/fxml/Juego.fxml", catan);
+            cambiarEscena(event, "/fxml/juego.fxml", catan);
         }
     }
 

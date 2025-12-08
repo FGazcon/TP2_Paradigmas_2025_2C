@@ -19,8 +19,9 @@ public class TurnoInicial extends Turno {
         if (this.carreterasUbicadas < 1) {
             if(intentarUbicarCarretera(new Carretera(jugador), numeroDeArista)){
                 carreterasUbicadas = 1;
-                System.out.println("Ya construiste carretera.");
             }
+        } else {
+            System.out.println("Ya construiste carretera.");
         }
     }
     @Override

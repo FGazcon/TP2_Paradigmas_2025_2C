@@ -5,6 +5,8 @@ import model.Recurso.Recurso;
 import model.Tablero.Arista.Arista;
 import model.Tablero.Arista.Carretera;
 import model.Tablero.Factory.ConectorVertices_MapaBasico;
+import model.Tablero.Puerto.Puerto;
+import model.Tablero.Puerto.SinPuerto;
 import model.Tablero.Vertice.Estructura.Ciudad;
 import model.Tablero.Vertice.Estructura.Estructura;
 import model.Tablero.Vertice.Estructura.NoHayEstructura;
@@ -18,6 +20,7 @@ public class Vertice {
     private List<Arista> aristas;
     private int numeroDeVertice;
     private Estado estado;
+    private Puerto puerto;
 
     //Para la visualizacion
     private double coordenadaX, coordenadaY;
@@ -28,6 +31,7 @@ public class Vertice {
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = numeroDeVertice;
         this.estado = new Vacio();
+        this.puerto = new SinPuerto();
     }
 
     public Vertice() {
@@ -35,12 +39,17 @@ public class Vertice {
         this.aristas = new ArrayList<Arista>();
         this.numeroDeVertice = 0;
         this.estado = new Vacio();
+        this.puerto = new SinPuerto();
     }
 
     public void setCoordenadas(double x, double y) {
         this.coordenadaX = x;
         this.coordenadaY = y;
         this.coordenadasAsignadas = true;
+    }
+
+    public void setPuerto(Puerto puerto) {
+        this.puerto = puerto;
     }
 
     public double getCoordenadaX() {
@@ -71,6 +80,7 @@ public class Vertice {
         this.estado = new Ocupado();
         this.estructura = estructura;
         this.estructura.sumarAJugador();
+        this.puerto.darReglaAJugador(estructura.getJugador());
     }
 
     public void bloquearAdyacentes() {
