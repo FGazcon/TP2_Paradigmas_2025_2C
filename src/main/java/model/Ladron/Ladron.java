@@ -15,6 +15,7 @@ public class Ladron {
         this.hexagonoBajoAtaque.liberarse();
         this.hexagonoBajoAtaque = nuevoHexagono;
         this.hexagonoBajoAtaque.recibirLadron(jugadorQueMovio);
+        System.out.println("hexgono bajo ataque " + this.hexagonoBajoAtaque.getNumero());
     }
 
     public Hexagono getHexagonoBajoAtaque() {

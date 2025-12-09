@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -17,15 +16,22 @@ import model.Dados.Dados;
 import model.Jugador.Jugador;
 import model.Recurso.*;
 import model.Tablero.Arista.Arista;
-import model.Tablero.Arista.Carretera;
 import model.Tablero.Hexagono;
+import model.Tablero.Vertice.Estructura.Estructura;
+import model.Tablero.Vertice.Estructura.Poblado;
 import model.Tablero.Vertice.Vertice;
 
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class JuegoController extends BaseTableroController implements Initializable {
 
+    @FXML public Button btnCiudad;
+    @FXML public Button btnPoblado;
+    @FXML public Button btnCarretera;
     @FXML private Label lblJugadorActual;
     @FXML private Label lblTurno;
     @FXML private Label lblValorDados;
@@ -38,13 +44,12 @@ public class JuegoController extends BaseTableroController implements Initializa
     @FXML private Label lblInvPiedra;
 
     @FXML private Button btnComercio;
+    //@FXML private Button colocarPoblado;
     @FXML private Button btnDados;
 
     private Banco banco = new Banco();
     private Catan catan;
     private Dados dados = new Dados();
-    private List<Jugador> jugadores = new ArrayList<>();
-    private Jugador jugadorActual;
     private Map<Label, Recurso> lblRecursos;
     private TurnoGeneral turnoActual;
     private Hexagono hexagonoPrevioLadron = null;
@@ -55,16 +60,13 @@ public class JuegoController extends BaseTableroController implements Initializa
         // Llamar a una instancia de java.Tablero que contenga la lista de Hexagonos
         this.lblRecursos = crearMapRecursos();
     }
-    public void init(Catan catan, Pane tablero){
+    public void init(Catan catan){
         this.catan = catan;
         this.jugadorActual = this.catan.getTurno().getJugadorActual();
         this.tableroModelo = this.catan.getTablero();
         this.jugadores = catan.getJugadores();
-        this.tableroPane.getChildren().add(tablero);
+       // this.tableroPane.getChildren().add(tablero);
         bloqueador();
-
-        // Turno inicial
-        //this.turnoInicial = new TurnoInicial(catan, tableroModelo, jugadorActual, dados);
 
         this.turnoActual = catan.getTurno().getTurnoGeneral();
         System.out.println(turnoActual);
@@ -72,10 +74,69 @@ public class JuegoController extends BaseTableroController implements Initializa
         setValores();
 
     //hay q cargar  el mapa ya pintado
-        //asignarCoordenadas(tableroModelo.getHexagonos());
-       // asignarCoordenadasVertices(tableroModelo);
-
+        asignarCoordenadas(tableroModelo.getHexagonos());
+        asignarCoordenadasVertices(tableroModelo);
+        crearTablero(tableroModelo);
+        recuperarTablero();
     }
+    public void recuperarTablero(){
+        List<Hexagono> hexagonos = catan.getTablero().getHexagonos();
+        for (Hexagono h : hexagonos){
+            List<Vertice> vertices = List.of(h.getVertices());
+            for (Vertice v : vertices){
+                Estructura estructura =v.getEstructura();
+                if( estructura instanceof Poblado){
+                    Jugador jugador = estructura.getJugador();
+                    dibujarCirculo(v,jugador);
+                    List<Arista> aristas = v.getAristas();
+                    for(Arista a : aristas){
+                        if(a.getCarretera() != null) {
+                            Line arista = encontrarAristaUI(a);
+                            if (arista != null) {
+                                colorear(arista, jugador);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void dibujarCirculo(Vertice v,Jugador jugador){
+        double x = v.getCoordenadaX();
+        double y = v.getCoordenadaY();
+        this.tableroPane.getChildren().stream()
+                .filter(node -> node instanceof Circle)
+                .map(node -> (Circle) node)
+                .filter(circle -> circle.getCenterX() == x && circle.getCenterY() == y)
+                .findFirst().ifPresent(c -> colorear(c, jugador));
+    }
+    private Line encontrarAristaUI( Arista a) {
+
+        double ox = a.getPar().getDestino().getCoordenadaX();
+        double oy = a.getPar().getDestino().getCoordenadaY();
+        double dx = a.getDestino().getCoordenadaX();
+        double dy = a.getDestino().getCoordenadaY();
+
+        return this.tableroPane.getChildren().stream()
+                .filter(node -> node instanceof Line)
+                .map(node -> (Line) node)
+                .filter(line ->
+                        // Mismo sentido
+                        (line.getStartX() == ox &&
+                                line.getStartY() == oy &&
+                                line.getEndX() == dx &&
+                                line.getEndY() == dy)
+                                ||
+                                // Sentido invertido
+                                (line.getStartX() == dx &&
+                                        line.getStartY() == dy &&
+                                        line.getEndX() == ox &&
+                                        line.getEndY() == oy)
+                )
+                .findFirst()
+                .orElse(null);
+    }
+
     public void setValores(){
         this.jugadorActual = this.catan.getTurno().getJugadorActual();
         this.lblJugadorActual.setText(jugadorActual.getNombre());
@@ -125,16 +186,7 @@ public class JuegoController extends BaseTableroController implements Initializa
             }
         }
 
-        try {
-            Carretera c = new Carretera(jugadorActual);
-            a.ubicarCarretera(c, a.getNumeroDeVertices());
 
-            ui.setStroke(Color.BLUE);
-            ui.setOpacity(1);
-
-        } catch (Exception ex) {
-            System.err.println("Error en arista: " + ex.getMessage());
-        }
 
         modoActual = ModoJuego.SELECCIONAR_NADA;
     }
@@ -228,7 +280,7 @@ public class JuegoController extends BaseTableroController implements Initializa
     }
 
     public void pintarHexagonoLadron(Hexagono hex, Map<Hexagono, StackPane> uiH ) {
-        // 1. Despintar hexágono anterior
+        // 1. Desmarcar hexágono anterior
 
         if (hexagonoPrevioLadron != null) {
             StackPane uiPrevio = uiH.get(hexagonoPrevioLadron);
@@ -237,7 +289,7 @@ public class JuegoController extends BaseTableroController implements Initializa
             }
         }
 
-        // 2. Pintar hexágono actual
+        // 2. Marcar hexágono actual
         StackPane uiActual = uiH.get(hex);
         if (uiActual != null) {
 
@@ -257,10 +309,12 @@ public class JuegoController extends BaseTableroController implements Initializa
 
     private void moverLadronAHexagono(Hexagono nuevoHex,Map<Hexagono, StackPane> uiH) {
         // 1. Mover ladrón en el modelo
-        turnoActual.moverLadron(nuevoHex.getNumero());
+        turnoActual.moverLadron(nuevoHex);
+        actualizarRecursos();
 
         // 2. Pintar en la UI
         pintarHexagonoLadron(nuevoHex,uiH);
+
 
         // 3. Salir del modo
         modoActual = ModoJuego.SELECCIONAR_NADA;
@@ -270,4 +324,9 @@ public class JuegoController extends BaseTableroController implements Initializa
     }
 
 
+
+
 }
+
+//hay que configurar para no pintar poblados arriba de poblados, para no pintar carreteras arriba de carreteras o donde no debe
+// y para no poner el ladron en el hexagono donde ya estaba (hacer para que deba elegir hasta que se elija un lugar valido)

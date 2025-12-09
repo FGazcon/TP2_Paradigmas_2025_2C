@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 import model.Catan.Turno;
 import model.Jugador.Jugador;
 import model.Tablero.Arista.Arista;
@@ -36,8 +37,8 @@ public abstract class BaseTableroController implements Initializable {
     // Usa las dimensiones reales del Pane
     protected final double X_INICIAL = 400.0 - (2.5 * DIST_X);
     protected final double Y_INICIAL = 300.0 - (2.0 * DIST_Y);
-    protected BaseTableroController controller;
     protected Label cruz;
+    protected List<Jugador> jugadores;
 
 
     protected Turno turnoActual; // Puede ser inicial o general
@@ -156,7 +157,7 @@ public abstract class BaseTableroController implements Initializable {
         tile.setOnMouseClicked(e -> {
             System.out.println("Click en hexágono " + hex.getNumero());
             //testController();
-            this.controller.manejarClickHexagono(hex,uiHexagonos);
+            manejarClickHexagono(hex,uiHexagonos);
             //System.out.println("Fin manejarClickHexagono");
         });
 
@@ -236,6 +237,8 @@ public abstract class BaseTableroController implements Initializable {
         return l;
     }
 
+
+
     protected abstract void manejarClickVertice(Vertice v, Circle ui);
 
     protected abstract void manejarClickArista(Arista a, Line ui);
@@ -246,6 +249,24 @@ public abstract class BaseTableroController implements Initializable {
 
     //
 
+    public void colorear(Shape ui,Jugador jugadorActual){
+
+        if(jugadorActual.equals(jugadores.getFirst())){
+            ui.setStroke(Color.BLUE);
+            ui.setFill(Color.BLUE);
+        }else if(jugadorActual.equals(jugadores.get(1))){
+            ui.setFill(Color.TAN);
+            ui.setStroke(Color.TAN);
+        }else if(jugadorActual.equals(jugadores.get(2))){
+            ui.setStroke(Color.PINK);
+            ui.setFill(Color.PINK);
+        }else if ( !jugadores.getLast().equals(jugadores.get(2))
+                && jugadorActual.equals(jugadores.getLast()) ) {
+            ui.setStroke(Color.CORNSILK);
+            ui.setFill(Color.CORNSILK);
+        }
+
+    }
 
     protected abstract void manejarClickHexagono(Hexagono h,Map<Hexagono, StackPane> uiH);
     protected void testController() {

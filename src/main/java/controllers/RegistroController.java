@@ -1,28 +1,23 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.event.ActionEvent;
 import model.Banco.Banco;
+import model.Catan.Catan;
 import model.Jugador.Jugador;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Catan.Catan;
-
 public class RegistroController
 {
 
-    private Catan modelo;
 
-    public void setModelo(Catan modelo) {
-        this.modelo = modelo;
-    }
 
     @FXML private TextField txtJugador1;
     @FXML private TextField txtJugador2;
@@ -62,7 +57,7 @@ public class RegistroController
 
 
         //este es el condicional de cantidad de jugadores
-        if (jugadores.size() < 3)
+        if (jugadores.size() < 2)
         {
             System.out.println("Faltan nombres! (de 3 a 4 jugadores)");
             return;

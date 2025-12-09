@@ -9,10 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import model.Banco.Banco;
 import model.Catan.Catan;
@@ -20,14 +18,11 @@ import model.Catan.Turno;
 import model.Catan.TurnoGeneral;
 import model.Catan.TurnoInicial;
 import model.Dados.Dados;
-import model.Jugador.Jugador;
 import model.Tablero.Arista.Arista;
 import model.Tablero.Hexagono;
 import model.Tablero.Vertice.Vertice;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -43,14 +38,11 @@ public class InicialController extends BaseTableroController implements Initiali
     private Banco banco = new Banco();
     private Catan catan;
     private Dados dados = new Dados();
-    private List<Jugador> jugadores = new ArrayList<>();
-    private Jugador jugadorActual;
     private TurnoInicial turnoInicial;
     private Turno turno;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.controller= this;
         // Crear tablero
         // List<Hexagono> hexs = Factory_MapaBasico.crearHexagonosBasico();
 
@@ -93,7 +85,7 @@ public class InicialController extends BaseTableroController implements Initiali
             if (modoActual == ModoJuego.CONSTRUIR_POBLADO) {
                 try {
                     turnoActual.construirPoblado(v.getNumeroDeVertice());
-                    colorear(ui);
+                    colorear(ui,this.jugadorActual);
                     modoActual = ModoJuego.CONSTRUIR_CARRETERA;
                 } catch (Exception ex) {
                     System.err.println("Error construir poblado: " + ex.getMessage());
@@ -115,7 +107,7 @@ public class InicialController extends BaseTableroController implements Initiali
                 int origen = a.getPar().getDestino().getNumeroDeVertice();
                 int destino = a.getDestino().getNumeroDeVertice();
                 turnoActual.construirCarretera(new int[]{origen, destino});
-                colorear(ui);
+                colorear(ui,this.jugadorActual);
                 //catan.terminarTurno();
                 //this.turnoActual= catan.getTurno();
             } catch (Exception ex) {
@@ -141,34 +133,8 @@ public class InicialController extends BaseTableroController implements Initiali
     protected void manejarClickHexagono(Hexagono h, Map<Hexagono, StackPane> uiH) {
     }
 
-    public void colorear(Shape ui){
 
-            if(this.jugadorActual.equals(jugadores.getFirst())){
-                ui.setStroke(Color.BLUE);
-                ui.setFill(Color.BLUE);
-            }else if(this.jugadorActual.equals(jugadores.get(1))){
-                ui.setFill(Color.TAN);
-                ui.setStroke(Color.TAN);
-            }else if(this.jugadorActual.equals(jugadores.get(2))){
-                ui.setStroke(Color.PINK);
-                ui.setFill(Color.PINK);
-            }else if ( !jugadores.getLast().equals(jugadores.get(2))
-                    && this.jugadorActual.equals(jugadores.getLast()) ) {
-                ui.setStroke(Color.CORNSILK);
-                ui.setFill(Color.CORNSILK);
-            }
 
-    }
-
-    @FXML
-    public void construirPoblado() {
-        modoActual = ModoJuego.CONSTRUIR_POBLADO;
-    }
-
-    @FXML
-    public void construirCarretera() {
-        modoActual = ModoJuego.CONSTRUIR_CARRETERA;
-    }
 
     @FXML
     public void terminarTurnoInicial(ActionEvent event) {
@@ -202,8 +168,7 @@ public class InicialController extends BaseTableroController implements Initiali
             Scene nueva = new Scene(loader.load());
 
             JuegoController controller = loader.getController();
-            this.controller = controller;
-            controller.init(catan,tableroPane);
+            controller.init(catan);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(nueva);

@@ -12,15 +12,13 @@ public class Caballero extends CartaDesarrollo {
 
         return new ActivacionDesarrollo() {
 
-            private int hexElegido;
+            //private int hexElegido;
 
-            public void setHex(int hex) {
-                this.hexElegido = hex;
-            }
+           // public void setHex(int hex) {this.hexElegido = hex;}
 
             @Override
             public void ejecutar(Jugador jugador, Tablero tablero, List <Jugador> jugadores) {
-                tablero.moverLadron(hexElegido, jugador);
+                //tablero.moverLadron(hexElegido, jugador);
             }
         };
     }

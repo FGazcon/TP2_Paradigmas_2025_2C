@@ -136,7 +136,12 @@ public class Hexagono {
         for(Vertice vertice: vertices){
             vertice.tieneDuenio(jugadores);
         }
+        System.out.println("roba jugador" + jugador.getNombre());
+        System.out.println("cant jugadores " + jugadores.toArray().length );
+        for (Jugador jugadorl : jugadores){
 
+            System.out.println("jugador " + jugadorl.getNombre());
+        }
         if(!jugadores.isEmpty()){
             jugadores.getFirst().dejarseRobarPorJugador(jugador);
         }

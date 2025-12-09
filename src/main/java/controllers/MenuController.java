@@ -31,11 +31,8 @@ public class MenuController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Scene nueva = new Scene(loader.load());
 
-            Object controller = loader.getController();
+            //Object controller = loader.getController();
 
-            if (controller instanceof RegistroController rc) {
-                rc.setModelo(modelo);
-            }
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(nueva);

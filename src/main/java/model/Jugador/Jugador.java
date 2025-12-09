@@ -68,7 +68,9 @@ public class Jugador {
     }
 
     public void dejarseRobarPorJugador(Jugador jugador) {
-        elegirCartaRandomADescartar().transferirAJugador(jugador, 1);
+        Recurso recurso =elegirCartaRandomADescartar();
+        System.out.println(recurso.nombre());
+        recurso.transferirAJugador(jugador, 1);
     }
 
     public int cantidadCartas(){

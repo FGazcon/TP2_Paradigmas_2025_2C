@@ -102,4 +102,10 @@ public class Arista {
     public int[] getNumeroDeVertices() {
         return numeroDeVertices;
     }
+
+    ///getters interfaz
+
+    public Carretera getCarretera(){
+        return this.carretera;
+    }
 }

@@ -61,8 +61,12 @@ public class Tablero {
         hexagonoConVertice.ubicarEstructura(estructura, numeroDeVertice);
     }
 
-    public void moverLadron(int nuevoHexagono, Jugador jugador){
-        ladron.moverLadron(this.hexagonos.get(nuevoHexagono), jugador);
+    public void moverLadron(Hexagono hexagono, Jugador jugador){
+
+        //System.out.println("hexagono " + this.hexagonos.get(nuevoHexagono).getNumero());
+        //ladron.moverLadron(this.hexagonos.get(nuevoHexagono), jugador);
+        ladron.moverLadron(hexagono, jugador);
+
     }
 
     public void ubicarCarretera(Carretera carretera, int[] numeroDeArista) {

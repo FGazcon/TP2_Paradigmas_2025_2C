@@ -6,6 +6,7 @@ import model.Desarrollo.CartasDesarrollo.CartaDesarrollo;
 import model.Jugador.Jugador;
 import model.Recurso.Recurso;
 import model.Tablero.Arista.Carretera;
+import model.Tablero.Hexagono;
 import model.Tablero.Tablero;
 import model.Tablero.Vertice.Estructura.Ciudad;
 import model.Tablero.Vertice.Estructura.Poblado;
@@ -33,8 +34,9 @@ public class TurnoGeneral extends Turno {
         }
     }
 
-    public void moverLadron(int numeroDeHexagono){
-        this.tablero.moverLadron(numeroDeHexagono, this.jugador);
+    public void moverLadron(Hexagono  hexagono){
+        System.out.println("mover ladron a " + hexagono.getNumero());
+        this.tablero.moverLadron(hexagono, this.jugador);
     }
 
     public void construirCarretera(int[] numeroDeArista){
