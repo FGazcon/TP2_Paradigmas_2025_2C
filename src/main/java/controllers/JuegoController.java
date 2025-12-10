@@ -8,6 +8,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,20 +21,18 @@ import model.Banco.Banco;
 import model.Catan.Catan;
 import model.Catan.TurnoGeneral;
 import model.Dados.Dados;
-import model.Desarrollo.CartasDesarrollo.CartaDesarrollo;
+import model.Desarrollo.CartasDesarrollo.*;
 import model.Jugador.Jugador;
 import model.Recurso.*;
 import model.Tablero.Arista.Arista;
 import model.Tablero.Hexagono;
+import model.Tablero.Vertice.Estructura.Ciudad;
 import model.Tablero.Vertice.Estructura.Estructura;
 import model.Tablero.Vertice.Estructura.Poblado;
 import model.Tablero.Vertice.Vertice;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class JuegoController extends BaseTableroController implements Initializable {
 
@@ -63,6 +63,9 @@ public class JuegoController extends BaseTableroController implements Initializa
     private Hexagono hexagonoPrevioLadron = null;
     private List<Recurso> recursosOfrecer;
     private List<Recurso> recursosElegir;
+    private Jugador jugadorATradear;
+
+    protected ActivacionDesarrollo activacionPendiente;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -171,10 +174,10 @@ public class JuegoController extends BaseTableroController implements Initializa
             if (modoActual == ModoJuego.CONSTRUIR_CIUDAD) {
                 try {
                     turnoActual.construirCiudad(v.getNumeroDeVertice());
-                    if(v.getEstructura().getJugador().equals(this.jugadorActual) && v.getEstructura().getJugador().equals(this.jugadorActual)) {
+                    if(v.getEstructura() instanceof Ciudad && v.getEstructura().getJugador().equals(this.jugadorActual)) {
                         ui.setUserData("Ciudad");
                         colorarCiudad(ui);
-                        this.modoActual = ModoJuego.CONSTRUIR_CARRETERA;
+                        this.modoActual = ModoJuego.SELECCIONAR_NADA;
                         actualizarRecursos();
 
                     }
@@ -240,7 +243,64 @@ public class JuegoController extends BaseTableroController implements Initializa
 
         popup.setScene(new Scene(layout, 250, 160));
         popup.initModality(Modality.NONE);
+        popup.setAlwaysOnTop(true);
         popup.show();
+    }
+
+    private void mostrarElegirJugador() {
+        Stage popup = new Stage();
+        popup.setTitle("Comercio de Recursos");
+
+        VBox layout = new VBox(15);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        for(Jugador jugador : this.jugadores){
+
+            Button botonJugador = new Button(jugador.getNombre());
+            botonJugador.setPrefWidth(180);
+            botonJugador.setDisable(jugador.equals(this.jugadorActual));
+            botonJugador.setOnAction(e -> jugadorElegido(jugador,popup));
+            layout.getChildren().add(botonJugador);
+        }
+
+
+        popup.setScene(new Scene(layout, 250, 160));
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.show();
+    }
+    private void mostrarElegirComercio() {
+        Stage popup = new Stage();
+        popup.setTitle("Elegir Comercio");
+
+        VBox layout = new VBox(15);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        Button boton1 = new Button("Comerciar con banco");
+        Button boton2 = new Button("Comerciar con jugador");
+
+        boton1.setOnAction(e -> comerciarConBanco(popup));
+        boton2.setOnAction(e -> comerciarConJugador(popup));
+
+        layout.getChildren().addAll(boton1,boton2);
+
+
+
+        popup.setScene(new Scene(layout, 250, 160));
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.show();
+    }
+    private void comerciarConBanco(Stage popup){
+        System.out.println("Sss");
+        popup.close();
+    }
+    private void jugadorElegido(Jugador jugador,Stage popup){
+        System.out.println(jugador.getNombre());
+        this.jugadorATradear = jugador;
+        popup.close();
     }
 
     private void manejarOfrecer() {
@@ -252,7 +312,7 @@ public class JuegoController extends BaseTableroController implements Initializa
     }
 
     private void manejarEnviarTrade(Stage popup){
-         turnoGeneral.comerciar(jugadores.getLast(),this.recursosOfrecer,this.recursosElegir);
+         turnoGeneral.comerciar(this.jugadorATradear,this.recursosOfrecer,this.recursosElegir);
          this.recursosElegir.clear();
          this.recursosOfrecer.clear();
          actualizarRecursos();
@@ -261,33 +321,21 @@ public class JuegoController extends BaseTableroController implements Initializa
     }
 
     @FXML
-    private void mostrarVentanaComprarDesarrollo() {
-        Stage popup = new Stage();
-        popup.setTitle("Comprar Desarrollo");
+    private void comprarCartaDesarrollo() {
 
-        Button btnComprarDesarrollo = new Button("Comprar Carta");
-        btnComprarDesarrollo.setPrefWidth(180);
+        if (!CartaDesarrollo.jugadorMePuedePagar(jugadorActual)) {
+            mostrarErrorPopup("No tenés recursos suficientes para comprar una carta.");
+            return;
+        }
 
-        Button btnCancelar = new Button("Cancelar");
-        btnCancelar.setPrefWidth(180);
+        turnoGeneral.comprarDesarrollo();   // Esto ya agrega la carta a jugadorActual
+        actualizarRecursos();
 
-        btnComprarDesarrollo.setOnAction(e -> {
-            popup.close();
-            mostrarPopupElegirTipoCarta();
-        });
-
-        btnCancelar.setOnAction(e -> popup.close());
-
-        VBox layout = new VBox(15, btnComprarDesarrollo, btnCancelar);
-        layout.setAlignment(Pos.CENTER);
-        layout.setPadding(new Insets(20));
-        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
-
-        popup.setScene(new Scene(layout, 250, 160));
-        popup.initModality(Modality.NONE);
-        popup.show();
+        mostrarInfoPopup("¡Compraste una carta de desarrollo!");
     }
 
+
+    /*
     private void mostrarPopupElegirTipoCarta() {
         Stage popup = new Stage();
         popup.setTitle("Elegí qué carta comprar");
@@ -331,23 +379,429 @@ public class JuegoController extends BaseTableroController implements Initializa
         actualizarRecursos();
         popup.close();
     }
+    */
 
-    private void mostrarErrorPopup(String mensaje) {
+    @FXML
+    private void mostrarVentanaUsarDesarrollo() {
         Stage popup = new Stage();
-        popup.setTitle("Error");
+        popup.setTitle("Usar Desarrollo");
 
-        Label lbl = new Label(mensaje);
+        ListView<String> lista = new ListView<>();
+        lista.setPrefSize(220, 180);
+
+        // 1) Cartas que SÍ se pueden usar este turno
+        List<CartaDesarrollo> activables = jugadorActual.getCartasDesarrolloSinActivar();
+
+        // 2) Cartas recién compradas (NO se pueden usar)
+        List<CartaDesarrollo> recienCompradas = jugadorActual.getCartasDesarrolloRecienCompradas();
+
+        // === Mostrar primero las usables ===
+        for (CartaDesarrollo c : activables) {
+            lista.getItems().add(c.getClass().getSimpleName() + " (usable)");
+        }
+
+        // === Mostrar después las NO usables ===
+        for (CartaDesarrollo c : recienCompradas) {
+            lista.getItems().add(c.getClass().getSimpleName() + " (no usable este turno)");
+        }
+
+        Button btnUsar = new Button("Usar Carta");
+        btnUsar.setPrefWidth(180);
+
+        Button btnCancelar = new Button("Cancelar");
+        btnCancelar.setPrefWidth(180);
+
+        btnUsar.setOnAction(e -> {
+            int index = lista.getSelectionModel().getSelectedIndex();
+            if (index < 0) {
+                mostrarErrorPopup("Seleccioná una carta.");
+                return;
+            }
+
+            if (index >= activables.size()) {
+                mostrarErrorPopup("No podés usar una carta recién comprada.");
+                return;
+            }
+
+            // Obtener la carta real activable
+            CartaDesarrollo carta = activables.get(index);
+
+            // Preparar activación
+            ActivacionDesarrollo act = jugadorActual.getActivacionParaCartaEnPosicion(index);
+
+            popup.close();
+
+            // Lógica según el tipo de carta
+            if (carta instanceof Caballero) {
+                mostrarPopupCaballero((Caballero) carta, act);
+            }
+            else if (carta instanceof Monopolio) {
+                mostrarPopupMonopolio((Monopolio) carta, act);
+            }
+            else if (carta instanceof Descubrimiento) {
+                mostrarPopupDescubrimiento((Descubrimiento) carta, act);
+            }
+            else if (carta instanceof ConstruccionDeCarreteras) {
+                mostrarPopupCarreteras((ConstruccionDeCarreteras) carta, act);
+            }
+            else if (carta instanceof PuntoDeVictoria) {
+                mostrarPopupPuntoDeVictoria((PuntoDeVictoria) carta, act);
+            }
+        });
+
+//        popup.initModality(Modality.WINDOW_MODAL); //este para bloquear las otras ventanas
+//        popup.setAlwaysOnTop(true); //este para que se mantenga siempre arriba
+
+        btnCancelar.setOnAction(e -> popup.close());
+
+        VBox layout = new VBox(15, lista, btnUsar, btnCancelar);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(layout, 300, 320));
+        popup.show();
+    }
+
+
+    private void mostrarPopupMonopolio(CartaDesarrollo carta, ActivacionDesarrollo act) {
+
+        Stage popup = new Stage();
+        popup.setTitle("Monopolio");
+
+        Label label = new Label("Elegí un recurso para monopolizar:");
+        label.setStyle("-fx-font-weight: bold;");
+
+        Button b1 = new Button("Madera");
+        Button b2 = new Button("Ladrillo");
+        Button b3 = new Button("Oveja");
+        Button b4 = new Button("Trigo");
+        Button b5 = new Button("Piedra");
+
+        List<Button> botones = List.of(b1, b2, b3, b4, b5);
+        botones.forEach(b -> b.setPrefWidth(180));
+
+        // Acciones de cada botón
+        b1.setOnAction(e -> usarMonopolio("Madera", act, popup, carta));
+        b2.setOnAction(e -> usarMonopolio("Ladrillo", act, popup, carta));
+        b3.setOnAction(e -> usarMonopolio("Oveja", act, popup, carta));
+        b4.setOnAction(e -> usarMonopolio("Trigo", act, popup, carta));
+        b5.setOnAction(e -> usarMonopolio("Piedra", act, popup, carta));
+
+        VBox layout = new VBox(12, label, b1, b2, b3, b4, b5);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(layout, 260, 300));
+        popup.show();
+    }
+
+    private void usarMonopolio(String nombreRecurso, ActivacionDesarrollo act, Stage popup, CartaDesarrollo carta) {
+
+        // Obtener el Recurso real desde el jugador
+        Recurso recurso;
+        switch (nombreRecurso) {
+            case "Madera" -> recurso = jugadorActual.getMadera();
+            case "Ladrillo" -> recurso = jugadorActual.getLadrillo();
+            case "Oveja" -> recurso = jugadorActual.getOveja();
+            case "Trigo" -> recurso = jugadorActual.getTrigo();
+            case "Piedra" -> recurso = jugadorActual.getPiedra();
+            default -> throw new IllegalStateException("Recurso desconocido: " + nombreRecurso);
+        }
+
+        // Setear el recurso dentro de la activación anónima
+        try {
+            var metodo = act.getClass().getDeclaredMethod("setRecurso", Recurso.class);
+            metodo.setAccessible(true);
+            metodo.invoke(act, recurso);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarErrorPopup("Error interno al asignar recurso al monopolio.");
+            return;
+        }
+
+        // Ejecutar la carta
+        act.ejecutar(this.jugadorActual, this.tableroModelo, this.jugadores);
+        jugadorActual.marcarCartaComoUsada(carta);
+
+        // Actualizar interfaz
+        actualizarRecursos();
+
+        popup.close();
+
+        mostrarInfoPopup("Monopolizaste " + nombreRecurso + ".");
+    }
+
+    private void mostrarPopupDescubrimiento(CartaDesarrollo carta, ActivacionDesarrollo act) {
+        Stage popup = new Stage();
+        popup.setTitle("Año de Abundancia");
+
+        Label label = new Label("Elegí DOS recursos:");
+        label.setStyle("-fx-font-weight: bold;");
+
+        ListView<String> lista = new ListView<>();
+        lista.getItems().addAll("Madera", "Ladrillo", "Oveja", "Trigo", "Piedra");
+        lista.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        lista.setPrefSize(200, 160);
+
+        Button btnAceptar = new Button("Aceptar");
+        btnAceptar.setPrefWidth(160);
+
+        btnAceptar.setOnAction(e -> {
+            var seleccion = lista.getSelectionModel().getSelectedItems();
+
+            if (seleccion.size() != 2) {
+                mostrarErrorPopup("Debés elegir EXACTAMENTE 2 recursos.");
+                return;
+            }
+
+            usarDescubrimiento(seleccion.get(0), seleccion.get(1), act, popup, carta);
+        });
+
+        VBox layout = new VBox(12, label, lista, btnAceptar);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(layout, 280, 300));
+        popup.show();
+    }
+
+    private void usarDescubrimiento(String r1, String r2, ActivacionDesarrollo act, Stage popup, CartaDesarrollo carta) {
+
+        Recurso recursoA = obtenerRecursoJugadorPorNombre(r1);
+        Recurso recursoB = obtenerRecursoJugadorPorNombre(r2);
+
+        // Llamar al setter privado "setRecursos(Recurso, Recurso)" usando reflexión
+        try {
+            var metodo = act.getClass().getDeclaredMethod("setRecursos", Recurso.class, Recurso.class);
+            metodo.setAccessible(true);
+            metodo.invoke(act, recursoA, recursoB);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarErrorPopup("Error interno al asignar recursos.");
+            return;
+        }
+
+        // Ejecutar la activación
+        act.ejecutar(jugadorActual, tableroModelo, jugadores);
+        jugadorActual.marcarCartaComoUsada(carta);
+
+        actualizarRecursos();
+        popup.close();
+
+        mostrarInfoPopup("Obtuviste 1 " + r1 + " y 1 " + r2 + ".");
+    }
+
+    private Recurso obtenerRecursoJugadorPorNombre(String nombre) {
+        return switch (nombre) {
+            case "Madera" -> jugadorActual.getMadera();
+            case "Ladrillo" -> jugadorActual.getLadrillo();
+            case "Oveja" -> jugadorActual.getOveja();
+            case "Trigo" -> jugadorActual.getTrigo();
+            case "Piedra" -> jugadorActual.getPiedra();
+            default -> throw new IllegalStateException("Recurso desconocido: " + nombre);
+        };
+    }
+
+    private void mostrarPopupCaballero(CartaDesarrollo carta, ActivacionDesarrollo act) {
+
+        Stage popup = new Stage();
+        popup.setTitle("Carta: Caballero");
+
+        Label lbl = new Label(
+                "Vas a usar un Caballero.\n\n" +
+                        "Hacé CLICK en el hexágono donde querés mover el ladrón."
+        );
         lbl.setWrapText(true);
+        lbl.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-        Button btnOk = new Button("OK");
-        btnOk.setOnAction(e -> popup.close());
+        Button btnOk = new Button("Aceptar");
+        btnOk.setPrefWidth(140);
+
+        btnOk.setOnAction(e -> {
+            activarModoMoverLadron(act);  // <<< Activa el modo especial
+            popup.close();
+        });
 
         VBox layout = new VBox(15, lbl, btnOk);
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(20));
-        layout.setStyle("-fx-background-color: #F8D7DA; -fx-border-color: #721C24;");
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
 
-        popup.setScene(new Scene(layout, 260, 120));
+        popup.setScene(new Scene(layout, 340, 180));
+        popup.show();
+    }
+
+    @Override
+    protected void manejarClickHexagono(Hexagono h, Map<Hexagono, StackPane> uiH) {
+
+        if (modoActual == ModoJuego.MODO_MOVER_LADRON) {
+
+            // Caso 1: Carta Caballero activa
+            if (activacionPendiente != null) {
+                try {
+                    // Setear hex
+                    var metodo = activacionPendiente.getClass()
+                            .getDeclaredMethod("setHex", Hexagono.class);
+                    metodo.setAccessible(true);
+                    metodo.invoke(activacionPendiente, h);
+
+                    // Ejecutar mover ladrón
+                    activacionPendiente.ejecutar(jugadorActual, tableroModelo, jugadores);
+
+                    moverLadronAHexagono(h, uiH);
+
+                    // Robar
+                   // manejarRoboTrasLadron(h);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                activacionPendiente = null;
+                return;
+            }
+
+            // Caso 2: Movimiento normal del ladrón (si existe esa acción en tu juego)
+            this.turnoGeneral.moverLadron(h);
+            moverLadronAHexagono(h, uiH);
+            modoActual = ModoJuego.SELECCIONAR_NADA;
+            return;
+        }
+
+        // Otros modos (poblado / ciudad / carretera / comercio / etc.)
+    }
+
+    protected void manejarRoboTrasLadron(Hexagono hex) {
+
+        List<Jugador> adyacentes = jugadoresAdyacentes(hex);
+
+        if (adyacentes.isEmpty()) {
+            mostrarInfoPopup("No hay jugadores adyacentes para robar.");
+            return;
+        }
+
+        if (adyacentes.size() == 1) {
+            Jugador victima = adyacentes.getFirst();
+            victima.dejarseRobarPorJugador(jugadorActual);
+            mostrarInfoPopup("Robaste a " + victima.getNombre());
+            return;
+        }
+
+        mostrarPopupElegirVictima(adyacentes);
+    }
+
+    protected List<Jugador> jugadoresAdyacentes(Hexagono hex) {
+
+        Set<Jugador> encontrados = new HashSet<>();
+
+        for (Vertice v : hex.getVertices()) {
+            Estructura est = v.getEstructura();
+            if (est != null) {
+                encontrados.add(est.getJugador());
+            }
+        }
+
+        // No puede robarse a sí mismo
+        encontrados.remove(jugadorActual);
+
+        return new ArrayList<>(encontrados);
+    }
+
+    protected void mostrarPopupElegirVictima(List<Jugador> victimas) {
+        Stage popup = new Stage();
+        popup.setTitle("Elegí jugador a robar");
+
+        ListView<String> lista = new ListView<>();
+        for (Jugador j : victimas) lista.getItems().add(j.getNombre());
+
+        Button robar = new Button("Robar");
+        robar.setOnAction(e -> {
+            int idx = lista.getSelectionModel().getSelectedIndex();
+            if (idx < 0) return;
+
+            Jugador victima = victimas.get(idx);
+            victima.dejarseRobarPorJugador(jugadorActual);
+
+            popup.close();
+            mostrarInfoPopup("Robaste a " + victima.getNombre());
+        });
+
+        VBox root = new VBox(12, lista, robar);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(20));
+        root.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(root, 260, 250));
+        popup.show();
+    }
+
+    private void activarModoMoverLadron(ActivacionDesarrollo act) {
+        this.activacionPendiente = act;
+        this.modoActual = ModoJuego.MODO_MOVER_LADRON;
+        mostrarInfoPopup("Hacé click en el hexágono donde querés mover el ladrón.");
+    }
+
+    private void mostrarPopupPuntoDeVictoria(CartaDesarrollo carta, ActivacionDesarrollo act) {
+
+        Stage popup = new Stage();
+        popup.setTitle("Punto de Victoria");
+
+        Label lbl = new Label(
+                "¡Esta carta te otorga 1 Punto de Victoria!"
+        );
+        lbl.setWrapText(true);
+        lbl.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        Button btnOk = new Button("Aceptar");
+        btnOk.setPrefWidth(120);
+
+        btnOk.setOnAction(e -> {
+            act.ejecutar(jugadorActual, tableroModelo, jugadores);
+            jugadorActual.marcarCartaComoUsada(carta);
+            actualizarRecursos(); // si mostrás puntaje acá, sino sacalo
+            popup.close();
+
+            mostrarInfoPopup("Ahora tenés " + jugadorActual.getPuntos() + " puntos.");
+        });
+
+        VBox layout = new VBox(15, lbl, btnOk);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(layout, 320, 160));
+        popup.show();
+    }
+
+    private void mostrarPopupCarreteras(CartaDesarrollo carta, ActivacionDesarrollo act) {
+
+        Stage popup = new Stage();
+        popup.setTitle("Construcción de Carreteras");
+
+        Label lbl = new Label(
+                "Esta carta te permite construir 2 carreteras gratis.\n\n" +
+                        "Elegí dos aristas en el tablero donde quieras ubicarlas."
+        );
+        lbl.setWrapText(true);
+        lbl.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
+
+        Button btnOk = new Button("Aceptar");
+        btnOk.setPrefWidth(140);
+
+        btnOk.setOnAction(e -> {
+            activarModoCarreteras(act);
+            popup.close();
+        });
+
+        VBox layout = new VBox(15, lbl, btnOk);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(layout, 380, 180));
         popup.show();
     }
 
@@ -427,9 +881,14 @@ public class JuegoController extends BaseTableroController implements Initializa
     //deberia preguntarle a cada jugador siguiente si acepta o no el cambio y por ultimo vuelve al jugador 1
     // para que elija con quien comerciar o algo asi
     @FXML
-    public void comerciarConJugador(){
-       this.recursosOfrecer = Recurso.crearListaDeRecursos();
-       this.recursosElegir = Recurso.crearListaDeRecursos();
+    public void elegirComcercio(){
+        mostrarElegirComercio();
+    }
+    public void comerciarConJugador(Stage popup){
+        popup.close();
+        mostrarElegirJugador();
+        this.recursosOfrecer = Recurso.crearListaDeRecursos();
+        this.recursosElegir = Recurso.crearListaDeRecursos();
 
         mostrarVentanaComercio();
         btnComercio.setDisable(true);
@@ -490,17 +949,9 @@ public class JuegoController extends BaseTableroController implements Initializa
         // 3. Guardar referencia para la próxima
         hexagonoPrevioLadron = hex;
     }
-    @Override
-    protected void manejarClickHexagono(Hexagono h,Map<Hexagono, StackPane> uiH) {
-        System.out.println("cambiar ladron");
-        if (modoActual == ModoJuego.MODO_MOVER_LADRON) {
-            moverLadronAHexagono(h,uiH);
-        }
-    }
 
     private void moverLadronAHexagono(Hexagono nuevoHex,Map<Hexagono, StackPane> uiH) {
         // 1. Mover ladrón en el modelo
-        this.turnoGeneral.moverLadron(nuevoHex);
         actualizarRecursos();
 
         // 2. Pintar en la UI
@@ -526,9 +977,9 @@ public class JuegoController extends BaseTableroController implements Initializa
 
 }
 
-//hay que configurar para no pintar poblados arriba de poblados, para no pintar carreteras arriba de carreteras o donde no debe
-// y para no poner el ladron en el hexagono donde ya estaba (hacer para que deba elegir hasta que se elija un lugar valido)
+// pasar el click arista a juego e inicial controller devuelta para poder actualizar los recursos
+// probar usar carta de desarrollo teniendo 1 de un turno anterior y habiendo comprado otro (2 caballeros ejemplos)
+// solo se deberia poder usar 1
 
-//update
-// me deja cambiar el color de una carretera ya construida pq se cambia el color si la arista contiene una instancia de carretera
-// probablemente seria mucho mas facil usar una excepcion en el metodo llamado y seguro sea lo correcto.
+
+//las cosas funcionan para el jugador 1 pero no para el 2

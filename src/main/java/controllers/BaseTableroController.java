@@ -2,16 +2,23 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
 import model.Catan.Turno;
+import model.Desarrollo.CartasDesarrollo.ActivacionDesarrollo;
 import model.Jugador.Jugador;
 import model.Tablero.Arista.Arista;
 import model.Tablero.Hexagono;
@@ -29,7 +36,7 @@ public abstract class BaseTableroController implements Initializable {
 
     protected Tablero tableroModelo;
     protected Jugador jugadorActual;
-    protected enum ModoJuego { RECURSO_NECESITADO,RECURSO_OFRECER,SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD, MODO_MOVER_LADRON }
+    protected enum ModoJuego { RECURSO_NECESITADO,RECURSO_OFRECER,SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD, MODO_MOVER_LADRON, MODO_CARRETERAS_CARTA_DESARROLLO }
     protected ModoJuego modoActual = ModoJuego.SELECCIONAR_NADA;
     protected final double RADIO = 60.0;
     protected final double DIST_X = RADIO * Math.sqrt(3.0);
@@ -43,6 +50,10 @@ public abstract class BaseTableroController implements Initializable {
 
     protected Turno turnoActual; // Puede ser inicial o general
     Map<Hexagono, StackPane> uiHexagonos = new HashMap<>();
+
+    private ActivacionDesarrollo activacionPendienteCarreteras;
+
+    private int[] primeraArista = null;
 
     protected void crearTablero(Tablero modelo) {
         for (Hexagono hex : modelo.getHexagonos()) {
@@ -277,6 +288,47 @@ public abstract class BaseTableroController implements Initializable {
 
 
     protected void manejarClickArista(Arista a, Line ui) {
+
+        // Caso: carta de carreteras
+        if (modoActual == ModoJuego.MODO_CARRETERAS_CARTA_DESARROLLO) {
+
+            int origen = a.getPar().getDestino().getNumeroDeVertice();
+            int destino = a.getDestino().getNumeroDeVertice();
+            int[] seleccion = new int[]{origen, destino};
+
+            // Primera selección
+            if (primeraArista == null) {
+                primeraArista = seleccion;
+                mostrarInfoPopup("Primera arista seleccionada. Elegí la SEGUNDA.");
+                return;
+            }
+
+            // Segunda selección
+            try {
+                var metodo = activacionPendienteCarreteras.getClass()
+                        .getDeclaredMethod("setAristas", int[].class, int[].class);
+                metodo.setAccessible(true);
+                metodo.invoke(activacionPendienteCarreteras, primeraArista, seleccion);
+
+                // Ejecutar acción
+                activacionPendienteCarreteras.ejecutar(jugadorActual, tableroModelo, jugadores);
+
+                // Dibujar la carretera visualmente
+                colorear(ui, jugadorActual);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            // Resetear modo
+            activacionPendienteCarreteras = null;
+            primeraArista = null;
+            modoActual = ModoJuego.SELECCIONAR_NADA;
+            mostrarInfoPopup("¡Construiste 2 carreteras gratis!");
+
+            return;
+        }
+
         if (modoActual == ModoJuego.CONSTRUIR_CARRETERA) {
             try {
                 int origen = a.getPar().getDestino().getNumeroDeVertice();
@@ -297,5 +349,51 @@ public abstract class BaseTableroController implements Initializable {
         }
 
     }
+
+    protected void activarModoCarreteras(ActivacionDesarrollo act) {
+        this.activacionPendienteCarreteras = act;
+        this.primeraArista = null;
+        this.modoActual = ModoJuego.MODO_CARRETERAS_CARTA_DESARROLLO;
+        mostrarInfoPopup("Elegí la PRIMER arista donde querés construir la carretera.");
+    }
+
+    public void mostrarErrorPopup(String mensaje) {
+        Stage popup = new Stage();
+        popup.setTitle("Error");
+
+        Label lbl = new Label(mensaje);
+        lbl.setWrapText(true);
+
+        Button btnOk = new Button("OK");
+        btnOk.setOnAction(e -> popup.close());
+
+        VBox layout = new VBox(15, lbl, btnOk);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #F8D7DA; -fx-border-color: #721C24;");
+
+        popup.setScene(new Scene(layout, 260, 120));
+        popup.show();
+    }
+
+    public void mostrarInfoPopup(String mensaje) {
+        Stage popup = new Stage();
+        popup.setTitle("Info");
+
+        Label lbl = new Label(mensaje);
+        lbl.setWrapText(true);
+
+        Button btnOk = new Button("OK");
+        btnOk.setOnAction(e -> popup.close());
+
+        VBox layout = new VBox(15, lbl, btnOk);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #D0E6B4; -fx-border-color: #3E7A21;");
+
+        popup.setScene(new Scene(layout, 260, 120));
+        popup.show();
+    }
+
 
 }

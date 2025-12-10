@@ -1,6 +1,7 @@
 package model.Desarrollo.CartasDesarrollo;
 
 import model.Jugador.Jugador;
+import model.Tablero.Hexagono;
 import model.Tablero.Tablero;
 
 import java.util.List;
@@ -12,13 +13,13 @@ public class Caballero extends CartaDesarrollo {
 
         return new ActivacionDesarrollo() {
 
-            //private int hexElegido;
+            private Hexagono hexElegido;
 
-           // public void setHex(int hex) {this.hexElegido = hex;}
+            public void setHex(Hexagono hex) {this.hexElegido = hex;}
 
             @Override
             public void ejecutar(Jugador jugador, Tablero tablero, List <Jugador> jugadores) {
-                //tablero.moverLadron(hexElegido, jugador);
+                tablero.moverLadron(hexElegido, jugador);
             }
         };
     }

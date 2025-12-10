@@ -12,8 +12,8 @@ import java.util.*;
 
 public class Tablero {
 
-    private List<Hexagono> hexagonos;
-    private Ladron ladron;
+    private final List<Hexagono> hexagonos;
+    private final Ladron ladron;
 
     public Tablero(List<Hexagono> hexagonos) {
         this.hexagonos = hexagonos;
@@ -26,9 +26,9 @@ public class Tablero {
     }
 
     public Hexagono buscarDesierto() {
-        for (int i = 0; i < this.hexagonos.size(); i++) {
-            if(hexagonos.get(i).esDesierto()){
-                return hexagonos.get(i);
+        for (Hexagono hexagono : this.hexagonos) {
+            if (hexagono.esDesierto()) {
+                return hexagono;
             }
         }
         return null;
@@ -63,8 +63,6 @@ public class Tablero {
 
     public void moverLadron(Hexagono hexagono, Jugador jugador){
 
-        //System.out.println("hexagono " + this.hexagonos.get(nuevoHexagono).getNumero());
-        //ladron.moverLadron(this.hexagonos.get(nuevoHexagono), jugador);
         ladron.moverLadron(hexagono, jugador);
 
     }
@@ -91,16 +89,11 @@ public class Tablero {
         Set<Arista> unicas = new HashSet<>();
 
         for (Vertice v : getVerticesUnicos()) {
-            for (Arista a : v.getAristas()) {
-                unicas.add(a);
-            }
+            unicas.addAll(v.getAristas());
         }
 
         return new ArrayList<>(unicas);
     }
     /////getters para la app
-    public Ladron getLadron(){
-        return this.ladron;
-    }
 
 }

@@ -4,6 +4,7 @@ import model.Banco.Banco;
 import model.Comercio.ReglaDeComercio;
 import model.Desarrollo.CartasDesarrollo.ActivacionDesarrollo;
 import model.Desarrollo.CartasDesarrollo.CartaDesarrollo;
+import model.Desarrollo.CartasDesarrollo.EstadoCartaDesarrollo.*;
 import model.Recurso.Recurso;
 
 import java.util.ArrayList;
@@ -269,5 +270,9 @@ public class Jugador {
 
     public int getCaminoMasLargo() {
         return this.caminoMasLArgo;
+    }
+
+    public void marcarCartaComoUsada(CartaDesarrollo carta) {
+        carta.setEstado(new Activada());
     }
 }
