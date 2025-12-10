@@ -1,0 +1,118 @@
+@startuml Diagrama Clases Estructuras
+
+abstract class Estructura {
+    # costo: List<Recurso>
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice): void
+    + entregarRecursos(recurso: Recurso): void
+    + anotarDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarMejorar(ciudad: Ciudad, vertice: Vertice): void
+    + intentarMejorar(poblado: Poblado, vertice: Vertice): void
+    + esDe(jugador: Jugador): boolean
+    + getJugador(): Jugador
+    + sumarAJugador(): void
+    + jugadorMePuedePagar(): boolean
+    + cobrarleAJugador(): void
+}
+
+
+class Ciudad{
+    + Ciudad(jugador: Jugador)
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice): void
+    + entregarRecursos(recurso: Recurso): void
+    + anotarDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarMejorar(estructura: Ciudad, vertice: Vertice): void
+    + intentarMejorar(estructura: Poblado, vertice: Vertice): void
+}
+
+
+class Poblado {
+    + Poblado(jugador: Jugador)
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice): void
+    + entregarRecursos(recurso: Recurso): void
+    + anotarDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarMejorar(ciudad: Ciudad, vertice: Vertice): void
+    + intentarMejorar(poblado: Poblado, vertice: Vertice): void
+}
+
+
+class PobladoInicial {
+    + PobladoInicial(jugador: Jugador)
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice): void
+}
+
+
+class NoHayEstructura {
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice): void
+    + entregarRecursos(recurso: Recurso): void
+    + anotarDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarMejorar(ciudad: Ciudad, vertice: Vertice): void
+    + intentarMejorar(poblado: Poblado, vertice: Vertice): void
+}
+
+
+class Carretera {
+    - costo: List<Recurso>
+    + Carretera(jugador: Jugador)
+    + getJugador(): Jugador
+    + perteneceA(jugador: Jugador): boolean
+    + jugadorMePuedePagar(): boolean
+    + cobrarleAJugador(): void
+    + actualizarDistanciaJugador(i: int): void
+}
+
+
+class Arista {
+    - numeroDeVertices: int[]
+    + Arista(destino: Vertice, numeroDeVertices: int[])
+    + bloquearDestino(): void
+    + ocuparse(carretera: Carretera): void
+    + ocuparPar(carretera: Carretera): void
+    + iniciarConteoCamino(): int
+    + setPar(par: Arista): void
+    + validarCarreteraPara(jugador: Jugador): boolean
+    + aristaValidaPara(jugador: Jugador): boolean
+    + esDe(jugador: Jugador): boolean
+    + ubicarCarretera(carretera: Carretera, numeroDeArista: int[]): void
+    + getDestino(): Vertice
+    + getPar(): Arista
+    + getNumeroDeVertices(): int[]
+    + getCarretera(): Carretera
+}
+
+
+abstract class EstadoArista {
+    + ubicarCarretera(carretera: Carretera, arista: Arista): void
+    + esDe(jugador: Jugador, carretera: Carretera): boolean
+}
+
+
+abstract class Estado{}
+
+class AristaOcupada  {
+    + ubicarCarretera(carretera: Carretera, arista: Arista): void
+    + esDe(jugador: Jugador, carretera: Carretera): boolean
+}
+
+
+class AristaVacia  {
+    + ubicarCarretera(carretera: Carretera, arista: Arista): void
+    + esDe(jugador: Jugador, carretera: Carretera): boolean
+}
+
+
+Vertice "2"<-->"2..3" Arista
+Vertice--> Estado 
+Arista-->"0..1" Carretera
+Vertice-->"0..1" Estructura
+Estructura<|-- Ciudad
+Estructura<|-- Poblado
+Poblado<|-- PobladoInicial
+Estructura<|-- NoHayEstructura
+Arista-->EstadoArista
+EstadoArista<|--AristaOcupada
+EstadoArista<|--AristaVacia
+Estructura--> Jugador
+Carretera--> Jugador
+Arista-->Arista
+
+@enduml

@@ -1,0 +1,54 @@
+@startuml Diagrama Clases Terreno
+
+abstract class Terreno{
+    +darRecurso(): Recurso
+    +generar19Terrenos(): List<Terreno>
+}
+
+abstract class Productor{
+    +generar18Productores(): List<Terreno>
+}
+
+class Pastizal{
+    +darRecurso(): Recurso
+}
+
+class Montaña{
+    +darRecurso(): Recurso
+}
+
+class Colina{
+    +darRecurso(): Recurso
+}
+
+class Bosque{
+    +darRecurso(): Recurso
+}
+
+class Campo{
+    +darRecurso(): Recurso
+}
+
+
+class Desierto{
+    +darRecurso(): Recurso
+}
+
+Terreno<|-- Desierto 
+Terreno<|-- Productor
+Productor<|-- Bosque
+Productor<|-- Campo
+Productor<|-- Colina 
+Productor<|-- Montaña
+Productor<|-- Pastizal 
+
+Bosque..> Madera 
+Colina..> Ladrillo
+Montaña..> Piedra
+Campo..> Trigo
+Pastizal..> Oveja
+
+
+
+
+@enduml

@@ -1,0 +1,60 @@
+@startuml Diagrama Clases Jugador
+
+class Jugador{
+    -nombre: String
+    -puntaje: Int 
+    -cantidadCaballeros: Int 
+    -caminoMasLargo: Int
+    + Jugador(nombre: String, banco: Banco)
+    + setCaminoMasLArgo(caminoMasLArgo: int): void
+    + getCantidadDeRecursoEspecifico(recurso: Recurso): int
+    + elegirCartaRandomADescartar(): Recurso
+    + descartarMitad(): void
+    + dejarseRobarPorJugador(jugador: Jugador): void
+    + cantidadCartas(): int
+    + sumarPunto(): void
+    + calcularPuntaje(): int
+    + sumarRecurso(recurso: Recurso, cantidad: int): void
+    + descartarRecurso(recurso: Recurso, cantidad: int): void
+    + tieneAlMenos(recurso: Recurso, cantidad: int): boolean
+    + pedirAlBanco(recurso: Recurso, cantidad: int): void
+    + comerciarConJugador(jugador: Jugador, recursosOfertados: List<Recurso>, recursosDeseados: List<Recurso>): void
+    + recibirComercioConJugador(jugador: Jugador, recursosQueEnviaria: List<Recurso>, recursosQueRecibiria: List<Recurso>): void
+    - sumarVariosRecursos(recursosQueRecibe: List<Recurso>): void
+    - restarVariosRecursos(recursosQueEnvia: List<Recurso>): void
+    + tieneSuficientesParaOfertar(recursosOfertados: List<Recurso>): boolean
+    + comerciarConBanco(recursoOfertado: Recurso, cantidad: int, recursoDeseado: Recurso): void
+    + darReglaA(recurso: Recurso, reglaDeComercio: ReglaDeComercio): void
+    + darReglaATodos(reglaDeComercio: ReglaDeComercio): void
+    + imprimirRecursos(): void
+    + obtenerRecurso(nombre: String): Recurso
+    + getNombre(): String
+    + getMadera(): Recurso
+    + getLadrillo(): Recurso
+    + getPiedra(): Recurso
+    + getOveja(): Recurso
+    + getTrigo(): Recurso
+    + pagarleAlBanco(costo: List<Recurso>): void
+    + adquirirDesarrollo(): void
+    + registrarDesarrollo(carta: CartaDesarrollo): void
+    + getCartasDesarrolloSinActivar(): List<CartaDesarrollo>
+    + getCartasDesarrolloUsadas(): List<CartaDesarrollo>
+    + getCartasDesarrolloRecienCompradas(): List<CartaDesarrollo>
+    + actualizarTurnoCartas(): void
+    - obtenerCartaDesarrolloEn(posicion: int): CartaDesarrollo
+    - activarCarta(carta: CartaDesarrollo): ActivacionDesarrollo
+    + getActivacionParaCartaEnPosicion(posicion: int): ActivacionDesarrollo
+    + getPuntos(): int
+    + getCaminoMasLargo(): int
+}
+
+class Recurso{}
+
+class CartaDesarrollo{}
+
+class Banco{}
+
+Jugador-->Banco
+Jugador-->"5" Recurso
+Jugador-->"*" CartaDesarrollo
+@enduml
