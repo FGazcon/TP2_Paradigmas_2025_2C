@@ -67,7 +67,7 @@
                         prefWidth="180"
                         style="-fx-background-color: #F0B340; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 5;"/>
 
-                <Button fx:id="btnComprarDesarrollo" text="COMPRAR DESARROLLO"  prefWidth="180" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+                <Button fx:id="btnComprarDesarrollo" text="COMPRAR DESARROLLO"  onAction="#mostrarVentanaComprarDesarrollo" prefWidth="180" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"/>
                 <Button fx:id="btnUsarDesarrollo" text="USAR DESARROLLO"  prefWidth="180" style="-fx-background-color: #87CEEB; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 5;"/>
             </VBox>
 

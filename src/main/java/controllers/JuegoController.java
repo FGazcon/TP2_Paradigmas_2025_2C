@@ -19,6 +19,7 @@ import model.Banco.Banco;
 import model.Catan.Catan;
 import model.Catan.TurnoGeneral;
 import model.Dados.Dados;
+import model.Desarrollo.CartasDesarrollo.CartaDesarrollo;
 import model.Jugador.Jugador;
 import model.Recurso.*;
 import model.Tablero.Arista.Arista;
@@ -42,6 +43,7 @@ public class JuegoController extends BaseTableroController implements Initializa
     @FXML private Label lblTurno;
     @FXML private Label lblValorDados;
     @FXML private Label lblPV;
+    @FXML public Button btnComprarDesarrollo;
 
     @FXML private Label lblInvMadera;
     @FXML private Label lblInvLadrillo;
@@ -255,10 +257,100 @@ public class JuegoController extends BaseTableroController implements Initializa
          this.recursosOfrecer.clear();
          actualizarRecursos();
          popup.close();
-        btnComercio.setDisable(false);
-
-
+         btnComercio.setDisable(false);
     }
+
+    @FXML
+    private void mostrarVentanaComprarDesarrollo() {
+        Stage popup = new Stage();
+        popup.setTitle("Comprar Desarrollo");
+
+        Button btnComprarDesarrollo = new Button("Comprar Carta");
+        btnComprarDesarrollo.setPrefWidth(180);
+
+        Button btnCancelar = new Button("Cancelar");
+        btnCancelar.setPrefWidth(180);
+
+        btnComprarDesarrollo.setOnAction(e -> {
+            popup.close();
+            mostrarPopupElegirTipoCarta();
+        });
+
+        btnCancelar.setOnAction(e -> popup.close());
+
+        VBox layout = new VBox(15, btnComprarDesarrollo, btnCancelar);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(layout, 250, 160));
+        popup.initModality(Modality.NONE);
+        popup.show();
+    }
+
+    private void mostrarPopupElegirTipoCarta() {
+        Stage popup = new Stage();
+        popup.setTitle("Elegí qué carta comprar");
+
+        Button btnCaballero = new Button("Caballero");
+        Button btnMonopolio = new Button("Monopolio");
+        Button btnDescubrimiento = new Button("Descubrimiento");
+        Button btnCarreteras = new Button("Carreteras");
+        Button btnPuntoVictoria = new Button("Punto de Victoria");
+
+        List<Button> botones = List.of(
+                btnCaballero, btnMonopolio, btnDescubrimiento, btnCarreteras, btnPuntoVictoria
+        );
+
+        botones.forEach(b -> b.setPrefWidth(200));
+
+        btnCaballero.setOnAction(e -> intentarComprarTipo("Caballero", popup));
+        btnMonopolio.setOnAction(e -> intentarComprarTipo("Monopolio", popup));
+        btnDescubrimiento.setOnAction(e -> intentarComprarTipo("Descubrimiento", popup));
+        btnCarreteras.setOnAction(e -> intentarComprarTipo("Carreteras", popup));
+        btnPuntoVictoria.setOnAction(e -> intentarComprarTipo("Punto de Victoria", popup));
+
+        VBox layout = new VBox(12);
+        layout.getChildren().addAll(botones);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(layout, 280, 260));
+        popup.show();
+    }
+
+    private void intentarComprarTipo(String tipo, Stage popup) {
+        if (!CartaDesarrollo.jugadorMePuedePagar(jugadorActual)) {
+            mostrarErrorPopup("No tenés recursos suficientes para comprar: " + tipo);
+            return;
+        }
+
+        turnoGeneral.comprarDesarrollo();
+
+        actualizarRecursos();
+        popup.close();
+    }
+
+    private void mostrarErrorPopup(String mensaje) {
+        Stage popup = new Stage();
+        popup.setTitle("Error");
+
+        Label lbl = new Label(mensaje);
+        lbl.setWrapText(true);
+
+        Button btnOk = new Button("OK");
+        btnOk.setOnAction(e -> popup.close());
+
+        VBox layout = new VBox(15, lbl, btnOk);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #F8D7DA; -fx-border-color: #721C24;");
+
+        popup.setScene(new Scene(layout, 260, 120));
+        popup.show();
+    }
+
 
     private Map<Label, Recurso> crearMapRecursos() {
         Map<Label, Recurso> map = new HashMap<>();
