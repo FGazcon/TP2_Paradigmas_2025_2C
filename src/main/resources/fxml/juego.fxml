@@ -63,6 +63,7 @@
 
                 <Button fx:id="btnComercio"
                         text="COMERCIO"
+                        onAction="#comerciarConJugador"
                         prefWidth="180"
                         style="-fx-background-color: #F0B340; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 5;"/>
 

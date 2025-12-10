@@ -29,7 +29,7 @@ public abstract class BaseTableroController implements Initializable {
 
     protected Tablero tableroModelo;
     protected Jugador jugadorActual;
-    protected enum ModoJuego { SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD, MODO_MOVER_LADRON }
+    protected enum ModoJuego { RECURSO_NECESITADO,RECURSO_OFRECER,SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD, MODO_MOVER_LADRON }
     protected ModoJuego modoActual = ModoJuego.SELECCIONAR_NADA;
     protected final double RADIO = 60.0;
     protected final double DIST_X = RADIO * Math.sqrt(3.0);
@@ -51,6 +51,8 @@ public abstract class BaseTableroController implements Initializable {
 
         aniadirAristas(modelo.getAristasUnicas());
         aniadirVertices(modelo.getVerticesUnicos());
+        //tableroPane.setStyle("-fx-background-color: linear-gradient(#3ba4d2, #0e5773);");
+
     }
 
 
@@ -241,7 +243,7 @@ public abstract class BaseTableroController implements Initializable {
 
     protected abstract void manejarClickVertice(Vertice v, Circle ui);
 
-    protected abstract void manejarClickArista(Arista a, Line ui);
+    //protected abstract void manejarClickArista(Arista a, Line ui);
 
     public void setTurnoActual(Turno turno) {
         this.turnoActual = turno;
@@ -271,6 +273,29 @@ public abstract class BaseTableroController implements Initializable {
     protected abstract void manejarClickHexagono(Hexagono h,Map<Hexagono, StackPane> uiH);
     protected void testController() {
         System.out.println("Soy: " + this.getClass().getName());
+    }
+
+
+    protected void manejarClickArista(Arista a, Line ui) {
+        if (modoActual == ModoJuego.CONSTRUIR_CARRETERA) {
+            try {
+                int origen = a.getPar().getDestino().getNumeroDeVertice();
+                int destino = a.getDestino().getNumeroDeVertice();
+                turnoActual.construirCarretera(new int[]{origen, destino});
+                if(a.getCarretera() != null && a.getCarretera().getJugador().equals(this.jugadorActual)){
+                    ui.setUserData("Carretera");
+                    colorear(ui,this.jugadorActual);
+                    modoActual = ModoJuego.SELECCIONAR_NADA;
+                    //actualizarRecursos();
+
+
+                }
+
+            } catch (Exception ex) {
+                System.err.println("Error construir carretera: " + ex.getMessage());
+            }
+        }
+
     }
 
 }

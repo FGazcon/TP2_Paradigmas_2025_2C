@@ -5,7 +5,9 @@ import model.Comercio.CuatroPorUno;
 import model.Comercio.ReglaDeComercio;
 import model.Jugador.Jugador;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class Recurso{
@@ -144,6 +146,43 @@ public abstract class Recurso{
         recurso.comerciarConBanco(jugador, cantidad, recursoDeseado, banco);
     }
 
+        ///
+
+    public static List<Recurso> crearListaDeRecursos(){
+        List<Recurso> recursos = new ArrayList<>();
+        recursos.add(new Trigo());
+        recursos.add(new Piedra());
+        recursos.add(new Madera());
+        recursos.add(new Oveja());
+        recursos.add(new Ladrillo());
+
+        return recursos;
+
+    }
+
+    public void agregarRecursosALista(List<Recurso> recursosLista) {
+
+        for (Recurso r : recursosLista) {
+            if (r.getClass().equals(this.getClass())) {  // mismo tipo
+                if (r.getCantidad() < this.getCantidad()) {
+                    r.sumar(1);
+                }
+                //return;
+            }
+        }
+    }
+    public void agregarALaListaSinRestriccion(List<Recurso> recursosNecesitados){
+        for (Recurso r : recursosNecesitados) {
+            if (r.getClass().equals(this.getClass())) {  // mismo tipo
+                System.out.println("Recursos elegidos " + r.getCantidad());
+
+                    r.sumar(1);
+                System.out.println("Recursos elegidos " + r.getCantidad());
+
+                break;
+            }
+        }
+    }
 
 
 }
