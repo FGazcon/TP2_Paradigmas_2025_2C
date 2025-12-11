@@ -1,0 +1,30 @@
+@startuml Diagrama Clases Puerto
+
+abstract class Puerto{
+    + darRecursoAJugador(jugador: Jugador)
+}
+
+class Recurso{}
+
+class DosXUno{
+    + DosXUno(recurso: Recurso)
+    + darRecursoAJugador(jugador: Jugador)
+}
+
+class TresXUno{
+    + darRecursoAJugador(jugador: Jugador)
+}
+
+class SinPuerto{
+    + darRecursoAJugador(jugador: Jugador)
+}
+
+Puerto--> Recurso
+Puerto<|-- DosXUno
+Puerto<|-- TresXUno
+Puerto<|-- SinPuerto
+DosXUno..> DosPorUno
+TresXUno..> TresPorUno
+
+Vertice--> Puerto
+@enduml

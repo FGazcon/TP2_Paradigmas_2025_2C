@@ -1,0 +1,88 @@
+package Tablero;
+
+import model.Banco.Banco;
+import model.Errores.VerticeOcupadoPorCiudad;
+import model.Jugador.Jugador;
+import model.Recurso.Piedra;
+import model.Tablero.Vertice.Estructura.Ciudad;
+import model.Tablero.Vertice.Estructura.PobladoInicial;
+import model.Tablero.Vertice.Vertice;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
+
+public class EstructuraTest {
+
+    @Test
+    public void test01LosPobladosDan1Recurso() {
+        Banco banco = new Banco();
+
+        Vertice vertice = new Vertice();
+        Jugador jugador = new Jugador("jaime", banco);
+        PobladoInicial poblado = new PobladoInicial(jugador);
+        Piedra piedrita = new Piedra();
+
+        vertice.ubicarEstructura(poblado);
+        vertice.darRecurso(piedrita);
+
+        Assertions.assertEquals(jugador.cantidadCartas(), 1);
+
+    }
+
+    @Test
+    public void test02LasCiudadesDan2Recursos() {
+        Banco banco = new Banco();
+
+        Vertice vertice = new Vertice();
+        Jugador jugador = new Jugador("jaime", banco);
+        Piedra piedrita = new Piedra();
+
+        vertice.ubicarEstructura(new PobladoInicial(jugador));
+        vertice.ubicarEstructura(new Ciudad(jugador));
+        vertice.darRecurso(piedrita);
+
+        Assertions.assertEquals(jugador.cantidadCartas(), 2);
+
+    }
+
+    @Test
+    public void test03LosPobladosAumentanElPuntaje() {
+        Banco banco = new Banco();
+        Vertice vertice = new Vertice();
+        Jugador jugador = new Jugador("Ariel", banco);
+        PobladoInicial poblado = new PobladoInicial(jugador);
+
+        vertice.ubicarEstructura(poblado);
+
+        Assertions.assertEquals(jugador.calcularPuntaje(), 1);
+    }
+
+    @Test
+    public void test04LasCiudadesAumentanElPuntaje() {
+        Banco banco = new Banco();
+        Vertice vertice = new Vertice();
+        Jugador jugador = new Jugador("Ariel", banco);
+        PobladoInicial poblado = new PobladoInicial(jugador);
+        Ciudad ciudad = new Ciudad(jugador);
+
+        vertice.ubicarEstructura(poblado);
+        vertice.ubicarEstructura(ciudad);
+
+        Assertions.assertEquals(jugador.calcularPuntaje(), 2);
+    }
+
+    @Test
+    public void test05NoPuedoPonerUnaCiudadSobreUnaCiudad() {
+        Banco banco = new Banco();
+        Vertice vertice = new Vertice();
+        Jugador jugador = new Jugador("Ariel", banco);
+        PobladoInicial poblado = new PobladoInicial(jugador);
+        Ciudad ciudad = new Ciudad(jugador);
+        Ciudad ciudad2 = new Ciudad(jugador);
+
+        vertice.ubicarEstructura(poblado);
+        vertice.ubicarEstructura(ciudad);
+
+        Assertions.assertThrows(VerticeOcupadoPorCiudad.class, ()->{vertice.ubicarEstructura(ciudad2);});
+    }
+}

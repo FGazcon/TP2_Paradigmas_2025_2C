@@ -1,0 +1,119 @@
+@startuml Diagrama Clases Juego
+
+class AdministradorDeJugadores {
+    - jugadoresIda: ArrayList<Jugador>
+    - jugadoresVuelta: ArrayList<Jugador>
+    - jugadores: Queue<Jugador>
+
+    + AdministradorDeJugadores(jugadores: List<Jugador>)
+    + nuevoTurno(catan: Catan, tablero: Tablero, dados: Dados): Turno
+}
+
+class Catan {
+    - banco: Banco
+    - jugadores: List<Jugador>
+    - tablero: Tablero
+    - dados: Dados
+    - turno: Turno
+    - administrador: AdministradorDeJugadores
+    - ganador: Jugador
+
+    + Catan(banco: Banco)
+    + Catan(listaJugadores: List<Jugador>, banco: Banco)
+    + prepararJugadores(): void
+    + terminarTurno(): void
+    + avisarQueSalioLadron(): void
+    + getTablero(): Tablero
+    + prepararJugadoresConNombres(nombres: List<String>): void
+    + getTurno(): Turno
+    + getJugadores(): List<Jugador>
+    + declararGanador(j: Jugador): void
+    + getGanador(): Jugador
+}
+
+class PreparadoDeJugadores {
+    + prepararJugadores(banco: Banco): List<Jugador>
+}
+
+abstract class Turno {
+    # tablero: Tablero
+    # jugador: Jugador
+    # catan: Catan
+    # dados: Dados
+
+    + Turno(catan: Catan, tablero: Tablero, jugador: Jugador, dados: Dados)
+    + intentarUbicarEstructura(estructura: Estructura, numeroDeVertice: int): boolean
+    + intentarUbicarCarretera(carretera: Carretera, numeroDeArista: int[]): boolean
+    + construirCarretera(numeroDeArista: int[]): void
+    + construirPoblado(numeroDeVertice: int): void
+    + construirCiudad(numeroDeVertice: int): void
+    + terminarTurno(administrador: AdministradorDeJugadores): Turno
+    + getJugadorActual(): Jugador
+    + getTurnoGeneral(): TurnoGeneral
+    + getTurnoInicial(): TurnoInicial
+}
+
+class TurnoInicial {
+    - pobladosUbicados: int
+    - carreterasUbicadas: int
+
+    + TurnoInicial(catan: Catan, tablero: Tablero, jugador: Jugador, dados: Dados)
+    + construirCarretera(numeroDeArista: int[]): void
+    + construirPoblado(numeroDeVertice: int): void
+    + getTurnoGeneral(): TurnoGeneral
+    + getTurnoInicial(): TurnoInicial
+}
+
+class SegundoTurnoInicial {
+    - pobladosUbicados: int
+
+    + SegundoTurnoInicial(catan: Catan, tablero: Tablero, jugador: Jugador, dados: Dados)
+    + construirPoblado(numeroDeVertice: int): void
+}
+
+class TurnoGeneral {
+    + TurnoGeneral(catan: Catan, tablero: Tablero, jugador: Jugador, dados: Dados)
+    + tirarDados(resultadoDados: int): void
+    + moverLadron(hexagono: Hexagono): void
+    + construirCarretera(numeroDeArista: int[]): void
+    + construirPoblado(numeroDeVertice: int): void
+    + construirCiudad(numeroDeVertice: int): void
+    + getTurnoInicial(): TurnoInicial
+    + getTurnoGeneral(): TurnoGeneral
+    + comprarDesarrollo(): void
+    + comerciar(jugadorObjetivo: Jugador, recurso: List<Recurso>, recurso2: List<Recurso>): void
+    + usarDesarrollo(posicionDeCarta: int): ActivacionDesarrollo
+    + getNombreJugador(): String
+}
+
+Turno <|-- TurnoInicial
+Turno <|-- TurnoGeneral
+TurnoInicial <|-- SegundoTurnoInicial
+
+Catan --> Banco
+Catan --> AdministradorDeJugadores
+Catan --> Tablero
+Catan --> Dados
+Catan --> Turno
+Catan --> "0..*" Jugador 
+Catan --> Jugador
+
+AdministradorDeJugadores --> "1..*" Jugador
+
+Turno --> Tablero
+Turno --> Jugador
+Turno --> Catan
+Turno --> Dados
+
+TurnoGeneral --> Carretera
+TurnoGeneral --> Poblado
+TurnoGeneral --> Ciudad
+TurnoGeneral --> Hexagono
+TurnoGeneral --> CartaDesarrollo
+TurnoGeneral --> Recurso
+
+SegundoTurnoInicial --> PobladoInicial
+
+PreparadoDeJugadores --> Jugador
+
+@enduml

@@ -1,0 +1,120 @@
+@startuml Diagrama Clases Recursos
+
+
+class Recurso{
+    -cantidad: Int
+    + Recurso(cantidad: int)
+    + Recurso()
+    + crearMazoProduccionBanco(): Map<String, Recurso>
+    + crearMazoProduccionJugador(): Map<String, Recurso>
+    + getCantidad(): int
+    + descartar(cantidad: int): void
+    + sumar(cantidad: int): void
+    + sumadorCantidad(cantidad: int): int
+    + comerciarConBanco(jugador: Jugador, cantidad: int, recursoDeseado: Recurso, banco: Banco): void
+    + cambiarRegla(reglaDeComercio: ReglaDeComercio): void
+    + equals(o: Object): boolean
+    + hashCode(): int
+    + obtenerRecursoDeJugador(jugador: Jugador): Recurso
+    + obtenerRecursoDeBanco(banco: Banco): Recurso
+    + sumarCantidadDeUnRecursoAJugador(jugador: Jugador, cantidad: int): void
+    + descartarCantidadDeUnRecursoAJugador(jugador: Jugador, cantidad: int): void
+    + verificarSiJugadorTieneAlMenosUnaCantidadDeUnRecurso(jugador: Jugador, cantidad: int): boolean
+    + sumarCantidadDeUnRecursoABanco(banco: Banco, cantidad: int): void
+    + descartarCantidadDeUnRecursoABanco(banco: Banco, cantidad: int): void
+    + verificarSiBancoTieneAlMenosUnaCantidadDeUnRecurso(banco: Banco, cantidad: int): boolean
+    + cambiarReglaDeComercioDeUnJugador(jugador: Jugador, reglaDeComercio: ReglaDeComercio): void
+    + comerciarRecursoDeUnJugadorConElBanco(jugador: Jugador, cantidad: int, recursoDeseado: Recurso, banco: Banco): void
+    # transferirAlBanco(banco: Banco, cantidad: int): void
+    # transferirAJugador(jugador: Jugador, cantidad: int): void
+    # descartarAlBanco(banco: Banco, cantidad: int): void
+    # descartarAJugador(jugador: Jugador, cantidad: int): void
+    # hacerQuejugadorSoliciteABanco(jugador: Jugador, cantidad: int): void
+    # getRecursoJugador(jugador: Jugador): Recurso
+    # getRecursoBanco(banco: Banco): Recurso
+    # jugadorTieneAlMenos(jugador: Jugador, cantidad: int): boolean
+    # bancoTieneAlMenos(banco: Banco, cantidad: int): boolean
+    # darReglaA(jugador: Jugador, reglaDeComercio: ReglaDeComercio): void
+    # tieneAlMenos(cantidad: int): boolean
+}
+
+class Madera{
+    + transferirAlBanco(banco: Banco, cantidad: int): void
+    + transferirAJugador(jugador: Jugador, cantidad: int): void
+    + descartarAlBanco(banco: Banco, cantidad: int): void
+    + descartarAJugador(jugador: Jugador, cantidad: int): void
+    + hacerQuejugadorSoliciteABanco(jugador: Jugador, cantidad: int): void
+    + jugadorTieneAlMenos(jugador: Jugador, cantidad: int): boolean
+    + bancoTieneAlMenos(banco: Banco, cantidad: int): boolean
+    + tieneAlMenos(cantidad: int): boolean
+    + darReglaA(jugador: Jugador, reglaDeComercio: ReglaDeComercio): void
+    + getRecursoJugador(jugador: Jugador): Recurso
+    + getRecursoBanco(banco: Banco): Recurso
+}
+
+class Ladrillo{
+    + transferirAlBanco(banco: Banco, cantidad: int): void
+    + transferirAJugador(jugador: Jugador, cantidad: int): void
+    + descartarAlBanco(banco: Banco, cantidad: int): void
+    + descartarAJugador(jugador: Jugador, cantidad: int): void
+    + hacerQuejugadorSoliciteABanco(jugador: Jugador, cantidad: int): void
+    + jugadorTieneAlMenos(jugador: Jugador, cantidad: int): boolean
+    + bancoTieneAlMenos(banco: Banco, cantidad: int): boolean
+    + tieneAlMenos(cantidad: int): boolean
+    + darReglaA(jugador: Jugador, reglaDeComercio: ReglaDeComercio): void
+    + getRecursoJugador(jugador: Jugador): Recurso
+    + getRecursoBanco(banco: Banco): Recurso
+}
+
+class Oveja{
+    + transferirAlBanco(banco: Banco, cantidad: int): void
+    + transferirAJugador(jugador: Jugador, cantidad: int): void
+    + descartarAlBanco(banco: Banco, cantidad: int): void
+    + descartarAJugador(jugador: Jugador, cantidad: int): void
+    + hacerQuejugadorSoliciteABanco(jugador: Jugador, cantidad: int): void
+    + jugadorTieneAlMenos(jugador: Jugador, cantidad: int): boolean
+    + bancoTieneAlMenos(banco: Banco, cantidad: int): boolean
+    + tieneAlMenos(cantidad: int): boolean
+    + darReglaA(jugador: Jugador, reglaDeComercio: ReglaDeComercio): void
+    + getRecursoJugador(jugador: Jugador): Recurso
+    + getRecursoBanco(banco: Banco): Recurso
+}
+
+class Trigo{
+    + transferirAlBanco(banco: Banco, cantidad: int): void
+    + transferirAJugador(jugador: Jugador, cantidad: int): void
+    + descartarAlBanco(banco: Banco, cantidad: int): void
+    + descartarAJugador(jugador: Jugador, cantidad: int): void
+    + hacerQuejugadorSoliciteABanco(jugador: Jugador, cantidad: int): void
+    + jugadorTieneAlMenos(jugador: Jugador, cantidad: int): boolean
+    + bancoTieneAlMenos(banco: Banco, cantidad: int): boolean
+    + tieneAlMenos(cantidad: int): boolean
+    + darReglaA(jugador: Jugador, reglaDeComercio: ReglaDeComercio): void
+    + getRecursoJugador(jugador: Jugador): Recurso
+    + getRecursoBanco(banco: Banco): Recurso
+}
+
+class Piedra{
+    + transferirAlBanco(banco: Banco, cantidad: int): void
+    + transferirAJugador(jugador: Jugador, cantidad: int): void
+    + descartarAlBanco(banco: Banco, cantidad: int): void
+    + descartarAJugador(jugador: Jugador, cantidad: int): void
+    + hacerQuejugadorSoliciteABanco(jugador: Jugador, cantidad: int): void
+    + jugadorTieneAlMenos(jugador: Jugador, cantidad: int): boolean
+    + bancoTieneAlMenos(banco: Banco, cantidad: int): boolean
+    + tieneAlMenos(cantidad: int): boolean
+    + darReglaA(jugador: Jugador, reglaDeComercio: ReglaDeComercio): void
+    + getRecursoJugador(jugador: Jugador): Recurso
+    + getRecursoBanco(banco: Banco): Recurso
+}
+
+Recurso<|-- Trigo
+Recurso<|-- Ladrillo
+Recurso<|-- Madera
+Recurso<|-- Oveja
+Recurso<|-- Piedra
+Recurso..>Banco
+Recurso..>Jugador
+
+
+@enduml

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Tablero.AristaTest" time="0.165" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\santi\TP2_Paradigmas_2025_2C\target\test-classes;C:\Users\santi\TP2_Paradigmas_2025_2C\target\classes;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\santi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\santi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-core\5.20.0\mockito-core-5.20.0.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy\1.17.7\byte-buddy-1.17.7.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar;C:\Users\santi\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-junit-jupiter\5.20.0\mockito-junit-jupiter-5.20.0.jar;"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="user.timezone" value="America/Buenos_Aires"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="AR"/>
+    <property name="sun.boot.library.path" value="C:\Users\santi\.jdks\ms-21.0.9\bin"/>
+    <property name="sun.java.command" value="C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203\surefirebooter-20251205161631422_3.jar C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203 2025-12-05T16-16-27_749-jvmRun1 surefire-20251205161631422_1tmp surefire_0-20251205161631422_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\santi\TP2_Paradigmas_2025_2C\target\test-classes;C:\Users\santi\TP2_Paradigmas_2025_2C\target\classes;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\santi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\santi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-core\5.20.0\mockito-core-5.20.0.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy\1.17.7\byte-buddy-1.17.7.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar;C:\Users\santi\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-junit-jupiter\5.20.0\mockito-junit-jupiter-5.20.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\santi"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="C:\Users\santi\.jdks\ms-21.0.9"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\santi\TP2_Paradigmas_2025_2C"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203\surefirebooter-20251205161631422_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.9+10-LTS"/>
+    <property name="user.name" value="santi"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-12574459"/>
+    <property name="localRepository" value="C:\Users\santi\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\santi\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2024.1.1"/>
+    <property name="java.version" value="21.0.9"/>
+    <property name="user.dir" value="C:\Users\santi\TP2_Paradigmas_2025_2C"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\santi\.jdks\ms-21.0.9\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Vagrant\bin;C:\Users\santi\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\santi\AppData\Local\Programs\Python\Python313\;C:\Users\santi\AppData\Local\Programs\Python\Launcher\;C:\Users\santi\AppData\Local\Microsoft\WindowsApps;C:\Users\santi\AppData\Local\GitHubDesktop\bin;C:\Users\santi\AppData\Local\Programs\Microsoft VS Code\bin;C:\MinGW\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="21.0.9+10-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="test02UbicarUnaCarreteraEsPosibleConUnPuebloCercano" classname="Tablero.AristaTest" time="0.128">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@63e5e5b4
+1 model.Tablero.Vertice.Vertice@13a37e2a
+2 model.Tablero.Vertice.Vertice@a50ae65
+3 model.Tablero.Vertice.Vertice@1280851e
+4 model.Tablero.Vertice.Vertice@5e840abf
+5 model.Tablero.Vertice.Vertice@56de6d6b
+6 model.Tablero.Vertice.Vertice@5972d253
+7 model.Tablero.Vertice.Vertice@4fcc0416
+8 model.Tablero.Vertice.Vertice@31e32ea2
+9 model.Tablero.Vertice.Vertice@1473b8c0
+10 model.Tablero.Vertice.Vertice@5b5c0057
+11 model.Tablero.Vertice.Vertice@749f539e
+12 model.Tablero.Vertice.Vertice@5ca1f591
+13 model.Tablero.Vertice.Vertice@551de37d
+14 model.Tablero.Vertice.Vertice@6ef81f31
+15 model.Tablero.Vertice.Vertice@6075b2d3
+16 model.Tablero.Vertice.Vertice@33abde31
+17 model.Tablero.Vertice.Vertice@997d532
+18 model.Tablero.Vertice.Vertice@273842a6
+19 model.Tablero.Vertice.Vertice@6a969fb8
+20 model.Tablero.Vertice.Vertice@7a18e8d
+21 model.Tablero.Vertice.Vertice@3028e50e
+22 model.Tablero.Vertice.Vertice@5560bcdf
+23 model.Tablero.Vertice.Vertice@b558294
+24 model.Tablero.Vertice.Vertice@bb095
+25 model.Tablero.Vertice.Vertice@777c350f
+26 model.Tablero.Vertice.Vertice@27aae97b
+27 model.Tablero.Vertice.Vertice@4c9e38
+28 model.Tablero.Vertice.Vertice@5d1e09bc
+29 model.Tablero.Vertice.Vertice@4bdc8b5d
+30 model.Tablero.Vertice.Vertice@3bcd426c
+31 model.Tablero.Vertice.Vertice@5f14a673
+32 model.Tablero.Vertice.Vertice@726a17c4
+33 model.Tablero.Vertice.Vertice@5dc3fcb7
+34 model.Tablero.Vertice.Vertice@c4c0b41
+35 model.Tablero.Vertice.Vertice@76911385
+36 model.Tablero.Vertice.Vertice@5467eea4
+37 model.Tablero.Vertice.Vertice@160396db
+38 model.Tablero.Vertice.Vertice@7a799159
+39 model.Tablero.Vertice.Vertice@40ab8a8
+40 model.Tablero.Vertice.Vertice@6ff37443
+41 model.Tablero.Vertice.Vertice@65cc8228
+42 model.Tablero.Vertice.Vertice@53093491
+43 model.Tablero.Vertice.Vertice@21719a0
+44 model.Tablero.Vertice.Vertice@76b224cd
+45 model.Tablero.Vertice.Vertice@77ee25f1
+46 model.Tablero.Vertice.Vertice@6dd93a21
+47 model.Tablero.Vertice.Vertice@57b9e423
+48 model.Tablero.Vertice.Vertice@304a3655
+49 model.Tablero.Vertice.Vertice@368d5c00
+50 model.Tablero.Vertice.Vertice@12a160c2
+51 model.Tablero.Vertice.Vertice@aa10649
+52 model.Tablero.Vertice.Vertice@6b3871d6
+53 model.Tablero.Vertice.Vertice@37095ded
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+]]></system-out>
+  </testcase>
+  <testcase name="test04SePuedenUbicarCarreterasConCoordenadasInvertidas" classname="Tablero.AristaTest" time="0.009">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@6c37bd27
+1 model.Tablero.Vertice.Vertice@25d3cfc8
+2 model.Tablero.Vertice.Vertice@30331109
+3 model.Tablero.Vertice.Vertice@2571066a
+4 model.Tablero.Vertice.Vertice@74fe5966
+5 model.Tablero.Vertice.Vertice@4fe875be
+6 model.Tablero.Vertice.Vertice@677b8e13
+7 model.Tablero.Vertice.Vertice@4a9486c0
+8 model.Tablero.Vertice.Vertice@4c27d39d
+9 model.Tablero.Vertice.Vertice@40ee0a22
+10 model.Tablero.Vertice.Vertice@7bde1f3a
+11 model.Tablero.Vertice.Vertice@15923407
+12 model.Tablero.Vertice.Vertice@67dba613
+13 model.Tablero.Vertice.Vertice@57540fd0
+14 model.Tablero.Vertice.Vertice@5cf8edcf
+15 model.Tablero.Vertice.Vertice@58cec85b
+16 model.Tablero.Vertice.Vertice@629f066f
+17 model.Tablero.Vertice.Vertice@1542af63
+18 model.Tablero.Vertice.Vertice@ecfbe91
+19 model.Tablero.Vertice.Vertice@20ed3303
+20 model.Tablero.Vertice.Vertice@3adbe50f
+21 model.Tablero.Vertice.Vertice@3a627c80
+22 model.Tablero.Vertice.Vertice@49aa766b
+23 model.Tablero.Vertice.Vertice@963176
+24 model.Tablero.Vertice.Vertice@65004ff6
+25 model.Tablero.Vertice.Vertice@4cafa9aa
+26 model.Tablero.Vertice.Vertice@562c877a
+27 model.Tablero.Vertice.Vertice@67001148
+28 model.Tablero.Vertice.Vertice@989da1
+29 model.Tablero.Vertice.Vertice@31cb96e1
+30 model.Tablero.Vertice.Vertice@3eed0f5
+31 model.Tablero.Vertice.Vertice@64030b91
+32 model.Tablero.Vertice.Vertice@2032e725
+33 model.Tablero.Vertice.Vertice@4d23015c
+34 model.Tablero.Vertice.Vertice@383f1975
+35 model.Tablero.Vertice.Vertice@441cc260
+36 model.Tablero.Vertice.Vertice@73a00e09
+37 model.Tablero.Vertice.Vertice@26dcd8c0
+38 model.Tablero.Vertice.Vertice@66e889df
+39 model.Tablero.Vertice.Vertice@444548a0
+40 model.Tablero.Vertice.Vertice@3766c667
+41 model.Tablero.Vertice.Vertice@773c0293
+42 model.Tablero.Vertice.Vertice@55b8dbda
+43 model.Tablero.Vertice.Vertice@3b569985
+44 model.Tablero.Vertice.Vertice@3a022576
+45 model.Tablero.Vertice.Vertice@2dbd803f
+46 model.Tablero.Vertice.Vertice@3e48e859
+47 model.Tablero.Vertice.Vertice@31ddd4a4
+48 model.Tablero.Vertice.Vertice@1a5f7e7c
+49 model.Tablero.Vertice.Vertice@5b22b970
+50 model.Tablero.Vertice.Vertice@22d1886d
+51 model.Tablero.Vertice.Vertice@7df60067
+52 model.Tablero.Vertice.Vertice@1cbb3d3b
+53 model.Tablero.Vertice.Vertice@529cfee5
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+]]></system-out>
+  </testcase>
+  <testcase name="test01UbicarUnaCarreteraSinAdyacenciaEsImposible" classname="Tablero.AristaTest" time="0.008">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@748fe51d
+1 model.Tablero.Vertice.Vertice@415156bf
+2 model.Tablero.Vertice.Vertice@393881f0
+3 model.Tablero.Vertice.Vertice@4af46df3
+4 model.Tablero.Vertice.Vertice@4158debd
+5 model.Tablero.Vertice.Vertice@af78c87
+6 model.Tablero.Vertice.Vertice@773dab28
+7 model.Tablero.Vertice.Vertice@1ecfcbc9
+8 model.Tablero.Vertice.Vertice@1965539b
+9 model.Tablero.Vertice.Vertice@2fc07784
+10 model.Tablero.Vertice.Vertice@353efdbf
+11 model.Tablero.Vertice.Vertice@55cff952
+12 model.Tablero.Vertice.Vertice@660591fb
+13 model.Tablero.Vertice.Vertice@4a55a6e8
+14 model.Tablero.Vertice.Vertice@8c46918
+15 model.Tablero.Vertice.Vertice@226b143b
+16 model.Tablero.Vertice.Vertice@682bd3c4
+17 model.Tablero.Vertice.Vertice@f2e4acf
+18 model.Tablero.Vertice.Vertice@24097e9b
+19 model.Tablero.Vertice.Vertice@5eb97ced
+20 model.Tablero.Vertice.Vertice@68ba310d
+21 model.Tablero.Vertice.Vertice@153f66e7
+22 model.Tablero.Vertice.Vertice@7aad3f7d
+23 model.Tablero.Vertice.Vertice@6f667ad1
+24 model.Tablero.Vertice.Vertice@566d0c69
+25 model.Tablero.Vertice.Vertice@388b401d
+26 model.Tablero.Vertice.Vertice@2bcec6a6
+27 model.Tablero.Vertice.Vertice@77a281fc
+28 model.Tablero.Vertice.Vertice@4912d525
+29 model.Tablero.Vertice.Vertice@2bfbffb2
+30 model.Tablero.Vertice.Vertice@765df79d
+31 model.Tablero.Vertice.Vertice@151335cb
+32 model.Tablero.Vertice.Vertice@4a7761b1
+33 model.Tablero.Vertice.Vertice@3e850122
+34 model.Tablero.Vertice.Vertice@27fde870
+35 model.Tablero.Vertice.Vertice@2b4c3c29
+36 model.Tablero.Vertice.Vertice@5ac7aa18
+37 model.Tablero.Vertice.Vertice@4cdd2c73
+38 model.Tablero.Vertice.Vertice@4abf3f0
+39 model.Tablero.Vertice.Vertice@4e4c3a38
+40 model.Tablero.Vertice.Vertice@293cde83
+41 model.Tablero.Vertice.Vertice@c27d163
+42 model.Tablero.Vertice.Vertice@57c88764
+43 model.Tablero.Vertice.Vertice@78faea5f
+44 model.Tablero.Vertice.Vertice@37fdfb05
+45 model.Tablero.Vertice.Vertice@5e39850
+46 model.Tablero.Vertice.Vertice@1603dc2f
+47 model.Tablero.Vertice.Vertice@398474a2
+48 model.Tablero.Vertice.Vertice@61799544
+49 model.Tablero.Vertice.Vertice@78c1a023
+50 model.Tablero.Vertice.Vertice@70abf9b0
+51 model.Tablero.Vertice.Vertice@6a10b263
+52 model.Tablero.Vertice.Vertice@476ec9d0
+53 model.Tablero.Vertice.Vertice@325bb9a6
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+]]></system-out>
+  </testcase>
+  <testcase name="test03UbicarUnaCarreteraEsPosibleConUnaCarreteraCercana" classname="Tablero.AristaTest" time="0.01">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@2c16fadb
+1 model.Tablero.Vertice.Vertice@248deced
+2 model.Tablero.Vertice.Vertice@2227a6c1
+3 model.Tablero.Vertice.Vertice@1e9804b9
+4 model.Tablero.Vertice.Vertice@543e593
+5 model.Tablero.Vertice.Vertice@4e628b52
+6 model.Tablero.Vertice.Vertice@51ec2df1
+7 model.Tablero.Vertice.Vertice@f8f56b9
+8 model.Tablero.Vertice.Vertice@15fa55a6
+9 model.Tablero.Vertice.Vertice@4f186450
+10 model.Tablero.Vertice.Vertice@7fab4be7
+11 model.Tablero.Vertice.Vertice@a64e035
+12 model.Tablero.Vertice.Vertice@4d74c3ba
+13 model.Tablero.Vertice.Vertice@41c204a0
+14 model.Tablero.Vertice.Vertice@64138b0c
+15 model.Tablero.Vertice.Vertice@49dbaaf3
+16 model.Tablero.Vertice.Vertice@22d9c961
+17 model.Tablero.Vertice.Vertice@736f3e9e
+18 model.Tablero.Vertice.Vertice@bdc8014
+19 model.Tablero.Vertice.Vertice@1f443fae
+20 model.Tablero.Vertice.Vertice@73ba6fe6
+21 model.Tablero.Vertice.Vertice@79ab34c1
+22 model.Tablero.Vertice.Vertice@1698d7c0
+23 model.Tablero.Vertice.Vertice@281f23f2
+24 model.Tablero.Vertice.Vertice@87abc48
+25 model.Tablero.Vertice.Vertice@28d79cba
+26 model.Tablero.Vertice.Vertice@782168b7
+27 model.Tablero.Vertice.Vertice@29f0c4f2
+28 model.Tablero.Vertice.Vertice@7435a578
+29 model.Tablero.Vertice.Vertice@6093d508
+30 model.Tablero.Vertice.Vertice@13047d7d
+31 model.Tablero.Vertice.Vertice@3c7cfcbb
+32 model.Tablero.Vertice.Vertice@65bb9029
+33 model.Tablero.Vertice.Vertice@1bfe3203
+34 model.Tablero.Vertice.Vertice@2b214b94
+35 model.Tablero.Vertice.Vertice@70e3f36f
+36 model.Tablero.Vertice.Vertice@49601f82
+37 model.Tablero.Vertice.Vertice@23e44287
+38 model.Tablero.Vertice.Vertice@2b8d084
+39 model.Tablero.Vertice.Vertice@6daf2337
+40 model.Tablero.Vertice.Vertice@24fabd0f
+41 model.Tablero.Vertice.Vertice@250b236d
+42 model.Tablero.Vertice.Vertice@61f3fbb8
+43 model.Tablero.Vertice.Vertice@7551da2a
+44 model.Tablero.Vertice.Vertice@432034a
+45 model.Tablero.Vertice.Vertice@78de58ea
+46 model.Tablero.Vertice.Vertice@60e5272
+47 model.Tablero.Vertice.Vertice@7d755813
+48 model.Tablero.Vertice.Vertice@69c93ca4
+49 model.Tablero.Vertice.Vertice@63da207f
+50 model.Tablero.Vertice.Vertice@173373b4
+51 model.Tablero.Vertice.Vertice@40d10481
+52 model.Tablero.Vertice.Vertice@60dd3c23
+53 model.Tablero.Vertice.Vertice@52b6319f
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+]]></system-out>
+  </testcase>
+</testsuite>

@@ -7,35 +7,35 @@ skinparam classFontStyle bold
 ' CLASES DEL MODELO
 ' ======================
 
-class Tablero
+class java.Tablero
 class Hexagono{
     -numero: int
     -tieneLadron: boolean
 }
-class Dados{
+class java.Dados{
     -random: Random
 }
 class Vertice
 class Arista
-class Terreno
-class Ladron
+class java.Terreno
+class java.Ladron
 
-Tablero --> Hexagono
-Tablero --> Vertice
+java.Tablero --> Hexagono
+java.Tablero --> Vertice
 
 Hexagono --> Vertice
-Hexagono --> Terreno
+Hexagono --> java.Terreno
 
-Ladron --> Hexagono
+java.Ladron --> Hexagono
 
 Vertice <--> Arista
 
-Terreno <|-- Desierto
-Terreno <|-- Colina
-Terreno <|-- Montaña
-Terreno <|-- Pastizal
-Terreno <|-- Campo
-Terreno <|-- Bosque
+java.Terreno <|-- Desierto
+java.Terreno <|-- Colina
+java.Terreno <|-- Montaña
+java.Terreno <|-- Pastizal
+java.Terreno <|-- Campo
+java.Terreno <|-- Bosque
 
 Vertice --> Estructura
 Arista --> Camino
