@@ -88,6 +88,10 @@ public class TurnoGeneral extends Turno {
         this.jugador.comerciarConJugador(jugadorObjetivo, recurso, recurso2);
     }
 
+    public void comerciarConBanco(Recurso recursoOfertado,int cantidad,Recurso recursoBuscado){
+        this.jugador.comerciarConBanco(recursoOfertado,cantidad,recursoBuscado);
+    }
+
     public ActivacionDesarrollo usarDesarrollo(int posicionDeCarta){
         //se va a cambiar
         return this.jugador.getActivacionParaCartaEnPosicion(posicionDeCarta);

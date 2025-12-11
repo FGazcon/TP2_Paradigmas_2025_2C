@@ -36,7 +36,7 @@ public abstract class BaseTableroController implements Initializable {
 
     protected Tablero tableroModelo;
     protected Jugador jugadorActual;
-    protected enum ModoJuego { RECURSO_NECESITADO,RECURSO_OFRECER,SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD, MODO_MOVER_LADRON, MODO_CARRETERAS_CARTA_DESARROLLO }
+    protected enum ModoJuego { NECESITAR_BANCO,TRADEAR_BANCO,RECURSO_NECESITADO,RECURSO_OFRECER,SELECCIONAR_NADA, CONSTRUIR_POBLADO, CONSTRUIR_CARRETERA, CONSTRUIR_CIUDAD, MODO_MOVER_LADRON, MODO_CARRETERAS_CARTA_DESARROLLO }
     protected ModoJuego modoActual = ModoJuego.SELECCIONAR_NADA;
     protected final double RADIO = 60.0;
     protected final double DIST_X = RADIO * Math.sqrt(3.0);

@@ -158,8 +158,9 @@ public class Jugador {
     public void comerciarConBanco(Recurso recursoOfertado, int cantidad, Recurso recursoDeseado){
         List<Recurso> recursos = new ArrayList<>();
         recursos.add(recursoOfertado);
-
+        System.out.println(" me regalas un pe ");
         if (tieneSuficientesParaOfertar(recursos)){
+            System.out.println(" pe ");
             recursoOfertado.comerciarRecursoDeUnJugadorConElBanco(this, cantidad, recursoDeseado, banco);
         }
     }

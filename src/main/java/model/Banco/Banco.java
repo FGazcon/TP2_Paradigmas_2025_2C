@@ -43,18 +43,18 @@ public class Banco {
 
     public void jugadorQuiereIntercambiar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado){
         Recurso recursoPropio = recursoDeseado.getRecursoBanco(this);
-
         if(recursoPropio.bancoTieneAlMenos(this, cantidad)){
-
             recursoOfrecido.descartarAJugador(jugador, cantidad);
             recursoOfrecido.transferirAlBanco(this, cantidad);
 
-            recursoDeseado.transferirAJugador(jugador, cantidad);
-            recursoDeseado.descartarAlBanco(this, cantidad);
+            recursoDeseado.transferirAJugador(jugador, 1);
+            recursoDeseado.descartarAlBanco(this, 1);
 
         }
 
     }
+
+
 
     public Recurso obtenerRecurso(String nombre) {
         return mazoDeProduccion.get(nombre);

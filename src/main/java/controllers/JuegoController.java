@@ -64,6 +64,9 @@ public class JuegoController extends BaseTableroController implements Initializa
     private List<Recurso> recursosOfrecer;
     private List<Recurso> recursosElegir;
     private Jugador jugadorATradear;
+    private VBox panelRecursos;
+    private Recurso recursoDelBanco;
+    private Recurso recursoBuscado;
 
     protected ActivacionDesarrollo activacionPendiente;
 
@@ -213,112 +216,7 @@ public class JuegoController extends BaseTableroController implements Initializa
 //        modoActual = ModoJuego.SELECCIONAR_NADA;
 //    }
 
-    // recursos intercambio
 
-    private void mostrarVentanaComercio() {
-        Stage popup = new Stage();
-        popup.setTitle("Comercio de Recursos");
-
-        // ☆ Botones
-        Button btnOfrecer = new Button("Recursos a ofrecer");
-        Button btnNecesitar = new Button("Recursos a necesitar");
-        Button btnEnviarTrade = new Button("Enviar Trade");
-
-
-        //debe agregar cartas a la lista de recursos que ofrece
-        btnOfrecer.setPrefWidth(180);
-        //debe agregar cartas a la lista de recursos que necesita
-        btnNecesitar.setPrefWidth(180);
-        btnEnviarTrade.setPrefWidth(180);
-
-        btnOfrecer.setOnAction(e -> manejarOfrecer());
-        btnNecesitar.setOnAction(e -> manejarNecesitar());
-        btnEnviarTrade.setOnAction(e -> manejarEnviarTrade(popup));
-
-        // ☆ Layout simple
-        VBox layout = new VBox(15, btnOfrecer, btnNecesitar, btnEnviarTrade);
-        layout.setAlignment(Pos.CENTER);
-        layout.setPadding(new Insets(20));
-        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
-
-        popup.setScene(new Scene(layout, 250, 160));
-        popup.initModality(Modality.NONE);
-        popup.setAlwaysOnTop(true);
-        popup.show();
-    }
-
-    private void mostrarElegirJugador() {
-        Stage popup = new Stage();
-        popup.setTitle("Comercio de Recursos");
-
-        VBox layout = new VBox(15);
-        layout.setAlignment(Pos.CENTER);
-        layout.setPadding(new Insets(20));
-        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
-
-        for(Jugador jugador : this.jugadores){
-
-            Button botonJugador = new Button(jugador.getNombre());
-            botonJugador.setPrefWidth(180);
-            botonJugador.setDisable(jugador.equals(this.jugadorActual));
-            botonJugador.setOnAction(e -> jugadorElegido(jugador,popup));
-            layout.getChildren().add(botonJugador);
-        }
-
-
-        popup.setScene(new Scene(layout, 250, 160));
-        popup.initModality(Modality.APPLICATION_MODAL);
-        popup.show();
-    }
-    private void mostrarElegirComercio() {
-        Stage popup = new Stage();
-        popup.setTitle("Elegir Comercio");
-
-        VBox layout = new VBox(15);
-        layout.setAlignment(Pos.CENTER);
-        layout.setPadding(new Insets(20));
-        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
-
-        Button boton1 = new Button("Comerciar con banco");
-        Button boton2 = new Button("Comerciar con jugador");
-
-        boton1.setOnAction(e -> comerciarConBanco(popup));
-        boton2.setOnAction(e -> comerciarConJugador(popup));
-
-        layout.getChildren().addAll(boton1,boton2);
-
-
-
-        popup.setScene(new Scene(layout, 250, 160));
-        popup.initModality(Modality.APPLICATION_MODAL);
-        popup.show();
-    }
-    private void comerciarConBanco(Stage popup){
-        System.out.println("Sss");
-        popup.close();
-    }
-    private void jugadorElegido(Jugador jugador,Stage popup){
-        System.out.println(jugador.getNombre());
-        this.jugadorATradear = jugador;
-        popup.close();
-    }
-
-    private void manejarOfrecer() {
-        this.modoActual = ModoJuego.RECURSO_OFRECER;
-    }
-
-    private void manejarNecesitar() {
-        this.modoActual = ModoJuego.RECURSO_NECESITADO;
-    }
-
-    private void manejarEnviarTrade(Stage popup){
-         turnoGeneral.comerciar(this.jugadorATradear,this.recursosOfrecer,this.recursosElegir);
-         this.recursosElegir.clear();
-         this.recursosOfrecer.clear();
-         actualizarRecursos();
-         popup.close();
-         btnComercio.setDisable(false);
-    }
 
     @FXML
     private void comprarCartaDesarrollo() {
@@ -806,6 +704,289 @@ public class JuegoController extends BaseTableroController implements Initializa
     }
 
 
+    // INICIO RECURSOS  SOBRE INTERCAMBIOS DE RECURSOS
+
+    private void mostrarVentanaComercio() {
+        Stage popup = new Stage();
+        popup.setTitle("Comercio de Recursos");
+
+        this.recursosOfrecer = Recurso.crearListaDeRecursos();
+        this.recursosElegir = Recurso.crearListaDeRecursos();
+
+        // ⭐ Panel para mostrar recursos
+        this.panelRecursos = new VBox(5);
+        panelRecursos.setAlignment(Pos.CENTER_LEFT);
+
+        actualizarPanelRecursos(panelRecursos); // cargar al inicio
+
+        // ☆ Botones
+        Button btnOfrecer = new Button("Recursos a ofrecer");
+        Button btnNecesitar = new Button("Recursos a necesitar");
+        Button btnEnviarTrade = new Button("Enviar Trade");
+
+
+        //debe agregar cartas a la lista de recursos que ofrece
+        btnOfrecer.setPrefWidth(180);
+        //debe agregar cartas a la lista de recursos que necesita
+        btnNecesitar.setPrefWidth(180);
+        btnEnviarTrade.setPrefWidth(180);
+
+
+        btnOfrecer.setOnAction(e -> {
+            if(this.modoActual == ModoJuego.NECESITAR_BANCO || this.modoActual == ModoJuego.TRADEAR_BANCO){
+                this.modoActual = ModoJuego.TRADEAR_BANCO;
+            }else {
+                manejarOfrecer();
+            }
+        });
+
+        btnNecesitar.setOnAction(e -> {
+            if(this.modoActual == ModoJuego.NECESITAR_BANCO || this.modoActual == ModoJuego.TRADEAR_BANCO){
+                this.modoActual = ModoJuego.NECESITAR_BANCO;
+            }else {
+                manejarNecesitar();
+            }
+        });
+        btnEnviarTrade.setOnAction(e ->{
+            if((this.modoActual == ModoJuego.TRADEAR_BANCO) ||
+                    (this.modoActual == ModoJuego.NECESITAR_BANCO)){
+                comerciarConBanco(popup);
+            }else{
+                manejarEnviarTrade(popup);
+            }
+
+        });
+
+        // ☆ Layout simple
+        VBox layout = new VBox(15, btnOfrecer, btnNecesitar, btnEnviarTrade,new Label("Recursos seleccionados:"),
+                panelRecursos);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        popup.setScene(new Scene(layout, 300, 300));
+        popup.initModality(Modality.NONE);
+        popup.setAlwaysOnTop(true);
+        popup.show();
+        popup.setOnCloseRequest(e -> {
+            btnComercio.setDisable(false);
+        });
+
+    }
+    private void actualizarPanelRecursosBanco(VBox panel){
+        panel.getChildren().clear();
+        if (this.recursoDelBanco.getCantidad() > 0) {
+
+            panel.getChildren().add(
+                    new Label("Ofrece: " + this.recursoDelBanco.nombre() + " x" +
+                            this.recursoDelBanco.getCantidad())
+            );
+        }
+        if (this.recursoBuscado != null) {
+
+            panel.getChildren().add(new Label("Necesita: " + this.recursoBuscado.nombre()));
+        }
+        if (panel.getChildren().isEmpty()) {
+            panel.getChildren().add(new Label("No hay recursos seleccionados"));
+        }
+
+    }
+    private void actualizarPanelRecursos(VBox panel) {
+        panel.getChildren().clear();
+
+        for (Recurso r : recursosOfrecer) {
+            if (r.getCantidad() > 0) {
+                panel.getChildren().add(
+                        new Label("Ofrece: " + r.nombre() + " x" + r.getCantidad())
+                );
+            }
+        }
+
+        for (Recurso r : recursosElegir) {
+            if (r.getCantidad() > 0) {
+                panel.getChildren().add(
+                        new Label("Necesita: " + r.nombre() + " x" + r.getCantidad())
+                );
+            }
+        }
+
+        if (panel.getChildren().isEmpty()) {
+            panel.getChildren().add(new Label("No hay recursos seleccionados"));
+        }
+    }
+
+
+    private void mostrarElegirJugador() {
+        Stage popup = new Stage();
+        popup.setTitle("Comercio de Recursos");
+
+        VBox layout = new VBox(15);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        for(Jugador jugador : this.jugadores){
+
+            Button botonJugador = new Button(jugador.getNombre());
+            botonJugador.setPrefWidth(180);
+            botonJugador.setDisable(jugador.equals(this.jugadorActual));
+            botonJugador.setOnAction(e -> jugadorElegido(jugador,popup));
+            layout.getChildren().add(botonJugador);
+        }
+
+
+        popup.setScene(new Scene(layout, 250, 160));
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.show();
+
+
+        popup.setOnHidden(e -> {
+            btnComercio.setDisable(false);
+            mostrarVentanaComercio();
+        });
+
+    }
+//    private void mostrarVentanaComercioConBanco() {
+//        Stage popup = new Stage();
+//        popup.setTitle("Comercio de Recursos con banco");
+//
+//        // ⭐ Panel para mostrar recursos
+//        this.panelRecursos = new VBox(5);
+//        panelRecursos.setAlignment(Pos.CENTER_LEFT);
+//
+//        actualizarPanelRecursos(panelRecursos); // cargar al inicio
+//
+//        // ☆ Botones
+//        Button btnOfrecer = new Button("Recursos a ofrecer al Banco");
+//        Button btnNecesitar = new Button("Recursos a necesitar");
+//        Button btnEnviarTrade = new Button("Enviar Trade");
+//
+//
+//        //debe agregar cartas a la lista de recursos que ofrece
+//        //btnOfrecer.setPrefWidth(180);
+//        //debe agregar cartas a la lista de recursos que necesita
+//       // btnNecesitar.setPrefWidth(180);
+//        btnEnviarTrade.setPrefWidth(180);
+//
+//
+////        btnOfrecer.setOnAction(e -> {
+////            manejarOfrecer();
+////
+////        });
+//
+////        btnNecesitar.setOnAction(e -> {
+////            manejarNecesitar();
+////
+////        });
+//        btnEnviarTrade.setOnAction(e -> );
+//
+//        // ☆ Layout simple
+//        VBox layout = new VBox(15, btnEnviarTrade,new Label("Recursos seleccionados:"),
+//                panelRecursos);
+//        layout.setAlignment(Pos.CENTER);
+//        layout.setPadding(new Insets(20));
+//        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+//
+//        popup.setScene(new Scene(layout, 300, 300));
+//        popup.initModality(Modality.NONE);
+//        popup.setAlwaysOnTop(true);
+//        popup.show();
+//        popup.setOnCloseRequest(e -> {
+//            btnComercio.setDisable(false);
+//        });
+//
+//    }
+    private void mostrarElegirComercio() {
+        Stage popup = new Stage();
+        popup.setTitle("Elegir Comercio");
+
+        VBox layout = new VBox(15);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
+
+        Button boton1 = new Button("Comerciar con banco");
+        Button boton2 = new Button("Comerciar con jugador");
+
+        boton1.setOnAction(e -> {
+            this.modoActual = ModoJuego.TRADEAR_BANCO;
+            mostrarVentanaComercio();
+            popup.close();
+        });
+        boton2.setOnAction(e -> comerciarConJugador(popup));
+
+        layout.getChildren().addAll(boton1,boton2);
+
+
+
+        popup.setScene(new Scene(layout, 250, 160));
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.show();
+        popup.setOnCloseRequest(e -> {
+            btnComercio.setDisable(false);
+        });
+
+    }
+    private void comerciarConBanco(Stage popup){
+        //prepararListaIntercambio();
+        System.out.println("Recurso ofertado " + this.recursoDelBanco.nombre());
+        System.out.println("cantidad "+ this.recursoDelBanco.getCantidad());
+        System.out.println("recurso pedido " + this.recursoBuscado.nombre());
+
+        turnoGeneral.comerciarConBanco(this.recursoDelBanco,this.recursoDelBanco.getCantidad(),this.recursoBuscado);
+        popup.close();
+        actualizarRecursos();
+        this.recursoBuscado = null;
+        this.recursoDelBanco.descartar(this.recursoDelBanco.getCantidad());
+        btnComercio.setDisable(false);
+
+    }
+    private void manejarClickParaBanco(Recurso recursoATradearConBanco){
+        if(this.recursoDelBanco == null ||
+                this.recursoDelBanco.getClass() != recursoATradearConBanco.getClass()
+        ){
+            //this.recursoDelBanco = recursoATradearConBanco;
+            this.recursosOfrecer.clear();
+            this.recursosOfrecer = Recurso.crearListaDeRecursos();
+            for (Recurso recurso : this.recursosOfrecer){
+                if(recurso.getClass() == recursoATradearConBanco.getClass()){
+                    this.recursoDelBanco = recurso;
+                    System.out.println("Recurso r tipo " + recurso.nombre() + " cantidad" +
+                            recurso.getCantidad());
+                    break;
+                }
+
+            }
+        }
+            this.recursoDelBanco.sumar(1);
+        actualizarPanelRecursosBanco(this.panelRecursos);
+        System.out.println("Recurso tipo " + this.recursoDelBanco.nombre() + " cantidad" + this.recursoDelBanco.getCantidad());
+
+    }
+    private void jugadorElegido(Jugador jugador,Stage popup){
+        System.out.println("jugador a tradear" + jugador.getNombre());
+        this.jugadorATradear = jugador;
+        popup.close();
+    }
+
+    private void manejarOfrecer() {
+        this.modoActual = ModoJuego.RECURSO_OFRECER;
+    }
+
+    private void manejarNecesitar() {
+        this.modoActual = ModoJuego.RECURSO_NECESITADO;
+    }
+
+    private void manejarEnviarTrade(Stage popup){
+        System.out.println("jugador actual" + this.turnoGeneral.getJugadorActual().getNombre());
+        turnoGeneral.comerciar(this.jugadorATradear,this.recursosOfrecer,this.recursosElegir);
+        this.recursosElegir.clear();
+        this.recursosOfrecer.clear();
+        actualizarRecursos();
+        popup.close();
+        btnComercio.setDisable(false);
+    }
+
     private Map<Label, Recurso> crearMapRecursos() {
         Map<Label, Recurso> map = new HashMap<>();
         map.put(lblInvMadera, new Madera());
@@ -822,9 +1003,15 @@ public class JuegoController extends BaseTableroController implements Initializa
                     manejarClickRecurso(recurso, this.recursosOfrecer);
                 } else if (this.modoActual == ModoJuego.RECURSO_NECESITADO) {
                     manejarClickRecurso(recurso, this.recursosElegir);
+                } else if (this.modoActual == ModoJuego.TRADEAR_BANCO) {
+                    manejarClickParaBanco(recurso);
+                    System.out.println("recurso cantidad: " + this.recursoDelBanco.getCantidad());
+
+                } else if (this.modoActual == ModoJuego.NECESITAR_BANCO) {
+                    this.recursoBuscado = recurso;
+                    actualizarPanelRecursosBanco(this.panelRecursos);
+                    System.out.println("Recursos buscado: " + this.recursoBuscado.nombre());
                 }
-                System.out.println("Recursos ofrecer: " + this.recursosOfrecer);
-                System.out.println("Recursos necesitar: " + this.recursosElegir);
             });
             //label.setCursor(Cursor.HAND);   // opcional: mano al pasar
         }
@@ -834,7 +1021,7 @@ public class JuegoController extends BaseTableroController implements Initializa
     //agrega recursos a una lista
     private void manejarClickRecurso(Recurso recurso,List<Recurso> listaRecurso){
         recurso.agregarALaListaSinRestriccion(listaRecurso);
-        //System.out.println("Recursos elegidos " + recurso.getCantidad());
+        actualizarPanelRecursos(panelRecursos);
 
     }
 
@@ -845,6 +1032,22 @@ public class JuegoController extends BaseTableroController implements Initializa
             );
         }
     }
+
+
+
+    @FXML
+    public void elegirComcercio(){
+        System.out.println("jugador actual" + this.jugadorActual.getNombre());
+        btnComercio.setDisable(true);
+        mostrarElegirComercio();
+    }
+    public void comerciarConJugador(Stage popup){
+        popup.close();
+        mostrarElegirJugador();
+    }
+
+
+    // FIN RECURSOS  SOBRE INTERCAMBIOS DE RECURSOS
 
     @FXML
     public void tirarDados() {
@@ -878,29 +1081,6 @@ public class JuegoController extends BaseTableroController implements Initializa
     public void construirCarretera() {
         modoActual = ModoJuego.CONSTRUIR_CARRETERA;
     }
-    //deberia preguntarle a cada jugador siguiente si acepta o no el cambio y por ultimo vuelve al jugador 1
-    // para que elija con quien comerciar o algo asi
-    @FXML
-    public void elegirComcercio(){
-        mostrarElegirComercio();
-    }
-    public void comerciarConJugador(Stage popup){
-        popup.close();
-        mostrarElegirJugador();
-        this.recursosOfrecer = Recurso.crearListaDeRecursos();
-        this.recursosElegir = Recurso.crearListaDeRecursos();
-
-        mostrarVentanaComercio();
-        btnComercio.setDisable(true);
-    }
-
-    //hacer una funcion que al clickear una carta aniada un recurso a la lista
-
-/*
-    @FXML
-    public void terminarTurno() {
-        System.out.println("Turno terminado.");
-    }*/
 
     @FXML
     public void salir() {
@@ -924,6 +1104,7 @@ public class JuegoController extends BaseTableroController implements Initializa
         btnDados.setDisable(false);
         this.catan.terminarTurno();
         this.turnoActual= catan.getTurno().getTurnoGeneral();
+        this.turnoGeneral = catan.getTurno().getTurnoGeneral();
         setValores();
 
         // TODO: aca llamás al administrador de jugadores y verificas si pasas al turno general

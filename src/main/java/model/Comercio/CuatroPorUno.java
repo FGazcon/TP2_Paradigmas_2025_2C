@@ -24,6 +24,7 @@ public class CuatroPorUno implements ReglaDeComercio {
     }
     public void intentarComerciar(Jugador jugador, Recurso recursoOfrecido, int cantidad, Recurso recursoDeseado, Banco banco) {
         if (cantidad == 4){
+            System.out.println("pe jugador " + jugador.getNombre());
             banco.jugadorQuiereIntercambiar(jugador, recursoOfrecido, cantidad, recursoDeseado);
         }
     }

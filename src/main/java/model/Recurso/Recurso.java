@@ -39,6 +39,7 @@ public abstract class Recurso{
         this.cantidad = 0;
         this.reglaDeComercio = new CuatroPorUno();
     }
+
     public int getCantidad(){
         return cantidad;
     }
@@ -56,7 +57,9 @@ public abstract class Recurso{
     public abstract String nombre();
 
     public void descartar(int cantidad){
+        System.out.println("cantidad antes " + this.cantidad);
         this.cantidad -= cantidad;
+        System.out.println("cantidad dsp " + this.cantidad);
     }
 
     public void sumar(int cantidad){
@@ -75,6 +78,7 @@ public abstract class Recurso{
     public abstract void darReglaA(Jugador jugador, ReglaDeComercio reglaDeComercio);
 
     public void comerciarConBanco(Jugador jugador, int cantidad, Recurso recursoDeseado, Banco banco) {
+        System.out.println(reglaDeComercio);
         reglaDeComercio.intentarComerciar(jugador, this, cantidad, recursoDeseado, banco);
     }
 
@@ -143,6 +147,8 @@ public abstract class Recurso{
 
     public void comerciarRecursoDeUnJugadorConElBanco(Jugador jugador, int cantidad,  Recurso recursoDeseado, Banco banco) {
         Recurso recurso = this.obtenerRecursoDeJugador(jugador);
+
+        System.out.println(recurso.nombre());
         recurso.comerciarConBanco(jugador, cantidad, recursoDeseado, banco);
     }
 
