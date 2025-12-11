@@ -40,6 +40,7 @@ public class JugabilidadTest {
         // Jugador 1 pone poblado y carretera
         int vA = tablero.getVerticesUnicos().get(0).getNumeroDeVertice();
         int vB = tablero.getVerticesUnicos().get(1).getNumeroDeVertice();
+        int vE = tablero.getVerticesUnicos().get(2).getNumeroDeVertice();
 
         t1.construirPoblado(vA);
         t1.construirCarretera(new int[]{vA, vB});
@@ -62,6 +63,11 @@ public class JugabilidadTest {
         // ========================
         // 4) Ahora comienza Turno General
         // ========================
+        catan.terminarTurno();
+        catan.terminarTurno();
+        turno = catan.getTurno();
+        turno.construirPoblado(vE);
+        turno.construirCarretera(new int[]{vE, vB});
         catan.terminarTurno();
         turno = catan.getTurno();
         Assertions.assertTrue(turno instanceof TurnoGeneral);
@@ -94,6 +100,7 @@ public class JugabilidadTest {
         // Mejora a ciudad (superposición en vertice vB)
         tg1.construirCiudad(vB);
 
+        System.out.println(j1.calcularPuntaje());
         Assertions.assertTrue(j1.calcularPuntaje() >= 2);
 
         // ========================
