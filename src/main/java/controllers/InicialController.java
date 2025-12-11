@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -115,7 +116,7 @@ public class InicialController extends BaseTableroController implements Initiali
         System.out.println(this.turnoActual);
         this.catan.terminarTurno();
         this.turnoActual= catan.getTurno();
-        this.cambiarAJuegoController(event);
+        //this.cambiarAJuegoController(event);
         setValores();
         modoActual = ModoJuego.CONSTRUIR_POBLADO;
 
@@ -177,20 +178,29 @@ public class InicialController extends BaseTableroController implements Initiali
     }
 
     public void uiFinTurnoInicial() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/juego.fxml"));
-            Scene nueva = new Scene(loader.load());
+        Platform.runLater(() -> {
+            try {
+                // Si todavía no hay escena, reintentamos más tarde
+                if (rootInicial.getScene() == null) {
+                    System.out.println("Scene no lista, reintentando cambio de escena...");
+                    Platform.runLater(this::uiFinTurnoInicial);
+                    return;
+                }
 
-            JuegoController controller = loader.getController();
-            controller.init(catan);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/juego.fxml"));
+                Scene nueva = new Scene(loader.load());
 
-            Stage stage = (Stage) rootInicial.getScene().getWindow();
-            stage.setScene(nueva);
-            stage.show();
+                JuegoController controller = loader.getController();
+                controller.init(catan);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                Stage stage = (Stage) rootInicial.getScene().getWindow();
+                stage.setScene(nueva);
+                stage.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

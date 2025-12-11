@@ -131,7 +131,7 @@
         </VBox>
     </right>
 
-    <ImageView StackPane.alignment="TOP_RIGHT"
+    <ImageView translateX="800"
                pickOnBounds="false"
                fitWidth="180"
                preserveRatio="true"
