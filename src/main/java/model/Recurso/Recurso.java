@@ -57,9 +57,7 @@ public abstract class Recurso{
     public abstract String nombre();
 
     public void descartar(int cantidad){
-        System.out.println("cantidad antes " + this.cantidad);
         this.cantidad -= cantidad;
-        System.out.println("cantidad dsp " + this.cantidad);
     }
 
     public void sumar(int cantidad){
@@ -147,7 +145,6 @@ public abstract class Recurso{
 
     public void comerciarRecursoDeUnJugadorConElBanco(Jugador jugador, int cantidad,  Recurso recursoDeseado, Banco banco) {
         Recurso recurso = this.obtenerRecursoDeJugador(jugador);
-
         System.out.println(recurso.nombre());
         recurso.comerciarConBanco(jugador, cantidad, recursoDeseado, banco);
     }

@@ -1163,4 +1163,4 @@ public class JuegoController extends BaseTableroController implements Initializa
 // solo se deberia poder usar 1
 
 
-//las cosas funcionan para el jugador 1 pero no para el 2
+//hay que arreglar la actualizacion  de los PV
