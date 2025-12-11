@@ -20,6 +20,7 @@ public class Jugador {
     private Banco banco;
     private int cantidadCabelleros;
     private int caminoMasLArgo;
+    private int puntosCarretera;
 
     public Jugador(String nombre, Banco banco) {
         this.nombre = nombre;
@@ -29,6 +30,7 @@ public class Jugador {
         this.banco = banco;
         this.cantidadCabelleros = 0;
         this.caminoMasLArgo = 0;
+        this.puntosCarretera = 0;
     }
 
     public void setCaminoMasLArgo(int caminoMasLArgo) {
@@ -91,6 +93,10 @@ public class Jugador {
         for(CartaDesarrollo carta :  this.cartasDesarrollo) {
             puntaje = carta.modificarPuntaje(puntaje);
         }
+        if(this.puntosCarretera ==1){
+            puntaje +=2;
+        }
+
         //Sumar Cartas especiales
         return puntaje;
     }
@@ -179,6 +185,7 @@ public class Jugador {
         }
     }
 
+
     public Recurso obtenerRecurso(String nombre) {
         return mapaRecursos.get(nombre);
     }
@@ -262,6 +269,28 @@ public class Jugador {
         CartaDesarrollo carta = obtenerCartaDesarrolloEn(posicion);
         return activarCarta(carta);
     }
+    public Jugador carreteraMasLarga(Jugador jugadorConMayorCarretera){
+
+        if(jugadorConMayorCarretera.mayorCarretera(this.caminoMasLArgo)){
+            return jugadorConMayorCarretera;
+        }
+        return this;
+
+
+    }
+    public Jugador superaCuatroCarreteras(){
+        if (this.caminoMasLArgo >4){
+            return this;
+        }
+        return null;
+    }
+
+    public boolean mayorCarretera(int caminoMasLargoGanador){
+        if(this.caminoMasLArgo > caminoMasLargoGanador){
+            return true;
+        }
+        return false;
+    }
 
     public int getPuntos(){
         return this.puntaje;
@@ -274,4 +303,9 @@ public class Jugador {
     public void marcarCartaComoUsada(CartaDesarrollo carta) {
         carta.setEstado(new Activada());
     }
+
+    public void setPuntosCarretera(int puntosCarreteras){
+        this.puntosCarretera= puntosCarreteras;
+    }
+
 }

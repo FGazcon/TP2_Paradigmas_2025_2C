@@ -10,6 +10,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.GanadorController"
+            fx:id="rootGanador"
             prefWidth="1280" prefHeight="720"
             style="-fx-background-color: #E6D0B4;">
 

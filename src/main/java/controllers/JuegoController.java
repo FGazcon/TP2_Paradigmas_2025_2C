@@ -2,12 +2,14 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.StackPane;
@@ -30,34 +32,38 @@ import model.Tablero.Vertice.Estructura.Ciudad;
 import model.Tablero.Vertice.Estructura.Estructura;
 import model.Tablero.Vertice.Estructura.Poblado;
 import model.Tablero.Vertice.Vertice;
+import view.JuegoObserver;
 
 import java.net.URL;
 import java.util.*;
 
 public class JuegoController extends BaseTableroController implements Initializable {
 
+    // Buttons
     @FXML public Button btnCiudad;
     @FXML public Button btnPoblado;
     @FXML public Button btnCarretera;
+    @FXML public Button btnComprarDesarrollo;
+    @FXML private Button btnComercio;
+    @FXML private Button btnDados;
+
     @FXML private Label lblJugadorActual;
     @FXML private Label lblTurno;
     @FXML private Label lblValorDados;
     @FXML private Label lblPV;
-    @FXML public Button btnComprarDesarrollo;
-
     @FXML private Label lblInvMadera;
     @FXML private Label lblInvLadrillo;
     @FXML private Label lblInvOveja;
     @FXML private Label lblInvTrigo;
     @FXML private Label lblInvPiedra;
+    @FXML private BorderPane rootJuego;
 
-    @FXML private Button btnComercio;
-    //@FXML private Button colocarPoblado;
-    @FXML private Button btnDados;
-
+    // Inicializaciones
     private final Banco banco = new Banco();
-    private Catan catan;
     private final Dados dados = new Dados();
+
+    // Declaraciones
+    private Catan catan;
     private Map<Label, Recurso> lblRecursos;
     private TurnoGeneral turnoGeneral;
     private Hexagono hexagonoPrevioLadron = null;
@@ -67,16 +73,14 @@ public class JuegoController extends BaseTableroController implements Initializa
     private VBox panelRecursos;
     private Recurso recursoDelBanco;
     private Recurso recursoBuscado;
-
     protected ActivacionDesarrollo activacionPendiente;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        // Llamar a una instancia de java.Tablero que contenga la lista de Hexagonos
         this.lblRecursos = crearMapRecursos();
     }
-    public void init(Catan catan){
+
+    public void init(Catan catan) {
         this.catan = catan;
         this.jugadorActual = this.catan.getTurno().getJugadorActual();
         this.tableroModelo = this.catan.getTablero();
@@ -92,8 +96,11 @@ public class JuegoController extends BaseTableroController implements Initializa
         asignarCoordenadasVertices(tableroModelo);
         crearTablero(tableroModelo);
         recuperarTablero();
+
+        new JuegoObserver(catan, this);
     }
-    public void recuperarTablero(){
+
+    public void recuperarTablero() {
         List<Hexagono> hexagonos = catan.getTablero().getHexagonos();
         for (Hexagono h : hexagonos){
             List<Vertice> vertices = List.of(h.getVertices());
@@ -115,7 +122,8 @@ public class JuegoController extends BaseTableroController implements Initializa
             }
         }
     }
-    private void dibujarCirculo(Vertice v,Jugador jugador){
+
+    private void dibujarCirculo(Vertice v,Jugador jugador) {
         double x = v.getCoordenadaX();
         double y = v.getCoordenadaY();
         this.tableroPane.getChildren().stream()
@@ -124,6 +132,7 @@ public class JuegoController extends BaseTableroController implements Initializa
                 .filter(circle -> circle.getCenterX() == x && circle.getCenterY() == y)
                 .findFirst().ifPresent(c -> colorear(c, jugador));
     }
+
     private Line encontrarAristaUI( Arista a) {
 
         double ox = a.getPar().getDestino().getCoordenadaX();
@@ -149,7 +158,7 @@ public class JuegoController extends BaseTableroController implements Initializa
                 .orElse(null);
     }
 
-    public void setValores(){
+    public void setValores() {
         this.jugadorActual = this.catan.getTurno().getJugadorActual();
         this.lblJugadorActual.setText(jugadorActual.getNombre());
         this.lblTurno.setText("Turno de " + jugadorActual.getNombre());
@@ -167,6 +176,7 @@ public class JuegoController extends BaseTableroController implements Initializa
                         ui.setUserData("Poblado");
                         colorear(ui, this.jugadorActual);
                         modoActual = ModoJuego.SELECCIONAR_NADA;
+                        actualizarPuntos();
                         actualizarRecursos();
                     }
                 } catch (Exception ex) {
@@ -181,6 +191,7 @@ public class JuegoController extends BaseTableroController implements Initializa
                         ui.setUserData("Ciudad");
                         colorarCiudad(ui);
                         this.modoActual = ModoJuego.SELECCIONAR_NADA;
+                        actualizarPuntos();
                         actualizarRecursos();
 
                     }
@@ -195,27 +206,6 @@ public class JuegoController extends BaseTableroController implements Initializa
         }
 
     }
-//    @Override
-//    protected void manejarClickArista(Arista a, Line ui) {
-//        if (modoActual == ModoJuego.CONSTRUIR_CARRETERA) {
-//            try {
-//                int origen = a.getPar().getDestino().getNumeroDeVertice();
-//                int destino = a.getDestino().getNumeroDeVertice();
-//                turnoActual.construirCarretera(new int[]{origen, destino});
-//                if(a.getCarretera() != null){
-//                    ui.setUserData("Carretera");
-//                    colorear(ui,this.jugadorActual);
-//                }
-//            } catch (Exception ex) {
-//                System.err.println("Error construir carretera: " + ex.getMessage());
-//            }
-//        }
-//
-//
-//
-//        modoActual = ModoJuego.SELECCIONAR_NADA;
-//    }
-
 
 
     @FXML
@@ -232,53 +222,6 @@ public class JuegoController extends BaseTableroController implements Initializa
         mostrarInfoPopup("¡Compraste una carta de desarrollo!");
     }
 
-
-    /*
-    private void mostrarPopupElegirTipoCarta() {
-        Stage popup = new Stage();
-        popup.setTitle("Elegí qué carta comprar");
-
-        Button btnCaballero = new Button("Caballero");
-        Button btnMonopolio = new Button("Monopolio");
-        Button btnDescubrimiento = new Button("Descubrimiento");
-        Button btnCarreteras = new Button("Carreteras");
-        Button btnPuntoVictoria = new Button("Punto de Victoria");
-
-        List<Button> botones = List.of(
-                btnCaballero, btnMonopolio, btnDescubrimiento, btnCarreteras, btnPuntoVictoria
-        );
-
-        botones.forEach(b -> b.setPrefWidth(200));
-
-        btnCaballero.setOnAction(e -> intentarComprarTipo("Caballero", popup));
-        btnMonopolio.setOnAction(e -> intentarComprarTipo("Monopolio", popup));
-        btnDescubrimiento.setOnAction(e -> intentarComprarTipo("Descubrimiento", popup));
-        btnCarreteras.setOnAction(e -> intentarComprarTipo("Carreteras", popup));
-        btnPuntoVictoria.setOnAction(e -> intentarComprarTipo("Punto de Victoria", popup));
-
-        VBox layout = new VBox(12);
-        layout.getChildren().addAll(botones);
-        layout.setAlignment(Pos.CENTER);
-        layout.setPadding(new Insets(20));
-        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
-
-        popup.setScene(new Scene(layout, 280, 260));
-        popup.show();
-    }
-
-    private void intentarComprarTipo(String tipo, Stage popup) {
-        if (!CartaDesarrollo.jugadorMePuedePagar(jugadorActual)) {
-            mostrarErrorPopup("No tenés recursos suficientes para comprar: " + tipo);
-            return;
-        }
-
-        turnoGeneral.comprarDesarrollo();
-
-        actualizarRecursos();
-        popup.close();
-    }
-    */
-
     @FXML
     private void mostrarVentanaUsarDesarrollo() {
         Stage popup = new Stage();
@@ -287,18 +230,14 @@ public class JuegoController extends BaseTableroController implements Initializa
         ListView<String> lista = new ListView<>();
         lista.setPrefSize(220, 180);
 
-        // 1) Cartas que SÍ se pueden usar este turno
         List<CartaDesarrollo> activables = jugadorActual.getCartasDesarrolloSinActivar();
 
-        // 2) Cartas recién compradas (NO se pueden usar)
         List<CartaDesarrollo> recienCompradas = jugadorActual.getCartasDesarrolloRecienCompradas();
 
-        // === Mostrar primero las usables ===
         for (CartaDesarrollo c : activables) {
             lista.getItems().add(c.getClass().getSimpleName() + " (usable)");
         }
 
-        // === Mostrar después las NO usables ===
         for (CartaDesarrollo c : recienCompradas) {
             lista.getItems().add(c.getClass().getSimpleName() + " (no usable este turno)");
         }
@@ -321,15 +260,12 @@ public class JuegoController extends BaseTableroController implements Initializa
                 return;
             }
 
-            // Obtener la carta real activable
             CartaDesarrollo carta = activables.get(index);
 
-            // Preparar activación
             ActivacionDesarrollo act = jugadorActual.getActivacionParaCartaEnPosicion(index);
 
             popup.close();
 
-            // Lógica según el tipo de carta
             if (carta instanceof Caballero) {
                 mostrarPopupCaballero((Caballero) carta, act);
             }
@@ -347,9 +283,6 @@ public class JuegoController extends BaseTableroController implements Initializa
             }
         });
 
-//        popup.initModality(Modality.WINDOW_MODAL); //este para bloquear las otras ventanas
-//        popup.setAlwaysOnTop(true); //este para que se mantenga siempre arriba
-
         btnCancelar.setOnAction(e -> popup.close());
 
         VBox layout = new VBox(15, lista, btnUsar, btnCancelar);
@@ -361,6 +294,8 @@ public class JuegoController extends BaseTableroController implements Initializa
         popup.show();
     }
 
+
+    // PopUp para carta de desarrollo Monopolio
 
     private void mostrarPopupMonopolio(CartaDesarrollo carta, ActivacionDesarrollo act) {
 
@@ -379,7 +314,6 @@ public class JuegoController extends BaseTableroController implements Initializa
         List<Button> botones = List.of(b1, b2, b3, b4, b5);
         botones.forEach(b -> b.setPrefWidth(180));
 
-        // Acciones de cada botón
         b1.setOnAction(e -> usarMonopolio("Madera", act, popup, carta));
         b2.setOnAction(e -> usarMonopolio("Ladrillo", act, popup, carta));
         b3.setOnAction(e -> usarMonopolio("Oveja", act, popup, carta));
@@ -395,10 +329,12 @@ public class JuegoController extends BaseTableroController implements Initializa
         popup.show();
     }
 
-    private void usarMonopolio(String nombreRecurso, ActivacionDesarrollo act, Stage popup, CartaDesarrollo carta) {
 
-        // Obtener el Recurso real desde el jugador
+    // Utilidades para el PopUp de la carta de desarrollo Monopolio
+
+    private void usarMonopolio(String nombreRecurso, ActivacionDesarrollo act, Stage popup, CartaDesarrollo carta) {
         Recurso recurso;
+
         switch (nombreRecurso) {
             case "Madera" -> recurso = jugadorActual.getMadera();
             case "Ladrillo" -> recurso = jugadorActual.getLadrillo();
@@ -408,7 +344,6 @@ public class JuegoController extends BaseTableroController implements Initializa
             default -> throw new IllegalStateException("Recurso desconocido: " + nombreRecurso);
         }
 
-        // Setear el recurso dentro de la activación anónima
         try {
             var metodo = act.getClass().getDeclaredMethod("setRecurso", Recurso.class);
             metodo.setAccessible(true);
@@ -419,11 +354,9 @@ public class JuegoController extends BaseTableroController implements Initializa
             return;
         }
 
-        // Ejecutar la carta
         act.ejecutar(this.jugadorActual, this.tableroModelo, this.jugadores);
         jugadorActual.marcarCartaComoUsada(carta);
 
-        // Actualizar interfaz
         actualizarRecursos();
 
         popup.close();
@@ -431,6 +364,8 @@ public class JuegoController extends BaseTableroController implements Initializa
         mostrarInfoPopup("Monopolizaste " + nombreRecurso + ".");
     }
 
+
+    // PopUp para carta de desarrollo Descubrimiento
     private void mostrarPopupDescubrimiento(CartaDesarrollo carta, ActivacionDesarrollo act) {
         Stage popup = new Stage();
         popup.setTitle("Año de Abundancia");
@@ -466,12 +401,13 @@ public class JuegoController extends BaseTableroController implements Initializa
         popup.show();
     }
 
-    private void usarDescubrimiento(String r1, String r2, ActivacionDesarrollo act, Stage popup, CartaDesarrollo carta) {
 
+    // Utilidades para el PopUp de la carta de desarrollo Descubrimiento
+
+    private void usarDescubrimiento(String r1, String r2, ActivacionDesarrollo act, Stage popup, CartaDesarrollo carta) {
         Recurso recursoA = obtenerRecursoJugadorPorNombre(r1);
         Recurso recursoB = obtenerRecursoJugadorPorNombre(r2);
 
-        // Llamar al setter privado "setRecursos(Recurso, Recurso)" usando reflexión
         try {
             var metodo = act.getClass().getDeclaredMethod("setRecursos", Recurso.class, Recurso.class);
             metodo.setAccessible(true);
@@ -482,7 +418,6 @@ public class JuegoController extends BaseTableroController implements Initializa
             return;
         }
 
-        // Ejecutar la activación
         act.ejecutar(jugadorActual, tableroModelo, jugadores);
         jugadorActual.marcarCartaComoUsada(carta);
 
@@ -502,6 +437,9 @@ public class JuegoController extends BaseTableroController implements Initializa
             default -> throw new IllegalStateException("Recurso desconocido: " + nombre);
         };
     }
+
+
+    // PopUp para carta de desarrollo Caballero
 
     private void mostrarPopupCaballero(CartaDesarrollo carta, ActivacionDesarrollo act) {
 
@@ -532,27 +470,24 @@ public class JuegoController extends BaseTableroController implements Initializa
         popup.show();
     }
 
+
+    // Utilidades para el PopUp de la carta de desarrollo Caballero
+
     @Override
     protected void manejarClickHexagono(Hexagono h, Map<Hexagono, StackPane> uiH) {
 
         if (modoActual == ModoJuego.MODO_MOVER_LADRON) {
 
-            // Caso 1: Carta Caballero activa
             if (activacionPendiente != null) {
                 try {
-                    // Setear hex
                     var metodo = activacionPendiente.getClass()
                             .getDeclaredMethod("setHex", Hexagono.class);
                     metodo.setAccessible(true);
                     metodo.invoke(activacionPendiente, h);
 
-                    // Ejecutar mover ladrón
                     activacionPendiente.ejecutar(jugadorActual, tableroModelo, jugadores);
 
                     moverLadronAHexagono(h, uiH);
-
-                    // Robar
-                   // manejarRoboTrasLadron(h);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -562,14 +497,11 @@ public class JuegoController extends BaseTableroController implements Initializa
                 return;
             }
 
-            // Caso 2: Movimiento normal del ladrón (si existe esa acción en tu juego)
             this.turnoGeneral.moverLadron(h);
             moverLadronAHexagono(h, uiH);
             modoActual = ModoJuego.SELECCIONAR_NADA;
             return;
         }
-
-        // Otros modos (poblado / ciudad / carretera / comercio / etc.)
     }
 
     protected void manejarRoboTrasLadron(Hexagono hex) {
@@ -602,7 +534,6 @@ public class JuegoController extends BaseTableroController implements Initializa
             }
         }
 
-        // No puede robarse a sí mismo
         encontrados.remove(jugadorActual);
 
         return new ArrayList<>(encontrados);
@@ -642,6 +573,9 @@ public class JuegoController extends BaseTableroController implements Initializa
         mostrarInfoPopup("Hacé click en el hexágono donde querés mover el ladrón.");
     }
 
+
+    // PopUp para carta de desarrollo Caballero
+
     private void mostrarPopupPuntoDeVictoria(CartaDesarrollo carta, ActivacionDesarrollo act) {
 
         Stage popup = new Stage();
@@ -674,6 +608,9 @@ public class JuegoController extends BaseTableroController implements Initializa
         popup.show();
     }
 
+
+    // PopUp para carta de desarrollo Construccion de Carreteras
+
     private void mostrarPopupCarreteras(CartaDesarrollo carta, ActivacionDesarrollo act) {
 
         Stage popup = new Stage();
@@ -704,7 +641,7 @@ public class JuegoController extends BaseTableroController implements Initializa
     }
 
 
-    // INICIO RECURSOS  SOBRE INTERCAMBIOS DE RECURSOS
+    // Intercambio de recursos
 
     private void mostrarVentanaComercio() {
         Stage popup = new Stage();
@@ -713,24 +650,18 @@ public class JuegoController extends BaseTableroController implements Initializa
         this.recursosOfrecer = Recurso.crearListaDeRecursos();
         this.recursosElegir = Recurso.crearListaDeRecursos();
 
-        // ⭐ Panel para mostrar recursos
         this.panelRecursos = new VBox(5);
         panelRecursos.setAlignment(Pos.CENTER_LEFT);
 
-        actualizarPanelRecursos(panelRecursos); // cargar al inicio
+        actualizarPanelRecursos(panelRecursos);
 
-        // ☆ Botones
         Button btnOfrecer = new Button("Recursos a ofrecer");
         Button btnNecesitar = new Button("Recursos a necesitar");
         Button btnEnviarTrade = new Button("Enviar Trade");
 
-
-        //debe agregar cartas a la lista de recursos que ofrece
         btnOfrecer.setPrefWidth(180);
-        //debe agregar cartas a la lista de recursos que necesita
         btnNecesitar.setPrefWidth(180);
         btnEnviarTrade.setPrefWidth(180);
-
 
         btnOfrecer.setOnAction(e -> {
             if(this.modoActual == ModoJuego.NECESITAR_BANCO || this.modoActual == ModoJuego.TRADEAR_BANCO){
@@ -747,6 +678,7 @@ public class JuegoController extends BaseTableroController implements Initializa
                 manejarNecesitar();
             }
         });
+
         btnEnviarTrade.setOnAction(e ->{
             if((this.modoActual == ModoJuego.TRADEAR_BANCO) ||
                     (this.modoActual == ModoJuego.NECESITAR_BANCO)){
@@ -754,12 +686,9 @@ public class JuegoController extends BaseTableroController implements Initializa
             }else{
                 manejarEnviarTrade(popup);
             }
-
         });
 
-        // ☆ Layout simple
-        VBox layout = new VBox(15, btnOfrecer, btnNecesitar, btnEnviarTrade,new Label("Recursos seleccionados:"),
-                panelRecursos);
+        VBox layout = new VBox(15, btnOfrecer, btnNecesitar, btnEnviarTrade,new Label("Recursos seleccionados:"), panelRecursos);
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(20));
         layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
@@ -768,29 +697,30 @@ public class JuegoController extends BaseTableroController implements Initializa
         popup.initModality(Modality.NONE);
         popup.setAlwaysOnTop(true);
         popup.show();
+
         popup.setOnCloseRequest(e -> {
             btnComercio.setDisable(false);
         });
 
     }
-    private void actualizarPanelRecursosBanco(VBox panel){
-        panel.getChildren().clear();
-        if (this.recursoDelBanco.getCantidad() > 0) {
 
-            panel.getChildren().add(
-                    new Label("Ofrece: " + this.recursoDelBanco.nombre() + " x" +
-                            this.recursoDelBanco.getCantidad())
-            );
+    private void actualizarPanelRecursosBanco(VBox panel) {
+        panel.getChildren().clear();
+
+        if (this.recursoDelBanco.getCantidad() > 0) {
+            panel.getChildren().add(new Label("Ofrece: " + this.recursoDelBanco.nombre() + " x" + this.recursoDelBanco.getCantidad()));
         }
+
         if (this.recursoBuscado != null) {
 
             panel.getChildren().add(new Label("Necesita: " + this.recursoBuscado.nombre()));
         }
+
         if (panel.getChildren().isEmpty()) {
             panel.getChildren().add(new Label("No hay recursos seleccionados"));
         }
-
     }
+
     private void actualizarPanelRecursos(VBox panel) {
         panel.getChildren().clear();
 
@@ -815,7 +745,6 @@ public class JuegoController extends BaseTableroController implements Initializa
         }
     }
 
-
     private void mostrarElegirJugador() {
         Stage popup = new Stage();
         popup.setTitle("Comercio de Recursos");
@@ -825,8 +754,7 @@ public class JuegoController extends BaseTableroController implements Initializa
         layout.setPadding(new Insets(20));
         layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
 
-        for(Jugador jugador : this.jugadores){
-
+        for (Jugador jugador : this.jugadores) {
             Button botonJugador = new Button(jugador.getNombre());
             botonJugador.setPrefWidth(180);
             botonJugador.setDisable(jugador.equals(this.jugadorActual));
@@ -834,68 +762,16 @@ public class JuegoController extends BaseTableroController implements Initializa
             layout.getChildren().add(botonJugador);
         }
 
-
         popup.setScene(new Scene(layout, 250, 160));
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.show();
-
 
         popup.setOnHidden(e -> {
             btnComercio.setDisable(false);
             mostrarVentanaComercio();
         });
-
     }
-//    private void mostrarVentanaComercioConBanco() {
-//        Stage popup = new Stage();
-//        popup.setTitle("Comercio de Recursos con banco");
-//
-//        // ⭐ Panel para mostrar recursos
-//        this.panelRecursos = new VBox(5);
-//        panelRecursos.setAlignment(Pos.CENTER_LEFT);
-//
-//        actualizarPanelRecursos(panelRecursos); // cargar al inicio
-//
-//        // ☆ Botones
-//        Button btnOfrecer = new Button("Recursos a ofrecer al Banco");
-//        Button btnNecesitar = new Button("Recursos a necesitar");
-//        Button btnEnviarTrade = new Button("Enviar Trade");
-//
-//
-//        //debe agregar cartas a la lista de recursos que ofrece
-//        //btnOfrecer.setPrefWidth(180);
-//        //debe agregar cartas a la lista de recursos que necesita
-//       // btnNecesitar.setPrefWidth(180);
-//        btnEnviarTrade.setPrefWidth(180);
-//
-//
-////        btnOfrecer.setOnAction(e -> {
-////            manejarOfrecer();
-////
-////        });
-//
-////        btnNecesitar.setOnAction(e -> {
-////            manejarNecesitar();
-////
-////        });
-//        btnEnviarTrade.setOnAction(e -> );
-//
-//        // ☆ Layout simple
-//        VBox layout = new VBox(15, btnEnviarTrade,new Label("Recursos seleccionados:"),
-//                panelRecursos);
-//        layout.setAlignment(Pos.CENTER);
-//        layout.setPadding(new Insets(20));
-//        layout.setStyle("-fx-background-color: #E6D0B4; -fx-border-color: black;");
-//
-//        popup.setScene(new Scene(layout, 300, 300));
-//        popup.initModality(Modality.NONE);
-//        popup.setAlwaysOnTop(true);
-//        popup.show();
-//        popup.setOnCloseRequest(e -> {
-//            btnComercio.setDisable(false);
-//        });
-//
-//    }
+
     private void mostrarElegirComercio() {
         Stage popup = new Stage();
         popup.setTitle("Elegir Comercio");
@@ -913,22 +789,21 @@ public class JuegoController extends BaseTableroController implements Initializa
             mostrarVentanaComercio();
             popup.close();
         });
+
         boton2.setOnAction(e -> comerciarConJugador(popup));
 
         layout.getChildren().addAll(boton1,boton2);
 
-
-
         popup.setScene(new Scene(layout, 250, 160));
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.show();
+
         popup.setOnCloseRequest(e -> {
             btnComercio.setDisable(false);
         });
 
     }
-    private void comerciarConBanco(Stage popup){
-        //prepararListaIntercambio();
+    private void comerciarConBanco(Stage popup) {
         System.out.println("Recurso ofertado " + this.recursoDelBanco.nombre());
         System.out.println("cantidad "+ this.recursoDelBanco.getCantidad());
         System.out.println("recurso pedido " + this.recursoBuscado.nombre());
@@ -941,29 +816,27 @@ public class JuegoController extends BaseTableroController implements Initializa
         btnComercio.setDisable(false);
 
     }
-    private void manejarClickParaBanco(Recurso recursoATradearConBanco){
-        if(this.recursoDelBanco == null ||
-                this.recursoDelBanco.getClass() != recursoATradearConBanco.getClass()
-        ){
-            //this.recursoDelBanco = recursoATradearConBanco;
+
+    private void manejarClickParaBanco(Recurso recursoATradearConBanco) {
+        if (this.recursoDelBanco == null || this.recursoDelBanco.getClass() != recursoATradearConBanco.getClass()) {
             this.recursosOfrecer.clear();
             this.recursosOfrecer = Recurso.crearListaDeRecursos();
-            for (Recurso recurso : this.recursosOfrecer){
-                if(recurso.getClass() == recursoATradearConBanco.getClass()){
+            for (Recurso recurso : this.recursosOfrecer) {
+                if (recurso.getClass() == recursoATradearConBanco.getClass()){
                     this.recursoDelBanco = recurso;
-                    System.out.println("Recurso r tipo " + recurso.nombre() + " cantidad" +
-                            recurso.getCantidad());
+                    System.out.println("Recurso r tipo " + recurso.nombre() + " cantidad" + recurso.getCantidad());
                     break;
                 }
 
             }
         }
-            this.recursoDelBanco.sumar(1);
+
+        this.recursoDelBanco.sumar(1);
         actualizarPanelRecursosBanco(this.panelRecursos);
         System.out.println("Recurso tipo " + this.recursoDelBanco.nombre() + " cantidad" + this.recursoDelBanco.getCantidad());
-
     }
-    private void jugadorElegido(Jugador jugador,Stage popup){
+
+    private void jugadorElegido(Jugador jugador,Stage popup) {
         System.out.println("jugador a tradear" + jugador.getNombre());
         this.jugadorATradear = jugador;
         popup.close();
@@ -977,7 +850,7 @@ public class JuegoController extends BaseTableroController implements Initializa
         this.modoActual = ModoJuego.RECURSO_NECESITADO;
     }
 
-    private void manejarEnviarTrade(Stage popup){
+    private void manejarEnviarTrade(Stage popup) {
         System.out.println("jugador actual" + this.turnoGeneral.getJugadorActual().getNombre());
         turnoGeneral.comerciar(this.jugadorATradear,this.recursosOfrecer,this.recursosElegir);
         this.recursosElegir.clear();
@@ -1013,27 +886,15 @@ public class JuegoController extends BaseTableroController implements Initializa
                     System.out.println("Recursos buscado: " + this.recursoBuscado.nombre());
                 }
             });
-            //label.setCursor(Cursor.HAND);   // opcional: mano al pasar
         }
 
         return map;
     }
-    //agrega recursos a una lista
-    private void manejarClickRecurso(Recurso recurso,List<Recurso> listaRecurso){
+
+    private void manejarClickRecurso(Recurso recurso,List<Recurso> listaRecurso) {
         recurso.agregarALaListaSinRestriccion(listaRecurso);
         actualizarPanelRecursos(panelRecursos);
-
     }
-
-    private void actualizarRecursos() {
-        for (var entry : lblRecursos.entrySet()) {
-            entry.getKey().setText(
-                    String.valueOf(jugadorActual.getCantidadDeRecursoEspecifico(entry.getValue()))
-            );
-        }
-    }
-
-
 
     @FXML
     public void elegirComcercio(){
@@ -1046,8 +907,8 @@ public class JuegoController extends BaseTableroController implements Initializa
         mostrarElegirJugador();
     }
 
-
-    // FIN RECURSOS  SOBRE INTERCAMBIOS DE RECURSOS
+    
+    // Manejo de dados
 
     @FXML
     public void tirarDados() {
@@ -1059,7 +920,6 @@ public class JuegoController extends BaseTableroController implements Initializa
         if (tirada == 7) {
             lblTurno.setText("Mové el ladrón seleccionando un hexágono.");
             this.modoActual = ModoJuego.MODO_MOVER_LADRON;
-            //cambiarLadronImagen();
         }
 
         actualizarRecursos();
@@ -1067,6 +927,9 @@ public class JuegoController extends BaseTableroController implements Initializa
 
     }
 
+    
+    // Manejo de construcciones
+    
     @FXML
     public void construirPoblado() {
         modoActual = ModoJuego.CONSTRUIR_POBLADO;
@@ -1082,15 +945,35 @@ public class JuegoController extends BaseTableroController implements Initializa
         modoActual = ModoJuego.CONSTRUIR_CARRETERA;
     }
 
-    @FXML
-    public void salir() {
-        System.exit(0);
+
+    // Actualizar recursos y puntos de victoria
+
+    private void actualizarRecursos() {
+        for (var entry : lblRecursos.entrySet()) {
+            entry.getKey().setText(
+                    String.valueOf(jugadorActual.getCantidadDeRecursoEspecifico(entry.getValue()))
+            );
+        }
     }
 
-    public void actualizarPuntos(){
-        lblPV.setText("PV: " + jugadorActual.calcularPuntaje() + " / 10");
+    public void actualizarPuntos() {
+        int pv = jugadorActual.calcularPuntaje();
+        lblPV.setText("PV: " + pv + " / 10");
 
+        if (pv >= 10) {
+            mostrarPantallaGanador(jugadorActual.getNombre());
+        }
     }
+
+    @Override
+    protected void actualizarPuntosYRecursosEnArista() {
+        actualizarRecursos();
+        actualizarPuntos();
+    }
+
+
+    // Metodos extras y compartidos
+
     public void bloqueador(){
         this.cruz = new Label("✖");
         cruz.setStyle("-fx-font-size: 40px; -fx-text-fill: red;");
@@ -1106,13 +989,9 @@ public class JuegoController extends BaseTableroController implements Initializa
         this.turnoActual= catan.getTurno().getTurnoGeneral();
         this.turnoGeneral = catan.getTurno().getTurnoGeneral();
         setValores();
-
-        // TODO: aca llamás al administrador de jugadores y verificas si pasas al turno general
     }
 
     public void pintarHexagonoLadron(Hexagono hex, Map<Hexagono, StackPane> uiH ) {
-        // 1. Desmarcar hexágono anterior
-
         if (hexagonoPrevioLadron != null) {
             StackPane uiPrevio = uiH.get(hexagonoPrevioLadron);
             if (uiPrevio != null) {
@@ -1120,47 +999,94 @@ public class JuegoController extends BaseTableroController implements Initializa
             }
         }
 
-        // 2. Marcar hexágono actual
         StackPane uiActual = uiH.get(hex);
         if (uiActual != null) {
 
             uiActual.getChildren().add(cruz);
         }
 
-        // 3. Guardar referencia para la próxima
         hexagonoPrevioLadron = hex;
     }
 
     private void moverLadronAHexagono(Hexagono nuevoHex,Map<Hexagono, StackPane> uiH) {
-        // 1. Mover ladrón en el modelo
         actualizarRecursos();
 
-        // 2. Pintar en la UI
         pintarHexagonoLadron(nuevoHex,uiH);
 
-
-        // 3. Salir del modo
         modoActual = ModoJuego.SELECCIONAR_NADA;
 
-        // 4. (Opcional) Mostrar mensaje
         lblTurno.setText("Ladrón movido. Continuá tu turno.");
     }
-    //diferenciacion entre poblado y ciudad, abierto a cambios.
+
     private void colorarCiudad(Circle verticeCiudad){
         verticeCiudad.setRadius(15);
         verticeCiudad.setOpacity(0.7);
         verticeCiudad.setStroke(Color.BLACK);
         verticeCiudad.setStrokeWidth(2);
-
     }
 
 
+    // Mostrar ganador
 
+    private void mostrarPantallaGanador(String nombreGanador) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ganador.fxml"));
+            Scene escenaGanador = new Scene(loader.load());
+
+            GanadorController controlador = loader.getController();
+            controlador.setGanador(nombreGanador);
+
+            Stage stage = (Stage) lblJugadorActual.getScene().getWindow();
+            stage.setScene(escenaGanador);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // Salir del juego
+
+    @FXML
+    public void salir() {
+        System.exit(0);
+    }
+
+    // =====================================================================
+    //   LLAMADOS DESDE EL OBSERVER PARA ACTUALIZAR LA UI
+    // =====================================================================
+
+    public void actualizarVistaTrasDados() {
+        actualizarRecursos();
+        actualizarPuntos();
+    }
+
+    public void actualizarRecursosYVista() {
+        actualizarRecursos();
+        actualizarPuntos();
+    }
+
+    public void refrescarConstruccion() {
+        recuperarTablero();
+        actualizarRecursos();
+        actualizarPuntos();
+    }
+
+    public void refrescarLadron() {
+        recuperarTablero();
+    }
+
+    public void actualizarTurno() {
+        this.jugadorActual = catan.getTurno().getJugadorActual();
+        lblJugadorActual.setText(jugadorActual.getNombre());
+        lblTurno.setText("Turno de " + jugadorActual.getNombre());
+        actualizarRecursos();
+        actualizarPuntos();
+    }
+
+    public void mostrarGanador() {
+        mostrarPantallaGanador(catan.getGanador().getNombre());
+    }
 }
-
-// pasar el click arista a juego e inicial controller devuelta para poder actualizar los recursos
-// probar usar carta de desarrollo teniendo 1 de un turno anterior y habiendo comprado otro (2 caballeros ejemplos)
-// solo se deberia poder usar 1
-
-
-//hay que arreglar la actualizacion  de los PV
+//falta agregar que si hay igual cantidad de carreteras se la quede el que pus oprimero

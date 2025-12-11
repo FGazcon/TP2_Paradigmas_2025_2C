@@ -10,6 +10,7 @@ import model.Tablero.Hexagono;
 import model.Tablero.Tablero;
 import model.Tablero.Vertice.Estructura.Ciudad;
 import model.Tablero.Vertice.Estructura.Poblado;
+import model.EventoCatan;
 
 import java.util.List;
 
@@ -20,23 +21,22 @@ public class TurnoGeneral extends Turno {
     }
 
     public void tirarDados(int resultadoDados) {
+        catan.avisar(EventoCatan.DADOS_TIRADOS);
 
         if (resultadoDados == 7) {
             catan.avisarQueSalioLadron();
+        }
 
-            //El jugador elige a donde
-            //tablero.moverLadron(0, jugador);
-
-        } else {
-
+        else {
             tablero.activarHexagonoPorNumero(resultadoDados);
-
+            catan.avisar(EventoCatan.RECURSOS_ENTREGADOS);
         }
     }
 
     public void moverLadron(Hexagono  hexagono){
         System.out.println("mover ladron a " + hexagono.getNumero());
         this.tablero.moverLadron(hexagono, this.jugador);
+        catan.avisar(EventoCatan.LADRON_MOVIDO);
     }
 
     public void construirCarretera(int[] numeroDeArista){
@@ -44,8 +44,14 @@ public class TurnoGeneral extends Turno {
         if(carretera.jugadorMePuedePagar()){
             if(intentarUbicarCarretera(carretera, numeroDeArista)){
                 carretera.cobrarleAJugador();
+                verificarCarreteraMasLarga();
+                catan.avisar(EventoCatan.CARRETERA_CONSTRUIDA);
             }
         }
+    }
+
+    public void verificarCarreteraMasLarga(){
+        catan.carreteraMasLarga();
     }
 
     public void construirPoblado(int numeroDeVertice){
@@ -53,6 +59,7 @@ public class TurnoGeneral extends Turno {
         if(poblado.jugadorMePuedePagar()){
             if(intentarUbicarEstructura(poblado, numeroDeVertice)){
                 poblado.cobrarleAJugador();
+                catan.avisar(EventoCatan.POBLADO_CONSTRUIDO);
             }
         }
     }
@@ -62,6 +69,7 @@ public class TurnoGeneral extends Turno {
         if(ciudad.jugadorMePuedePagar()){
             if(intentarUbicarEstructura(ciudad, numeroDeVertice)){
                 ciudad.cobrarleAJugador();
+                catan.avisar(EventoCatan.CIUDAD_CONSTRUIDA);
             }
         }
     }
@@ -81,19 +89,21 @@ public class TurnoGeneral extends Turno {
     public void comprarDesarrollo(){
         if(CartaDesarrollo.jugadorMePuedePagar(this.jugador)){
             this.jugador.adquirirDesarrollo();
+            catan.avisar(EventoCatan.DESARROLLO_COMPRADO);
         }
     }
 
     public void comerciar(Jugador jugadorObjetivo, List<Recurso> recurso, List<Recurso> recurso2){
         this.jugador.comerciarConJugador(jugadorObjetivo, recurso, recurso2);
+        catan.avisar(EventoCatan.COMERCIO_CON_JUGADOR_REALIZADO);
     }
 
     public void comerciarConBanco(Recurso recursoOfertado,int cantidad,Recurso recursoBuscado){
         this.jugador.comerciarConBanco(recursoOfertado,cantidad,recursoBuscado);
+        catan.avisar(EventoCatan.COMERCIO_CON_BANCO_REALIZADO);
     }
 
     public ActivacionDesarrollo usarDesarrollo(int posicionDeCarta){
-        //se va a cambiar
         return this.jugador.getActivacionParaCartaEnPosicion(posicionDeCarta);
     }
 

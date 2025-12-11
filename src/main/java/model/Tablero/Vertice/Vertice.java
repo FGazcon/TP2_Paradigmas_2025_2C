@@ -199,4 +199,12 @@ public class Vertice {
         }
         return maxLongitud;
     }
+
+
+    //
+
+    public Puerto getPuerto(){
+        return this.puerto;
+    }
+
 }

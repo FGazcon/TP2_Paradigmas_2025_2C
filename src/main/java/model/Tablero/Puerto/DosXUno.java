@@ -10,6 +10,7 @@ public class DosXUno extends Puerto {
 
     public DosXUno(Recurso recurso){
         this.recurso = recurso;
+        this.nombre = "2x1";
     }
 
     //new DosXUno(new Madera());

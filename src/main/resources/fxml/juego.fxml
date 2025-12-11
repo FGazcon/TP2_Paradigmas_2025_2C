@@ -11,8 +11,12 @@
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.JuegoController"
+            fx:id="rootJuego"
             prefWidth="1280" prefHeight="720"
-            style="-fx-background-color: #E6D0B4;">
+            style="-fx-background-image: url('img/agua.png');
+                   -fx-background-repeat: no-repeat;
+                   -fx-background-size: cover;
+                   -fx-background-position: center;">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="60"
@@ -123,5 +127,15 @@
             </VBox>
         </AnchorPane>
     </bottom>
+
+    <ImageView StackPane.alignment="TOP_RIGHT"
+               pickOnBounds="false"
+               fitWidth="180"
+               preserveRatio="true"
+               opacity="0.95">
+        <image>
+            <Image url="/img/Puertos.png"/>
+        </image>
+    </ImageView>
 
 </BorderPane>

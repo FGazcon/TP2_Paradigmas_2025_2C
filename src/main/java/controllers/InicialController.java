@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
@@ -18,6 +19,7 @@ import model.Dados.Dados;
 import model.Tablero.Hexagono;
 import model.Tablero.Vertice.Estructura.Poblado;
 import model.Tablero.Vertice.Vertice;
+import view.InicialObserver;
 
 import java.net.URL;
 import java.util.Map;
@@ -29,6 +31,9 @@ public class InicialController extends BaseTableroController implements Initiali
     @FXML private Label lblTurno;
 
     @FXML private Pane tableroPane;
+
+    @FXML private BorderPane rootInicial;
+
     //@FXML private Button btnCarretera;
     //@FXML private Button btnPoblado;
 
@@ -40,11 +45,6 @@ public class InicialController extends BaseTableroController implements Initiali
     public void initialize(URL location, ResourceBundle resources) {
         // Crear tablero
         // List<Hexagono> hexs = Factory_MapaBasico.crearHexagonosBasico();
-
-
-
-
-
 
     }
     public void init(Catan catan){
@@ -66,6 +66,8 @@ public class InicialController extends BaseTableroController implements Initiali
         asignarCoordenadas(tableroModelo.getHexagonos());
         asignarCoordenadasVertices(tableroModelo);
         crearTablero(tableroModelo);
+
+        new InicialObserver(catan, this);
     }
 
     public void setValores(){
@@ -152,4 +154,43 @@ public class InicialController extends BaseTableroController implements Initiali
             e.printStackTrace();
         }
     }
+
+    // =====================================================================
+    //   LLAMADOS DESDE EL OBSERVER PARA ACTUALIZAR LA UI
+    // =====================================================================
+
+    public void uiPobladoInicialConstruido() {
+        // Pasar de modo poblado → carretera
+        this.modoActual = ModoJuego.CONSTRUIR_CARRETERA;
+    }
+
+    public void uiCarreteraInicialConstruida() {
+        // Terminó la parte de construcción → habilitar nuevo turno
+        this.modoActual = ModoJuego.SELECCIONAR_NADA;
+    }
+
+    public void uiCambioTurnoInicial() {
+        this.jugadorActual = catan.getTurno().getJugadorActual();
+        this.lblJugadorActual.setText(jugadorActual.getNombre());
+        this.lblTurno.setText("Turno Inicial de " + jugadorActual.getNombre());
+        this.modoActual = ModoJuego.CONSTRUIR_POBLADO;
+    }
+
+    public void uiFinTurnoInicial() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/juego.fxml"));
+            Scene nueva = new Scene(loader.load());
+
+            JuegoController controller = loader.getController();
+            controller.init(catan);
+
+            Stage stage = (Stage) rootInicial.getScene().getWindow();
+            stage.setScene(nueva);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

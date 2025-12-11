@@ -10,7 +10,12 @@ public class TresXUno extends Puerto {
 //        return (ReglaDeComercio) new TresXUno();
 //    }
 
+    public TresXUno(){
+        this.nombre = "3x1";
+    }
     public void darReglaAJugador(Jugador jugador){
         jugador.darReglaATodos(new TresPorUno());
     }
+
+
 }

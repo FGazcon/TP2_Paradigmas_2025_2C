@@ -19,6 +19,9 @@ public class Catan extends Observable {
     private Turno turno;
     private AdministradorDeJugadores administrador;
     private Jugador ganador;
+    private Jugador carreteraMasLarga;
+ //   private
+
 
     public Catan(Banco banco) {
         this.banco = banco;
@@ -27,6 +30,7 @@ public class Catan extends Observable {
         this.dados = new Dados();
         this.administrador = new AdministradorDeJugadores(this.jugadores);
         this.turno = administrador.nuevoTurno(this, this.tablero, this.dados);
+        this.carreteraMasLarga= null;
     }
 
     public Catan(List<Jugador> listaJugadores, Banco banco) {
@@ -37,24 +41,49 @@ public class Catan extends Observable {
         this.dados = new Dados();
         this.administrador = new AdministradorDeJugadores(this.jugadores);
         this.turno = administrador.nuevoTurno(this, this.tablero, this.dados);
+        this.carreteraMasLarga = null;
 
     }
 
     public void prepararJugadores(){
         this.jugadores = PreparadoDeJugadores.prepararJugadores(this.banco);
-        notificar(EventoCatan.PREPARADO_DE_JUGADORES);
     }
 
     public void terminarTurno() {
+        Turno turnoAnterior = this.turno;
+
         this.turno = turno.terminarTurno(administrador);
-        notificar(EventoCatan.CAMBIO_TURNO);
+
+        if (turnoAnterior instanceof TurnoInicial && this.turno instanceof TurnoInicial) {
+            avisar(EventoCatan.CAMBIO_TURNO_INICIAL);
+        }
+
+        if (turnoAnterior instanceof TurnoInicial && this.turno instanceof TurnoGeneral) {
+            avisar(EventoCatan.FIN_TURNO_INICIAL);
+        }
+
+        if (turnoAnterior instanceof TurnoGeneral && this.turno instanceof TurnoGeneral) {
+            avisar(EventoCatan.CAMBIO_TURNO_GENERAL);
+        }
     }
+
+    public void carreteraMasLarga(){
+        for (Jugador jugador : this.jugadores){
+            if(this.carreteraMasLarga == null){
+                this.carreteraMasLarga = jugador.superaCuatroCarreteras();
+            }
+            this.carreteraMasLarga.setPuntosCarretera(0);
+            this.carreteraMasLarga = jugador.carreteraMasLarga(this.carreteraMasLarga);
+        }
+        this.carreteraMasLarga.setPuntosCarretera(1);
+
+    }
+
 
     public void avisarQueSalioLadron() {
         for(Jugador jugador: this.jugadores){
             jugador.descartarMitad();
         }
-        notificar(EventoCatan.SALIO_LADRON);
     }
 
     public Tablero getTablero() {
@@ -66,7 +95,6 @@ public class Catan extends Observable {
         for (String nombre : nombres) {
             this.jugadores.add(new Jugador(nombre, this.banco));
         }
-        notificar(EventoCatan.JUGADORES_PREPARADOS_CON_NOMBRE);
     }
 
     public Turno getTurno(){
@@ -84,6 +112,10 @@ public class Catan extends Observable {
 
     public Jugador getGanador() {
         return ganador;
+    }
+
+    public void avisar(EventoCatan evento) {
+        notificar(evento);
     }
 
 }

@@ -143,7 +143,11 @@ public class Hexagono {
             System.out.println("jugador " + jugadorl.getNombre());
         }
         if(!jugadores.isEmpty()){
-            jugadores.getFirst().dejarseRobarPorJugador(jugador);
+//            if (jugadores.contains(jugadorARobar)) {
+//                jugadorARobar.dejarseRobarPorJugador(jugador);
+//            }else{
+                jugadores.getFirst().dejarseRobarPorJugador(jugador);
+           // }
         }
     }
 

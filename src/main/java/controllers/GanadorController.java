@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.event.ActionEvent;
 import view.GanadorObserver;
 import model.Catan.Catan;
@@ -13,8 +13,9 @@ import model.Catan.Catan;
 public class GanadorController {
 
     @FXML private Label lblGanador;
+    @FXML private BorderPane rootGanador;
 
-    private String nombreGanador = "???";
+    private String nombreGanador;
 
     public void setGanador(String nombre) {
         this.nombreGanador = nombre;
@@ -30,7 +31,7 @@ public class GanadorController {
 
     @FXML
     public void volverAlMenu(ActionEvent event) {
-        cambiarEscena(event, "/fxml/menu.fxml");
+        cambiarEscena("/fxml/menu.fxml");
     }
 
     @FXML
@@ -38,12 +39,12 @@ public class GanadorController {
         System.exit(0);
     }
 
-    private void cambiarEscena(ActionEvent event, String fxml) {
+    private void cambiarEscena(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Scene nueva = new Scene(loader.load());
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) rootGanador.getScene().getWindow();
             stage.setScene(nueva);
             stage.show();
 

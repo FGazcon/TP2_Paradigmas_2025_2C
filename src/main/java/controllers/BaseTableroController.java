@@ -22,6 +22,8 @@ import model.Desarrollo.CartasDesarrollo.ActivacionDesarrollo;
 import model.Jugador.Jugador;
 import model.Tablero.Arista.Arista;
 import model.Tablero.Hexagono;
+import model.Tablero.Puerto.DosXUno;
+import model.Tablero.Puerto.SinPuerto;
 import model.Tablero.Tablero;
 import model.Tablero.Vertice.Vertice;
 import model.Terreno.Desierto;
@@ -62,8 +64,101 @@ public abstract class BaseTableroController implements Initializable {
 
         aniadirAristas(modelo.getAristasUnicas());
         aniadirVertices(modelo.getVerticesUnicos());
+        //aniadirPuertos(modelo.getVerticesUnicos());
         //tableroPane.setStyle("-fx-background-color: linear-gradient(#3ba4d2, #0e5773);");
 
+    }
+    protected void aniadirPuertos(Hexagono hex) {
+    
+            List<Vertice> vertices = List.of(hex.getVertices());
+    
+    
+            Vertice primero = null;
+            int i =-1;
+            for (Vertice v : vertices) {
+                i++;
+                if (v.getPuerto() instanceof SinPuerto)
+                    continue;
+
+                // Primer vértice del par
+                if (primero == null) {
+                    primero = v;
+                    continue;
+                }
+
+                // Segundo vértice → ya tengo un par
+                Vertice segundo = v;
+                System.out.println(i);
+                double ang = Math.PI / 2 + i * Math.PI / 3;
+
+                //double x = RADIO * Math.cos(ang);
+                //double y = -RADIO * Math.sin(ang);
+
+                double startX = primero.getCoordenadaX();
+                double startY = primero.getCoordenadaY();
+                double endX = segundo.getCoordenadaX();
+                double endY = segundo.getCoordenadaY();
+                double puntoEncuentroX = startX;
+                double puntoEncuentroY = endY;
+
+                // Calcular punto medio
+                double midX = (startX + endX)/ 2;
+                double midY = (startY + endY) / 2;
+
+                // Calcular ángulo de la arista en grados
+                double angleRad = Math.atan2(endY - startY, endX - startX);
+                double angleDeg = Math.toDegrees(angleRad);
+
+                // Calcular longitud entre vértices (longitud de la arista)
+                double length = Math.hypot(endX - startX, endY - startY);
+
+                // --- EMPUJAR HACIA AFUERA ---
+                // Vector desde el centro del hex hacia el punto medio
+
+               // double cx = hex.getCoordenadaX();
+                //double cy = hex.getCoordenadaY();
+
+                double dx = midX ;
+                double dy = midY ;
+
+//                double mag = Math.sqrt(dx*dx + dy*dy);
+//                dx /= mag;
+//                dy /= mag;
+//
+//                // Empujarlo 25px hacia afuera
+//                double px = midX + dx ;
+//                double py = midY + dy ;
+//
+
+
+                // Crear cartel
+                Label cartel = new Label("Puerto: \n" + primero.getPuerto().getNombre());
+                cartel.setStyle("""
+                -fx-background-color: rgba(255,255,200,0.9);
+                -fx-border-color: black;
+                -fx-padding: 3px 6px;
+                -fx-font-size: 13px;
+                -fx-font-weight: bold;
+                """);
+
+
+
+                // Forzar layout para poder medir el Label
+                cartel.applyCss();
+                cartel.layout();
+
+// Trasladar el label al inicio de la arista
+                cartel.setLayoutX(startX);
+                cartel.setLayoutY(startY);
+
+// Rotar el label
+                cartel.setRotate(ang);
+
+                tableroPane.getChildren().add(cartel);
+
+                // reset para el próximo puerto
+                //primero = null;
+            }
     }
 
 
@@ -137,9 +232,6 @@ public abstract class BaseTableroController implements Initializable {
 
         Polygon polygon = new Polygon();
 
-        //tile.setOnMouseClicked(event -> manejarClickHexagono(hex));
-        //tableroPane.getChildren().add(polygon);
-
         for (int i = 0; i < 6; i++) {
             double ang = Math.PI / 2 + i * Math.PI / 3;
 
@@ -165,8 +257,7 @@ public abstract class BaseTableroController implements Initializable {
             lbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold;");
             tile.getChildren().add(lbl);
         }
-
-
+        
         tile.setOnMouseClicked(e -> {
             System.out.println("Click en hexágono " + hex.getNumero());
             //testController();
@@ -190,8 +281,28 @@ public abstract class BaseTableroController implements Initializable {
     }
 
     protected void aniadirVertices(List<Vertice> vertices) {
-        for (Vertice v : vertices)
+        for (Vertice v : vertices) {
             tableroPane.getChildren().add(crearVerticeUI(v));
+            if(!(v.getPuerto() instanceof SinPuerto) && (v.getPuerto() != null)) {
+                tableroPane.getChildren().add(crearPuertoUi(v));
+            }
+        }
+    }
+    protected Circle crearPuertoUi(Vertice v){
+        Circle c = new Circle(10);
+
+        c.setCenterX(v.getCoordenadaX());
+        c.setCenterY(v.getCoordenadaY());
+        if(v.getPuerto() instanceof DosXUno){
+            c.setStroke(Color.CYAN);
+        }else{
+            c.setStroke(Color.TOMATO);
+        }
+        c.setFill(null);           // sin relleno
+        c.setStrokeWidth(3);
+
+
+        return c;
     }
 
     protected Circle crearVerticeUI(Vertice v) {
@@ -206,6 +317,7 @@ public abstract class BaseTableroController implements Initializable {
         Tooltip.install(c, new Tooltip("Vértice " + v.getNumeroDeVertice()));
 
         c.setOnMouseClicked(e -> manejarClickVertice(v, c));
+        
 
         return c;
     }
@@ -275,8 +387,8 @@ public abstract class BaseTableroController implements Initializable {
             ui.setFill(Color.PINK);
         }else if ( !jugadores.getLast().equals(jugadores.get(2))
                 && jugadorActual.equals(jugadores.getLast()) ) {
-            ui.setStroke(Color.CORNSILK);
-            ui.setFill(Color.CORNSILK);
+            ui.setStroke(Color.CHARTREUSE);
+            ui.setFill(Color.CHARTREUSE);
         }
 
     }
@@ -338,7 +450,7 @@ public abstract class BaseTableroController implements Initializable {
                     ui.setUserData("Carretera");
                     colorear(ui,this.jugadorActual);
                     modoActual = ModoJuego.SELECCIONAR_NADA;
-                    //actualizarRecursos();
+                    actualizarPuntosYRecursosEnArista();
 
 
                 }
@@ -394,6 +506,8 @@ public abstract class BaseTableroController implements Initializable {
         popup.setScene(new Scene(layout, 260, 120));
         popup.show();
     }
+
+    protected void actualizarPuntosYRecursosEnArista() {}
 
 
 }
