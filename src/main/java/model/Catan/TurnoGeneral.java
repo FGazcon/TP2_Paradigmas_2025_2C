@@ -37,6 +37,8 @@ public class TurnoGeneral extends Turno {
         System.out.println("mover ladron a " + hexagono.getNumero());
         this.tablero.moverLadron(hexagono, this.jugador);
         catan.avisar(EventoCatan.LADRON_MOVIDO);
+        catan.caballeriaMasGrande();
+
     }
 
     public void construirCarretera(int[] numeroDeArista){
@@ -90,6 +92,7 @@ public class TurnoGeneral extends Turno {
         if(CartaDesarrollo.jugadorMePuedePagar(this.jugador)){
             this.jugador.adquirirDesarrollo();
             catan.avisar(EventoCatan.DESARROLLO_COMPRADO);
+            this.catan.revisarPuntaje(this.jugador);
         }
     }
 

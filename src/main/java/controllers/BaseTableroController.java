@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import model.Catan.Turno;
 import model.Desarrollo.CartasDesarrollo.ActivacionDesarrollo;
 import model.Jugador.Jugador;
+import model.Recurso.*;
 import model.Tablero.Arista.Arista;
 import model.Tablero.Hexagono;
 import model.Tablero.Puerto.DosXUno;
@@ -64,101 +65,8 @@ public abstract class BaseTableroController implements Initializable {
 
         aniadirAristas(modelo.getAristasUnicas());
         aniadirVertices(modelo.getVerticesUnicos());
-        //aniadirPuertos(modelo.getVerticesUnicos());
-        //tableroPane.setStyle("-fx-background-color: linear-gradient(#3ba4d2, #0e5773);");
-
-    }
-    protected void aniadirPuertos(Hexagono hex) {
-    
-            List<Vertice> vertices = List.of(hex.getVertices());
-    
-    
-            Vertice primero = null;
-            int i =-1;
-            for (Vertice v : vertices) {
-                i++;
-                if (v.getPuerto() instanceof SinPuerto)
-                    continue;
-
-                // Primer vértice del par
-                if (primero == null) {
-                    primero = v;
-                    continue;
-                }
-
-                // Segundo vértice → ya tengo un par
-                Vertice segundo = v;
-                System.out.println(i);
-                double ang = Math.PI / 2 + i * Math.PI / 3;
-
-                //double x = RADIO * Math.cos(ang);
-                //double y = -RADIO * Math.sin(ang);
-
-                double startX = primero.getCoordenadaX();
-                double startY = primero.getCoordenadaY();
-                double endX = segundo.getCoordenadaX();
-                double endY = segundo.getCoordenadaY();
-                double puntoEncuentroX = startX;
-                double puntoEncuentroY = endY;
-
-                // Calcular punto medio
-                double midX = (startX + endX)/ 2;
-                double midY = (startY + endY) / 2;
-
-                // Calcular ángulo de la arista en grados
-                double angleRad = Math.atan2(endY - startY, endX - startX);
-                double angleDeg = Math.toDegrees(angleRad);
-
-                // Calcular longitud entre vértices (longitud de la arista)
-                double length = Math.hypot(endX - startX, endY - startY);
-
-                // --- EMPUJAR HACIA AFUERA ---
-                // Vector desde el centro del hex hacia el punto medio
-
-               // double cx = hex.getCoordenadaX();
-                //double cy = hex.getCoordenadaY();
-
-                double dx = midX ;
-                double dy = midY ;
-
-//                double mag = Math.sqrt(dx*dx + dy*dy);
-//                dx /= mag;
-//                dy /= mag;
-//
-//                // Empujarlo 25px hacia afuera
-//                double px = midX + dx ;
-//                double py = midY + dy ;
-//
 
 
-                // Crear cartel
-                Label cartel = new Label("Puerto: \n" + primero.getPuerto().getNombre());
-                cartel.setStyle("""
-                -fx-background-color: rgba(255,255,200,0.9);
-                -fx-border-color: black;
-                -fx-padding: 3px 6px;
-                -fx-font-size: 13px;
-                -fx-font-weight: bold;
-                """);
-
-
-
-                // Forzar layout para poder medir el Label
-                cartel.applyCss();
-                cartel.layout();
-
-// Trasladar el label al inicio de la arista
-                cartel.setLayoutX(startX);
-                cartel.setLayoutY(startY);
-
-// Rotar el label
-                cartel.setRotate(ang);
-
-                tableroPane.getChildren().add(cartel);
-
-                // reset para el próximo puerto
-                //primero = null;
-            }
     }
 
 
@@ -177,33 +85,11 @@ public abstract class BaseTableroController implements Initializable {
                 double y = Y_INICIAL + (fila * DIST_Y);
 
                 hexagonos.get(hexIndex).setCoordenadas(x, y);
-                //asignarCoordenadasVertices(hexagonos.get(hexIndex));
                 hexIndex++;
             }
         }
     }
 
-    protected void asignarCoordenadasVertices(Hexagono hex) {
-
-        double Cx = hex.getCoordenadaX();
-        double Cy = hex.getCoordenadaY();
-
-        Vertice[] vertices = hex.getVertices();
-
-        for (int i = 0; i < 6; i++) {
-
-            double ang = Math.PI / 2 + i * Math.PI / 3;
-
-            double Vx = Cx + RADIO * Math.cos(ang);
-            double Vy = Cy - RADIO * Math.sin(ang);
-
-            Vertice v = vertices[i];
-
-            if (!v.tieneCoordenadasAsignadas()) {
-                v.setCoordenadas(Vx, Vy);
-            }
-        }
-    }
 
     protected void asignarCoordenadasVertices(Tablero tableroModelo) {
         Vertice[] vertices;
@@ -279,12 +165,23 @@ public abstract class BaseTableroController implements Initializable {
             default -> Color.GRAY;
         };
     }
+    protected Color obtenerColorSegunRecurso(Recurso r) {
+        return switch (r) {
+            case Madera b -> Color.rgb(107, 142, 35);
+            case Ladrillo c -> Color.rgb(178, 34, 34);
+            case Oveja p -> Color.rgb(240, 248, 255);
+            case Trigo ca -> Color.rgb(218, 165, 32);
+            case Piedra m -> Color.rgb(128, 128, 128);
+            default -> Color.GRAY;
+        };
+    }
 
     protected void aniadirVertices(List<Vertice> vertices) {
         for (Vertice v : vertices) {
             tableroPane.getChildren().add(crearVerticeUI(v));
             if(!(v.getPuerto() instanceof SinPuerto) && (v.getPuerto() != null)) {
                 tableroPane.getChildren().add(crearPuertoUi(v));
+                tableroPane.getChildren().add(crearPuertoUi2x1(v));
             }
         }
     }
@@ -304,6 +201,23 @@ public abstract class BaseTableroController implements Initializable {
 
         return c;
     }
+
+    protected Circle crearPuertoUi2x1(Vertice v){
+        Circle c = new Circle(12);
+
+        c.setCenterX(v.getCoordenadaX());
+        c.setCenterY(v.getCoordenadaY());
+        if(v.getPuerto() instanceof DosXUno){
+            c.setStroke(obtenerColorSegunRecurso(v.getPuerto().getRecurso()));
+        }
+        c.setFill(null);           // sin relleno
+        c.setStrokeWidth(3);
+
+
+        return c;
+    }
+
+
 
     protected Circle crearVerticeUI(Vertice v) {
         Circle c = new Circle(10);
@@ -380,11 +294,11 @@ public abstract class BaseTableroController implements Initializable {
             ui.setStroke(Color.BLUE);
             ui.setFill(Color.BLUE);
         }else if(jugadorActual.equals(jugadores.get(1))){
-            ui.setFill(Color.TAN);
-            ui.setStroke(Color.TAN);
+            ui.setFill(Color.GOLDENROD);
+            ui.setStroke(Color.GOLDENROD);
         }else if(jugadorActual.equals(jugadores.get(2))){
-            ui.setStroke(Color.PINK);
-            ui.setFill(Color.PINK);
+            ui.setStroke(Color.VIOLET);
+            ui.setFill(Color.VIOLET);
         }else if ( !jugadores.getLast().equals(jugadores.get(2))
                 && jugadorActual.equals(jugadores.getLast()) ) {
             ui.setStroke(Color.CHARTREUSE);

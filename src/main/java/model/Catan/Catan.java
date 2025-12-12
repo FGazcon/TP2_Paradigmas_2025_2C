@@ -12,20 +12,21 @@ import java.util.List;
 
 public class Catan extends Observable {
 
-    private Banco banco;
+    private final Banco banco;
     private List<Jugador> jugadores;
-    private Tablero tablero;
-    private Dados dados;
+    private final Tablero tablero;
+    private final Dados dados;
     private Turno turno;
-    private AdministradorDeJugadores administrador;
+    private final AdministradorDeJugadores administrador;
     private Jugador ganador;
     private Jugador carreteraMasLarga;
+    private Jugador caballeriaMasGrande;
  //   private
 
 
     public Catan(Banco banco) {
         this.banco = banco;
-        this.jugadores = new ArrayList<Jugador>();
+        this.jugadores = new ArrayList<>();
         this.tablero = Tablero.crearTableroBasico();
         this.dados = new Dados();
         this.administrador = new AdministradorDeJugadores(this.jugadores);
@@ -35,7 +36,7 @@ public class Catan extends Observable {
 
     public Catan(List<Jugador> listaJugadores, Banco banco) {
         this.banco = banco;
-        this.jugadores = new ArrayList<Jugador>();
+        this.jugadores = new ArrayList<>();
         this.jugadores.addAll(listaJugadores);
         this.tablero = Tablero.crearTableroBasico();
         this.dados = new Dados();
@@ -70,13 +71,37 @@ public class Catan extends Observable {
     public void carreteraMasLarga(){
         for (Jugador jugador : this.jugadores){
             if(this.carreteraMasLarga == null){
-                this.carreteraMasLarga = jugador.superaCuatroCarreteras();
+                if(jugador.superaCuatroCarreteras() != null){
+                    this.carreteraMasLarga = jugador.superaCuatroCarreteras();
+                } else {
+                    break;
+                }
             }
             this.carreteraMasLarga.setPuntosCarretera(0);
             this.carreteraMasLarga = jugador.carreteraMasLarga(this.carreteraMasLarga);
         }
-        this.carreteraMasLarga.setPuntosCarretera(1);
+        if(this.carreteraMasLarga != null ){
+            this.carreteraMasLarga.setPuntosCarretera(1);
+        }
+    }
 
+    public void caballeriaMasGrande(){
+        Jugador anterior = this.caballeriaMasGrande;
+        Jugador mejor = null;
+        for (Jugador jugador : this.jugadores){
+            if(mejor == null){
+                mejor = jugador.caballeriaMasLarga(anterior);
+            }
+        }
+        if (mejor == null) return;
+
+        if (anterior != null && anterior != mejor) {
+            anterior.setPuntosCaballeria(0);  // quitar punto al anterior
+        }
+        if(mejor.superaTresCaballeros() != null){
+            this.caballeriaMasGrande = mejor;
+            this.caballeriaMasGrande.setPuntosCaballeria(1);
+        }
     }
 
 
@@ -116,6 +141,12 @@ public class Catan extends Observable {
 
     public void avisar(EventoCatan evento) {
         notificar(evento);
+    }
+
+    public void revisarPuntaje(Jugador jugador){
+        if(jugador.calcularPuntaje() >= 10){
+            this.declararGanador(jugador);
+        }
     }
 
 }

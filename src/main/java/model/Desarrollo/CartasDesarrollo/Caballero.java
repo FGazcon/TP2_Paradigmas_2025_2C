@@ -20,6 +20,7 @@ public class Caballero extends CartaDesarrollo {
             @Override
             public void ejecutar(Jugador jugador, Tablero tablero, List <Jugador> jugadores) {
                 tablero.moverLadron(hexElegido, jugador);
+                jugador.sumarCaballero();
             }
         };
     }

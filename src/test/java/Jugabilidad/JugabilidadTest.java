@@ -4,11 +4,9 @@ import model.Banco.Banco;
 import model.Catan.Catan;
 import model.Catan.Turno;
 import model.Catan.TurnoGeneral;
-import model.Catan.TurnoInicial;
 import model.Jugador.Jugador;
-import model.Tablero.Tablero;
 import model.Recurso.*;
-
+import model.Tablero.Tablero;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,107 +14,97 @@ import java.util.List;
 
 public class JugabilidadTest {
 
-    @Test
-    public void testPartidaCompleta() {
 
-        // ========================
-        // 1) Preparar juego
-        // ========================
+    @Test
+    public void test01PartidaCompleta() {
+
         Banco banco = new Banco();
         Jugador j1 = new Jugador("Felipe", banco);
         Jugador j2 = new Jugador("Joaquin", banco);
 
         Catan catan = new Catan(List.of(j1, j2), banco);
         Tablero tablero = catan.getTablero();
+        int vertice1 = 0;
+        int vertice2 = 1;
+        int vertice3 = 2;
 
-        // ========================
-        // 2) Turno inicial – Jugador 1
-        // ========================
-        Turno turno = catan.getTurno();
-        Assertions.assertTrue(turno instanceof TurnoInicial);
+        int verticeA = 45;
+        int verticeB = 46;
+        int verticeC = 47;
 
-        TurnoInicial t1 = turno.getTurnoInicial();
 
-        // Jugador 1 pone poblado y carretera
-        int vA = tablero.getVerticesUnicos().get(0).getNumeroDeVertice();
-        int vB = tablero.getVerticesUnicos().get(1).getNumeroDeVertice();
-        int vE = tablero.getVerticesUnicos().get(2).getNumeroDeVertice();
+        Turno turnoInicial = catan.getTurno();
 
-        t1.construirPoblado(vA);
-        t1.construirCarretera(new int[]{vA, vB});
+        //Primer turno Felipe
+        turnoInicial.construirPoblado(vertice1);
+        turnoInicial.construirCarretera(new int[]{vertice1, vertice2});
 
-        // ========================
-        // 3) Termina turno → Jugador 2
-        // ========================
         catan.terminarTurno();
-        turno = catan.getTurno();
-        Assertions.assertTrue(turno instanceof TurnoInicial);
+        turnoInicial = catan.getTurno();
 
-        TurnoInicial t2 = turno.getTurnoInicial();
+        //Primer turno Joaquin
+        turnoInicial.construirPoblado(verticeA);
+        turnoInicial.construirCarretera(new int[]{verticeA, verticeB});
 
-        int vC = tablero.getVerticesUnicos().get(10).getNumeroDeVertice();
-        int vD = tablero.getVerticesUnicos().get(11).getNumeroDeVertice();
-
-        t2.construirPoblado(vC);
-        t2.construirCarretera(new int[]{vC, vD});
-
-        // ========================
-        // 4) Ahora comienza Turno General
-        // ========================
         catan.terminarTurno();
+        turnoInicial = catan.getTurno();
+
+        //Segundo turno Joaquin
+        turnoInicial.construirPoblado(verticeC);
+        turnoInicial.construirCarretera(new int[]{verticeC, verticeB});
+
         catan.terminarTurno();
-        turno = catan.getTurno();
-        turno.construirPoblado(vE);
-        turno.construirCarretera(new int[]{vE, vB});
+        turnoInicial = catan.getTurno();
+
+        //Segundo turno Felipe
+        turnoInicial.construirPoblado(vertice3);
+        turnoInicial.construirCarretera(new int[]{vertice3, vertice2});
+
+        Assertions.assertEquals(2, j1.calcularPuntaje());
+        Assertions.assertEquals(2, j2.calcularPuntaje());
+
+        //Termina fase inicial
         catan.terminarTurno();
-        turno = catan.getTurno();
-        Assertions.assertTrue(turno instanceof TurnoGeneral);
+        TurnoGeneral turnoGeneral = catan.getTurno().getTurnoGeneral();
 
-        TurnoGeneral tg1 = turno.getTurnoGeneral();
+        //Simulamos la obtencion de recursos
+        j1.pedirAlBanco(new Madera(), 5);
+        j1.pedirAlBanco(new Ladrillo(), 5);
+        j1.pedirAlBanco(new Trigo(), 9);
+        j1.pedirAlBanco(new Oveja(), 5);
+        j1.pedirAlBanco(new Piedra(), 9);
 
-        // ========================
-        // 5) Producir recursos
-        // ========================
-        tg1.tirarDados(5); // cualquier número que tenga hexágonos asociados
+        j2.pedirAlBanco(new Madera(), 5);
+        j2.pedirAlBanco(new Ladrillo(), 5);
+        j2.pedirAlBanco(new Trigo(), 5);
+        j2.pedirAlBanco(new Oveja(), 5);
+        j2.pedirAlBanco(new Piedra(), 5);
 
-        // Ver que al menos se produjo algo
-        int total1 = j1.cantidadCartas();
-        int total2 = j2.cantidadCartas();
-        Assertions.assertTrue(total1 + total2 >= 1);
+        int vertice4 = 3;
+        int vertice5 = 4;
+        int vertice6 = 5;
 
-        // ========================
-        // 6) Simular construcciones
-        // ========================
-        // Le damos recursos manualmente
-        j1.sumarRecurso(new Madera(), 5);
-        j1.sumarRecurso(new Ladrillo(), 5);
-        j1.sumarRecurso(new Trigo(), 5);
-        j1.sumarRecurso(new Oveja(), 5);
-        j1.sumarRecurso(new Piedra(), 5);
+        turnoGeneral.construirCarretera(new int[]{vertice3, vertice4});
+        turnoGeneral.construirCarretera(new int[]{vertice5, vertice4});
+        turnoGeneral.construirPoblado(vertice5);
+        turnoGeneral.construirCiudad(vertice5);
+        turnoGeneral.construirCiudad(vertice3);
+        turnoGeneral.construirCiudad(vertice1);
 
-        // Construye un nuevo poblado
-        tg1.construirPoblado(vB);
+        Assertions.assertEquals(6, j1.calcularPuntaje());
 
-        // Mejora a ciudad (superposición en vertice vB)
-        tg1.construirCiudad(vB);
+        turnoGeneral.construirCarretera(new int[]{4, 5});
 
-        System.out.println(j1.calcularPuntaje());
-        Assertions.assertTrue(j1.calcularPuntaje() >= 2);
+        Assertions.assertEquals(8, j1.calcularPuntaje());
 
-        // ========================
-        // 7) Comprar una carta de desarrollo
-        // ========================
-        tg1.comprarDesarrollo();
-        Assertions.assertFalse(j1.getCartasDesarrolloRecienCompradas().isEmpty());
+        for(int i = 0; i < 25; i++){
+            j1.pedirAlBanco(new Trigo(), 1);
+            j1.pedirAlBanco(new Piedra(), 1);
+            j1.pedirAlBanco(new Oveja(), 1);
+            turnoGeneral.comprarDesarrollo();
+        }
 
-        // ========================
-        // 8) Subir artificialmente a 10 puntos y verificar ganador
-        // ========================
-        for (int i = 0; i < 8; i++) j1.sumarPunto();
-
-        Assertions.assertEquals(10, j1.calcularPuntaje());
-
-        catan.declararGanador(j1);
         Assertions.assertEquals(j1, catan.getGanador());
     }
+
 }

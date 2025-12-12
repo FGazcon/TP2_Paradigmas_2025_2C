@@ -217,7 +217,7 @@ public class JuegoController extends BaseTableroController implements Initializa
         }
 
         turnoGeneral.comprarDesarrollo();   // Esto ya agrega la carta a jugadorActual
-        actualizarRecursos();
+        actualizarPuntos();
 
         mostrarInfoPopup("¡Compraste una carta de desarrollo!");
     }
@@ -686,6 +686,7 @@ public class JuegoController extends BaseTableroController implements Initializa
             }else{
                 manejarEnviarTrade(popup);
             }
+            this.modoActual = ModoJuego.SELECCIONAR_NADA;
         });
 
         VBox layout = new VBox(15, btnOfrecer, btnNecesitar, btnEnviarTrade,new Label("Recursos seleccionados:"), panelRecursos);
@@ -700,6 +701,7 @@ public class JuegoController extends BaseTableroController implements Initializa
 
         popup.setOnCloseRequest(e -> {
             btnComercio.setDisable(false);
+            this.modoActual = ModoJuego.SELECCIONAR_NADA;
         });
 
     }
@@ -914,7 +916,7 @@ public class JuegoController extends BaseTableroController implements Initializa
     public void tirarDados() {
         int tirada = dados.tirarDados();
         lblValorDados.setText("Dados: " + tirada);
-        //btnDados.setDisable(true);
+        btnDados.setDisable(true);
         this.turnoGeneral.tirarDados(tirada);
 
         if (tirada == 7) {
@@ -961,6 +963,7 @@ public class JuegoController extends BaseTableroController implements Initializa
         lblPV.setText("PV: " + pv + " / 10");
 
         if (pv >= 10) {
+            this.catan.declararGanador(jugadorActual);
             mostrarPantallaGanador(jugadorActual.getNombre());
         }
     }
@@ -1023,6 +1026,16 @@ public class JuegoController extends BaseTableroController implements Initializa
         verticeCiudad.setOpacity(0.7);
         verticeCiudad.setStroke(Color.BLACK);
         verticeCiudad.setStrokeWidth(2);
+
+        Circle punto = new Circle(1);
+        punto.setCenterX(verticeCiudad.getCenterX());
+        punto.setCenterY(verticeCiudad.getCenterY());
+        punto.setOpacity(1);
+        punto.setStroke(Color.BLACK);
+        punto.setFill(Color.BLACK);
+        this.tableroPane.getChildren().add(punto);
+
+
     }
 
 

@@ -13,14 +13,16 @@ import java.util.Map;
 
 public class Jugador {
 
-    private String nombre;
+    private final String nombre;
     private int puntaje;
     private Map<String, Recurso> mapaRecursos;
     private List<CartaDesarrollo> cartasDesarrollo;
-    private Banco banco;
+    private final Banco banco;
     private int cantidadCabelleros;
     private int caminoMasLArgo;
     private int puntosCarretera;
+    private int puntosCaballeria;
+
 
     public Jugador(String nombre, Banco banco) {
         this.nombre = nombre;
@@ -39,6 +41,9 @@ public class Jugador {
         }
     }
 
+    public void sumarCaballero(){
+        this.cantidadCabelleros ++;
+    }
     public int getCantidadDeRecursoEspecifico(Recurso recurso){
         return recurso.getRecursoJugador(this).getCantidad();
     }
@@ -94,6 +99,9 @@ public class Jugador {
             puntaje = carta.modificarPuntaje(puntaje);
         }
         if(this.puntosCarretera ==1){
+            puntaje +=2;
+        }
+        if(this.puntosCaballeria ==1){
             puntaje +=2;
         }
 
@@ -278,18 +286,30 @@ public class Jugador {
 
 
     }
+    public Jugador caballeriaMasLarga(Jugador jugadorConMayorCaballeria){
+
+        if(jugadorConMayorCaballeria.mayorCarretera(this.cantidadCabelleros)){
+            return jugadorConMayorCaballeria;
+        }
+        return this;
+
+
+    }
     public Jugador superaCuatroCarreteras(){
-        if (this.caminoMasLArgo >4){
+        if (this.caminoMasLArgo >=5){
+            return this;
+        }
+        return null;
+    }
+    public Jugador superaTresCaballeros(){
+        if (this.cantidadCabelleros >=3){
             return this;
         }
         return null;
     }
 
     public boolean mayorCarretera(int caminoMasLargoGanador){
-        if(this.caminoMasLArgo > caminoMasLargoGanador){
-            return true;
-        }
-        return false;
+        return this.caminoMasLArgo > caminoMasLargoGanador;
     }
 
     public int getPuntos(){
@@ -306,6 +326,9 @@ public class Jugador {
 
     public void setPuntosCarretera(int puntosCarreteras){
         this.puntosCarretera= puntosCarreteras;
+    }
+    public void setPuntosCaballeria(int puntosCaballerias){
+        this.puntosCaballeria = puntosCaballerias;
     }
 
 }
