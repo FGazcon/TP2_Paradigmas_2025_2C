@@ -1,0 +1,102 @@
+@startuml Diagrama de Paquetes
+
+package "src" {}
+
+package "main" {}
+
+package "java" {}
+
+package "resources" {}
+
+package "java" {}
+
+package "app" {}
+
+package "cotrollers" {}
+
+package "model" {}
+
+package "utils" {}
+
+package "view" {}
+
+package "audio" {}
+
+package "fxml" {}
+
+package "img" {}
+
+package "Banco" {}
+
+package "Catan" {}
+
+package "Comercio" {}
+
+package "Dados" {}
+
+package "Desarrollo" {}
+
+package "CartasDesarrollo" {}
+
+package "EstadoCartasDesarrollo" {}
+
+package "Errores" {}
+
+package "Jugador" {}
+
+package "Ladron" {}
+
+package "Recurso" {}
+
+package "Tablero" {}
+
+package "Arista" {}
+
+package "Factory" {}
+
+package "Puerto" {}
+
+package "Vertice" {}
+
+package "Estructura" {}
+
+package "Terreno" {}
+
+package "Productor" {}
+
+src --> main
+
+main --> java
+main --> resources
+
+java --> app
+java --> cotrollers
+java --> model
+java --> utils
+java --> view
+
+resources --> audio
+resources --> fxml
+resources --> img
+
+model --> Banco
+model --> Catan
+model --> Comercio
+model --> Dados
+model --> Desarrollo
+Desarrollo --> CartasDesarrollo
+CartasDesarrollo --> EstadoCartasDesarrollo
+model --> Errores
+model --> Jugador
+model --> Ladron
+model --> Recurso
+model --> Tablero
+Tablero --> Arista
+Tablero --> Factory
+Tablero --> Puerto
+Tablero --> Vertice
+Vertice --> Estructura
+model --> Terreno
+Terreno --> Productor
+
+@enduml

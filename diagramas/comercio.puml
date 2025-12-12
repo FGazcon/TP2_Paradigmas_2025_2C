@@ -1,0 +1,27 @@
+@startuml Diagrama Clases Comercio 
+
+abstract class Recurso{}
+
+interface ReglaDeComercio{
+
+    +intentarCambiarA(CuatroPorUno reglaDeComercio): ReglaDeComercio
+    +intentarCambiarA(TresPorUno reglaDeComercio): ReglaDeComercio
+    +intentarCambiarA(DosPorUno reglaDeComercio): ReglaDeComercio
+    +intentarCambiarA(ReglaDeComercio reglaDeComercio): ReglaDeComercio
+    +intentarComerciar(jugador: Jugador, recursoOfrecido: Recurso, cantidad: Int, recursoDeseado: Recurso, banco: Banco);
+}
+
+class CuatroPorUno{}
+
+class TresPorUno{}
+
+class DosPorUno{}
+
+Recurso-->ReglaDeComercio
+
+ReglaDeComercio<|-- CuatroPorUno
+ReglaDeComercio<|-- TresPorUno
+ReglaDeComercio<|-- DosPorUno
+ReglaDeComercio..> Banco
+
+@enduml

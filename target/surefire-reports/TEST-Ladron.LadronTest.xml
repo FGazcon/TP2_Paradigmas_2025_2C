@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Ladron.LadronTest" time="2.468" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\santi\TP2_Paradigmas_2025_2C\target\test-classes;C:\Users\santi\TP2_Paradigmas_2025_2C\target\classes;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\santi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\santi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-core\5.20.0\mockito-core-5.20.0.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy\1.17.7\byte-buddy-1.17.7.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar;C:\Users\santi\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-junit-jupiter\5.20.0\mockito-junit-jupiter-5.20.0.jar;"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="user.timezone" value="America/Buenos_Aires"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="AR"/>
+    <property name="sun.boot.library.path" value="C:\Users\santi\.jdks\ms-21.0.9\bin"/>
+    <property name="sun.java.command" value="C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203\surefirebooter-20251205161631422_3.jar C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203 2025-12-05T16-16-27_749-jvmRun1 surefire-20251205161631422_1tmp surefire_0-20251205161631422_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\santi\TP2_Paradigmas_2025_2C\target\test-classes;C:\Users\santi\TP2_Paradigmas_2025_2C\target\classes;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\santi\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\santi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\santi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\santi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-core\5.20.0\mockito-core-5.20.0.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy\1.17.7\byte-buddy-1.17.7.jar;C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar;C:\Users\santi\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\santi\.m2\repository\org\mockito\mockito-junit-jupiter\5.20.0\mockito-junit-jupiter-5.20.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\santi"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="C:\Users\santi\.jdks\ms-21.0.9"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\santi\TP2_Paradigmas_2025_2C"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\santi\AppData\Local\Temp\surefire9158017559103411203\surefirebooter-20251205161631422_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.9+10-LTS"/>
+    <property name="user.name" value="santi"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-12574459"/>
+    <property name="localRepository" value="C:\Users\santi\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\santi\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2024.1.1"/>
+    <property name="java.version" value="21.0.9"/>
+    <property name="user.dir" value="C:\Users\santi\TP2_Paradigmas_2025_2C"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\santi\.jdks\ms-21.0.9\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Vagrant\bin;C:\Users\santi\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\santi\AppData\Local\Programs\Python\Python313\;C:\Users\santi\AppData\Local\Programs\Python\Launcher\;C:\Users\santi\AppData\Local\Microsoft\WindowsApps;C:\Users\santi\AppData\Local\GitHubDesktop\bin;C:\Users\santi\AppData\Local\Programs\Microsoft VS Code\bin;C:\MinGW\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="21.0.9+10-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="test03HexagonoRobado" classname="Ladron.LadronTest" time="0.004">
+    <system-out><![CDATA[Mezclados 18
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+java.Mazo desarrollo generado 25
+Madera tiene: 1
+Madera tiene: 1
+]]></system-out>
+  </testcase>
+  <testcase name="test01LadronSeMueve" classname="Ladron.LadronTest" time="2.439">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@4fe01805
+1 model.Tablero.Vertice.Vertice@55120f99
+2 model.Tablero.Vertice.Vertice@794b435f
+3 model.Tablero.Vertice.Vertice@38f2e97e
+4 model.Tablero.Vertice.Vertice@779dfe55
+5 model.Tablero.Vertice.Vertice@323659f8
+6 model.Tablero.Vertice.Vertice@1144a55a
+7 model.Tablero.Vertice.Vertice@3e521715
+8 model.Tablero.Vertice.Vertice@26a529dc
+9 model.Tablero.Vertice.Vertice@265c5d69
+10 model.Tablero.Vertice.Vertice@1286528d
+11 model.Tablero.Vertice.Vertice@3cc20577
+12 model.Tablero.Vertice.Vertice@33a630fa
+13 model.Tablero.Vertice.Vertice@775594f2
+14 model.Tablero.Vertice.Vertice@5767b2af
+15 model.Tablero.Vertice.Vertice@7b22ec89
+16 model.Tablero.Vertice.Vertice@790132f7
+17 model.Tablero.Vertice.Vertice@2228db21
+18 model.Tablero.Vertice.Vertice@48b0e701
+19 model.Tablero.Vertice.Vertice@241a0c3a
+20 model.Tablero.Vertice.Vertice@547c04c4
+21 model.Tablero.Vertice.Vertice@30e92cb9
+22 model.Tablero.Vertice.Vertice@7fae4d4a
+23 model.Tablero.Vertice.Vertice@ba1f559
+24 model.Tablero.Vertice.Vertice@3f4f9acd
+25 model.Tablero.Vertice.Vertice@46baf579
+26 model.Tablero.Vertice.Vertice@4bf324f9
+27 model.Tablero.Vertice.Vertice@4f7c0be3
+28 model.Tablero.Vertice.Vertice@ca66933
+29 model.Tablero.Vertice.Vertice@1d2644e3
+30 model.Tablero.Vertice.Vertice@4fa06f52
+31 model.Tablero.Vertice.Vertice@602c4656
+32 model.Tablero.Vertice.Vertice@5ffc5491
+33 model.Tablero.Vertice.Vertice@705202d1
+34 model.Tablero.Vertice.Vertice@3c443976
+35 model.Tablero.Vertice.Vertice@3e58d65e
+36 model.Tablero.Vertice.Vertice@3bd55d8
+37 model.Tablero.Vertice.Vertice@63998bf4
+38 model.Tablero.Vertice.Vertice@7e0b9178
+39 model.Tablero.Vertice.Vertice@61942c1
+40 model.Tablero.Vertice.Vertice@6f63c44f
+41 model.Tablero.Vertice.Vertice@408a247c
+42 model.Tablero.Vertice.Vertice@62a8fd44
+43 model.Tablero.Vertice.Vertice@2e6ba49a
+44 model.Tablero.Vertice.Vertice@5f5b5ca4
+45 model.Tablero.Vertice.Vertice@4ee33af7
+46 model.Tablero.Vertice.Vertice@6b04acb2
+47 model.Tablero.Vertice.Vertice@18388a3c
+48 model.Tablero.Vertice.Vertice@1d035be3
+49 model.Tablero.Vertice.Vertice@4a60ee36
+50 model.Tablero.Vertice.Vertice@4cfbaf4
+51 model.Tablero.Vertice.Vertice@58faa93b
+52 model.Tablero.Vertice.Vertice@5f212d84
+53 model.Tablero.Vertice.Vertice@127d7908
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+Bajo Asalto
+]]></system-out>
+    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\santi\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="test02MoverLadronVariasVeces" classname="Ladron.LadronTest" time="0.013">
+    <system-out><![CDATA[Mezclados 18
+0 model.Tablero.Vertice.Vertice@5486887b
+1 model.Tablero.Vertice.Vertice@5226e402
+2 model.Tablero.Vertice.Vertice@1440c311
+3 model.Tablero.Vertice.Vertice@189b5fb1
+4 model.Tablero.Vertice.Vertice@783ec989
+5 model.Tablero.Vertice.Vertice@1ddd3478
+6 model.Tablero.Vertice.Vertice@f973499
+7 model.Tablero.Vertice.Vertice@4d33940d
+8 model.Tablero.Vertice.Vertice@43cf6ea3
+9 model.Tablero.Vertice.Vertice@37c5fc56
+10 model.Tablero.Vertice.Vertice@1c025cb
+11 model.Tablero.Vertice.Vertice@50825a02
+12 model.Tablero.Vertice.Vertice@68809cc7
+13 model.Tablero.Vertice.Vertice@703feacd
+14 model.Tablero.Vertice.Vertice@7051777c
+15 model.Tablero.Vertice.Vertice@3241713e
+16 model.Tablero.Vertice.Vertice@5ecba515
+17 model.Tablero.Vertice.Vertice@512d4583
+18 model.Tablero.Vertice.Vertice@2abc224d
+19 model.Tablero.Vertice.Vertice@13cd7ea5
+20 model.Tablero.Vertice.Vertice@102d92c4
+21 model.Tablero.Vertice.Vertice@2b97cc1f
+22 model.Tablero.Vertice.Vertice@60723d6a
+23 model.Tablero.Vertice.Vertice@18324f97
+24 model.Tablero.Vertice.Vertice@64f555e7
+25 model.Tablero.Vertice.Vertice@71178a52
+26 model.Tablero.Vertice.Vertice@ff6077
+27 model.Tablero.Vertice.Vertice@abbc908
+28 model.Tablero.Vertice.Vertice@44afefd5
+29 model.Tablero.Vertice.Vertice@9a7a808
+30 model.Tablero.Vertice.Vertice@72209d93
+31 model.Tablero.Vertice.Vertice@2687f956
+32 model.Tablero.Vertice.Vertice@1ded7b14
+33 model.Tablero.Vertice.Vertice@29be7749
+34 model.Tablero.Vertice.Vertice@5f84abe8
+35 model.Tablero.Vertice.Vertice@4650a407
+36 model.Tablero.Vertice.Vertice@30135202
+37 model.Tablero.Vertice.Vertice@6a4d7f76
+38 model.Tablero.Vertice.Vertice@10ec523c
+39 model.Tablero.Vertice.Vertice@53dfacba
+40 model.Tablero.Vertice.Vertice@79767781
+41 model.Tablero.Vertice.Vertice@78411116
+42 model.Tablero.Vertice.Vertice@aced190
+43 model.Tablero.Vertice.Vertice@245a060f
+44 model.Tablero.Vertice.Vertice@6edaa77a
+45 model.Tablero.Vertice.Vertice@1e63d216
+46 model.Tablero.Vertice.Vertice@62ddd21b
+47 model.Tablero.Vertice.Vertice@16c3ca31
+48 model.Tablero.Vertice.Vertice@2d195ee4
+49 model.Tablero.Vertice.Vertice@2d6aca33
+50 model.Tablero.Vertice.Vertice@21ab988f
+51 model.Tablero.Vertice.Vertice@29314cc9
+52 model.Tablero.Vertice.Vertice@4e38d975
+53 model.Tablero.Vertice.Vertice@35f8a9d3
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+Bajo Asalto
+]]></system-out>
+  </testcase>
+</testsuite>

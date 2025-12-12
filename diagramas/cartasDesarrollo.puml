@@ -1,0 +1,81 @@
+@startuml Diagrama Clases Desarrollo
+
+abstract class CartaDesarrollo{
+    + CartaDesarrollo()
+    # prepararActivacion(): ActivacionDesarrollo
+    + pasarTurnoDeCompra(): void
+    + setEstado(estado: EstadoCartaDesarrollo): void
+    + intentarActivarse(): ActivacionDesarrollo
+    + modificarPuntaje(puntaje: int): int
+    + jugadorMePuedePagar(jugador: Jugador): boolean
+    + cobrarleAJugador(jugador: Jugador): void
+    + sumarActivable(cartasDesarrollo: List<CartaDesarrollo>): List<CartaDesarrollo>
+    + sumarUsada(cartasDesarrollo: List<CartaDesarrollo>): List<CartaDesarrollo>
+    + sumarRecienComprada(cartasDesarrollo: List<CartaDesarrollo>): List<CartaDesarrollo>
+
+}
+
+class Caballero{
+    + prepararActivacion(): ActivacionDesarrollo
+}
+
+class Monopolio{
+    + prepararActivacion(): ActivacionDesarrollo
+}
+class ConstruccionDeCarreteras{
+    + prepararActivacion(): ActivacionDesarrollo
+}
+
+class Descubrimiento{
+    + prepararActivacion(): ActivacionDesarrollo
+}
+
+class PuntoDeVictoria{
+    + prepararActivacion(): ActivacionDesarrollo
+}
+
+abstract class EstadoCartaDesarrollo{
+    + pasarTurnoDeCompra(cartaDesarrollo: CartaDesarrollo): void
+    + intentarActivarse(cartaDesarrollo: CartaDesarrollo): ActivacionDesarrollo
+    + sumarActivable(cartasDesarrollo: List<CartaDesarrollo>, cartaDesarrollo: CartaDesarrollo): List<CartaDesarrollo>
+    + sumarUsada(cartasDesarrollo: List<CartaDesarrollo>, cartaDesarrollo: CartaDesarrollo): List<CartaDesarrollo>
+    + sumarRecienComprada(cartasDesarrollo: List<CartaDesarrollo>, cartaDesarrollo: CartaDesarrollo): List<CartaDesarrollo>
+}
+
+class Activable{
+    + intentarActivarse(cartaDesarrollo: CartaDesarrollo): ActivacionDesarrollo
+    + sumarActivable(cartasDesarrollo: List<CartaDesarrollo>, cartaDesarrollo: CartaDesarrollo): List<CartaDesarrollo>
+}
+
+class Activada{
+    + sumarUsada(cartasDesarrollo: List<CartaDesarrollo>, cartaDesarrollo: CartaDesarrollo): List<CartaDesarrollo>
+}
+
+class RecienComprada{
+    + pasarTurnoDeCompra(cartaDesarrollo: CartaDesarrollo): void
+    + sumarRecienComprada(cartasDesarrollo: List<CartaDesarrollo>, cartaDesarrollo: CartaDesarrollo): List<CartaDesarrollo>
+}
+
+class MazoDesarrolloGeneral{}
+
+interface ActivacionDesarrollo{
+    + ejecutar(jugador: Jugador, tablero: Tablero, jugadores: List<Jugador>): void
+}
+
+CartaDesarrollo<|-- Caballero
+CartaDesarrollo<|-- Monopolio
+CartaDesarrollo<|-- Descubrimiento
+CartaDesarrollo<|-- PuntoDeVictoria
+CartaDesarrollo<|-- ConstruccionDeCarreteras
+
+
+CartaDesarrollo..> ActivacionDesarrollo
+MazoDesarrolloGeneral-->"*" CartaDesarrollo
+
+
+CartaDesarrollo--> EstadoCartaDesarrollo
+EstadoCartaDesarrollo<|-- Activable
+EstadoCartaDesarrollo<|-- Activada
+EstadoCartaDesarrollo<|-- RecienComprada
+
+@enduml

@@ -7,14 +7,14 @@ skinparam classFontStyle bold
 ' CLASES DEL MODELO
 ' ======================
 
-class Ladron
-class Catan
-class Tablero
-class Jugador
+class java.Ladron
+class java.Catan
+class java.Tablero
+class java.Jugador
 class Banco
 class Dado
 class Hexagono
-class Terreno
+class java.Terreno
 class Desierto
 interface Productor
 class Numero
@@ -26,7 +26,7 @@ class Poblado
 interface Bonificacion
 class Ciudad
 interface Construccion
-class Recurso
+class java.Recurso
 interface Desarrollo
 class Caballero
 class PuntoDeVictoria
@@ -36,21 +36,21 @@ class ConstruccionDeCarreteras
 class Descubrimiento
 
 
-Catan --> Ladron
-Catan --> Tablero
-Catan --> "3..4" Jugador
-Catan --> Dado
-Catan --> Banco
+java.Catan --> java.Ladron
+java.Catan --> java.Tablero
+java.Catan --> "3..4" java.Jugador
+java.Catan --> Dado
+java.Catan --> Banco
 
-Tablero *-- "19" Hexagono
+java.Tablero *-- "19" Hexagono
 
-Hexagono --> Terreno
+Hexagono --> java.Terreno
 Hexagono --> Numero
 
-Terreno <|-- Productor
-Terreno <|-- Desierto
+java.Terreno <|-- Productor
+java.Terreno <|-- Desierto
 
-Ladron --> Hexagono
+java.Ladron --> Hexagono
 
 Construccion <|.. Produccion
 Construccion <|.. Carretera
@@ -60,10 +60,10 @@ Produccion <|.. Ciudad
 
 Hexagono <--> Vertice
 
-Jugador --> Recurso
-Jugador --> Desarrollo
-Jugador --> Construccion
-Jugador --> Bonificacion
+java.Jugador --> java.Recurso
+java.Jugador --> Desarrollo
+java.Jugador --> Construccion
+java.Jugador --> Bonificacion
 
 Bonificacion <|-- Ejercito
 Bonificacion <|-- Ruta
@@ -81,7 +81,7 @@ Vertice <--> Camino
 Camino --> Carretera
 
 Banco --> Desarrollo
-Banco --> Recurso
+Banco --> java.Recurso
 
 Productor <|.. Madera
 Productor <|.. Ladrillo

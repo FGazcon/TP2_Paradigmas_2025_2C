@@ -1,0 +1,14 @@
+Mazo\MazoTest.class
+Dados\DadosTest.class
+Tablero\VerticeTest.class
+Recurso\RecursoTest.class
+Tablero\HexagonoTest.class
+Tablero\EstructuraTest.class
+Catan\ComprasTest.class
+Tablero\AristaTest.class
+Comercio\ComercioTest.class
+Tablero\Aleatorio.class
+Catan\CatanTest.class
+Ladron\LadronTest.class
+Jugador\JugadorTest.class
+Terreno\TerrenosTest.class

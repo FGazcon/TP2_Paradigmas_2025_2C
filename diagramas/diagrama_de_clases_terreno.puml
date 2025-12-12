@@ -7,7 +7,7 @@ skinparam classFontStyle bold
 ' CLASES DEL MODELO
 ' ======================
 
-class Terreno
+class java.Terreno
 class Bosque
 class Pastizal
 class Campo
@@ -15,12 +15,12 @@ class Montaña
 class Colina
 class Desierto
 
-Terreno <|-- Bosque
-Terreno <|-- Pastizal
-Terreno <|-- Montaña
-Terreno <|-- Campo
-Terreno <|-- Colina
-Terreno <|-- Desierto
+java.Terreno <|-- Bosque
+java.Terreno <|-- Pastizal
+java.Terreno <|-- Montaña
+java.Terreno <|-- Campo
+java.Terreno <|-- Colina
+java.Terreno <|-- Desierto
 
 
 @enduml

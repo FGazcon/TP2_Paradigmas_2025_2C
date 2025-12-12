@@ -1,5 +1,5 @@
 @startuml
-title Catan - Diagrama de Clases Mejorado (Sintaxis Correcta)
+title java.Catan - Diagrama de Clases Mejorado (Sintaxis Correcta)
 
 ' ===== ENUMS =====
 enum TerrenoTipo {
@@ -10,16 +10,13 @@ enum TerrenoTipo {
     COLINA
     DESIERTO
 }
-
-abstract class Recurso {
-    +nombre(): String
+enum java.Recurso {
+    MADERA
+    LANA
+    TRIGO
+    MINERAL
+    BARRO
 }
-
-class Trigo;
-class Ladrillo;
-class Madera;
-class Oveja;
-class Piedra;
 
 enum CartaDesarrolloTipo {
     CABALLERO
@@ -33,21 +30,21 @@ interface Construible {
 }
 
 interface Jugable {
-    +jugar(jugador: Jugador)
+    +jugar(jugador: java.Jugador)
 }
 
 ' ===== CLASES PRINCIPALES =====
-class Catan {
-    -tablero: Tablero
-    -jugadores: List<Jugador>
+class java.Catan {
+    -tablero: java.Tablero
+    -jugadores: List<java.Jugador>
     -banco: Banco
-    -dados: Dados
+    -dados: java.Dados
     -jugadorActual: int
     +ejecutarTurno()
     +pasarAlSiguienteJugador()
 }
 
-class Tablero {
+class java.Tablero {
     -hexagonos: List<Hexagono>
     -vertices: List<Vertice>
     -aristas: List<Arista>
@@ -57,18 +54,18 @@ class Tablero {
     +moverLadron(hex: Hexagono)
 }
 
-class Dados {
+class java.Dados {
     +lanzar(): int
 }
 
 class Banco {
-    -recursos: Map<Recurso,Integer>
+    -recursos: Map<java.Recurso,Integer>
     -cartasDesarrollo: List<CartaDesarrollo>
-    +entregarRecurso(j: Jugador, r: Recurso, c: int)
+    +entregarRecurso(j: java.Jugador, r: java.Recurso, c: int)
     +entregarCartaDesarrollo(): CartaDesarrollo
 }
 
-class Jugador {
+class java.Jugador {
     -nombre: String
     -puntos: int
     -servicioConstruccion: ServicioConstruccion
@@ -77,32 +74,32 @@ class Jugador {
 }
 
 class ServicioConstruccion {
-    +construirPoblado(j: Jugador, v: Vertice)
-    +construirCiudad(j: Jugador, v: Vertice)
-    +construirCamino(j: Jugador, a: Arista)
+    +construirPoblado(j: java.Jugador, v: Vertice)
+    +construirCiudad(j: java.Jugador, v: Vertice)
+    +construirCamino(j: java.Jugador, a: Arista)
 }
 
 class ServicioComercio {
-    +comerciar(j1: Jugador, j2: Jugador/Banco, ofrecer: Map<Recurso,Integer>, pedir: Map<Recurso,Integer>)
+    +comerciar(j1: java.Jugador, j2: java.Jugador/Banco, ofrecer: Map<java.Recurso,Integer>, pedir: Map<java.Recurso,Integer>)
 }
 
 class ServicioCartas {
-    +comprarCarta(j: Jugador)
-    +jugarCarta(c: CartaDesarrollo, j: Jugador)
+    +comprarCarta(j: java.Jugador)
+    +jugarCarta(c: CartaDesarrollo, j: java.Jugador)
 }
 
 ' ===== TABLERO =====
 class Hexagono {
-    -terreno: Terreno
+    -terreno: java.Terreno
     -fichaNumero: FichaNumero
     -vertices: Vertice[6]
     -aristas: Arista[6]
     +getVertices(): List<Vertice>
 }
 
-class Terreno {
+class java.Terreno {
     -tipo: TerrenoTipo
-    +getRecurso(): Recurso
+    +getRecurso(): java.Recurso
 }
 
 class FichaNumero {
@@ -124,20 +121,20 @@ class Arista {
 
 ' ===== ESTRUCTURAS Y CAMINOS =====
 abstract class Estructura {
-    -jugador: Jugador
-    +getJugador(): Jugador
+    -jugador: java.Jugador
+    +getJugador(): java.Jugador
 }
 
 class Poblado extends Estructura
 class Ciudad extends Estructura
 
 class Camino {
-    -jugador: Jugador
+    -jugador: java.Jugador
 }
 
 ' ===== CARTAS =====
 abstract class CartaDesarrollo implements Jugable {
-    -jugador: Jugador
+    -jugador: java.Jugador
 }
 
 class Caballero extends CartaDesarrollo
@@ -145,18 +142,18 @@ class Progreso extends CartaDesarrollo
 class PuntosVictoria extends CartaDesarrollo
 
 ' ===== ASOCIACIONES =====
-Catan --> Tablero
-Catan --> Banco
-Catan --> Dados
-Catan --> Jugador : 1..4
+java.Catan --> java.Tablero
+java.Catan --> Banco
+java.Catan --> java.Dados
+java.Catan --> java.Jugador : 1..4
 
-Tablero --> Hexagono : 19
-Tablero --> Hexagono : ladron
+java.Tablero --> Hexagono : 19
+java.Tablero --> Hexagono : ladron
 
 Hexagono --> FichaNumero
 Hexagono --> Vertice : 6
 
-FichaNumero --> Terreno
+FichaNumero --> java.Terreno
 
 Vertice --> Estructura : 0..1
 Vertice --> Arista : 2..3
@@ -164,29 +161,18 @@ Vertice --> Arista : 2..3
 Arista --> Camino : 0..1
 Arista --> Vertice : 2
 
-Estructura --> Jugador
-Camino --> Jugador
-CartaDesarrollo --> Jugador
+Estructura --> java.Jugador
+Camino --> java.Jugador
+CartaDesarrollo --> java.Jugador
 
 ' ===== DEPENDENCIAS =====
-
-Recurso <|-- Madera
-Recurso <|-- Trigo
-Recurso <|-- Oveja
-Recurso <|-- Ladrillo
-Recurso <|-- Piedra
-
-Jugador ..> Tablero : usa
-Jugador ..> Banco : recibe recursos
-Jugador ..> Dados : lanza
-
-Hexagono ..> Terreno : consulta recurso
-
+java.Jugador ..> java.Tablero : usa
+java.Jugador ..> Banco : recibe recursos
+java.Jugador ..> java.Dados : lanza
+Hexagono ..> java.Terreno : consulta recurso
 Vertice ..> Estructura : consulta
-
 Arista ..> Camino : consulta
-
-Banco ..> Recurso : entrega
+Banco ..> java.Recurso : entrega
 Banco ..> CartaDesarrollo : entrega
 
 @enduml

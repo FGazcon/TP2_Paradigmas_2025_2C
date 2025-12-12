@@ -1,0 +1,208 @@
+@startuml Diagrama Clases Tablero
+
+class Tablero{
+    +Tablero(hexagonos: List<Hexagono>)
+    +ubicarEstructura(estructura: Estructura, numeroDeVertice: Int)
+    +ubicarCarretera(carretera: Carretera, numeroDeArista: int[2])
+    +moverLadron(numeroDeHexagono: Int, jugador: Jugador)
+    +activarHexagonoPorNumero(numero: Int)
+    +activarHexagonoPorVertice(numeroDeVertice: Int)
+}
+
+class Hexagono{
+    - numero: int
+    + Hexagono(terreno: Terreno, numero: int)
+    + contieneVertice(numeroDeVertice: int): boolean
+    + activarHexagonoParaVerticeEspecifico(vertice: int)
+    + activarHexagono()
+    + activarHexagonoParaNumero(numero: int)
+    + producir()
+    - buscarVerticeNumero(numeroDeVertice: int): Vertice
+    + setVertices(vertices: Vertice[])
+    + esDesierto(): boolean
+    + liberarse()
+    + recibirLadron(jugador: Jugador)
+    + ubicarEstructura(estructura: Estructura, numeroDeVertice: int)
+    + ubicarCarretera(carretera: Carretera, numeroDeArista: int[])
+}
+
+abstract class EstadoHexagono {
+    +intentarProducir(hexagono: Hexagono)
+}
+
+class BajoAsalto {
+    +intentarProducir(hexagono: Hexagono)
+
+}
+
+class Libre {
+    +intentarProducir(hexagono: Hexagono)
+}
+
+class Ladron{
+    +moverLadron(nuevoHexagono: Hexagono)
+}
+
+class Vertice{
+    - numeroDeVertice: int
+    + Vertice(numeroDeVertice: int)
+    + estructuraEsDe(jugador: Jugador): boolean
+    + bloquearse()
+    + ocuparse(estructura: Estructura)
+    + bloquearAdyacentes()
+    + darRecurso(recurso: Recurso)
+    + numeroDeVerticeEs(numeroDeVertice: int): boolean
+    + agregarArista(vertice1: Vertice, vertice2: Vertice, numeroDeArista: int[])
+    + generarVertices(): Vertice[]
+    + tieneDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarUbicarCiudad(ciudad: Ciudad)
+    + ubicarEstructura(estructura: Estructura)
+    + permiteConstruccionDeAristaDe(jugador: Jugador): boolean
+    + validarConstruccionPara(jugador: Jugador): boolean
+    + ubicarCarretera(carretera: Carretera, numeroDeArista: int[])
+}
+
+abstract class Estado {
+    + intentarUbicarEstructura(ciudad: Ciudad, vertice: Vertice)
+    + intentarUbicarEstructura(poblado: Poblado, vertice: Vertice)
+}
+
+class Ocupado {
+    + intentarUbicarEstructura(ciudad: Ciudad, vertice: Vertice)
+    + intentarUbicarEstructura(poblado: Poblado, vertice: Vertice)
+}
+
+class Vacio {
+    + intentarUbicarEstructura(ciudad: Ciudad, vertice: Vertice)
+    + intentarUbicarEstructura(poblado: Poblado, vertice: Vertice)
+}
+
+class Bloqueado {
+    + intentarUbicarEstructura(ciudad: Ciudad, vertice: Vertice)
+    + intentarUbicarEstructura(poblado: Poblado, vertice: Vertice)
+}
+
+class Arista{
+    - int[] numeroDeVertices
+    + Arista(Vertice destino, int[] numeroDeVertices)
+    + bloquearDestino()
+    + ocuparse(carretera: Carretera)
+    + ocuparPar(carretera: Carretera)
+    + setPar(par: Arista)
+    + validarCarreteraPara(jugador: Jugador): Boolean
+    + aristaValidaPara(jugador: Jugador): Boolean
+    + esDe(jugador: Jugador): Boolean
+    + ubicarCarretera(carretera: Carretera, numeroDeArista: int[2])
+}
+
+abstract class EstadoArista{
+    +esDe(jugador: Jugador): Boolean
+    +ubicarCarretera(carretera: Carretera)
+}
+
+class AristaOcupada{
+    +esDe(jugador: Jugador): Boolean
+    +ubicarCarretera(carretera: Carretera)
+}
+
+class AristaVacia{
+    +esDe(jugador: Jugador): Boolean
+    +ubicarCarretera(carretera: Carretera)
+}
+
+abstract class Terreno {
+    +darRecurso()
+}
+
+abstract class Estructura {
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice)
+    + entregarRecursos(recurso: Recurso)
+    + anotarDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarMejorar(estructura: Ciudad, vertice: Vertice)
+    + intentarMejorar(estructura: Poblado, vertice: Vertice)
+    + esDe(jugador: Jugador): boolean
+    + sumarAJugador()
+    + jugadorMePuedePagar(): boolean
+    + cobrarleAJugador()
+}
+
+class Ciudad {
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice)
+    + entregarRecursos(recurso: Recurso)
+    + anotarDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarMejorar(estructura: Ciudad, vertice: Vertice)
+    + intentarMejorar(estructura: Poblado, vertice: Vertice)
+}
+
+class Poblado {
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice)
+    + entregarRecursos(recurso: Recurso)
+    + anotarDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarMejorar(estructura: Ciudad, vertice: Vertice)
+    + intentarMejorar(estructura: Poblado, vertice: Vertice)
+}
+
+class PobladoInicial{
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice)
+
+}
+
+class NoHayEstructura {   
+    + ubicarseEnVerticeEnEstado(estado: Estado, vertice: Vertice)
+    + entregarRecursos(recurso: Recurso)
+    + anotarDuenio(jugadores: List<Jugador>): List<Jugador>
+    + intentarMejorar(estructura: Ciudad, vertice: Vertice)
+    + intentarMejorar(estructura: Poblado, vertice: Vertice)
+}
+
+class Factory_MapaBasico{
+    +crearHexagonosBasico():List<Hexagono>
+    +asignarVerticesAHexagonos(hexagonos: List<Hexagono>, verticesAsignados: Vertice[][])
+}
+
+class ConectorVertices_MapaBasico{
+    +generarVertices(vertices: Vertice[])
+}
+
+class Carretera{
+    + Carretera(jugador: Jugador)
+    + perteneceA(jugador: Jugador): boolean 
+    + boolean jugadorMePuedePagar(): boolean 
+    + cobrarleAJugador()
+}
+
+Tablero-->"19"Hexagono
+Hexagono-->"6"Vertice
+Vertice"2"<-->"3"Arista
+Tablero-->Ladron
+Tablero..>Factory_MapaBasico
+Ladron-->Hexagono 
+Arista-->Carretera
+Vertice-->Estructura
+Hexagono-->Terreno
+
+Vertice-->Estado 
+Hexagono-->EstadoHexagono
+Estructura<|--Ciudad
+Estructura<|--Poblado
+Estructura<|--NoHayEstructura
+Poblado<|--PobladoInicial
+
+Estado<|--Bloqueado
+Estado<|--Ocupado 
+Estado<|--Vacio 
+
+EstadoHexagono<|-- Libre 
+EstadoHexagono<|--BajoAsalto
+
+Factory_MapaBasico..>Vertice
+Factory_MapaBasico..>Terreno
+Factory_MapaBasico..>Hexagono
+
+Vertice..> ConectorVertices_MapaBasico
+
+Arista-->EstadoArista
+Arista-->Arista
+EstadoArista<|--AristaOcupada
+EstadoArista<|--AristaVacia
+@enduml

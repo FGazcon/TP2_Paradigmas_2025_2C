@@ -7,18 +7,18 @@ skinparam classFontStyle bold
 ' CLASES DEL MODELO
 ' ======================
 
-class Tablero
+class java.Tablero
 class Hexagono
 class Arista
 class Vertice
-class Terreno
+class java.Terreno
 
-Tablero --> Hexagono
-Tablero --> Arista
-Tablero --> Vertice
+java.Tablero --> Hexagono
+java.Tablero --> Arista
+java.Tablero --> Vertice
 
 Hexagono --> Vertice
-Hexagono --> Terreno
+Hexagono --> java.Terreno
 
 Arista --> Vertice
 

@@ -1,17 +1,17 @@
 @startuml
-title Secuencia de un Turno - Catan Mejorado
+title Secuencia de un Turno - java.Catan Mejorado
 
-actor Jugador
-participant "Catan" as C
-participant "Dados" as D
-participant "Tablero" as T
+actor java.Jugador
+participant "java.Catan" as C
+participant "java.Dados" as D
+participant "java.Tablero" as T
 participant "Banco" as B
 participant "ServicioConstruccion" as SC
 participant "ServicioComercio" as SCom
 participant "ServicioCartas" as SCar
 
 == Inicio del Turno ==
-Jugador -> C : iniciarTurno()
+java.Jugador -> C : iniciarTurno()
 C -> D : lanzar()
 D --> C : valorDado
 
@@ -22,26 +22,26 @@ alt valorDado != 7
 else valorDado == 7
     C -> T : moverLadron()
     T --> C : ladronMovido
-    C -> Jugador : descartarRecursos()
+    C -> java.Jugador : descartarRecursos()
 end
 
-== Fase de Comercio ==
-Jugador -> SCom : comerciar(con, ofrecer, pedir)
-SCom --> Jugador : resultado
+== Fase de java.Comercio ==
+java.Jugador -> SCom : comerciar(con, ofrecer, pedir)
+SCom --> java.Jugador : resultado
 
 == Fase de Construcción ==
-Jugador -> SC : construirPoblado(vertice)
-SC --> Jugador : éxito/fallo
-Jugador -> SC : construirCiudad(vertice)
-SC --> Jugador : éxito/fallo
-Jugador -> SC : construirCamino(arista)
-SC --> Jugador : éxito/fallo
+java.Jugador -> SC : construirPoblado(vertice)
+SC --> java.Jugador : éxito/fallo
+java.Jugador -> SC : construirCiudad(vertice)
+SC --> java.Jugador : éxito/fallo
+java.Jugador -> SC : construirCamino(arista)
+SC --> java.Jugador : éxito/fallo
 
 == Fase de Cartas de Desarrollo ==
-Jugador -> SCar : jugarCarta(carta)
-SCar --> Jugador : efecto
+java.Jugador -> SCar : jugarCarta(carta)
+SCar --> java.Jugador : efecto
 
 == Fin del Turno ==
-Jugador -> C : terminarTurno()
+java.Jugador -> C : terminarTurno()
 C -> C : pasarAlSiguienteJugador()
 @enduml

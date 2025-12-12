@@ -1,0 +1,271 @@
+@startuml Catan_Diagrama_Ordenado
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+hide empty members
+
+package "Modelo Económico" {
+    class Banco {
+        + sumarRecurso(recurso: Recurso, cantidad: int): void
+        + descartarRecurso(recurso: Recurso, cantidad: int): void
+        + jugadorLeSolicitaRecurso(...): void
+        + obtenerRecurso(nombre: String): Recurso
+    }
+
+    abstract class Recurso {
+        - cantidad: int
+        + Recurso(cantidad: int)
+        + sumar(cantidad: int): void
+        + descartar(cantidad: int): void
+        + comerciarConBanco(...): void
+        + cambiarRegla(regla: ReglaDeComercio): void
+    }
+
+    class Madera
+    class Ladrillo
+    class Piedra
+    class Oveja
+    class Trigo
+
+    Recurso <|-- Madera
+    Recurso <|-- Ladrillo
+    Recurso <|-- Piedra
+    Recurso <|-- Oveja
+    Recurso <|-- Trigo
+
+    interface ReglaDeComercio {
+        + intentarComerciar(...): void
+        + intentarCambiarA(regla: ReglaDeComercio): ReglaDeComercio
+    }
+
+    class CuatroPorUno
+    class TresPorUno
+    class DosPorUno
+
+    ReglaDeComercio <|.. CuatroPorUno
+    ReglaDeComercio <|.. TresPorUno
+    ReglaDeComercio <|.. DosPorUno
+
+    abstract class Puerto {
+        + darRecursoAJugador(jugador: Jugador)
+    }
+    class DosXUno
+    class TresXUno
+    class SinPuerto
+
+    Puerto <|-- DosXUno
+    Puerto <|-- TresXUno
+    Puerto <|-- SinPuerto
+
+    Banco "1" o-- "*" Recurso
+    Recurso ..> ReglaDeComercio
+    Puerto ..> Recurso
+}
+
+package "Tablero y Estructura Física" {
+    class Tablero {
+        + ubicarEstructura(...)
+        + ubicarCarretera(...)
+        + moverLadron(...)
+    }
+
+    class Hexagono {
+        - numero: int
+        + producir()
+        + recibirLadron(jugador: Jugador)
+    }
+
+    class Ladron {
+        + moverLadron(nuevoHexagono: Hexagono)
+    }
+
+    class Vertice {
+        - numeroDeVertice: int
+        + ocuparse(estructura: Estructura)
+        + darRecurso(recurso: Recurso)
+        + ubicarCarretera(...)
+    }
+
+    class Arista {
+        + ocuparse(carretera: Carretera)
+        + contarLargoCamino(): int
+        + validarCarreteraPara(jugador: Jugador): boolean
+    }
+
+    abstract class EstadoHexagono
+    class Libre
+    class BajoAsalto
+
+    abstract class EstadoVertice
+    class Ocupado
+    class Vacio
+    class Bloqueado
+
+    abstract class EstadoArista
+    class AristaOcupada
+    class AristaVacia
+
+    abstract class Terreno {
+        + darRecurso(): Recurso
+    }
+    abstract class Productor
+    class Desierto
+    class Bosque
+    class Campo
+    class Colina
+    class Montaña
+    class Pastizal
+
+    Tablero "1" *-- "19" Hexagono
+    Hexagono "1" *-- "6" Vertice
+    Vertice "2" -- "3" Arista
+    Arista "1" -- "0..1" Arista : par
+
+    Hexagono --> Terreno
+    Hexagono --> EstadoHexagono
+    EstadoHexagono <|-- Libre
+    EstadoHexagono <|-- BajoAsalto
+
+    Vertice --> EstadoVertice
+    EstadoVertice <|-- Ocupado
+    EstadoVertice <|-- Vacio
+    EstadoVertice <|-- Bloqueado
+    Vertice --> Puerto
+
+    Arista --> EstadoArista
+    EstadoArista <|-- AristaOcupada
+    EstadoArista <|-- AristaVacia
+
+    Terreno <|-- Desierto
+    Terreno <|-- Productor
+    Productor <|-- Bosque
+    Productor <|-- Campo
+    Productor <|-- Colina
+    Productor <|-- Montaña
+    Productor <|-- Pastizal
+}
+
+package "Construcciones" {
+    abstract class Estructura {
+        # costo: List<Recurso>
+        + entregarRecursos(recurso: Recurso): void
+        + esDe(jugador: Jugador): boolean
+    }
+
+    class Ciudad
+    class Poblado
+    class PobladoInicial
+    class NoHayEstructura
+
+    class Carretera {
+        + Carretera(jugador: Jugador)
+        + perteneceA(jugador: Jugador): boolean
+    }
+
+    Estructura <|-- Ciudad
+    Estructura <|-- Poblado
+    Poblado <|-- PobladoInicial
+    Estructura <|-- NoHayEstructura
+
+    Vertice o-- Estructura
+    Arista o-- Carretera
+}
+
+package "Desarrollo" {
+    class MazoDesarrolloGeneral {
+        + generarMazoDesarrolloBanco()
+        + jugadorSolicitaDesarrollo(): CartaDesarrollo
+    }
+
+    abstract class CartaDesarrollo {
+        + intentarActivarse(): ActivacionDesarrollo
+        + pasarTurnoDeCompra(): void
+    }
+
+    class Caballero
+    class Monopolio
+    class ConstruccionDeCarreteras
+    class Descubrimiento
+    class PuntoDeVictoria
+
+    abstract class EstadoCartaDesarrollo
+    class Activable
+    class Activada
+    class RecienComprada
+
+    interface ActivacionDesarrollo {
+        + ejecutar(jugador, tablero, jugadores): void
+    }
+
+    MazoDesarrolloGeneral o-- CartaDesarrollo
+    CartaDesarrollo <|-- Caballero
+    CartaDesarrollo <|-- Monopolio
+    CartaDesarrollo <|-- ConstruccionDeCarreteras
+    CartaDesarrollo <|-- Descubrimiento
+    CartaDesarrollo <|-- PuntoDeVictoria
+
+    CartaDesarrollo --> EstadoCartaDesarrollo
+    EstadoCartaDesarrollo <|-- Activable
+    EstadoCartaDesarrollo <|-- Activada
+    EstadoCartaDesarrollo <|-- RecienComprada
+    CartaDesarrollo ..> ActivacionDesarrollo
+}
+
+package "Core del Juego" {
+    class Catan {
+        + prepararJugadores(): void
+        + terminarTurno(): void
+        + declararGanador(j: Jugador): void
+    }
+
+    class Jugador {
+        - nombre: String
+        - puntaje: Int
+        + sumarPunto(): void
+        + comerciarConJugador(...)
+        + adquirirDesarrollo(): void
+    }
+
+    class AdministradorDeJugadores {
+        + nuevoTurno(...): Turno
+    }
+
+    abstract class Turno {
+        + intentarUbicarEstructura(...)
+        + terminarTurno(...)
+    }
+
+    class TurnoInicial
+    class SegundoTurnoInicial
+    class TurnoGeneral {
+        + tirarDados(): void
+        + comerciar(...): void
+    }
+
+    class Dados
+
+    Catan "1" *-- "1" Tablero
+    Catan "1" *-- "1" Banco
+    Catan "1" *-- "3..4" Jugador
+    Catan --> Turno
+    Catan --> AdministradorDeJugadores
+
+    Jugador --> Banco
+    Jugador o-- Recurso
+    Jugador o-- CartaDesarrollo
+    Jugador -- Estructura : dueño
+    Jugador -- Carretera : dueño
+
+    Turno <|-- TurnoInicial
+    Turno <|-- TurnoGeneral
+    TurnoInicial <|-- SegundoTurnoInicial
+    Turno ..> Tablero
+    Turno ..> Dados
+}
+
+Bosque ..> Madera
+Colina ..> Ladrillo
+Montaña ..> Piedra
+Campo ..> Trigo
+Pastizal ..> Oveja
+
+@enduml
