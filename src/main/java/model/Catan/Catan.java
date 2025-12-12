@@ -86,20 +86,18 @@ public class Catan extends Observable {
     }
 
     public void caballeriaMasGrande(){
-        Jugador anterior = this.caballeriaMasGrande;
-        Jugador mejor = null;
         for (Jugador jugador : this.jugadores){
-            if(mejor == null){
-                mejor = jugador.caballeriaMasLarga(anterior);
+            if(this.caballeriaMasGrande == null){
+                if(jugador.superaTresCaballeros() != null){
+                    this.caballeriaMasGrande = jugador.superaTresCaballeros();
+                } else {
+                    break;
+                }
             }
+            this.caballeriaMasGrande.setPuntosCaballeria(0);
+            this.caballeriaMasGrande = jugador.caballeriaMasLarga(this.carreteraMasLarga);
         }
-        if (mejor == null) return;
-
-        if (anterior != null && anterior != mejor) {
-            anterior.setPuntosCaballeria(0);  // quitar punto al anterior
-        }
-        if(mejor.superaTresCaballeros() != null){
-            this.caballeriaMasGrande = mejor;
+        if(this.caballeriaMasGrande != null ){
             this.caballeriaMasGrande.setPuntosCaballeria(1);
         }
     }
